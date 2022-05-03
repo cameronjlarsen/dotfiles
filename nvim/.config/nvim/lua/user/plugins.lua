@@ -16,13 +16,18 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
-
+-- vim.cmd [[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]
+local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerSync",
+  pattern = "plugins.lua",
+  group = group
+})
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
@@ -60,11 +65,12 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
 
+
   -- Colorschemes
-  use ({    
+  use ({
       "catppuccin/nvim",
       as = "catppuccin" }) -- Catpuccin color scheme
-  
+
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -72,6 +78,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-emoji"
   use "hrsh7th/cmp-nvim-lua"
 
   -- snippets
@@ -79,9 +86,11 @@ return packer.startup(function(use)
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- LSP
-  use "neovim/nvim-lspconfig" --enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server nvim-lsp-installer
+  use "tamago324/nlsp-settings.nvim" --language server settings defined in json for
+  use "neovim/nvim-lspconfig" --enable LSP
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "b0o/SchemaStore.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -100,6 +109,12 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- DAP
+  use "mfussenegger/nvim-dap"
+  use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+  use "theHamsta/nvim-dap-virtual-text"
+  use "Pocco81/DAPInstall.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

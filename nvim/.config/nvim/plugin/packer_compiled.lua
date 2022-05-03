@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["DAPInstall.nvim"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/DAPInstall.nvim",
+    url = "https://github.com/Pocco81/DAPInstall.nvim"
+  },
   ["FixCursorHold.nvim"] = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
@@ -83,6 +88,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["SchemaStore.nvim"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/SchemaStore.nvim",
+    url = "https://github.com/b0o/SchemaStore.nvim"
   },
   ["alpha-nvim"] = {
     loaded = true,
@@ -108,6 +118,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
     url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-emoji"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/cmp-emoji",
+    url = "https://github.com/hrsh7th/cmp-emoji"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -154,6 +169,11 @@ _G.packer_plugins = {
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["nlsp-settings.nvim"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/nlsp-settings.nvim",
+    url = "https://github.com/tamago324/nlsp-settings.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -168,6 +188,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
