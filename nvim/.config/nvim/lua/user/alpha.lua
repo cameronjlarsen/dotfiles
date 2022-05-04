@@ -23,12 +23,9 @@ dashboard.section.buttons.val = {
 }
 
 local function footer()
--- NOTE: requires the fortune-mod package to work
-	-- local handle = io.popen("fortune")
-	-- local fortune = handle:read("*a")
-	-- handle:close()
-	-- return fortune
-	return "Hello Cameron!"
+	-- Get number of plugins loaded by packer
+	local plugins_count = vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1))
+	return "Neovim loaded " .. plugins_count .. " plugins "
 end
 
 dashboard.section.footer.val = footer()
