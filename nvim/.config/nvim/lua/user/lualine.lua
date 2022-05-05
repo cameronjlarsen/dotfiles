@@ -21,7 +21,7 @@ local diff = {
 	"diff",
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-  cond = hide_in_width
+	cond = hide_in_width,
 }
 
 local mode = {
@@ -41,6 +41,8 @@ local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
+	seperator = { left = "" },
+	right_padding = 2,
 }
 
 local location = {
@@ -66,11 +68,11 @@ lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "catppuccin",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
+		component_separators = "|", -- { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
-    globalstatus = true,
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { branch, diagnostics },
