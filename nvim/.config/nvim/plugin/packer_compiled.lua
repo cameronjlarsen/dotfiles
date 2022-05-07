@@ -164,6 +164,11 @@ _G.packer_plugins = {
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  knap = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/knap",
+    url = "https://github.com/frabjous/knap"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/lualine.nvim",

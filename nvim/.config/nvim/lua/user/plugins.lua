@@ -116,6 +116,9 @@ return packer.startup(function(use)
   use "theHamsta/nvim-dap-virtual-text"
   use "Pocco81/DAPInstall.nvim"
 
+  -- Latex
+  use "frabjous/knap" -- allows livepreviewing of markdown and latex files
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
