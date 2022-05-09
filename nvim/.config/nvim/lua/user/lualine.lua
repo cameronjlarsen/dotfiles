@@ -10,44 +10,48 @@ end
 local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
-	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
-	colored = false,
+	sections = { "error", "warn", "info", "hint" },
+	symbols = { error = " ", warn = " ", info = "", hint = "" },
+	colored = true,
 	update_in_insert = false,
-	always_visible = true,
+	always_visible = false,
 }
 
 local diff = {
 	"diff",
-	colored = false,
+	colored = true,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 	cond = hide_in_width,
 }
 
 local mode = {
 	"mode",
+	separator = { left = "" },
+	right_padding = 2,
 	fmt = function(str)
-		return "-- " .. str .. " --"
+		return str
 	end,
 }
 
 local filetype = {
 	"filetype",
-	icons_enabled = false,
-	icon = nil,
+	icons_enabled = true,
+	-- icon = nil,
 }
 
 local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
-	seperator = { left = "" },
-	right_padding = 2,
+	-- seperator = { left = "" },
+	-- right_padding = 2,
 }
 
 local location = {
 	"location",
-	padding = 0,
+	-- padding = 0
+	seperator = { right = "" },
+	left_padding = 2,
 }
 
 -- cool function for progress
@@ -67,21 +71,20 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "catppuccin",
-		component_separators = "|", -- { left = "", right = "" },
+		theme = "auto",
+		component_separators = "|", --{ left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { branch, diagnostics },
-		lualine_b = { mode },
-		lualine_c = {},
-		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_x = { diff, spaces, "encoding", filetype },
-		lualine_y = { location },
-		lualine_z = { progress },
+		lualine_a = { mode },
+		lualine_b = { branch, diff },
+		lualine_c = { diagnostics },
+		lualine_x = { spaces, "encoding" },
+		lualine_y = { filetype, progress },
+		lualine_z = { location },
 	},
 	inactive_sections = {
 		lualine_a = {},
