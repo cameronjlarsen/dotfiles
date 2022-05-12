@@ -26,7 +26,7 @@ local diff = {
 
 local mode = {
 	"mode",
-	separator = { left = "" },
+	-- separator = { left = "" },
 	right_padding = 2,
 	fmt = function(str)
 		return str
@@ -50,7 +50,7 @@ local branch = {
 local location = {
 	"location",
 	-- padding = 0
-	seperator = { right = "" },
+	-- seperator = { right = "" },
 	left_padding = 2,
 }
 
@@ -72,8 +72,8 @@ lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "auto",
-		component_separators = "|", --{ left = "", right = "" },
-		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 		globalstatus = true,

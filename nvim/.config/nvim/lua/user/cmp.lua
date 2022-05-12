@@ -58,10 +58,10 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		-- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-		["<C-e>"] = cmp.mapping {
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close(),
-        },
+		["<C-e>"] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
@@ -112,7 +112,8 @@ cmp.setup({
 				luasnip = "",
 				buffer = "",
 				path = "",
-                emoji = "",
+				emoji = "",
+				latex_symbols = "",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -123,7 +124,8 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
-        { name = "emoji "},
+		{ name = "emoji " },
+		{ name = "latex_symbols" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
@@ -140,5 +142,8 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 		-- native_menu = false,
+	},
+	view = {
+		entries = { name = "custom", selection_order = "near_cursor" },
 	},
 })
