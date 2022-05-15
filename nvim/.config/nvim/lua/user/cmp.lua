@@ -3,6 +3,11 @@ if not cmp_status_ok then
 	return
 end
 
+local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
+if not cmp_dap_status_ok then
+	return
+end
+
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
 	return
@@ -51,6 +56,11 @@ cmp.setup({
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
+
+	enabled = function()
+		return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or cmp_dap.is_dap_buffer()
+	end,
+
 	mapping = cmp.mapping.preset.insert({
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -101,12 +111,6 @@ cmp.setup({
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
-				--nvim_lsp = "[LSP]",
-				-- nvim_lua = "[NVIM_LUA]",
-				-- luasnip = "[Snippet]",
-				-- buffer = "[Buffer]",
-				-- path = "[Path]",
-
 				nvim_lsp = "",
 				nvim_lua = "",
 				luasnip = "",
@@ -114,6 +118,7 @@ cmp.setup({
 				path = "",
 				emoji = "",
 				latex_symbols = "",
+				dap = "",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -126,6 +131,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "emoji " },
 		{ name = "latex_symbols" },
+		{ name = "dap" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
@@ -136,12 +142,8 @@ cmp.setup({
 			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 		},
 	},
-	-- documentation = {
-	--   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	-- },
 	experimental = {
 		ghost_text = true,
-		-- native_menu = false,
 	},
 	view = {
 		entries = { name = "custom", selection_order = "near_cursor" },

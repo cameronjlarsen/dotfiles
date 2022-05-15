@@ -164,4 +164,4 @@ bufferline.setup {
       guibg = { attribute = "bg", highlight = "Normal" },
     },
   },
-} 
+}
