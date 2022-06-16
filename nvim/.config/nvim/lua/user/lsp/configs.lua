@@ -5,7 +5,7 @@ end
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua", "clangd", "texlab" }
+local servers = { "jsonls", "sumneko_lua", "clangd", "texlab", "omnisharp" }
 
 lsp_installer.setup {
   ensure_installed = servers
