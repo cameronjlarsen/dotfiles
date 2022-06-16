@@ -107,24 +107,32 @@ cmp.setup({
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
-			-- Kind icons
-			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-			vim_item.menu = ({
-				nvim_lsp = "",
-				nvim_lua = "",
-				luasnip = "",
-				buffer = "",
-				path = "",
-				emoji = "",
-				latex_symbols = "",
-				dap = "",
-			})[entry.source.name]
-			return vim_item
+			local prsnt, lspkind = pcall(require, "lspkind")
+			if not prsnt then
+				-- Kind icons
+				-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+				vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+				vim_item.menu = ({
+					nvim_lsp = "",
+					nvim_lsp_signature_help = "",
+					nvim_lua = "",
+					luasnip = "",
+					buffer = "",
+					path = "",
+					emoji = "",
+					latex_symbols = "",
+					dap = "",
+					rg = "",
+				})[entry.source.name]
+				return vim_item
+			else
+				return lspkind.cmp_format()
+			end
 		end,
 	},
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -132,6 +140,7 @@ cmp.setup({
 		{ name = "emoji " },
 		{ name = "latex_symbols" },
 		{ name = "dap" },
+		{ name = "rg" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
@@ -147,5 +156,21 @@ cmp.setup({
 	},
 	view = {
 		entries = { name = "custom", selection_order = "near_cursor" },
+	},
+})
+
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
+
+cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
 	},
 })

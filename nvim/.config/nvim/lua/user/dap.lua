@@ -3,6 +3,7 @@ if not dap_status_ok then
 	return
 end
 
+-- Adapters
 dap.adapters.lldb = {
 	type = "executable",
 	command = "/usr/bin/lldb-vscode", -- adjust as needed
@@ -15,6 +16,13 @@ dap.adapters.cppdbg = {
 	command = "/usr/bin/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
 }
 
+dap.adapters.coreclr = {
+	type = "executable",
+	command = "/usr/bin/netcoredbg",
+	args = { "--interpreter=vscode" },
+}
+
+-- Configurations
 dap.configurations.cpp = {
 	{
 		name = "Launch",
@@ -96,9 +104,17 @@ dap.configurations.cpp = {
 }
 
 -- If you want to use this for rust and c, add something like this:
-
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+
+dap.configurations.cs = {
+	type = "coreclr",
+	name = "launch - netcoredbg",
+	request = "launch",
+	program = function()
+		return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+	end,
+}
 
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then

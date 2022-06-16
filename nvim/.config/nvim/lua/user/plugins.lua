@@ -81,6 +81,8 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-emoji")
 	use("hrsh7th/cmp-nvim-lua")
 	use("rcarriga/cmp-dap")
+	use("kdheepak/cmp-latex-symbols")
+	use("lukas-reineke/cmp-rg")
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
