@@ -184,6 +184,11 @@ _G.packer_plugins = {
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/knap",
     url = "https://github.com/frabjous/knap"
   },
+  ["lualine-lsp-progress"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/lualine-lsp-progress",
+    url = "https://github.com/arkav/lualine-lsp-progress"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/lualine.nvim",

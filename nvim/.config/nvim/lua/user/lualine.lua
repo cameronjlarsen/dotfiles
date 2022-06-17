@@ -35,14 +35,14 @@ local mode = {
 
 local filetype = {
 	"filetype",
-	icons_enabled = true,
-	-- icon = nil,
+	icon_only = true,
+	colored = false,
 }
 
 local branch = {
 	"branch",
-	icons_enabled = true,
-	icon = "",
+	-- icon = "",
+  icon = ""
 	-- seperator = { left = "" },
 	-- right_padding = 2,
 }
@@ -68,6 +68,25 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local function lsp()
+	local icon = [[  ]]
+	local msg = "No Active LSP"
+	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+	local clients = vim.lsp.get_active_clients()
+	if next(clients) == nil then
+		return icon .. msg
+	end
+
+	for _, client in ipairs(clients) do
+		local filetypes = client.config.filetypes
+		if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+			return icon .. client.name
+		end
+	end
+
+	return icon .. msg
+end
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
@@ -79,12 +98,12 @@ lualine.setup({
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { mode },
+		lualine_a = { filetype, mode },
 		lualine_b = { branch, diff },
-		lualine_c = { diagnostics },
-		lualine_x = { spaces, "encoding" },
-		lualine_y = { filetype, progress },
-		lualine_z = { location },
+		lualine_c = { diagnostics, "lsp_progress" },
+    lualine_x = { lsp },
+		lualine_y = { spaces, "encoding" },
+		lualine_z = { location, progress },
 	},
 	inactive_sections = {
 		lualine_a = {},
