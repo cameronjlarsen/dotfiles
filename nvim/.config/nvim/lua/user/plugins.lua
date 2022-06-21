@@ -99,6 +99,7 @@ return packer.startup(function(use)
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
 	use("nvim-telescope/telescope-media-files.nvim") -- Allows media files preview
+  use("nvim-telescope/telescope-symbols.nvim")
 
 	-- Treesitter
 	use({
