@@ -34,8 +34,8 @@ vim.opt.scrolloff = 8                           -- is one of my fav
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "hack:h16"               -- the font used in graphical neovim applications
 vim.opt.shell  = "/bin/zsh"
-
 vim.opt.shortmess:append "c"
+
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]

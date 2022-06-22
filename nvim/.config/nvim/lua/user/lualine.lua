@@ -42,7 +42,7 @@ local filetype = {
 local branch = {
 	"branch",
 	-- icon = "",
-  icon = ""
+	icon = "",
 	-- seperator = { left = "" },
 	-- right_padding = 2,
 }
@@ -100,8 +100,8 @@ lualine.setup({
 	sections = {
 		lualine_a = { filetype, mode },
 		lualine_b = { branch, diff },
-		lualine_c = { diagnostics, "lsp_progress" },
-    lualine_x = { lsp },
+		lualine_c = { diagnostics },
+		lualine_x = { lsp },
 		lualine_y = { spaces, "encoding" },
 		lualine_z = { location, progress },
 	},
