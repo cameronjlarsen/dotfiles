@@ -1,6 +1,6 @@
 ---@diagnostic disable: redundant-parameter
 local M = {}
-local u = require("utils")
+local u = require("user.utils")
 
 -- TODO: backfill this to template
 M.setup = function()
