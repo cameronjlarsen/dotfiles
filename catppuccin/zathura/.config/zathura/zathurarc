@@ -1,0 +1,5 @@
+set font                    "JetBrains Mono Nerd Font"
+set selection-notification  "true"
+set selection-clipboard     "clipboard"
+set recolor                 "true"
+include catppuccin-mocha
