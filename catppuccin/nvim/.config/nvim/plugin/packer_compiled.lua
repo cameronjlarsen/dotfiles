@@ -107,7 +107,7 @@ _G.packer_plugins = {
   catppuccin = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "https://github.com/catppuccin/nvim"
+    url = "catppuccin/nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
