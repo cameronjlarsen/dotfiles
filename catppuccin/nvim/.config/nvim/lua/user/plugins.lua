@@ -16,12 +16,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.cmd [[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost plugins.lua source <afile> | PackerSync
---   augroup end
--- ]]
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
 	command = "source <afile> | PackerSync",
@@ -65,12 +59,15 @@ return packer.startup(function(use)
 	use("goolord/alpha-nvim")
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/which-key.nvim")
-  use("rcarriga/nvim-notify")
+	use("rcarriga/nvim-notify")
+	use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
+    use("j-hui/fidget.nvim")
 
 	-- Colorschemes
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
+        run = ":CatpuccinCompile"
 	}) -- Catpuccin color scheme
 
 	-- cmp plugins
@@ -91,16 +88,17 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
-	use("williamboman/nvim-lsp-installer") -- simple to use language server nvim-lsp-installer
+    use("williamboman/mason.nvim") -- New lsp installer, succeeds nvim-lsp-installer
+    use("williamboman/mason-lspconfig.nvim")
+    use("neovim/nvim-lspconfig") --enable LSP
 	use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
-	use("neovim/nvim-lspconfig") --enable LSP
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use("b0o/SchemaStore.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
 	use("nvim-telescope/telescope-media-files.nvim") -- Allows media files preview
-  use("nvim-telescope/telescope-symbols.nvim")
+	use("nvim-telescope/telescope-symbols.nvim")
 
 	-- Treesitter
 	use({
