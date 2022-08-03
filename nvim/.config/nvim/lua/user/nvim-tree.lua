@@ -19,7 +19,7 @@ nvim_tree.setup({
 		"dashboard",
 		"alpha",
 	},
-	update_cwd = false,
+	sync_root_with_cwd = true,
 	diagnostics = {
 		enable = true,
 		icons = {
@@ -31,7 +31,7 @@ nvim_tree.setup({
 	},
 	update_focused_file = {
 		enable = true,
-		update_cwd = false,
+		update_root = true,
 		ignore_list = {},
 	},
 	git = {

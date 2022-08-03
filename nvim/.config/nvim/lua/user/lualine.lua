@@ -35,6 +35,7 @@ local mode = {
 
 local filetype = {
 	"filetype",
+	separator = { left = "" },
 	icon_only = true,
 	colored = false,
 }
@@ -91,8 +92,8 @@ lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "auto",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
+		component_separators = "|", --{ left = "", right = "" },
+		section_separators = { left = "", right = "" }, --{ left = "", right = "" },
 		disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 		globalstatus = true,
@@ -103,7 +104,9 @@ lualine.setup({
 		lualine_c = { diagnostics },
 		lualine_x = { lsp },
 		lualine_y = { spaces, "encoding" },
-		lualine_z = { location, progress },
+		lualine_z = { location,
+            { progress, separator = { right = "" }}
+        },
 	},
 	inactive_sections = {
 		lualine_a = {},
