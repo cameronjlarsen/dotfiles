@@ -3,9 +3,21 @@ if not status_ok then
     return
 end
 
+local mason = require("mason")
+
+mason.setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua", "clangd", "texlab", "omnisharp", "cssls" }
+local servers = { "jsonls", "sumneko_lua", "clangd", "texlab", "omnisharp", "cssls", "bashls" }
 
 mason_lspconfig.setup({
     ensure_installed = servers,
