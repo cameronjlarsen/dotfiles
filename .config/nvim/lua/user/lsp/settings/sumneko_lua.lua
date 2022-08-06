@@ -4,10 +4,6 @@ return {
 			diagnostics = {
 				globals = {
                     "vim",
-                    "awesome",
-                    "client",
-                    "root",
-                    "screen"
                 },
 			},
 			completion = {
@@ -17,12 +13,14 @@ return {
 			workspace = {
 				library = {
                     vim.api.nvim_get_runtime_file("", true),
-                    "/usr/share/awesome/lib/",
                 },
 			},
 			telemetry = {
 				enable = false,
 			},
+            format = {
+                enable = true,
+            }
 		},
 	},
 }
