@@ -1,6 +1,6 @@
 ---@diagnostic disable: redundant-parameter
 local M = {}
-local u = require("user.utils")
+--[[ local u = require("user.utils") ]]
 
 -- TODO: backfill this to template
 M.setup = function()
@@ -18,6 +18,7 @@ M.setup = function()
     local config = {
         -- disable virtual text
         virtual_text = false,
+        virtual_lines = true,
         -- show signs
         signs = {
             active = signs,

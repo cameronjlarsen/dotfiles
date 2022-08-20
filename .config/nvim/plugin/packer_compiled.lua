@@ -107,7 +107,7 @@ _G.packer_plugins = {
   catppuccin = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/catppuccin",
-    url = "catppuccin/nvim"
+    url = "https://github.com/catppuccin/nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -188,6 +188,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/camjl/.local/share/nvim/site/pack/packer/start/knap",
     url = "https://github.com/frabjous/knap"
+  },
+  ["lsp_lines.nvim"] = {
+    loaded = true,
+    path = "/home/camjl/.local/share/nvim/site/pack/packer/start/lsp_lines.nvim",
+    url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
   },
   ["lualine-lsp-progress"] = {
     loaded = true,
