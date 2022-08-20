@@ -1,8 +1,8 @@
 configuration{
     modi: "run,drun,window";
-    icon-theme: "Oranchelo";
+    icon-theme: "Catppuccin-SE";
     show-icons: true;
-    terminal: "alacritty";
+    terminal: "kitty";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;
@@ -10,7 +10,7 @@ configuration{
     display-drun: "   Apps ";
     display-run: "   Run ";
     display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
+    display-Network: " 直 Network";
     sidebar-mode: true;
 }
 
