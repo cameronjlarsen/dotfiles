@@ -1,3 +1,9 @@
 [submodule "catppuccin/catppuccin/zsh/.config/zsh/.oh-my-zsh"]
 	path = catppuccin/catppuccin/zsh/.config/zsh/.oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule ".config/awesome/modules/bling"]
+	path = .config/awesome/modules/bling
+	url = https://github.com/BlingCorp/bling.git
+[submodule ".config/awesome/modules/rubato"]
+	path = .config/awesome/modules/rubato
+	url = https://github.com/andOrlando/rubato.git
