@@ -121,3 +121,6 @@ export FZF_DEFAULT_OPTS=" \
 
 SPACESHIP_CHAR_SYMBOL=" "
 export PATH=$HOME/.config/rofi/scripts/:$PATH
+
+# Starship prompt
+eval "$(starship init zsh)"
