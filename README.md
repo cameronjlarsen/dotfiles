@@ -12,12 +12,24 @@ Clone into `$HOME` directory or `~`
 git clone https://github.com/cameronjlarsen/dotfiles ~
 ```
 
-Run `stow` to symlink everything or selected items
+Run `stow` from `/dotfiles` directory like so:
+This will stow the `.config` directory at `$HOME/.config/`
 
 ```
-stow */ # Everything (the '/' ignores the README 
+stow -v -R .config -t ~/.config
 ```
 
+This will stow the `Wallpapers` directory at `$HOME/Pictures/Wallpapers/`
+
 ```
-stow nvim # Just nvim config
+stow -v -R Wallpapers -t ~/Pictures/Wallpapers/
 ```
+
+To stow individual config folders `CD` into `/dotfiles/.config/` 
+run `stow` with the desired config folder like so:
+
+```
+stow -v -R nvim -t ~/.config 
+```
+
+The above command will stow only the `nvim` config folder at `$HOME/.config/nvim`
