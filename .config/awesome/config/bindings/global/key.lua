@@ -21,7 +21,7 @@ awful.keyboard.append_global_keybindings({
         on_press    = hotkeys_popup.show_help,
     },
     awful.key {
-        modifiers   = { Super, Shift },
+        modifiers   = { Super },
         key         = "w",
         description = "show main menu",
         group       = "awesome",
@@ -63,14 +63,14 @@ awful.keyboard.append_global_keybindings({
         on_press    = function() awful.spawn(apps.launcher) end,
     },
     awful.key {
-        modifiers   = { Super },
+        modifiers   = { Super, Shift },
         key         = "w",
         description = "launch web browser",
         group       = "launcher",
         on_press    = function() awful.spawn(apps.web_browser) end,
     },
     awful.key {
-        modifiers   = { Super },
+        modifiers   = { Super, Shift },
         key         = "f",
         description = "launch file manager",
         group       = "launcher",

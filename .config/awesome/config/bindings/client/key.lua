@@ -9,7 +9,7 @@ local Ctrl  = mod.ctrl
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings {
         awful.key {
-            modifiers   = { Super, Shift },
+            modifiers   = { Super },
             key         = "f",
             description = "toggle fullscreen",
             group       = "client",
