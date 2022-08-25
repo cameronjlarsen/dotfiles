@@ -77,7 +77,7 @@ ZSH_CUSTOM=~/.config/zsh/custom/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-source $ZSH/custom/plugins/catppuccin-zsh-syntax-highlighting/catppuccin-zsh-syntax-highlighting.zsh
+source $ZSH_CUSTOM/plugins/catppuccin-zsh-syntax-highlighting/catppuccin-zsh-syntax-highlighting.zsh
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting )
 
 source $ZSH/oh-my-zsh.sh

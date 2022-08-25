@@ -1,0 +1,2 @@
+# Ignore packer compiled 
+.config/nvim/plugin/
