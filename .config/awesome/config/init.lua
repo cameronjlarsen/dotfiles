@@ -1,5 +1,5 @@
 require("config.apps")
 require("config.main")
+require("config.titlebar")
 require("config.bindings")
 require("config.rules")
-require("config.menu")

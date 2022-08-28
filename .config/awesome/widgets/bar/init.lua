@@ -4,20 +4,20 @@ local gears = require("gears")
 local dpi   = require("beautiful").xresources.apply_dpi
 
 -- Get widgets
-local volume  = require("ui.bar.volume")
-local clock   = require("ui.bar.clock")
-local network = require("ui.bar.network")
-local tray    = require("ui.bar.tray")
+local volume  = require("widgets.volume")
+local clock   = require("widgets.clock")
+local network = require("widgets.network")
+local tray    = require("widgets.tray")
 local margins = { top = dpi(5), bottom = dpi(5), left = dpi(10), right = dpi(10) }
 
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    s.layoutbox = require("ui.bar.layoutbox")(s)
+    s.layoutbox = require("widgets.layoutbox")(s)
 
     -- Create a taglist widget
-    s.taglist = require("ui.bar.taglist").new({
+    s.taglist = require("widgets.taglist").new({
         screen = s,
     })
 
@@ -59,8 +59,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
         { -- Right widgets
             {
                 tray,
-                network,
                 volume,
+                network,
                 s.layoutbox,
                 widget  = wibox.widget,
                 layout  = wibox.layout.fixed.horizontal,

@@ -131,3 +131,5 @@ awesome.connect_signal("widget::volume", function()
     })
     volumeDisplay.visible = true
 end)
+
+return icon

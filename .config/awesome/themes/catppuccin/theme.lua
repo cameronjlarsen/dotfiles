@@ -8,7 +8,6 @@ local dpi          = xresources.apply_dpi
 local gears        = require("gears")
 local gfs          = require("gears.filesystem")
 local config_path  = gfs.get_configuration_dir()
-local theme_path   = config_path .. "themes/"
 local icon_path    = config_path .. "icons/"
 local walls_path   = "~/Pictures/Wallpapers/"
 local catppuccin   = require("themes.catppuccin.colors")
@@ -56,7 +55,7 @@ theme.wallpaper = walls_path .. "evening-sky.png"
 theme.font_family = "Ubuntu "
 theme.font        = theme.font_family .. 12
 theme.font_italic = theme.font_family .. "Italic " .. 12
-theme.font_icon   = "Material Icons "
+theme.font_icon   = "Material Icons Rounded "
 
 theme.bg_normal   = theme.colors.base
 theme.bg_focus    = theme.colors.base
@@ -115,6 +114,15 @@ theme.taglist_shape       = gears.shape.rounded_rect
 -- Wibar
 theme.wibar_bg           = theme.colors.base
 theme.wibar_container_bg = theme.colors.surface0
+
+-- Tooltips
+theme.tooltip_border_color = theme.colors.lavender
+theme.tooltip_bg           = theme.bg_normal
+theme.tooltop_fg           = theme.fg_normal
+theme.tooltip_font         = theme.font
+theme.tooltip_border_width = dpi(0)
+theme.tooltip_gaps         = dpi(5)
+theme.tooptip_shape        = gears.shape.rounded_rect
 
 -- Menu
 theme.menu_font         = theme.font
@@ -179,22 +187,22 @@ theme.titlebar_maximized_button_focus_active    = gears.surface.load_from_shape(
     theme.colors.green)
 
 -- You can use your own layout icons like this:
-theme.layout_fairh      = icon_path .. "layouts/fairhw.png"
-theme.layout_fairv      = icon_path .. "layouts/fairvw.png"
-theme.layout_floating   = icon_path .. "layouts/floatingw.png"
-theme.layout_magnifier  = icon_path .. "layouts/magnifierw.png"
-theme.layout_max        = icon_path .. "layouts/maxw.png"
-theme.layout_fullscreen = icon_path .. "layouts/fullscreenw.png"
-theme.layout_tilebottom = icon_path .. "layouts/tilebottomw.png"
-theme.layout_tileleft   = icon_path .. "layouts/tileleftw.png"
-theme.layout_tile       = icon_path .. "layouts/tilew.png"
-theme.layout_tiletop    = icon_path .. "layouts/tiletopw.png"
-theme.layout_spiral     = icon_path .. "layouts/spiralw.png"
-theme.layout_dwindle    = icon_path .. "layouts/dwindlew.png"
-theme.layout_cornernw   = icon_path .. "layouts/cornernww.png"
-theme.layout_cornerne   = icon_path .. "layouts/cornernew.png"
-theme.layout_cornersw   = icon_path .. "layouts/cornersww.png"
-theme.layout_cornerse   = icon_path .. "layouts/cornersew.png"
+theme.layout_fairh      =gears.color.recolor_image(icon_path .. "layouts/fairhw.png", theme.fg_normal)
+theme.layout_fairv      =gears.color.recolor_image(icon_path .. "layouts/fairvw.png", theme.fg_normal)
+theme.layout_floating   =gears.color.recolor_image(icon_path .. "layouts/floatingw.png", theme.fg_normal)
+theme.layout_magnifier  =gears.color.recolor_image(icon_path .. "layouts/magnifierw.png", theme.fg_normal)
+theme.layout_max        =gears.color.recolor_image(icon_path .. "layouts/maxw.png", theme.fg_normal)
+theme.layout_fullscreen =gears.color.recolor_image(icon_path .. "layouts/fullscreenw.png", theme.fg_normal)
+theme.layout_tilebottom =gears.color.recolor_image(icon_path .. "layouts/tilebottomw.png", theme.fg_normal)
+theme.layout_tileleft   =gears.color.recolor_image(icon_path .. "layouts/tileleftw.png", theme.fg_normal)
+theme.layout_tile       =gears.color.recolor_image(icon_path .. "layouts/tilew.png", theme.fg_normal)
+theme.layout_tiletop    =gears.color.recolor_image(icon_path .. "layouts/tiletopw.png", theme.fg_normal)
+theme.layout_spiral     =gears.color.recolor_image(icon_path .. "layouts/spiralw.png", theme.fg_normal)
+theme.layout_dwindle    =gears.color.recolor_image(icon_path .. "layouts/dwindlew.png", theme.fg_normal)
+theme.layout_cornernw   =gears.color.recolor_image(icon_path .. "layouts/cornernww.png", theme.fg_normal)
+theme.layout_cornerne   =gears.color.recolor_image(icon_path .. "layouts/cornernew.png", theme.fg_normal)
+theme.layout_cornersw   =gears.color.recolor_image(icon_path .. "layouts/cornersww.png", theme.fg_normal)
+theme.layout_cornerse   =gears.color.recolor_image(icon_path .. "layouts/cornersew.png", theme.fg_normal)
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.colors.crust, theme.colors.text)

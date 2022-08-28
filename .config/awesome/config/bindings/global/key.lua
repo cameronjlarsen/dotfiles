@@ -1,6 +1,6 @@
 local awful         = require("awful")
 local apps          = require("config.apps")
-local menu          = require("config.menu")
+local menu          = require("widgets.menu")
 local mod           = require("config.bindings.mod")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys.firefox")
