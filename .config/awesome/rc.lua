@@ -9,7 +9,7 @@ local theme_dir = gears.filesystem.get_configuration_dir() .. "themes/"
 beautiful.init(theme_dir .. "catppuccin/theme.lua")
 
 -- Use bash for every shell cmd
-require("awful").util.shell = "/bin/bash"
+require("awful").util.shell = "/usr/bin/bash"
 
 require("config")
 require("widgets")
