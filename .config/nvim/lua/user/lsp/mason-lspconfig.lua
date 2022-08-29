@@ -17,7 +17,7 @@ mason.setup({
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua", "clangd", "texlab", "omnisharp", "cssls", "bashls" }
+local servers = { "jsonls", "sumneko_lua", "clangd", "texlab", "omnisharp", "cssls", "bashls", "marksman" }
 
 mason_lspconfig.setup({
     ensure_installed = servers,
