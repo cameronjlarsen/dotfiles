@@ -124,10 +124,16 @@ return packer.startup(function(use)
     -- Latex
     use("frabjous/knap") -- allows livepreviewing of markdown and latex files
 
-    -- Markdown previews
+    -- Markdown
     use("ellisonleao/glow.nvim") -- preview files in nvim
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    use({ 'jakewvincent/mkdnflow.nvim',
+        rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
+        config = function()
+            require('mkdnflow').setup({})
+        end
+    })
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
