@@ -2,7 +2,7 @@
 
 Contains my config files
 
-# Installing
+## Installing
 
 Requires `git` and GNU `stow`
 
