@@ -112,6 +112,24 @@ awful.keyboard.append_global_keybindings {
     },
     awful.key {
         modifiers   = {},
+        key         = "XF86MonBrightnessUp",
+        description = "Increase monitor brightness",
+        group       = "brightness",
+        on_press    = function()
+            awful.spawn("brightnessctl set 5%+ -q")
+        end,
+    },
+    awful.key {
+        modifiers   = {},
+        key         = "XF86MonBrightnessDown",
+        description = "Decrease monitor brightness",
+        group       = "brightness",
+        on_press    = function()
+            awful.spawn("brightnessctl set 5%- -q")
+        end,
+    },
+    awful.key {
+        modifiers   = {},
         key         = "Print",
         description = "manual capture",
         group       = "screenshot",
