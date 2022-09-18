@@ -39,93 +39,85 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-    -- My plugins here
-    use("wbthomason/packer.nvim") -- Have packer manage itself
-    use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-    use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-    use("fladson/vim-kitty") -- Enables syntax highlighting in kitty.conf
-    use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and Treesitter
-    use("numToStr/Comment.nvim") -- Easily comment stuff
-    use("kyazdani42/nvim-web-devicons")
-    use("kyazdani42/nvim-tree.lua")
-    use("akinsho/bufferline.nvim")
-    use("moll/vim-bbye")
-    use("nvim-lualine/lualine.nvim")
-    use("arkav/lualine-lsp-progress")
-    use("akinsho/toggleterm.nvim")
-    use("ahmedkhalf/project.nvim")
-    use("lewis6991/impatient.nvim")
-    use("lukas-reineke/indent-blankline.nvim")
-    use("goolord/alpha-nvim")
-    use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
-    use("folke/which-key.nvim")
-    use("rcarriga/nvim-notify")
-    use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
-    use("j-hui/fidget.nvim")
 
-    -- Colorschemes
+    use("lewis6991/impatient.nvim") -- Load plugins faster
+    use("wbthomason/packer.nvim") -- Have packer manage itself
+
+    -- Autopairs --
+    use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and Treesitter
+
+    -- Buffers --
+    use("akinsho/bufferline.nvim") -- Buffers as tabs
+    use("moll/vim-bbye") -- Close buffers without closing windows
+
+    -- Colorschemes & Color --
     use({
         "catppuccin/nvim",
         as = "catppuccin",
         run = ":CatpuccinCompile"
     }) -- Catpuccin color scheme
+    use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
 
-    -- cmp plugins
-    use("hrsh7th/nvim-cmp") -- The completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completions
-    use("hrsh7th/cmp-path") -- path completions
-    use("hrsh7th/cmp-cmdline") -- cmdline completions
-    use("saadparwaiz1/cmp_luasnip") -- snippet completions
-    use("hrsh7th/cmp-nvim-lsp")
-    use("hrsh7th/cmp-emoji")
-    use("hrsh7th/cmp-nvim-lua")
-    use("rcarriga/cmp-dap")
-    use("kdheepak/cmp-latex-symbols")
-    use("lukas-reineke/cmp-rg")
-
-    -- snippets
-    use("L3MON4D3/LuaSnip") --snippet engine
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-    -- LSP
-    use("williamboman/mason.nvim") -- New lsp installer, succeeds nvim-lsp-installer
-    use("williamboman/mason-lspconfig.nvim")
-    use("neovim/nvim-lspconfig") --enable LSP
-    use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
-    use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-    use("b0o/SchemaStore.nvim")
-    use("https://git.sr.ht/~whynothugo/lsp_lines.nvim")
-
-    -- Telescope
-    use("nvim-telescope/telescope.nvim")
-    use("nvim-telescope/telescope-media-files.nvim") -- Allows media files preview
-    use("nvim-telescope/telescope-symbols.nvim")
-
-    -- Treesitter
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-    })
-    use("p00f/nvim-ts-rainbow")
-    use("nvim-treesitter/playground")
-
-    -- Comments
+    -- Comments --
+    use("numToStr/Comment.nvim") -- Easily comment stuff
     use("JoosepAlviste/nvim-ts-context-commentstring")
 
-    -- Git
-    use("lewis6991/gitsigns.nvim")
+    -- Completion & Snippets plugins --
+    -- Cmp
+    use({ "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-emoji",
+            "hrsh7th/cmp-nvim-lua",
+            "rcarriga/cmp-dap",
+            "kdheepak/cmp-latex-symbols",
+            "lukas-reineke/cmp-rg"
+        }
+    })
+    -- Snippets
+    use({ "L3MON4D3/LuaSnip", --snippet engine
+        requires = { "saadparwaiz1/cmp_luasnip" }
+    })
+    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
-    -- DAP
+    -- Dashboard --
+    use({ "goolord/alpha-nvim",
+        requires = { "kyazdani42/nvim-web-devicons" }
+    }) -- Startup dashboard
+
+    -- Debugging --
     use("mfussenegger/nvim-dap")
-    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-    use("theHamsta/nvim-dap-virtual-text")
+    use({ "rcarriga/nvim-dap-ui",
+        requires = { "mfussenegger/nvim-dap" },
+        after = { "nvim-dap" }
+    })
+    use({ "theHamsta/nvim-dap-virtual-text",
+        requires = {
+            "mfussenegger/nvim-dap",
+            "nvim-treesitter/nvim-treesitter"
+        }
+    })
     use("Pocco81/DAPInstall.nvim")
 
-    -- Latex
-    use("frabjous/knap") -- allows livepreviewing of markdown and latex files
+    -- File Explorer --
+    use({ "kyazdani42/nvim-tree.lua",
+        requires = { "kyazdani42/nvim-web-devicons" }
+    }) -- File Explorer
 
-    -- Markdown
-    use("ellisonleao/glow.nvim") -- preview files in nvim
+    -- Git --
+    use({ "lewis6991/gitsigns.nvim",
+        requires = { "nvim-lua/plenary.nvim" }
+    })
+
+    -- Keymaps --
+    use("folke/which-key.nvim") -- Keymap cheatsheet
+
+    -- Latex & Markdown Previews --
+    use("frabjous/knap") -- allows livepreviewing of markdown and latex files
+    use("ellisonleao/glow.nvim") -- preview markdown files in nvim
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
     use({ 'jakewvincent/mkdnflow.nvim',
@@ -134,6 +126,65 @@ return packer.startup(function(use)
             require('mkdnflow').setup({})
         end
     })
+
+    -- LSP --
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
+
+    use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
+    use({ "jose-elias-alvarez/null-ls.nvim",
+        requires = { "nvim-lua/plenary.nvim" }
+    })
+    use("b0o/SchemaStore.nvim") -- JSON schemas
+    use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Show lsp errors inline
+    use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
+    use("j-hui/fidget.nvim") -- Show LSP progress
+
+    -- Notifications --
+    use("rcarriga/nvim-notify") -- Fancy notifications
+
+    -- Projects --
+    use("ahmedkhalf/project.nvim") -- Project management
+
+    -- Statusline --
+    use("nvim-lualine/lualine.nvim") -- Statusline
+    use({ "arkav/lualine-lsp-progress",
+        requires = { "nvim-lualine/lualine.nvim" }
+    }) -- Show lsp progress in statusline
+
+    -- Telescope --
+    use({ "nvim-telescope/telescope.nvim",
+        requires = {
+            "nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim
+            "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
+        }
+    })
+    use({ "nvim-telescope/telescope-media-files.nvim" }) -- Allows media files preview
+    use({ "nvim-telescope/telescope-symbols.nvim" })
+
+    -- Terminal --
+    use("akinsho/toggleterm.nvim") -- Terminal
+
+    -- Treesitter & Highlighting --
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+    })
+    use({ "p00f/nvim-ts-rainbow",
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        after = { "nvim-treesitter" }
+    })
+    use({ "nvim-treesitter/playground",
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        after = { "nvim-treesitter" }
+    })
+    -- Syntax highlighting
+    use("fladson/vim-kitty") -- Enables syntax highlighting in kitty.conf
+    use("lukas-reineke/indent-blankline.nvim") -- Indentation lines
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
