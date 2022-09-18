@@ -19,5 +19,5 @@ end
 -- map({ "n", "v" }, "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>", { silent = true, desc = "Toggle repl" })
 
 -- Configure language adapters
-require("user.dap.cpp")
-require("user.dap.cs")
+require("plugins.dap.cpp")
+require("plugins.dap.cs")
