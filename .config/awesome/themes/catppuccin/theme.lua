@@ -136,14 +136,16 @@ theme.menu_bg_normal    = theme.colors.surface0
 theme.menu_fg_normal    = theme.colors.text
 
 -- Misc
-theme.useless_gap          = dpi(5)
-theme.border_width         = dpi(2)
-theme.border_color_normal  = theme.colors.surface0
-theme.border_color_active  = theme.colors.lavender
-theme.border_color_urgent  = theme.colors.maroon
-theme.border_radius        = dpi(5)
+theme.useless_gap             = dpi(5)
+theme.gap_single_client       = true
+theme.border_width            = dpi(2)
+theme.border_color_normal     = theme.colors.surface0
+theme.border_color_active     = theme.colors.lavender
+theme.border_color_urgent     = theme.colors.maroon
+theme.border_radius           = dpi(5)
 -- theme.bg_systray           = theme.wibar_container_bg
-theme.systray_icon_spacing = dpi(5)
+theme.systray_icon_spacing    = dpi(5)
+theme.maximized_honor_padding = true
 
 -- Hotkeys
 theme.hotkeys_bg           = theme.colors.surface0
@@ -187,22 +189,22 @@ theme.titlebar_maximized_button_focus_active    = gears.surface.load_from_shape(
     theme.colors.green)
 
 -- You can use your own layout icons like this:
-theme.layout_fairh      =gears.color.recolor_image(icon_path .. "layouts/fairhw.png", theme.fg_normal)
-theme.layout_fairv      =gears.color.recolor_image(icon_path .. "layouts/fairvw.png", theme.fg_normal)
-theme.layout_floating   =gears.color.recolor_image(icon_path .. "layouts/floatingw.png", theme.fg_normal)
-theme.layout_magnifier  =gears.color.recolor_image(icon_path .. "layouts/magnifierw.png", theme.fg_normal)
-theme.layout_max        =gears.color.recolor_image(icon_path .. "layouts/maxw.png", theme.fg_normal)
-theme.layout_fullscreen =gears.color.recolor_image(icon_path .. "layouts/fullscreenw.png", theme.fg_normal)
-theme.layout_tilebottom =gears.color.recolor_image(icon_path .. "layouts/tilebottomw.png", theme.fg_normal)
-theme.layout_tileleft   =gears.color.recolor_image(icon_path .. "layouts/tileleftw.png", theme.fg_normal)
-theme.layout_tile       =gears.color.recolor_image(icon_path .. "layouts/tilew.png", theme.fg_normal)
-theme.layout_tiletop    =gears.color.recolor_image(icon_path .. "layouts/tiletopw.png", theme.fg_normal)
-theme.layout_spiral     =gears.color.recolor_image(icon_path .. "layouts/spiralw.png", theme.fg_normal)
-theme.layout_dwindle    =gears.color.recolor_image(icon_path .. "layouts/dwindlew.png", theme.fg_normal)
-theme.layout_cornernw   =gears.color.recolor_image(icon_path .. "layouts/cornernww.png", theme.fg_normal)
-theme.layout_cornerne   =gears.color.recolor_image(icon_path .. "layouts/cornernew.png", theme.fg_normal)
-theme.layout_cornersw   =gears.color.recolor_image(icon_path .. "layouts/cornersww.png", theme.fg_normal)
-theme.layout_cornerse   =gears.color.recolor_image(icon_path .. "layouts/cornersew.png", theme.fg_normal)
+theme.layout_fairh      = gears.color.recolor_image(icon_path .. "layouts/fairhw.png", theme.fg_normal)
+theme.layout_fairv      = gears.color.recolor_image(icon_path .. "layouts/fairvw.png", theme.fg_normal)
+theme.layout_floating   = gears.color.recolor_image(icon_path .. "layouts/floatingw.png", theme.fg_normal)
+theme.layout_magnifier  = gears.color.recolor_image(icon_path .. "layouts/magnifierw.png", theme.fg_normal)
+theme.layout_max        = gears.color.recolor_image(icon_path .. "layouts/maxw.png", theme.fg_normal)
+theme.layout_fullscreen = gears.color.recolor_image(icon_path .. "layouts/fullscreenw.png", theme.fg_normal)
+theme.layout_tilebottom = gears.color.recolor_image(icon_path .. "layouts/tilebottomw.png", theme.fg_normal)
+theme.layout_tileleft   = gears.color.recolor_image(icon_path .. "layouts/tileleftw.png", theme.fg_normal)
+theme.layout_tile       = gears.color.recolor_image(icon_path .. "layouts/tilew.png", theme.fg_normal)
+theme.layout_tiletop    = gears.color.recolor_image(icon_path .. "layouts/tiletopw.png", theme.fg_normal)
+theme.layout_spiral     = gears.color.recolor_image(icon_path .. "layouts/spiralw.png", theme.fg_normal)
+theme.layout_dwindle    = gears.color.recolor_image(icon_path .. "layouts/dwindlew.png", theme.fg_normal)
+theme.layout_cornernw   = gears.color.recolor_image(icon_path .. "layouts/cornernww.png", theme.fg_normal)
+theme.layout_cornerne   = gears.color.recolor_image(icon_path .. "layouts/cornernew.png", theme.fg_normal)
+theme.layout_cornersw   = gears.color.recolor_image(icon_path .. "layouts/cornersww.png", theme.fg_normal)
+theme.layout_cornerse   = gears.color.recolor_image(icon_path .. "layouts/cornersew.png", theme.fg_normal)
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.colors.crust, theme.colors.text)

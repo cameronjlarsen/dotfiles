@@ -151,9 +151,6 @@ return packer.startup(function(use)
 
     -- Statusline --
     use("nvim-lualine/lualine.nvim") -- Statusline
-    use({ "arkav/lualine-lsp-progress",
-        requires = { "nvim-lualine/lualine.nvim" }
-    }) -- Show lsp progress in statusline
 
     -- Telescope --
     use({ "nvim-telescope/telescope.nvim",

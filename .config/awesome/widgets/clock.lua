@@ -5,4 +5,5 @@ local clock = wibox.widget {
     widget = wibox.widget.textclock
 }
 
+
 return clock

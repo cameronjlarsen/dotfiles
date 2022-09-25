@@ -1,5 +1,6 @@
-local awful = require("awful")
-local mod   = require("config.bindings.mod")
+local awful     = require("awful")
+local mod       = require("config.bindings.mod")
+local beautiful = require("beautiful")
 
 local Alt   = mod.alt
 local Super = mod.super
@@ -66,6 +67,11 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize",
             group       = "client",
             on_press    = function(c)
+                if c.maximized then
+                    awful.screen.focused().padding = 0
+                else
+                    awful.screen.focused().padding = beautiful.useless_gap
+                end
                 c.maximized = not c.maximized
                 c:raise()
             end,

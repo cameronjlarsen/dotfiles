@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.config/zsh/.oh-my-zsh"
+# export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -80,7 +80,7 @@ ZSH_CUSTOM=~/.config/zsh/custom/
 source $ZSH_CUSTOM/plugins/catppuccin-zsh-syntax-highlighting/catppuccin-zsh-syntax-highlighting.zsh
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting )
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 

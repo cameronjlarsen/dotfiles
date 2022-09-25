@@ -59,8 +59,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
         { -- Right widgets
             {
                 tray,
-                volume,
                 network,
+                volume,
                 s.layoutbox,
                 widget  = wibox.widget,
                 layout  = wibox.layout.fixed.horizontal,
