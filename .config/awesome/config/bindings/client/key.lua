@@ -70,7 +70,7 @@ client.connect_signal("request::default_keybindings", function()
                 if c.maximized then
                     awful.screen.focused().padding = 0
                 else
-                    awful.screen.focused().padding = beautiful.useless_gap
+                    awful.screen.focused().padding = beautiful.useless_gap * 2
                 end
                 c.maximized = not c.maximized
                 c:raise()
@@ -82,6 +82,11 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize vertically",
             group       = "client",
             on_press    = function(c)
+                if c.maximized_vertical then
+                    awful.screen.focused().padding = 0
+                else
+                    awful.screen.focused().padding = beautiful.useless_gap * 2
+                end
                 c.maximized_vertical = not c.maximized_vertical
                 c:raise()
             end,
@@ -92,6 +97,11 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize horizontally",
             group       = "client",
             on_press    = function(c)
+                if c.maximized_horizontal then
+                    awful.screen.focused().padding = 0
+                else
+                    awful.screen.focused().padding = beautiful.useless_gap * 2
+                end
                 c.maximized_horizontal = not c.maximized_horizontal
                 c:raise()
             end,
