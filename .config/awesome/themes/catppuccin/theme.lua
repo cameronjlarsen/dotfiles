@@ -136,16 +136,18 @@ theme.menu_bg_normal    = theme.colors.surface0
 theme.menu_fg_normal    = theme.colors.text
 
 -- Misc
-theme.useless_gap             = dpi(5)
-theme.gap_single_client       = true
-theme.border_width            = dpi(2)
-theme.border_color_normal     = theme.colors.surface0
-theme.border_color_active     = theme.colors.lavender
-theme.border_color_urgent     = theme.colors.maroon
-theme.border_radius           = dpi(5)
+theme.useless_gap                   = dpi(5)
+theme.gap_single_client             = true
+theme.border_width                  = dpi(2)
+theme.border_width_maximized        = dpi(2)
+theme.border_color_normal           = theme.colors.surface0
+theme.border_color_active           = theme.colors.lavender
+theme.border_color_urgent           = theme.colors.maroon
+theme.border_color_maximized        = theme.colors.green
+theme.border_radius                 = dpi(5)
 -- theme.bg_systray           = theme.wibar_container_bg
-theme.systray_icon_spacing    = dpi(5)
-theme.maximized_honor_padding = true
+theme.systray_icon_spacing          = dpi(5)
+theme.maximized_honor_padding       = true
 
 -- Hotkeys
 theme.hotkeys_bg           = theme.colors.surface0
