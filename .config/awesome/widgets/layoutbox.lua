@@ -1,4 +1,6 @@
 local awful = require("awful")
+local wibox = require("wibox")
+local dpi   = require("beautiful").xresources.apply_dpi
 
 local buttons = {
     awful.button({}, 1, function()
@@ -16,8 +18,14 @@ local buttons = {
 }
 
 return function(s)
-    return awful.widget.layoutbox({
-        screen = s,
-        buttons = buttons
-    })
+    return wibox.widget {
+        {
+            widget = awful.widget.layoutbox {
+                screen = s,
+                buttons = buttons
+            },
+        },
+        margins = { top = dpi(3), bottom = dpi(3), left = dpi(3), right = dpi(3) },
+        widget = wibox.container.margin,
+    }
 end
