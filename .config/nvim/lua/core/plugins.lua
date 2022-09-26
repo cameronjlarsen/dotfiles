@@ -28,6 +28,18 @@ if not status_ok then
     return
 end
 
+local function map(mode, lhs, rhs, opts)
+    opts = vim.tbl_extend("keep", opts,
+        { silent = true })
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { desc = "Compile" })
+map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { desc = "Install" })
+map("n", "<leader>ps", "<cmd>PackerSync<cr>", { desc = "Sync" })
+map("n", "<leader>pS", "<cmd>PackerStatus<cr>", { desc = "Status" })
+map("n", "<leader>pu", "<cmd>PackerUpdate<cr>", { desc = "Update" })
+
 -- Have packer use a popup window
 packer.init({
     display = {
@@ -82,6 +94,9 @@ return packer.startup(function(use)
         requires = { "saadparwaiz1/cmp_luasnip" }
     })
     use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+
+    -- Github Copilot
+    use("github/copilot.vim")
 
     -- Dashboard --
     use({ "goolord/alpha-nvim",

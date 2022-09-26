@@ -1,12 +1,11 @@
-local opts = { noremap = true, silent = true }
-
-local term_opts = { silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local function map(mode, lhs, rhs, opts)
+    opts = vim.tbl_extend("keep", opts,
+        { silent = true })
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -20,54 +19,54 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
-keymap("n", "<leader>e", ":Lex 30<cr>", opts)
+map("n", "<C-h>", "<C-w>h", { desc = "Focus window left" })
+map("n", "<C-j>", "<C-w>j", { desc = "Focus window below" })
+map("n", "<C-k>", "<C-w>k", { desc = "Focus window above" })
+map("n", "<C-l>", "<C-w>l", { desc = "Focus window right" })
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+map("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize up" })
+map("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize down" })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Resize left" })
+map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Resize right" })
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("v", "<A-up>", ":m .+1<CR>==", opts)
-keymap("v", "<A-down>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
-
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Terminal --
--- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+map("n", "<S-l>", ":bnext<CR>", { desc = "Go to next buffer" })
+map("n", "<S-h>", ":bprevious<CR>", { desc = "Go to previous buffer" })
+map("n", "<leader>c", "<cmd>Bdelete!<CR>", { desc = "Close Buffer" })
 
 -- Keep text centered while searching
 -- n = next result
 -- zz = redraw at cursor (center screen)
 -- zv = open enough folds to display the cursor position
-keymap("n", "n", "nzzzv", opts)
-keymap("n", "N", "Nzzzv", opts)
+map("n", "n", "nzzzv", { desc = "Next search result" })
+map("n", "N", "Nzzzv", { desc = "Prev search result" })
+map("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "No Highlight Search" })
+
+-- Insert --
+-- Press jk fast to enter
+map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
+
+-- Visual --
+-- Stay in indent mode
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
+
+-- Move text up and down
+map("v", "<A-up>", ":m .+1<CR>==", { desc = "Move text up" })
+map("v", "<A-down>", ":m .-2<CR>==", { desc = "Move text down" })
+map("v", "p", '"_dP', { desc = "Paste and keep in register" })
+
+-- Visual Block --
+-- Move text up and down
+map("x", "J", ":move '>+1<CR>gv-gv", { desc = "Move text up" })
+map("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move text down" })
+map("x", "<A-j>", ":move '>+1<CR>gv-gv", { desc = "Move text up" })
+map("x", "<A-k>", ":move '<-2<CR>gv-gv", { desc = "Move text down" })
+
+-- Terminal --
+-- Better terminal navigation
+map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Focus terminal left" })
+map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Focus terminal down" })
+map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
+map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })

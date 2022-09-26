@@ -14,8 +14,8 @@ local setup = {
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-            operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-            motions = false, -- adds help for motions
+            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            motions = true, -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
@@ -55,7 +55,7 @@ local setup = {
         spacing = 3, -- spacing between columns
         align = "left", -- align columns left, center or right
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
     triggers = "auto", -- automatically setup triggers
@@ -69,151 +69,29 @@ local setup = {
     },
 }
 
-local opts = {
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
-}
-
-local mappings = {
-    ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
-    ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-    ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-
-    d = {
-        name = "Debug",
-        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Breakpoint" },
-        c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-        i = { "<cmd>lua require'dap'.step_into()<cr>", "Into" },
-        o = { "<cmd>lua require'dap'.step_over()<cr>", "Over" },
-        O = { "<cmd>lua require'dap'.step_out()<cr>", "Out" },
-        r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Repl" },
-        l = { "<cmd>lua require'dap'.run_last()<cr>", "Last" },
-        u = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
-        x = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
+local labels = {
+    ["<leader>d"] = {
+        name = "+Debug",
     },
-
-    f = {
-        name = "Find",
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-        f = {
-            "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-            "Find files",
-        },
-        t = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-        h = { "<cmd>Telescope help_tags<cr>", "Help" },
-        i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
-        l = { "<cmd>Telescope resume<cr>", "Last Search" },
-        M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-        r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-        R = { "<cmd>Telescope registers<cr>", "Registers" },
-        k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-        C = { "<cmd>Telescope commands<cr>", "Commands" },
-        s = { "<cmd>Telescope symbols<cr>", "Symbols" },
+    ["<leader>f"] = {
+        name = "+Find",
     },
-
-    g = {
-        name = "Git",
-        g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
-        j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-        k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-        l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-        p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-        r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-        R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-        u = {
-            "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-            "Undo Stage Hunk",
-        },
-        o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-        b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-        c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-        d = {
-            "<cmd>Gitsigns diffthis HEAD<cr>",
-            "Diff",
-        },
+    ["<leader>g"] = {
+        name = "+Git",
     },
-
-    l = {
-        name = "LSP",
-        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-        d = {
-            "<cmd>Telescope diagnostics bufnr=0<cr>",
-            "Document Diagnostics",
-        },
-        w = {
-            "<cmd>Telescope diagnostics<cr>",
-            "Workspace Diagnostics",
-        },
-        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-        i = { "<cmd>LspInfo<cr>", "Info" },
-        I = { "<cmd>Mason<cr>", "Installer Info" },
-        j = {
-            "<cmd>lua vim.diagnostic.goto_next()<CR>",
-            "Next Diagnostic",
-        },
-        k = {
-            "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-            "Prev Diagnostic",
-        },
-        l = { "<cmd>lua require 'lsp_lines'.toggle()<cr>", "Toggle lsp_lines" },
-        q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Quickfix" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-        R = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-            "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-            "Workspace Symbols",
-        },
+    ["<leader>l"] = {
+        name = "+LSP",
     },
-    m = {
-        name = "Markdown Preview",
-        g = { "<cmd>Glow<cr>", "Glow Preview" },
-        m = { "<cmd>MarkdownPreview<cr>", "Start Markdown Preview" },
-        s = { "<cmd>MarkdownPreviewStop<cr>", "Stop Markdown Preview" },
-        p = { "<cmd>MarkdownPreviewToggle", "Toggle Markdown Preview" },
+    ["<leader>k"] = {
+        name = "+Knap/Markdown Preview",
     },
-
-    p = {
-        name = "Packer",
-        c = { "<cmd>PackerCompile<cr>", "Compile" },
-        i = { "<cmd>PackerInstall<cr>", "Install" },
-        s = { "<cmd>PackerSync<cr>", "Sync" },
-        S = { "<cmd>PackerStatus<cr>", "Status" },
-        u = { "<cmd>PackerUpdate<cr>", "Update" },
+    ["<leader>p"] = {
+        name = "+Packer",
     },
-
-    t = {
-        name = "Terminal",
-        n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-        u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-        t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-        p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-        f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-        h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    ["<leader>t"] = {
+        name = "+Terminal",
     },
-}
-
-local vopts = {
-    mode = "v", -- VISUAL mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
-}
-local vmappings = {
-    ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>', "Comment" },
 }
 
 which_key.setup(setup)
-which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+which_key.register(labels)

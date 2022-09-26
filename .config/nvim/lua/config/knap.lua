@@ -1,7 +1,7 @@
--- local status_ok, knap = pcall(require, "knap")
--- if not status_ok then
--- 	return
--- end
+local status_ok, _ = pcall(require, "knap")
+if not status_ok then
+    return
+end
 
 local gknapsettings = {
     mdoutputext           = "pdf",
@@ -21,50 +21,34 @@ local gknapsettings = {
     -- textopdfforwardjump = "zathura --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-instance --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",   -- textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%"
 }
 
-local kmap = vim.keymap.set
+local function map(mode, lhs, rhs, opts)
+    opts = vim.tbl_extend("keep", opts,
+        { silent = true })
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
 
--- F5 processes the document once, and refreshes the view
-kmap("i", "<F5>", function()
+-- Processes the document once, and refreshes the view
+map({ "n", "v" }, "<leader>kp", function()
     require("knap").process_once()
-end)
-kmap("v", "<F5>", function()
-    require("knap").process_once()
-end)
-kmap("n", "<F5>", function()
-    require("knap").process_once()
-end)
+end,
+    { desc = "Preview Once" })
 
--- F6 closes the viewer application, and allows settings to be reset
-kmap("i", "<F6>", function()
+-- Closes the viewer application, and allows settings to be reset
+map({ "n", "v" }, "<leader>kc", function()
     require("knap").close_viewer()
-end)
-kmap("v", "<F6>", function()
-    require("knap").close_viewer()
-end)
-kmap("n", "<F6>", function()
-    require("knap").close_viewer()
-end)
+end,
+    { desc = "Close Viewer" })
 
--- F7 toggles the auto-processing on and off
-kmap("i", "<F7>", function()
+-- Toggles the auto-processing on and off
+map({ "n", "v" }, "<leader>kt", function()
     require("knap").toggle_autopreviewing()
-end)
-kmap("v", "<F7>", function()
-    require("knap").toggle_autopreviewing()
-end)
-kmap("n", "<F7>", function()
-    require("knap").toggle_autopreviewing()
-end)
+end,
+    { desc = "Toggle Auto-Preview" })
 
--- F8 invokes a SyncTeX forward search, or similar, where appropriate
-kmap("i", "<F8>", function()
+-- Invokes a SyncTeX forward search, or similar, where appropriate
+map({ "n", "v" }, "<leader>kj", function()
     require("knap").forward_jump()
-end)
-kmap("v", "<F8>", function()
-    require("knap").forward_jump()
-end)
-kmap("n", "<F8>", function()
-    require("knap").forward_jump()
-end)
+end,
+    { desc = "SyncTex jump" })
 
 vim.g.knap_settings = gknapsettings

@@ -1,6 +1,4 @@
----@diagnostic disable: redundant-parameter
 local M = {}
---[[ local u = require("user.utils") ]]
 
 -- TODO: backfill this to template
 M.setup = function()
@@ -63,21 +61,31 @@ local function lsp_highlight_document(client)
     end
 end
 
+local function map(mode, lhs, rhs, opts)
+    opts = vim.tbl_extend("keep", opts,
+        { silent = true, buffer = true })
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 local function lsp_keymaps(bufnr)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lun vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
+
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+    map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "goto declaration" })
+    map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "goto definition" })
+    map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "LSP hover information" })
+    map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "goto implementation" })
+    map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "LSP signature_help" })
+    map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })
+    map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "goto references" })
+    map("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
+    map("v", "<leader>la", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", { desc = "Code Action" })
+    map("n", "<leader>lR", "<cmd>lua vim.lsp.codelens.run()<CR>", { desc = "CodeLens Action" })
+    map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show Line Diagnostic" })
+    map("n", "<leader>lk", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', { desc = "Prev Diagnostic" })
+    map("n", "<leader>lj", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', { desc = "Next Diagnostic" })
+    map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Send Diagnostics to Quickfix" })
+    map("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", { desc = "Format Document" })
 end
 
 M.on_attach = function(client, bufnr)
@@ -94,45 +102,4 @@ end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
--- LSP integration
--- Make sure to also have the snippet with the common helper functions in your config!
-
--- vim.lsp.handlers["$/progress"] = function(_, result, ctx)
--- 	local client_id = ctx.client_id
---
--- 	local val = result.value
---
--- 	if not val.kind then
--- 		return
--- 	end
---
--- 	local notif_data = u.get_notif_data(client_id, result.token)
---
--- 	if val.kind == "begin" then
--- 		local message = u.format_message(val.message, val.percentage)
---
--- 		notif_data.notification = vim.notify(message, "info", {
--- 			title = u.format_title(val.title, vim.lsp.get_client_by_id(client_id).name),
--- 			icon = u.spinner_frames[1],
--- 			timeout = false,
--- 			hide_from_history = false,
--- 		})
---
--- 		notif_data.spinner = 1
--- 		u.update_spinner(client_id, result.token)
--- 	elseif val.kind == "report" and notif_data then
--- 		notif_data.notification = vim.notify(u.format_message(val.message, val.percentage), "info", {
--- 			replace = notif_data.notification,
--- 			hide_from_history = false,
--- 		})
--- 	elseif val.kind == "end" and notif_data then
--- 		notif_data.notification = vim.notify(val.message and u.format_message(val.message) or "Complete", "info", {
--- 			icon = "",
--- 			replace = notif_data.notification,
--- 			timeout = 3000,
--- 		})
---
--- 		notif_data.spinner = nil
--- 	end
--- end
 return M

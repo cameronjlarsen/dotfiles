@@ -1,4 +1,3 @@
-
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
     return
@@ -10,6 +9,8 @@ if not config_status_ok then
 end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
+
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { silent = true, desc = "Explorer" })
 
 nvim_tree.setup({
     ignore_ft_on_setup = {
@@ -40,7 +41,6 @@ nvim_tree.setup({
     },
     view = {
         width = 30,
-        height = 30,
         hide_root_folder = false,
         side = "left",
         mappings = {
@@ -79,4 +79,3 @@ nvim_tree.setup({
         },
     },
 })
-
