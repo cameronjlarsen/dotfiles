@@ -3,11 +3,6 @@ if not status_ok then
     return
 end
 
-vim.keymap.set("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
-    { silent = true, desc = "Comment" })
-vim.keymap.set("v", "<leader>/", "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-    { silent = true, desc = "Comment" })
-
 comment.setup {
     pre_hook = function(ctx)
 

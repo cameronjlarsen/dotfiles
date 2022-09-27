@@ -10,8 +10,6 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { silent = true, desc = "Explorer" })
-
 nvim_tree.setup({
     ignore_ft_on_setup = {
         "startify",

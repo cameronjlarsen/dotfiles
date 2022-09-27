@@ -3,21 +3,6 @@ if not status_ok then
     return
 end
 
-local function map(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("keep", opts,
-        { silent = true })
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-map("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", { desc = "Node" })
-map("n", "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", { desc = "NCDU" })
-map("n", "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Htop" })
-map("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", { desc = "Python" })
-map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Float" })
-map("n", "<leader>th", "<cmd>ToggleTerm size = 10 direction=horizontal<cr>",
-    { desc = "Horizontal" })
-map("n", "<leader>tv", "<cmd>ToggleTerm size = 80 direction=vertical<cr>", { desc = "Vertical" })
-
 toggleterm.setup({
     size = 20,
     open_mapping = [[<leader>t]],

@@ -3,8 +3,6 @@ if not status_ok then
     return
 end
 
-vim.keymap.set("n", "<leader>a", "<cmd>Alpha<cr>", { silent = true, desc = "Alpha"})
-
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = {
     [[                               __                ]],

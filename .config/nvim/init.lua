@@ -1,3 +1,5 @@
+require("plugins.config.impatient")
 require("core")
-require("config")
+require("plugins.packer_init")
+require("plugins.config")
 require("lsp")

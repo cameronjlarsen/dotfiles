@@ -70,3 +70,147 @@ map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Focus terminal left" })
 map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Focus terminal down" })
 map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
+
+-- File Explorer --
+map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Explorer" })
+
+-----------------------------------------------------------
+-- Plugin Mappings
+-----------------------------------------------------------
+
+-- Alpha --
+map("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "Alpha" })
+
+-- Comment --
+map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
+    { desc = "Comment" })
+map("v", "<leader>/", "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    { desc = "Comment" })
+
+-- DAP --
+map("n", "<leader>dc", "<cmd>lua require'dap'.continue()<CR>",
+    { desc = "Continue" })
+map("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<CR>",
+    { desc = "UI" })
+map("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+    { desc = "Toggle breakpoint" })
+map("n", "<leader>do", "<cmd>lua require'dap'.step_over()<CR>",
+    { desc = "Step over" })
+map("n", "<leader>di", "<cmd>lua require'dap'.step_into()<CR>",
+    { desc = "Step into" })
+map("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<CR>",
+    { desc = "Step out" })
+map("n", "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+    { desc = "Set breakpoint with condition" })
+map("n", "<leader>dp", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>"
+    , { desc = "Set breakpoint with log point message" })
+map("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>",
+    { desc = "Toggle repl" })
+
+-- Find Keymaps --
+map("n", "<leader>fb", "<cmd>Telescope git_branches<cr>",
+    { desc = "Checkout branch" })
+map("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>",
+    { desc = "Colorscheme" })
+map("n", "<leader>ff",
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    { desc = "Find files" })
+map("n", "<leader>ft", "<cmd>Telescope live_grep theme=ivy<cr>",
+    { desc = "Find Text" })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>",
+    { desc = "Help" })
+map("n", "<leader>fi", "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
+    { desc = "Media" })
+map("n", "<leader>fl", "<cmd>Telescope resume<cr>",
+    { desc = "Last Search" })
+map("n", "<leader>fM", "<cmd>Telescope man_pages<cr>",
+    { desc = "Man Pages" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>",
+    { desc = "Recent File" })
+map("n", "<leader>fR", "<cmd>Telescope registers<cr>",
+    { desc = "Registers" })
+map("n", "<leader>fk", "<cmd>Telescope keymaps<cr>",
+    { desc = "Keymaps" })
+map("n", "<leader>fC", "<cmd>Telescope commands<cr>",
+    { desc = "Commands" })
+map("n", "<leader>fs", "<cmd>Telescope symbols<cr>",
+    { desc = "Symbols" })
+
+-- Git --
+map("n", "<leader>go", "<cmd>Telescope git_status<cr>",
+    { desc = "Open changed file" })
+map("n", "<leader>gb", "<cmd>Telescope git_branches<cr>",
+    { desc = "Checkout branch" })
+map("n", "<leader>gc", "<cmd>Telescope git_commits<cr>",
+    { desc = "Checkout commit" })
+map("n", "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<cr>",
+    { desc = "Next Hunk" })
+map("n", "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>",
+    { desc = "Prev Hunk" })
+map("n", "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>",
+    { desc = "Preview Hunk" })
+map("n", "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>",
+    { desc = "Reset Hunk" })
+map("n", "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>",
+    { desc = "Reset Buffer" })
+map("n", "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>",
+    { desc = "Stage Hunk" })
+map("n", "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+    { desc = "Undo Stage Hunk" })
+map("n", "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>",
+    { desc = "Blame" })
+map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>",
+    { desc = "Diff" })
+
+-- Glow --
+map("n", "<leader>kmg", "<cmd>Glow<cr>", { desc = "Glow Preview" })
+
+-- Knap --
+-- Processes the document once, and refreshes the view
+map({ "n", "v" }, "<leader>kp", function()
+    require("plugins.config.knap_nvim").process_once()
+end,
+    { desc = "Preview Once" })
+-- Closes the viewer application, and allows settings to be reset
+map({ "n", "v" }, "<leader>kc", function()
+    require("plugins.config.knap_nvim").close_viewer()
+end,
+    { desc = "Close Viewer" })
+-- Toggles the auto-processing on and off
+map({ "n", "v" }, "<leader>kt", function()
+    require("plugins.config.knap_nvim").toggle_autopreviewing()
+end,
+    { desc = "Toggle Auto-Preview" })
+-- Invokes a SyncTeX forward search, or similar, where appropriate
+map({ "n", "v" }, "<leader>kj", function()
+    require("plugins.config.knap_nvim").forward_jump()
+end,
+    { desc = "SyncTex jump" })
+
+-- LSP Lines --
+map({ "n", "v" }, "<Leader>ll", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+
+-- LSP Mappings --
+map("n", "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>",
+    { desc = "Document Diagnostics" })
+map("n", "<leader>lw", "<cmd>Telescope diagnostics<cr>",
+    { desc = "Workspace Diagnostics" })
+map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",
+    { desc = "Document Symbols" })
+map("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+    { desc = "Workspace Symbols" })
+
+-- Markdown Preview --
+map("n", "<leader>kmm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Preview" })
+map("n", "<leader>kms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop Markdown Preview" })
+map("n", "<leader>kmp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
+
+-- Toggle Terminal --
+map("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", { desc = "Node" })
+map("n", "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", { desc = "NCDU" })
+map("n", "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Htop" })
+map("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", { desc = "Python" })
+map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Float" })
+map("n", "<leader>th", "<cmd>ToggleTerm size = 10 direction=horizontal<cr>",
+    { desc = "Horizontal" })
+map("n", "<leader>tv", "<cmd>ToggleTerm size = 80 direction=vertical<cr>", { desc = "Vertical" })

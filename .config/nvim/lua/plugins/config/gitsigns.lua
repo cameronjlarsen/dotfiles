@@ -3,32 +3,6 @@ if not status_ok then
     return
 end
 
-local function map(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("keep", opts,
-        { silent = true })
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-map("n", "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<cr>",
-    { desc = "Next Hunk" })
-map("n", "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>",
-    { desc = "Prev Hunk" })
-map("n", "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>",
-    { desc = "Preview Hunk" })
-map("n", "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>",
-    { desc = "Reset Hunk" })
-map("n", "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>",
-    { desc = "Reset Buffer" })
-map("n", "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>",
-    { desc = "Stage Hunk" })
-map("n", "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-    { desc = "Undo Stage Hunk" })
-map("n", "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>",
-    { desc = "Blame" })
-map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>",
-    { desc = "Diff" })
-
-
 gitsigns.setup {
     signs = {
         add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
