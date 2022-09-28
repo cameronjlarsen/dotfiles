@@ -19,7 +19,7 @@ end
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
     command = "source <afile> | PackerSync",
-    pattern = "_packer.lua",
+    pattern = "packer_init.lua",
     group = group,
 })
 -- Use a protected call so we don't error out on first use
@@ -27,18 +27,6 @@ local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
 end
-
-local function map(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("keep", opts,
-        { silent = true })
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { desc = "Compile" })
-map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { desc = "Install" })
-map("n", "<leader>ps", "<cmd>PackerSync<cr>", { desc = "Sync" })
-map("n", "<leader>pS", "<cmd>PackerStatus<cr>", { desc = "Status" })
-map("n", "<leader>pu", "<cmd>PackerUpdate<cr>", { desc = "Update" })
 
 -- Have packer use a popup window
 packer.init({

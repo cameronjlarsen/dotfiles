@@ -205,6 +205,13 @@ map("n", "<leader>kmm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Pre
 map("n", "<leader>kms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop Markdown Preview" })
 map("n", "<leader>kmp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
 
+-- Packer --
+map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { desc = "Compile" })
+map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { desc = "Install" })
+map("n", "<leader>ps", "<cmd>PackerSync<cr>", { desc = "Sync" })
+map("n", "<leader>pS", "<cmd>PackerStatus<cr>", { desc = "Status" })
+map("n", "<leader>pu", "<cmd>PackerUpdate<cr>", { desc = "Update" })
+
 -- Toggle Terminal --
 map("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", { desc = "Node" })
 map("n", "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", { desc = "NCDU" })
