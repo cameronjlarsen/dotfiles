@@ -1,5 +1,7 @@
 #!/bin/sh
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+alias zshconfig="$EDITOR $ZDOTDIR/.zshrc"
+alias nvimrc="$EDITOR $HOME/.config/nvim/init.lua"
 
 #Colorize ls output
 alias ls='ls --color=auto'

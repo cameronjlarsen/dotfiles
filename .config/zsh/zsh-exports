@@ -10,3 +10,7 @@ export GOPATH=$HOME/.local/share/go
 export PATH=$HOME/.fnm:$PATH
 export PATH="$HOME/.local/share/neovim/bin":$PATH
 
+# Environment variables set everywhere
+export EDITOR="nvim"
+export TERMINAL="wezterm"
+export BROWSER="firefox"
