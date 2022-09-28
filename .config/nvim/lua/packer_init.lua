@@ -19,7 +19,7 @@ end
 local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
     command = "source <afile> | PackerSync",
-    pattern = "plugins.lua",
+    pattern = "_packer.lua",
     group = group,
 })
 -- Use a protected call so we don't error out on first use
@@ -147,12 +147,16 @@ return packer.startup(function(use)
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
+        { "jose-elias-alvarez/null-ls.nvim",
+            requires = { "nvim-lua/plenary.nvim" }
+        },
+        "jayp0521/mason-null-ls.nvim",
     }
 
     use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
-    use({ "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" }
-    })
+    -- use({ "jose-elias-alvarez/null-ls.nvim",
+    --     requires = { "nvim-lua/plenary.nvim" }
+    -- })
     use("b0o/SchemaStore.nvim") -- JSON schemas
     use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Show lsp errors inline
     use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight

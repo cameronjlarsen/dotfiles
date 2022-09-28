@@ -3,6 +3,11 @@ if not dap_ui_status_ok then
 	return
 end
 
+local dap_status_ok, dap = pcall(require, "dap")
+if not dap_status_ok then
+    return
+end
+
 dapui.setup({
 	icons = { expanded = "▾", collapsed = "▸" },
 	mappings = {
@@ -47,8 +52,6 @@ dapui.setup({
 -- local icons = require "user.icons"
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
-
-local dap = require("user.dap")
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()

@@ -4,5 +4,5 @@ if not dap_status_ok then
 end
 
 -- Configure language adapters
-require("plugins.config.dap.cpp")
-require("plugins.config.dap.cs")
+require("plugins.dap.cpp")
+require("plugins.dap.cs")
