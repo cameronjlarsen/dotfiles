@@ -77,6 +77,7 @@ return packer.startup(function(use)
             "lukas-reineke/cmp-rg"
         }
     })
+    use("folke/lua-dev.nvim")
     -- Snippets
     use({ "L3MON4D3/LuaSnip", --snippet engine
         requires = { "saadparwaiz1/cmp_luasnip" }
@@ -92,7 +93,10 @@ return packer.startup(function(use)
     }) -- Startup dashboard
 
     -- Debugging --
-    use("mfussenegger/nvim-dap")
+    use {
+        "mfussenegger/nvim-dap",
+        "mfussenegger/nvim-dap-python"
+    }
     use({ "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
         after = { "nvim-dap" }
@@ -123,12 +127,12 @@ return packer.startup(function(use)
     use("ellisonleao/glow.nvim") -- preview markdown files in nvim
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-    use({ 'jakewvincent/mkdnflow.nvim',
-        rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
-        config = function()
-            require('mkdnflow').setup({})
-        end
-    })
+    -- use({ 'jakewvincent/mkdnflow.nvim',
+    --     rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
+    --     config = function()
+    --         require('mkdnflow').setup({})
+    --     end
+    -- })
 
     -- LSP --
     use {
@@ -142,9 +146,6 @@ return packer.startup(function(use)
     }
 
     use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
-    -- use({ "jose-elias-alvarez/null-ls.nvim",
-    --     requires = { "nvim-lua/plenary.nvim" }
-    -- })
     use("b0o/SchemaStore.nvim") -- JSON schemas
     use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Show lsp errors inline
     use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight

@@ -19,12 +19,6 @@ mason_null_ls.setup({
 	ensure_installed = { "stylua" },
 })
 
-mason_null_ls.setup_handlers({
-	stylua = function()
-		null_ls.register(formatting.stylua)
-	end,
-})
-
 -- null_ls.setup()
 null_ls.setup({
 	debug = false,

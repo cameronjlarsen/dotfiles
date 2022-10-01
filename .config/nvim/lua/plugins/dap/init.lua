@@ -6,3 +6,6 @@ end
 -- Configure language adapters
 require("plugins.dap.cpp")
 require("plugins.dap.cs")
+require("plugins.dap.python")
+
+require("plugins.dap.ui")

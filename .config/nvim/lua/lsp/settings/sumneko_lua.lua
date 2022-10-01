@@ -19,7 +19,7 @@ return {
 				enable = false,
 			},
             format = {
-                enable = false,
+                enable = true,
             }
 		},
 	},

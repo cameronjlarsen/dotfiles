@@ -47,7 +47,7 @@ end
 
 local function lsp_highlight_document(client)
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_exec(
             [[
       augroup lsp_document_highlight
@@ -85,7 +85,7 @@ local function lsp_keymaps(bufnr)
     map("n", "<leader>lk", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', { desc = "Prev Diagnostic" })
     map("n", "<leader>lj", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', { desc = "Next Diagnostic" })
     map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Send Diagnostics to Quickfix" })
-    map("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", { desc = "Format Document" })
+    map("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", { desc = "Format Document" })
 end
 
 M.on_attach = function(client, bufnr)
