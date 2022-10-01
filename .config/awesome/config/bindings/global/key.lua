@@ -249,7 +249,7 @@ awful.keyboard.append_global_keybindings {
         on_press    = function()
             local c = awful.client.restore()
             if c then
-                c:active { raise = true, context = "key.unminimize" }
+                c:activate { raise = true, context = "key.unminimize" }
             end
         end,
     },
