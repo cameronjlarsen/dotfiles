@@ -1,3 +1,4 @@
+require("user.plugins.packer")
 require("user.plugins.cmp")
 require("user.plugins.telescope")
 require("user.plugins.treesitter")
