@@ -1,4 +1,9 @@
-require("packer_init")
-require("core")
-require("plugins")
-require("lsp")
+local status_ok, impatient = pcall(require, "impatient")
+if not status_ok then
+  return
+end
+
+impatient.enable_profile()
+require("user.core")
+require("user.plugins")
+require("user.lsp")

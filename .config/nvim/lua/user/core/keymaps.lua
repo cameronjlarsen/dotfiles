@@ -113,7 +113,7 @@ map("n", "<leader>fb", "<cmd>Telescope git_branches<cr>",
 map("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>",
     { desc = "Colorscheme" })
 map("n", "<leader>ff",
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files()<cr>",
     { desc = "Find files" })
 map("n", "<leader>ft", "<cmd>Telescope live_grep theme=ivy<cr>",
     { desc = "Find Text" })
