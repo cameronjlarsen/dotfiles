@@ -21,7 +21,11 @@ mason_null_ls.setup({
 
 mason_null_ls.setup_handlers({
 	stylua = function()
-		null_ls.register(formatting.stylua)
+		null_ls.register(formatting.stylua.with({
+            condition = function(utils)
+                return utils.root_has_file({"stylua.toml", ".stylua.toml"})
+            end,
+        }))
 	end,
 })
 

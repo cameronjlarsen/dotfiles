@@ -26,11 +26,11 @@ M.setup = function()
         severity_sort = true,
         float = {
             focusable = false,
-            style = "minimal",
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
+            style     = "minimal",
+            border    = "rounded",
+            source    = "always",
+            header    = "",
+            prefix    = "",
         },
     }
 
@@ -62,13 +62,11 @@ local function lsp_highlight_document(client)
 end
 
 local function map(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("keep", opts,
-        { silent = true, buffer = true })
+    opts = vim.tbl_extend("keep", opts, { silent = true, buffer = true })
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 local function lsp_keymaps(bufnr)
-
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { desc = "goto declaration" })
@@ -78,12 +76,21 @@ local function lsp_keymaps(bufnr)
     map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "LSP signature_help" })
     map("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = "Rename" })
     map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "goto references" })
-    map("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
-    map("v", "<leader>la", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", { desc = "Code Action" })
+    map({ "n", "v" }, "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code Action" })
     map("n", "<leader>lR", "<cmd>lua vim.lsp.codelens.run()<CR>", { desc = "CodeLens Action" })
     map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "Show Line Diagnostic" })
-    map("n", "<leader>lk", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', { desc = "Prev Diagnostic" })
-    map("n", "<leader>lj", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', { desc = "Next Diagnostic" })
+    map(
+        "n",
+        "<leader>lk",
+        '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
+        { desc = "Prev Diagnostic" }
+    )
+    map(
+        "n",
+        "<leader>lj",
+        '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
+        { desc = "Next Diagnostic" }
+    )
     map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { desc = "Send Diagnostics to Quickfix" })
     map("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", { desc = "Format Document" })
 end
