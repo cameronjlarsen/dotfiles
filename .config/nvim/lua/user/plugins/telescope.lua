@@ -3,7 +3,8 @@ if not status_ok then
     return
 end
 
-telescope.load_extension('media_files')
+telescope.load_extension("media_files")
+telescope.load_extension("lazygit")
 
 local actions = require "telescope.actions"
 
@@ -83,7 +84,7 @@ telescope.setup {
         find_files = {
             theme = "dropdown",
             previewer = false,
-            find_command = {"rg", "--files", "--hidden", "--glob", "!.git/*"}
+            find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
         },
         live_grep = {
             theme = "dropdown",

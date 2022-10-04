@@ -135,6 +135,8 @@ map("n", "<leader>fC", "<cmd>Telescope commands<cr>",
     { desc = "Commands" })
 map("n", "<leader>fs", "<cmd>Telescope symbols<cr>",
     { desc = "Symbols" })
+map("n", "<leader>fg", "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>",
+    { desc = "LazyGit Repos" })
 
 -- Git --
 map("n", "<leader>go", "<cmd>Telescope git_status<cr>",
@@ -161,6 +163,7 @@ map("n", "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>",
     { desc = "Blame" })
 map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>",
     { desc = "Diff" })
+map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- Glow --
 map("n", "<leader>kmg", "<cmd>Glow<cr>", { desc = "Glow Preview" })
