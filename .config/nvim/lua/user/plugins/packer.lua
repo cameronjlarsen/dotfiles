@@ -119,6 +119,7 @@ return packer.startup(function(use)
     use({ "lewis6991/gitsigns.nvim",
         requires = { "nvim-lua/plenary.nvim" }
     })
+    use("kdheepak/lazygit.nvim")
 
     -- Keymaps --
     use("folke/which-key.nvim") -- Keymap cheatsheet
