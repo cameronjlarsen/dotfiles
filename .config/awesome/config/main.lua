@@ -1,8 +1,9 @@
-local awful = require("awful")
-require("awful.autofocus")
-local gears = require("gears")
+local awful     = require("awful")
+local gears     = require("gears")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
+local naughty   = require("naughty")
+local bling     = require("modules.bling")
+require("awful.autofocus")
 
 -- Wallpaper
 screen.connect_signal("request::wallpaper", function(s)
@@ -37,6 +38,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             awful.layout.suit.fair,
             awful.layout.suit.spiral.dwindle,
             awful.layout.suit.floating,
+            bling.layout.mstab,
         })
     end)
     -- Each screen has its own tag table.

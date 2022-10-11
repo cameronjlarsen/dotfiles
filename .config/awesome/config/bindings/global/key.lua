@@ -3,6 +3,7 @@ local apps          = require("config.apps")
 local menu          = require("widgets.menu")
 local mod           = require("config.bindings.mod")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local bling         = require("modules.bling")
 require("awful.hotkeys_popup.keys.firefox")
 require("awful.hotkeys_popup.keys.vim")
 
@@ -21,7 +22,7 @@ awful.keyboard.append_global_keybindings({
         on_press    = hotkeys_popup.show_help,
     },
     awful.key {
-        modifiers   = { Super },
+        modifiers   = { Super, Shift },
         key         = "w",
         description = "show main menu",
         group       = "awesome",
@@ -63,7 +64,7 @@ awful.keyboard.append_global_keybindings({
         on_press    = function() awful.spawn(apps.launcher) end,
     },
     awful.key {
-        modifiers   = { Super, Shift },
+        modifiers   = { Super },
         key         = "w",
         description = "launch web browser",
         group       = "launcher",
@@ -199,28 +200,40 @@ awful.keyboard.append_global_keybindings {
         key         = "j",
         description = "focus next client below",
         group       = "client",
-        on_press    = function() awful.client.focus.global_bydirection("down") end,
+        on_press    = function()
+            awful.client.focus.global_bydirection("down")
+            bling.module.flash_focus.flashfocus(client.focus)
+        end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "k",
         description = "focus next client above",
         group       = "client",
-        on_press    = function() awful.client.focus.global_bydirection("up") end,
+        on_press    = function()
+            awful.client.focus.global_bydirection("up")
+            bling.module.flash_focus.flashfocus(client.focus)
+        end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "h",
         description = "focus next client left",
         group       = "client",
-        on_press    = function() awful.client.focus.global_bydirection("left") end,
+        on_press    = function()
+            awful.client.focus.global_bydirection("left")
+            bling.module.flash_focus.flashfocus(client.focus)
+        end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "l",
         description = "focus next client right",
         group       = "client",
-        on_press    = function() awful.client.focus.global_bydirection("right") end,
+        on_press    = function()
+            awful.client.focus.global_bydirection("right")
+            bling.module.flash_focus.flashfocus(client.focus)
+        end,
     },
     awful.key {
         modifiers   = { Super },
@@ -295,44 +308,44 @@ awful.keyboard.append_global_keybindings {
     awful.key {
         modifiers   = { Super, Alt },
         key         = "Left",
-        description = "increase master width factor",
-        group       = "layout",
-        on_press    = function() awful.tag.incmwfact(0.05) end,
-    },
-    awful.key {
-        modifiers   = { Super, Alt },
-        key         = "Right",
         description = "decrease master width factor",
         group       = "layout",
         on_press    = function() awful.tag.incmwfact(-0.05) end,
     },
     awful.key {
-        modifiers   = { Super, Shift },
-        key         = "Left",
-        description = "increase the number of master clients",
+        modifiers   = { Super, Alt },
+        key         = "Right",
+        description = "increase master width factor",
         group       = "layout",
-        on_press    = function() awful.tag.incnmaster(1, nil, true) end,
+        on_press    = function() awful.tag.incmwfact(0.05) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
-        key         = "Right",
+        key         = "Left",
         description = "decrease the number of master clients",
         group       = "layout",
         on_press    = function() awful.tag.incnmaster(-1, nil, true) end,
     },
     awful.key {
-        modifiers   = { Super, Ctrl },
-        key         = "Left",
-        description = "increase the number of columns",
+        modifiers   = { Super, Shift },
+        key         = "Right",
+        description = "increase the number of master clients",
         group       = "layout",
         on_press    = function() awful.tag.incnmaster(1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super, Ctrl },
-        key         = "Right",
+        key         = "Left",
         description = "decrease the number of columns",
         group       = "layout",
         on_press    = function() awful.tag.incnmaster(-1, nil, true) end,
+    },
+    awful.key {
+        modifiers   = { Super, Ctrl },
+        key         = "Right",
+        description = "increase the number of columns",
+        group       = "layout",
+        on_press    = function() awful.tag.incnmaster(1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super },
@@ -348,8 +361,36 @@ awful.keyboard.append_global_keybindings {
         group       = "layout",
         on_press    = function() awful.layout.inc(-1) end,
     },
+    awful.key {
+        modifiers = { Alt },
+        key = "a",
+        description = "add client to tab group",
+        group = "tabs",
+        on_press = function()
+            bling.module.tabbed.pick_with_dmenu()
+        end,
+    },
+    awful.key {
+        modifiers = { Alt },
+        key = "d",
+        description = "remove client from tab group",
+        group = "tabs",
+        on_press = function()
+            bling.module.tabbed.pop()
+        end,
+    },
+    awful.key {
+        modifiers = { Alt },
+        key = "s",
+        description = "cycle through tab group",
+        group = "tabs",
+        on_press = function()
+            bling.module.tabbed.iter()
+        end,
+    },
 }
 
+-- Tag related keybindings
 awful.keyboard.append_global_keybindings {
     awful.key {
         modifiers   = { Super },

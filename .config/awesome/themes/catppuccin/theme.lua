@@ -67,6 +67,27 @@ theme.fg_focus    = theme.colors.subtext0
 theme.fg_urgent   = theme.colors.mantle
 theme.fg_minimize = theme.colors.subtext0
 
+-- Bling
+theme.flash_focus_start_opacity = 0.6
+theme.flash_focus_step           = 0.01
+
+theme.tabbed_spawn_in_tab       = false
+theme.tabbar_disable            = true
+theme.tabbar_ontop              = false
+theme.tabbar_radius             = 0
+theme.tabbar_style              = "modern"
+theme.tabbar_font               = nil
+theme.tabbar_size               = 40
+theme.tabbar_position           = "bottom"
+theme.tabbar_bg_normal          = theme.titlebar_bg_normal
+theme.tabbar_fg_normal          = theme.titlebar_fg_normal
+theme.tabbar_bg_focus           = theme.titlebar_bg_focus
+theme.tabbar_fg_focus           = theme.titlebar_fg_focus
+theme.tabbar_bg_focus_inactive  = nil
+theme.tabbar_fg_focus_inactive  = nil
+theme.tabbar_bg_normal_inactive = nil
+theme.tabbar_fg_normal_inactive = nil
+
 -- Titlebar
 theme.titlebar_bg_normal   = theme.colors.base
 theme.titlebar_bg_focus    = theme.colors.base
@@ -136,18 +157,18 @@ theme.menu_bg_normal    = theme.colors.surface0
 theme.menu_fg_normal    = theme.colors.text
 
 -- Misc
-theme.useless_gap                   = dpi(5)
-theme.gap_single_client             = true
-theme.border_width                  = dpi(2)
-theme.border_width_maximized        = dpi(2)
-theme.border_color_normal           = theme.colors.surface0
-theme.border_color_active           = theme.colors.lavender
-theme.border_color_urgent           = theme.colors.maroon
-theme.border_color_maximized        = theme.colors.green
-theme.border_radius                 = dpi(5)
+theme.useless_gap             = dpi(5)
+theme.gap_single_client       = true
+theme.border_width            = dpi(2)
+theme.border_width_maximized  = dpi(2)
+theme.border_color_normal     = theme.colors.surface0
+theme.border_color_active     = theme.colors.lavender
+theme.border_color_urgent     = theme.colors.maroon
+theme.border_color_maximized  = theme.colors.green
+theme.border_radius           = dpi(5)
 -- theme.bg_systray           = theme.wibar_container_bg
-theme.systray_icon_spacing          = dpi(5)
-theme.maximized_honor_padding       = true
+theme.systray_icon_spacing    = dpi(5)
+theme.maximized_honor_padding = true
 
 -- Hotkeys
 theme.hotkeys_bg           = theme.colors.surface0
