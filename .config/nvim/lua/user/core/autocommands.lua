@@ -20,10 +20,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "gitcommit", "markdown" },
     callback = function()
-        vim.cmd [[
-      setlocal wrap
-      setlocal spell
-    ]]
+        vim.opt_local.wrap = true
+        vim.opt_local.spell = true
     end,
 })
 
@@ -35,7 +33,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     callback = function()
-        vim.cmd "set formatoptions-=cro"
+        vim.opt.formatoptions:remove { "c", "r", "o" }
     end,
 })
 
@@ -45,4 +43,4 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "set awa" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "set awa" })

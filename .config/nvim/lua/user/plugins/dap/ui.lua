@@ -81,7 +81,9 @@ dapui.setup({
     }
 })
 
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+vim.fn.sign_define("DapLogPoint", { text = "●", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()

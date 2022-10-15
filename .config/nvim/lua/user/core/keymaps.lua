@@ -108,7 +108,9 @@ map("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>",
     { desc = "Toggle repl" })
 
 -- Find Keymaps --
-map("n", "<leader>fb", "<cmd>Telescope git_branches<cr>",
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>",
+    { desc = "Buffers" })
+map("n", "<leader>fB", "<cmd>Telescope git_branches<cr>",
     { desc = "Checkout branch" })
 map("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>",
     { desc = "Colorscheme" })
@@ -194,6 +196,8 @@ end,
 map({ "n", "v" }, "<Leader>ll", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 
 -- LSP Mappings --
+map("n", "<leader>li", "<cmd>LspInfo<cr>", { silent = true, desc = "Info" })
+map("n", "<leader>lI", "<cmd>Mason<cr>", { silent = true, desc = "Installer Info" })
 map("n", "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>",
     { desc = "Document Diagnostics" })
 map("n", "<leader>lw", "<cmd>Telescope diagnostics<cr>",

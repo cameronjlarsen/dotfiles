@@ -23,7 +23,7 @@ telescope.setup {
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
 
-                ["<C-c>"] = actions.close,
+                ["<ESC>"] = actions.close,
 
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
@@ -107,6 +107,10 @@ telescope.setup {
             initial_mode = "normal",
         },
         lsp_implementations = {
+            theme = "dropdown",
+            initial_mode = "normal",
+        },
+        git_branches = {
             theme = "dropdown",
             initial_mode = "normal",
         }

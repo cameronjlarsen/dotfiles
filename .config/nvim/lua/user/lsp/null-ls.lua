@@ -33,8 +33,8 @@ mason_null_ls.setup_handlers({
 null_ls.setup({
 	debug = false,
 	sources = {
-		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-		formatting.black.with({ extra_args = { "--fast" } }),
+		-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+		-- formatting.black.with({ extra_args = { "--fast" } }),
 		diagnostics.flake8,
 		code_actions.gitsigns,
 	},

@@ -78,7 +78,7 @@ return packer.startup(function(use)
             "lukas-reineke/cmp-rg"
         }
     })
-    use("folke/lua-dev.nvim")
+    use("folke/neodev.nvim")
     -- Snippets
     use({ "L3MON4D3/LuaSnip", --snippet engine
         requires = { "saadparwaiz1/cmp_luasnip" }
@@ -91,7 +91,7 @@ return packer.startup(function(use)
     -- Dashboard --
     use({ "goolord/alpha-nvim",
         requires = { "kyazdani42/nvim-web-devicons" }
-    }) -- Startup dashboard
+    })
 
     -- Debugging --
     use {
@@ -126,14 +126,13 @@ return packer.startup(function(use)
     -- Latex & Markdown Previews --
     use("frabjous/knap") -- allows livepreviewing of markdown and latex files
     use("ellisonleao/glow.nvim") -- preview markdown files in nvim
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-    -- use({ 'jakewvincent/mkdnflow.nvim',
-    --     rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
-    --     config = function()
-    --         require('mkdnflow').setup({})
-    --     end
-    -- })
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+    use({ 'jakewvincent/mkdnflow.nvim',
+        rocks = 'luautf8', -- Ensures optional luautf8 dependency is installed
+        config = function()
+            require('mkdnflow').setup({})
+        end
+    })
 
     -- LSP --
     use {
