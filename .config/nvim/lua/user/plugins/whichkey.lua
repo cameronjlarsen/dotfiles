@@ -82,8 +82,11 @@ local labels = {
     ["<leader>l"] = {
         name = "+LSP",
     },
+    ["<leader>m"] = {
+        name = "+Markdown Preview",
+    },
     ["<leader>k"] = {
-        name = "+Knap/Markdown Preview",
+        name = "+Knap Preview",
     },
     ["<leader>p"] = {
         name = "+Packer",

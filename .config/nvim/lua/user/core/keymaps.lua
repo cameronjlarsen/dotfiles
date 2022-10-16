@@ -167,9 +167,6 @@ map("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>",
     { desc = "Diff" })
 map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
--- Glow --
-map("n", "<leader>kmg", "<cmd>Glow<cr>", { desc = "Glow Preview" })
-
 -- Knap --
 -- Processes the document once, and refreshes the view
 map({ "n", "v" }, "<leader>kp", function()
@@ -208,9 +205,11 @@ map("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
     { desc = "Workspace Symbols" })
 
 -- Markdown Preview --
-map("n", "<leader>kmm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Preview" })
-map("n", "<leader>kms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop Markdown Preview" })
-map("n", "<leader>kmp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
+map("n", "<leader>mm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Preview" })
+map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop Markdown Preview" })
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
+map("n", "<leader>mg", "<cmd>Glow<cr>", { desc = "Glow Preview" })
+
 
 -- Packer --
 map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { desc = "Compile" })

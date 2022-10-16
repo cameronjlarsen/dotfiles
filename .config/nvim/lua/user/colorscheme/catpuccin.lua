@@ -7,22 +7,23 @@ vim.g.catppuccin_flavour = "mocha"
 
 catppuccin.setup({
     integrations = {
-        cmp                = true,
-        fidget             = true,
-        notify             = true,
-        telescope          = true,
-        treesitter_context = true,
-        treesitter         = true,
-        which_key          = true,
-        dap                = {
+        transparent_background = false,
+        cmp                    = true,
+        fidget                 = true,
+        notify                 = true,
+        telescope              = true,
+        treesitter_context     = true,
+        treesitter             = true,
+        which_key              = true,
+        dap                    = {
             enabled   = true,
             enable_ui = true,
         },
-        indent_blankline   = {
+        indent_blankline       = {
             enabled               = true,
             colored_indent_levels = false,
         },
-        native_lsp         = {
+        native_lsp             = {
             enabled      = true,
             virtual_text = {
                 errors      = { "italic" },
@@ -37,6 +38,6 @@ catppuccin.setup({
                 information = { "underline" },
             },
         },
-        bufferline         = true,
+        bufferline             = true,
     }
 })

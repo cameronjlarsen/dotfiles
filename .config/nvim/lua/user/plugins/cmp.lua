@@ -16,11 +16,10 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local check_backspace = function()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
 --   פּ ﯟ   some other good icons
 local kind_icons = {
     Text = "",
@@ -62,7 +61,7 @@ cmp.setup({
     },
     enabled = function()
         return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-            or require("cmp_dap").is_dap_buffer()
+            or cmp_dap.is_dap_buffer()
     end,
     mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -81,12 +80,10 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expandable() then
-                luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
+            elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
-            elseif check_backspace() then
-                fallback()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
@@ -109,22 +106,22 @@ cmp.setup({
                 -- Kind icons
                 -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                 vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                vim_item.menu = ({
-                    nvim_lsp = "",
-                    nvim_lsp_signature_help = "",
-                    nvim_lua = "",
-                    luasnip = "",
-                    buffer = "",
-                    path = "",
-                    emoji = "",
-                    latex_symbols = "",
-                    dap = "",
-                    rg = "",
-                })[entry.source.name]
-                return vim_item
             else
                 return lspkind.cmp_format()
             end
+            vim_item.menu = ({
+                nvim_lsp_signature_help = "[LSP SignatureHelp]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                nvim_lua = "[Lua]",
+                buffer = "[Buffer]",
+                rg = "[Rg]",
+                path = "[Path]",
+                latex_symbols = "[LaTeX]",
+                emoji = "[Emoji]",
+                dap = "[Dap]",
+            })[entry.source.name]
+            return vim_item
         end,
     },
     sources = cmp.config.sources(
