@@ -1,19 +1,20 @@
 vim.api.nvim_create_autocmd({ "User" }, {
     pattern = { "AlphaReady" },
     callback = function()
-        vim.cmd [[
-      set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-    ]]
+        vim.opt.showtabline = 0
+        vim.api.nvim_create_autocmd({ "BufUnload" }, {
+            callback = function()
+                vim.opt.showtabline = 2
+            end,
+        })
     end,
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
     callback = function()
-        vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      set nobuflisted 
-    ]]
+        vim.keymap.set("n", "<silent> <buffer> q", ":close<CR>")
+        vim.opt.buflisted = false
     end,
 })
 
@@ -22,7 +23,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
+        print("gitcommit + markdown")
     end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.autowriteall = true
+    end
 })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -42,5 +51,3 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
         vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
     end,
 })
-
-vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "set awa" })
