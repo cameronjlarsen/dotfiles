@@ -58,7 +58,7 @@ return {
         },
         {
             key    = "q",
-            mods   = "CTRL",
+            mods   = "CTRL|SHIFT",
             action = wezterm.action({ CloseCurrentPane = { confirm = false } }),
         },
         {
@@ -103,7 +103,7 @@ return {
         },
         { -- browser-like bindings for tabbing
             key    = "t",
-            mods   = "CTRL",
+            mods   = "CTRL|SHIFT",
             action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
         },
         {
@@ -123,7 +123,7 @@ return {
         }, -- standard copy/paste bindings
         {
             key    = "x",
-            mods   = "CTRL",
+            mods   = "CTRL|SHIFT",
             action = "ActivateCopyMode",
         },
         {
