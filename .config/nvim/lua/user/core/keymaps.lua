@@ -84,7 +84,7 @@ map("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "Alpha" })
 -- Comment --
 map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
     { desc = "Comment" })
-map("v", "<leader>/", "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
     { desc = "Comment" })
 
 -- DAP --
@@ -195,14 +195,6 @@ map({ "n", "v" }, "<Leader>ll", require("lsp_lines").toggle, { desc = "Toggle ls
 -- LSP Mappings --
 map("n", "<leader>li", "<cmd>LspInfo<cr>", { silent = true, desc = "Info" })
 map("n", "<leader>lI", "<cmd>Mason<cr>", { silent = true, desc = "Installer Info" })
-map("n", "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>",
-    { desc = "Document Diagnostics" })
-map("n", "<leader>lw", "<cmd>Telescope diagnostics<cr>",
-    { desc = "Workspace Diagnostics" })
-map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",
-    { desc = "Document Symbols" })
-map("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-    { desc = "Workspace Symbols" })
 
 -- Markdown Preview --
 map("n", "<leader>mm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Preview" })

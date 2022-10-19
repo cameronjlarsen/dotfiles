@@ -73,6 +73,9 @@ local labels = {
     ["<leader>d"] = {
         name = "+Debug",
     },
+    ["<leader>D"] = {
+        name = "+Duck",
+    },
     ["<leader>f"] = {
         name = "+Find",
     },
@@ -93,6 +96,9 @@ local labels = {
     },
     ["<leader>t"] = {
         name = "+Terminal",
+    },
+    ["<leader>w"] = {
+        name = "+Workspaces",
     },
 }
 

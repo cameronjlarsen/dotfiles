@@ -184,6 +184,15 @@ return packer.startup(function(use)
     use("fladson/vim-kitty") -- Enables syntax highlighting in kitty.conf
     use("lukas-reineke/indent-blankline.nvim") -- Indentation lines
 
+    -- Pet duck --
+    use({
+        "tamton-aquib/duck.nvim",
+        config = function()
+            vim.keymap.set("n", "<leader>Dd", function() require("duck").hatch() end, { desc = "Hatch a duck" })
+            vim.keymap.set("n", "<leader>Dk", function() require("duck").cook() end, { desc = "Cook a duck" })
+        end
+    })
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
