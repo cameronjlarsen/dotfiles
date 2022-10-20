@@ -81,9 +81,33 @@ local labels = {
     },
     ["<leader>g"] = {
         name = "+Git",
+        ["j"] = {
+            name = "+Next"
+        },
+        ["k"] = {
+            name = "+Previous"
+        },
+        ["p"] = {
+            name = "+Preview"
+        },
+        ["r"] = {
+            name = "+Reset"
+        },
+        ["s"] = {
+            name = "+Stage"
+        },
+        ["t"] = {
+            name = "+Toggle"
+        },
+        ["u"] = {
+            name = "+Undo"
+        },
     },
     ["<leader>l"] = {
         name = "+LSP",
+        ["w"] = {
+            name = "+Workspaces",
+        },
     },
     ["<leader>m"] = {
         name = "+Markdown Preview",
@@ -96,9 +120,6 @@ local labels = {
     },
     ["<leader>t"] = {
         name = "+Terminal",
-    },
-    ["<leader>w"] = {
-        name = "+Workspaces",
     },
 }
 

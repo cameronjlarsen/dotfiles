@@ -75,52 +75,40 @@ end
 local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+    -- Movement
     map("n", "gD", function()
         return require("telescope.builtin").lsp_declarations()
     end, { desc = "Goto declaration" })
     map("n", "gd", function()
         return require("telescope.builtin").lsp_definitions()
     end, { desc = "Goto definition" })
-    map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
     map("n", "gi", function()
         return require("telescope.builtin").lsp_implementations()
     end, { desc = "Goto implementation" })
     map("n", "gt", function()
         return require("telescope.builtin").lsp_type_definitions()
     end, { desc = "Goto type definition" })
-    map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
-    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
-    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
-    map("n", "<leader>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { desc = "List workspace folders" })
-    map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
     map("n", "gr", function()
         return require("telescope.builtin").lsp_references()
     end, { desc = "Goto references" })
+
+    -- Code actions
+    map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
+    map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
     map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
     map("n", "<leader>lR", vim.lsp.codelens.run, { desc = "CodeLens Action" })
-    map("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostic" })
-    map("n", "<leader>lk", function() vim.diagnostic.goto_prev({ border = "rounded" }) end, { desc = "Prev Diagnostic" })
-    map("n", "<leader>lj", function() vim.diagnostic.goto_next({ border = "rounded" }) end, { desc = "Next Diagnostic" })
-    map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Send Diagnostics to Quickfix" })
-    map("n", "<leader>ld", function()
-        return require("telescope.builtin").diagnostics({ bufnr = 0 })
-    end,
-        { desc = "Document Diagnostics" })
-    map("n", "<leader>lw", function()
-        return require("telescope.builtin").diagnostics()
-    end,
-        { desc = "Workspace Diagnostics" })
-    map("n", "<leader>ls", function()
-        return require("telescope.builtin").lsp_document_symbols()
-    end,
-        { desc = "Document Symbols" })
-    map("n", "<leader>lS", function()
-        return require("telescope.builtin").lsp_dynamic_workspace_symbols()
-    end,
-        { desc = "Workspace Symbols" })
-    map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
+
+    -- Docs
+    map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
+    map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
+
+    -- Workspaces
+    map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
+    map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
+    map("n", "<leader>lwl", function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { desc = "List workspace folders" })
+
 end
 
 M.on_attach = function(client, bufnr)
