@@ -25,9 +25,9 @@ mason_null_ls.setup_handlers({
             end,
         }))
     end,
-    flake8 = function ()
+    flake8 = function()
         null_ls.register(diagnostics.flake8)
-    end
+    end,
 })
 
 -- null_ls.setup()

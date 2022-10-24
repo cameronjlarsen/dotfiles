@@ -14,13 +14,13 @@ M.setup = function()
 
     local config = {
         -- disable virtual text
-        virtual_text = true,
+        virtual_text = false,
         virtual_lines = true,
         -- show signs
         signs = {
             active = signs,
         },
-        update_in_insert = false,
+        update_in_insert = true,
         underline = true,
         severity_sort = true,
         float = {
@@ -75,28 +75,44 @@ end
 local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+    local tb_status_ok, tb = pcall(require, "telescope.builtin")
+    if not tb_status_ok then
+        vim.notify("Telescope lsp not loaded")
+        return
+    end
+
     -- Movement
-    map("n", "gD", function()
-        return require("telescope.builtin").lsp_declarations()
-    end, { desc = "Goto declaration" })
-    map("n", "gd", function()
-        return require("telescope.builtin").lsp_definitions()
-    end, { desc = "Goto definition" })
-    map("n", "gi", function()
-        return require("telescope.builtin").lsp_implementations()
-    end, { desc = "Goto implementation" })
-    map("n", "gt", function()
-        return require("telescope.builtin").lsp_type_definitions()
-    end, { desc = "Goto type definition" })
-    map("n", "gr", function()
-        return require("telescope.builtin").lsp_references()
-    end, { desc = "Goto references" })
+    map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
+    map("n", "gd", tb.lsp_definitions, { desc = "Goto definition" })
+    map("n", "gi", tb.lsp_implementations, { desc = "Goto implementation" })
+    map("n", "gt", tb.lsp_type_definitions, { desc = "Goto type definition" })
+    map("n", "gr", tb.lsp_references, { desc = "Goto references" })
 
     -- Code actions
     map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
     map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
     map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
     map("n", "<leader>lR", vim.lsp.codelens.run, { desc = "CodeLens Action" })
+
+    -- Diagnostics --
+    map("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostic" })
+    map("n", "[d", function() vim.diagnostic.goto_prev({ border = "rounded" }) end, { desc = "Prev Diagnostic" })
+    map("n", "]d", function() vim.diagnostic.goto_next({ border = "rounded" }) end, { desc = "Next Diagnostic" })
+    map("n", "[e",
+        function() vim.diagnostic.goto_prev({ border = "rounded", severity = vim.diagnostic.severity.ERROR }) end,
+        { desc = "Prev Error" })
+    map("n", "]e",
+        function() vim.diagnostic.goto_next({ border = "rounded", severity = vim.diagnostic.severity.ERROR }) end,
+        { desc = "Next Error" })
+    map("n", "[w",
+        function() vim.diagnostic.goto_prev({ border = "rounded", severity = vim.diagnostic.severity.WARN }) end,
+        { desc = "Prev Warning" })
+    map("n", "]w",
+        function() vim.diagnostic.goto_next({ border = "rounded", severity = vim.diagnostic.severity.WARN }) end,
+        { desc = "Next Warning" })
+    map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Send Diagnostics to Quickfix" })
+    map("n", "<leader>ld", function() tb.diagnostics({ bufnr = 0 }) end, { desc = "Document Diagnostics" })
+    map("n", "<leader>lwd", tb.diagnostics, { desc = "Workspace Diagnostics" })
 
     -- Docs
     map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
@@ -105,10 +121,8 @@ local function lsp_keymaps(bufnr)
     -- Workspaces
     map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
     map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
-    map("n", "<leader>lwl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { desc = "List workspace folders" })
-
+    map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+        { desc = "List workspace folders" })
 end
 
 M.on_attach = function(client, bufnr)

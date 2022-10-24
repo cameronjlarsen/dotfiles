@@ -1,9 +1,10 @@
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
+    print("which-key not loaded")
     return
 end
 
-local setup = {
+which_key.setup({
     plugins = {
         marks = true, -- shows a list of your marks on ' and `
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -67,61 +68,24 @@ local setup = {
         i = { "j", "k" },
         v = { "j", "k" },
     },
-}
+})
 
-local labels = {
-    ["<leader>d"] = {
-        name = "+Debug",
-    },
-    ["<leader>D"] = {
-        name = "+Duck",
-    },
-    ["<leader>f"] = {
-        name = "+Find",
-    },
-    ["<leader>g"] = {
-        name = "+Git",
-        ["j"] = {
-            name = "+Next"
+which_key.register({
+    ["<leader>"] = {
+        w = { name = "+Window" },
+        b = { name = "+Buffer" },
+        t = { name = "+Toggle" },
+        s = { name = "+Search", },
+        h = { name = "+Help", },
+        f = { name = "+Files", },
+        g = { name = "+Git",
+            h = { name = "+hunk" },
+            t = { name = "+toggle" }
         },
-        ["k"] = {
-            name = "+Previous"
+        k = { name = "+Knap", },
+        l = { name = "+LSP",
+            w = "+Workspace"
         },
-        ["p"] = {
-            name = "+Preview"
-        },
-        ["r"] = {
-            name = "+Reset"
-        },
-        ["s"] = {
-            name = "+Stage"
-        },
-        ["t"] = {
-            name = "+Toggle"
-        },
-        ["u"] = {
-            name = "+Undo"
-        },
+        p = { name = "+Packer" },
     },
-    ["<leader>l"] = {
-        name = "+LSP",
-        ["w"] = {
-            name = "+Workspaces",
-        },
-    },
-    ["<leader>m"] = {
-        name = "+Markdown Preview",
-    },
-    ["<leader>k"] = {
-        name = "+Knap Preview",
-    },
-    ["<leader>p"] = {
-        name = "+Packer",
-    },
-    ["<leader>t"] = {
-        name = "+Terminal",
-    },
-}
-
-which_key.setup(setup)
-which_key.register(labels)
+})

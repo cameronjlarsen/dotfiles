@@ -1,10 +1,9 @@
 local status_ok, notify = pcall(require, "notify")
 if not status_ok then
-	return
+    return
 end
 notify.setup({
-  background_color = "#000000",
+    background_color = "#000000",
 })
 
 vim.notify = notify
-

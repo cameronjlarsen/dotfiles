@@ -3,14 +3,13 @@ if not status_ok then
     return
 end
 
-telescope.load_extension("media_files")
-telescope.load_extension("lazygit")
-
 local actions = require "telescope.actions"
+local actions_layout = require "telescope.actions.layout"
 
 telescope.setup {
     defaults = {
-
+        -- theme = "dropdown",
+        -- layout_strategy = "vertical",
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
@@ -45,6 +44,7 @@ telescope.setup {
                 ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-l>"] = actions.complete_tag,
                 ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+                ["<M-p>"] = actions_layout.toggle_preview,
             },
 
             n = {
@@ -77,6 +77,7 @@ telescope.setup {
                 ["<PageDown>"] = actions.results_scrolling_down,
 
                 ["?"] = actions.which_key,
+                ["<M-p>"] = actions_layout.toggle_preview,
             },
         },
     },
@@ -87,33 +88,30 @@ telescope.setup {
             find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
         },
         live_grep = {
-            theme = "dropdown",
+            theme = "ivy",
         },
         buffers = {
             theme = "dropdown",
             previewer = false,
-            initial_mode = "normal",
         },
         lsp_references = {
             theme = "dropdown",
-            initial_mode = "normal",
         },
         lsp_definitions = {
             theme = "dropdown",
-            initial_mode = "normal",
         },
         lsp_declarations = {
             theme = "dropdown",
-            initial_mode = "normal",
         },
         lsp_implementations = {
             theme = "dropdown",
-            initial_mode = "normal",
         },
         git_branches = {
             theme = "dropdown",
-            initial_mode = "normal",
-        }
+        },
+        git_files = {
+            theme = "dropdown",
+        },
     },
     extensions = {
         media_files = {
@@ -121,11 +119,11 @@ telescope.setup {
             -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
             -- filetypes = { "png", "webp", "jpg", "jpeg" },
             find_cmd = "fdfind" -- find command (defaults to `fd`)
-        }
-        -- Your extension configuration goes here:
-        -- extension_name = {
-        --   extension_config_key = value,
-        -- }
-        -- please take a look at the readme of the extension you want to configure
+        },
     },
 }
+
+-- Extenstions
+telescope.load_extension("media_files")
+telescope.load_extension("lazygit")
+telescope.load_extension("notify")

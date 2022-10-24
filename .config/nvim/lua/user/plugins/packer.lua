@@ -36,13 +36,14 @@ packer.init({
             return require("packer.util").float({ border = "rounded" })
         end,
     },
+    auto_reload_compiled = true,
 })
 
 -- Install your plugins here
 return packer.startup(function(use)
 
-    use("lewis6991/impatient.nvim") -- Load plugins faster
     use("wbthomason/packer.nvim") -- Have packer manage itself
+    use("lewis6991/impatient.nvim") -- Load plugins faster
 
     -- Autopairs --
     use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and Treesitter
@@ -55,7 +56,9 @@ return packer.startup(function(use)
     use({
         "catppuccin/nvim",
         as = "catppuccin",
-        run = ":CatpuccinCompile"
+        run = function()
+            require("catppuccin").compile()
+        end,
     }) -- Catpuccin color scheme
     use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
 
@@ -112,7 +115,7 @@ return packer.startup(function(use)
     -- File Explorer --
     use({ "kyazdani42/nvim-tree.lua",
         requires = { "kyazdani42/nvim-web-devicons" }
-    }) -- File Explorer
+    })
 
     -- Git --
     use({ "lewis6991/gitsigns.nvim",
@@ -121,7 +124,7 @@ return packer.startup(function(use)
     use("kdheepak/lazygit.nvim")
 
     -- Keymaps --
-    use("folke/which-key.nvim") -- Keymap cheatsheet
+    use("folke/which-key.nvim")
 
     -- Latex & Markdown Previews --
     use("frabjous/knap") -- allows livepreviewing of markdown and latex files
@@ -163,6 +166,7 @@ return packer.startup(function(use)
     })
     use({ "nvim-telescope/telescope-media-files.nvim" }) -- Allows media files preview
     use({ "nvim-telescope/telescope-symbols.nvim" })
+    use { 'nvim-telescope/telescope-ui-select.nvim' }
 
     -- Terminal --
     use("akinsho/toggleterm.nvim") -- Terminal
@@ -188,10 +192,21 @@ return packer.startup(function(use)
     use({
         "tamton-aquib/duck.nvim",
         config = function()
+            local wk_status_ok, wk = pcall(require, "which-key")
+            if not wk_status_ok then
+                return
+            end
             vim.keymap.set("n", "<leader>Dd", function() require("duck").hatch() end, { desc = "Hatch a duck" })
             vim.keymap.set("n", "<leader>Dk", function() require("duck").cook() end, { desc = "Cook a duck" })
+
+            wk.register({
+                D = { name = "+Duck", },
+            }, { prefix = "<leader>" })
         end
     })
+
+    -- UI --
+    use({ "stevearc/dressing.nvim" })
 
 
     -- Automatically set up your configuration after cloning packer.nvim

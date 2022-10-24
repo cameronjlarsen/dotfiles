@@ -1,25 +1,32 @@
 local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not status_ok then
+    print("mason_lspconfig not loaded")
     return
 end
 
 local mason_status_ok, mason = pcall(require, "mason")
 if not mason_status_ok then
+    print("mason not loaded")
     return
 end
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
+    print("lspconfig not loaded")
     return
 end
+
+require("lspconfig.ui.windows").default_options.border = "rounded"
+
 
 mason.setup({
     ui = {
         icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
+        },
+        border = "rounded"
     }
 })
 

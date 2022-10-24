@@ -19,21 +19,28 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
-map("n", "<C-h>", "<C-w>h", { desc = "Focus window left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Focus window below" })
-map("n", "<C-k>", "<C-w>k", { desc = "Focus window above" })
-map("n", "<C-l>", "<C-w>l", { desc = "Focus window right" })
+map("n", "<leader>wd", "<C-w>c", { desc = "Delete window" })
+map("n", "<leader>ws", "<C-w>c", { desc = "Split window below" })
+map("n", "<leader>wv", "<C-w>c", { desc = "Split window right" })
+map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
+map("n", "<leader>wj", "<C-w>j", { desc = "Focus window below" })
+map("n", "<leader>wk", "<C-w>k", { desc = "Focus window above" })
+map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
+map("n", "<leader>wH", function() vim.cmd("vertical resize -2") end, { desc = "Resize left" })
+map("n", "<leader>wJ", function() vim.cmd("resize +2") end, { desc = "Resize down" })
+map("n", "<leader>wK", function() vim.cmd("resize -2") end, { desc = "Resize up" })
+map("n", "<leader>wL", function() vim.cmd("vertical resize +2") end, { desc = "Resize right" })
+map("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 
--- Resize with arrows
-map("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize up" })
-map("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize down" })
-map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Resize left" })
-map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Resize right" })
 
 -- Navigate buffers
-map("n", "<S-l>", ":bnext<CR>", { desc = "Go to next buffer" })
-map("n", "<S-h>", ":bprevious<CR>", { desc = "Go to previous buffer" })
-map("n", "<leader>c", "<cmd>Bdelete!<CR>", { desc = "Close Buffer" })
+map("n", "<C-Right>", function() vim.cmd("bnext") end, { desc = "Go to next buffer" })
+map("n", "<C-Left>", function() vim.cmd("bprevious") end, { desc = "Go to previous buffer" })
+map("n", "<leader>bn", function() vim.cmd("BufferLineCycleNext") end, { desc = "Next Buffer" })
+map("n", "<leader>bp", function() vim.cmd("BufferLineCyclePrev") end, { desc = "Prev Buffer" })
+map("n", "<leader>bc", function() vim.cmd("Bdelete!") end, { desc = "Close Buffer" })
+map("n", "<leader>bd", function() vim.cmd("Bdelete") end, { desc = "Delete Buffer & Window" })
+
 
 -- Keep text centered while searching
 -- n = next result
@@ -41,7 +48,7 @@ map("n", "<leader>c", "<cmd>Bdelete!<CR>", { desc = "Close Buffer" })
 -- zv = open enough folds to display the cursor position
 map("n", "n", "nzzzv", { desc = "Next search result" })
 map("n", "N", "Nzzzv", { desc = "Prev search result" })
-map("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "No Highlight Search" })
+map("n", "<leader>th", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
 
 -- Insert --
 -- Press jk fast to enter
@@ -71,84 +78,53 @@ map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Focus terminal down" })
 map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
 
--- File Explorer --
-map("n", "<leader>e", function() require("nvim-tree").toggle() end, { desc = "Explorer" })
+-- Search --
+map("n", "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,
+    { desc = "Current Buffer" })
+map("n", "<leader>sc", function() require("telescope.builtin").colorscheme() end, { desc = "Colorschemes" })
+map("n", "<leader>sh", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
+map("n", "<leader>sl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
+map("n", "<leader>st", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
+map("n", "<leader>sw", function() require("telescope.builtin").grep_string() end, { desc = "Grep String" })
+map("n", "<leader>sn", function() require('telescope').extensions.notify.notify() end, { desc = "Notifications" })
+map("n", "<leader>sp", function() require('telescope').extensions.projects.projects() end, { desc = "Projects" })
+map("n", "<leader>ss", function()
+    require("telescope.builtin").lsp_document_symbols({
+        symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Variable" },
+    })
+end, { desc = "Document Symbols" })
+map("n", "<leader>sS", function()
+    require("telescope.builtin").lsp_dynamic_workspace_symbols({
+        symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Variable" },
+    })
+end, { desc = "Workspace Symbols" })
 
------------------------------------------------------------
--- Plugin Mappings
------------------------------------------------------------
+-- Help --
+map("n", "<leader>ha", function() require("telescope.builtin").autocommands() end, { desc = "Auto Commands" })
+map("n", "<leader>hb", function() require("telescope.builtin").buffers() end, { desc = "Buffers" })
+map("n", "<leader>hc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
+map("n", "<leader>hh", function() require("telescope.builtin").help_tags() end, { desc = "Help Pages" })
+map("n", "<leader>hk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>hm", function() require("telescope.builtin").man_pages() end, { desc = "Man Pages" })
+map("n", "<leader>ho", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
+map("n", "<leader>hr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
+map("n", "<leader>hs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
+map("n", "<leader>ht", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
 
--- Alpha --
-map("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "Alpha" })
-
--- Comment --
-map("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end,
-    { desc = "Comment" })
-map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-    { desc = "Comment" })
-
--- DAP --
-map("n", "<leader>dc", function() require("dap").continue() end, { desc = "Continue" })
-map("n", "<leader>du", function() require("dapui").toggle() end, { desc = "UI" })
-map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle breakpoint" })
-map("n", "<leader>do", function() require("dap").step_over() end, { desc = "Step over" })
-map("n", "<leader>di", function() require("dap").step_into() end, { desc = "Step into" })
-map("n", "<leader>dO", function() require("dap").step_out() end, { desc = "Step out" })
-map("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Toggle repl" })
-map("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end,
-    { desc = "Set breakpoint with condition" })
-map("n", "<leader>dp", function() require "dap".set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end,
-    { desc = "Set breakpoint with log point message" })
-
--- Diagnostics --
-map("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostic" })
-map("n", "<leader>lj", function() vim.diagnostic.goto_next({ border = "rounded" }) end, { desc = "Next Diagnostic" })
-map("n", "<leader>lk", function() vim.diagnostic.goto_prev({ border = "rounded" }) end, { desc = "Prev Diagnostic" })
-map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Send Diagnostics to Quickfix" })
-map("n", "<leader>ld", function() return require("telescope.builtin").diagnostics({ bufnr = 0 }) end,
-    { desc = "Document Diagnostics" })
-map("n", "<leader>lw", function() return require("telescope.builtin").diagnostics() end,
-    { desc = "Workspace Diagnostics" })
-map("n", "<leader>ls", function() return require("telescope.builtin").lsp_document_symbols() end,
-    { desc = "Document Symbols" })
-map("n", "<leader>lS", function() return require("telescope.builtin").lsp_dynamic_workspace_symbols() end,
-    { desc = "Workspace Symbols" })
-
--- Find Keymaps --
-map("n", "<leader>fb", function() require("telescope.builtin").buffers() end, { desc = "Buffers" })
-map("n", "<leader>fB", function() require("telescope.builtin").git_branches() end, { desc = "Checkout Branch" })
-map("n", "<leader>fc", function() require("telescope.builtin").colorscheme() end, { desc = "Colorscheme" })
 map("n", "<leader>ff", function() require("telescope.builtin").find_files() end, { desc = "Find Files" })
-map("n", "<leader>ft", function() require("telescope.builtin").live_grep() end, { desc = "Find Text" })
-map("n", "<leader>fT", function() require("telescope.builtin").grep_string() end, { desc = "Find Text Under Cursor" })
-map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end, { desc = "Help" })
-map("n", "<leader>fi", function() require("telescope").extensions.media_files.media_files() end, { desc = "Media" })
-map("n", "<leader>fl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
-map("n", "<leader>fM", function() require("telescope.builtin").man_pages() end, { desc = "Man Pages" })
-map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Recent File" })
-map("n", "<leader>fR", function() require("telescope.builtin").registers() end, { desc = "Registers" })
-map("n", "<leader>fk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
-map("n", "<leader>fC", function() require("telescope.builtin").commands() end, { desc = "Commands" })
-map("n", "<leader>fs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
-map("n", "<leader>fg", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
+map("n", "<leader>fg", function() require("telescope.builtin").git_files() end, { desc = "Find Git Files" })
+map("n", "<leader>fm", function() require("telescope").extensions.media_files.media_files() end,
+    { desc = "Find Media Files" })
+map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
+map("n", "<leader>ft", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
+
 
 -- Git --
-map("n", "<leader>go", function() require("telescope.builtin").git_status() end, { desc = "Open Changed File" })
 map("n", "<leader>gb", function() require("telescope.builtin").git_branches() end, { desc = "Checkout Branch" })
 map("n", "<leader>gc", function() require("telescope.builtin").git_commits() end, { desc = "Checkout Commit" })
-map("n", "<leader>gjh", function() require("gitsigns").next_hunk() end, { desc = "Next Hunk" })
-map("n", "<leader>gkh", function() require("gitsigns").prev_hunk() end, { desc = "Prev Hunk" })
-map("n", "<leader>gph", function() require("gitsigns").preview_hunk() end, { desc = "Preview Hunk" })
-map("n", "<leader>grh", function() require("gitsigns").reset_hunk() end, { desc = "Reset Hunk" })
-map("n", "<leader>grb", function() require("gitsigns").reset_buffer() end, { desc = "Reset Buffer" })
-map("n", "<leader>gsh", function() require("gitsigns").stage_hunk() end, { desc = "Stage Hunk" })
-map("n", "<leader>guh", function() require("gitsigns").undo_stage_hunk() end, { desc = "Undo Stage Hunk" })
-map("n", "<leader>gsb", function() require("gitsigns").stage_buffer() end, { desc = "Stage Buffer" })
-map("n", "<leader>gl", function() require("gitsigns").blame_line() end, { desc = "Blame Line" })
-map("n", "<leader>gtb", function() require("gitsigns").toggle_current_line_blame() end, { desc = "Toggle Line Blame " })
-map("n", "<leader>gtd", function() require("gitsigns").toggle_deleted() end, { desc = "Toggle Deleted " })
-map("n", "<leader>gd", function() require("gitsigns").diffthis("@") end, { desc = "Git Diff Head" })
-map("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+map("n", "<leader>gs", function() require("telescope.builtin").git_status() end, { desc = "Open Changed File" })
+map("n", "<leader>gg", function() vim.cmd("LazyGit") end, { desc = "LazyGit" })
+map("n", "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
 
 -- Knap --
 map({ "n", "v" }, "<leader>kp", function() require("knap").process_once() end, { desc = "Preview Once" })
@@ -156,31 +132,22 @@ map({ "n", "v" }, "<leader>kc", function() require("knap").close_viewer() end, {
 map({ "n", "v" }, "<leader>kt", function() require("knap").toggle_autopreviewing() end, { desc = "Toggle Auto-Preview" })
 map({ "n", "v" }, "<leader>kj", function() require("knap").forward_jump() end, { desc = "SyncTex jump" })
 
--- LSP Lines --
-map({ "n", "v" }, "<Leader>ll", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
-
--- LSP Mappings --
-map("n", "<leader>li", "<cmd>LspInfo<cr>", { silent = true, desc = "LSP Info" })
-map("n", "<leader>lI", "<cmd>Mason<cr>", { silent = true, desc = "Mason Installer Info" })
-
--- Markdown Preview --
-map("n", "<leader>mm", "<cmd>MarkdownPreview<cr>", { desc = "Start Markdown Preview" })
-map("n", "<leader>ms", "<cmd>MarkdownPreviewStop<cr>", { desc = "Stop Markdown Preview" })
-map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Toggle Markdown Preview" })
-map("n", "<leader>mg", "<cmd>Glow<cr>", { desc = "Glow Preview" })
+-- LSP --
+map("n", "<leader>li", function() vim.cmd("LspInfo") end, { silent = true, desc = "LSP Info" })
+map("n", "<leader>lm", function() vim.cmd("Mason") end, { silent = true, desc = "Mason Installer Info" })
+map({ "n", "v" }, "<Leader>ll",
+    function()
+        local new_value = not vim.diagnostic.config().virtual_lines
+        vim.diagnostic.config({
+            virtual_text = not new_value,
+            virtual_lines = new_value,
+        })
+    end,
+    { desc = "Toggle lsp_lines" })
 
 -- Packer --
-map("n", "<leader>pc", "<cmd>PackerCompile<cr>", { desc = "Packer Compile" })
-map("n", "<leader>pi", "<cmd>PackerInstall<cr>", { desc = "Packer Install" })
-map("n", "<leader>ps", "<cmd>PackerSync<cr>", { desc = "Packer Sync" })
-map("n", "<leader>pS", "<cmd>PackerStatus<cr>", { desc = "Packer Status" })
-map("n", "<leader>pu", "<cmd>PackerUpdate<cr>", { desc = "Packer Update" })
-
--- Toggle Terminal --
-map("n", "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", { desc = "Node Terminal" })
-map("n", "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", { desc = "NCDU Terminal" })
-map("n", "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Htop Terminal" })
-map("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", { desc = "Python Terminal" })
-map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", { desc = "Float Terminal" })
-map("n", "<leader>th", "<cmd>ToggleTerm size = 10 direction=horizontal<cr>", { desc = "Horizontal Terminal" })
-map("n", "<leader>tv", "<cmd>ToggleTerm size = 80 direction=vertical<cr>", { desc = "Vertical Terminal" })
+map("n", "<leader>pc", function() vim.cmd("PackerCompile") end, { desc = "Packer Compile" })
+map("n", "<leader>pi", function() vim.cmd("PackerInstall") end, { desc = "Packer Install" })
+map("n", "<leader>pp", function() vim.cmd("PackerSync") end, { desc = "Packer Sync" })
+map("n", "<leader>ps", function() vim.cmd("PackerStatus") end, { desc = "Packer Status" })
+map("n", "<leader>pu", function() vim.cmd("PackerUpdate") end, { desc = "Packer Update" })
