@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
     callback = function()
@@ -11,7 +12,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
-        print("gitcommit + markdown")
     end,
 })
 
