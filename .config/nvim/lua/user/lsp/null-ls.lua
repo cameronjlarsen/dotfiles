@@ -34,5 +34,6 @@ mason_null_ls.setup_handlers({
 null_ls.setup({
     sources = {
         code_actions.gitsigns,
+        formatting.google_java_format,
     },
 })

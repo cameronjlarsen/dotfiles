@@ -67,11 +67,6 @@ local function lsp_highlight_document(client, bufnr)
     end
 end
 
-local function map(mode, lhs, rhs, opts)
-    opts = vim.tbl_extend("keep", opts, { silent = true, buffer = true })
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -79,6 +74,11 @@ local function lsp_keymaps(bufnr)
     if not tb_status_ok then
         vim.notify("Telescope lsp not loaded")
         return
+    end
+
+    local function map(mode, lhs, rhs, opts)
+        opts = vim.tbl_extend("keep", opts, { silent = true, buffer = true })
+        vim.keymap.set(mode, lhs, rhs, opts)
     end
 
     -- Movement

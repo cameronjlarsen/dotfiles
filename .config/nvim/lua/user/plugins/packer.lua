@@ -123,6 +123,9 @@ return packer.startup(function(use)
     })
     use("kdheepak/lazygit.nvim")
 
+    -- Java --
+    use({ "mfussenegger/nvim-jdtls" })
+
     -- Keymaps --
     use("folke/which-key.nvim")
 

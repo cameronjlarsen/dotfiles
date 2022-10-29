@@ -47,5 +47,8 @@ mason_lspconfig.setup_handlers({
             opts = vim.tbl_deep_extend("force", server_custom_opts, opts)
         end
         lspconfig[server].setup(opts)
+    end,
+    ["jdtls"] = function()
+        lspconfig["jdtls"].setup(require("user.lsp.settings.jdtls"))
     end
 })
