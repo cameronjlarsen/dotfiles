@@ -33,17 +33,25 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<F5>", function() dap.continue() end, { desc = "Continue" })
-map("n", "<leader>du", function() dapui.toggle() end, { desc = "UI" })
-map("n", "<leader>db", function() dap.toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
+map("n", "<F9>", function() dap.step_back() end, { desc = "Step Back" })
 map("n", "<F10>", function() dap.step_over() end, { desc = "Step Over" })
 map("n", "<F11>", function() dap.step_into() end, { desc = "Step Into" })
 map("n", "<F12>", function() dap.step_out() end, { desc = "Step Out" })
+map("n", "<leader>db", function() dap.toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
 map("n", "<leader>dl", function() dap.run_last() end, { desc = "Run Last" })
+map("n", "<leader>dc", function() dap.run_to_cursor() end, { desc = "Run To Cursor" })
+map("n", "<leader>dd", function() dap.disconnect() end, { desc = "Disconnect" })
+map("n", "<leader>dg", function() dap.session() end, { desc = "Get Session" })
 map("n", "<leader>dr", function() dap.repl.toggle() end, { desc = "Toggle Repl" })
+map("n", "<leader>dp", function() dap.pause() end, { desc = "Pause" })
+map("n", "<leader>dq", function() dap.quit() end, { desc = "Quit" })
 map("n", "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint Condition: ")) end,
     { desc = "Set Breakpoint with Condition" })
 map("n", "<leader>dp", function() dap.set_breakpoint(nil, nil, vim.fn.input("Log Point Message: ")) end,
     { desc = "Set Breakpoint with Log Point Message" })
+map("n", "<leader>du", function() dapui.toggle() end, { desc = "UI" })
+map("n", "<leader>df", function() dapui.float_element() end, { desc = "Floating Element" })
+map({ "n", "v" }, "<leader>de", function() dapui.eval() end, { desc = "Evaluate Expression" })
 
 wk.register({
     d = {

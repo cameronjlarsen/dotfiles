@@ -39,8 +39,8 @@ local function java_keymaps()
     map({ "n", "v" }, "<leader>je", function() jdtls.extract_variable() end, { desc = "Extract Variable" })
     map({ "n", "v" }, "<leader>jc", function() jdtls.extract_variable() end, { desc = "Extract Constant" })
     map("v", "<leader>jm", function() jdtls.extract_method() end, { desc = "Extract Method" })
-    map("n", "<leader>df", function() jdtls.test_class() end, { desc = "Test Java Class" })
-    map("n", "<leader>dn", function() jdtls.test_nearest_method() end, { desc = "Test Nearest Java Method" })
+    map("n", "<leader>jt", function() jdtls.test_class() end, { desc = "Test Java Class" })
+    map("n", "<leader>jn", function() jdtls.test_nearest_method() end, { desc = "Test Nearest Java Method" })
 
     local status_ok, wk = pcall(require, "which-key")
     if not status_ok then

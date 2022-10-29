@@ -82,7 +82,6 @@ which_key.register({
             h = { name = "+hunk" },
             t = { name = "+toggle" }
         },
-        k = { name = "+Knap", },
         l = { name = "+LSP",
             w = "+Workspace"
         },
