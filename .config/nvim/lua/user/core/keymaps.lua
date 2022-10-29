@@ -19,6 +19,7 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
+map("n", "<leader>wq", "<C-w>q", { desc = "Quit window" })
 map("n", "<leader>wd", "<C-w>c", { desc = "Delete window" })
 map("n", "<leader>ws", "<C-w>c", { desc = "Split window below" })
 map("n", "<leader>wv", "<C-w>c", { desc = "Split window right" })
@@ -26,6 +27,10 @@ map("n", "<leader>wh", "<C-w>h", { desc = "Focus window left" })
 map("n", "<leader>wj", "<C-w>j", { desc = "Focus window below" })
 map("n", "<leader>wk", "<C-w>k", { desc = "Focus window above" })
 map("n", "<leader>wl", "<C-w>l", { desc = "Focus window right" })
+map("n", "<C-Left>", "<C-w>h", { desc = "Focus window left" })
+map("n", "<C-Down>", "<C-w>j", { desc = "Focus window below" })
+map("n", "<C-Up>", "<C-w>k", { desc = "Focus window above" })
+map("n", "<C-Right>", "<C-w>l", { desc = "Focus window right" })
 map("n", "<leader>wH", function() vim.cmd("vertical resize -2") end, { desc = "Resize left" })
 map("n", "<leader>wJ", function() vim.cmd("resize +2") end, { desc = "Resize down" })
 map("n", "<leader>wK", function() vim.cmd("resize -2") end, { desc = "Resize up" })
@@ -34,8 +39,8 @@ map("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 
 
 -- Navigate buffers
-map("n", "<C-Right>", function() vim.cmd("bnext") end, { desc = "Go to next buffer" })
-map("n", "<C-Left>", function() vim.cmd("bprevious") end, { desc = "Go to previous buffer" })
+map("n", "<S-Right>", function() vim.cmd("bnext") end, { desc = "Go to next buffer" })
+map("n", "<S-Left>", function() vim.cmd("bprevious") end, { desc = "Go to previous buffer" })
 map("n", "<leader>bn", function() vim.cmd("BufferLineCycleNext") end, { desc = "Next Buffer" })
 map("n", "<leader>bp", function() vim.cmd("BufferLineCyclePrev") end, { desc = "Prev Buffer" })
 map("n", "<leader>bc", function() vim.cmd("Bdelete!") end, { desc = "Close Buffer" })
@@ -127,10 +132,9 @@ map("n", "<leader>gg", function() vim.cmd("LazyGit") end, { desc = "LazyGit" })
 map("n", "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
 
 -- Knap --
-map({ "n", "v" }, "<leader>kp", function() require("knap").process_once() end, { desc = "Preview Once" })
-map({ "n", "v" }, "<leader>kc", function() require("knap").close_viewer() end, { desc = "Close Viewer" })
-map({ "n", "v" }, "<leader>kt", function() require("knap").toggle_autopreviewing() end, { desc = "Toggle Auto-Preview" })
-map({ "n", "v" }, "<leader>kj", function() require("knap").forward_jump() end, { desc = "SyncTex jump" })
+map({ "n", "v" }, "<F6>", function() require("knap").close_viewer() end, { desc = "Close Viewer" })
+map({ "n", "v" }, "<F7>", function() require("knap").toggle_autopreviewing() end, { desc = "Toggle Auto-Preview" })
+map({ "n", "v" }, "<F8>", function() require("knap").forward_jump() end, { desc = "SyncTex jump" })
 
 -- LSP --
 map("n", "<leader>li", function() vim.cmd("LspInfo") end, { silent = true, desc = "LSP Info" })

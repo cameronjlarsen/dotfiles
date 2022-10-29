@@ -41,6 +41,18 @@ local function java_keymaps()
     map("v", "<leader>jm", function() jdtls.extract_method() end, { desc = "Extract Method" })
     map("n", "<leader>df", function() jdtls.test_class() end, { desc = "Test Java Class" })
     map("n", "<leader>dn", function() jdtls.test_nearest_method() end, { desc = "Test Nearest Java Method" })
+
+    local status_ok, wk = pcall(require, "which-key")
+    if not status_ok then
+        print("which-key not loaded")
+        return
+    end
+
+    wk.register({
+        ["<leader>"] = {
+            j = { name = "+Java" },
+        },
+    })
 end
 
 local config = {
