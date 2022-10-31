@@ -152,6 +152,9 @@ return packer.startup(function(use)
     use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
     use("j-hui/fidget.nvim") -- Show LSP progress
 
+    -- Motions --
+    use("kylechui/nvim-surround")
+
     -- Notifications --
     use("rcarriga/nvim-notify") -- Fancy notifications
 
