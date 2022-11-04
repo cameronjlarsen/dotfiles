@@ -13,7 +13,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
         install_path,
     })
     print("Installing packer close and reopen Neovim...")
-    vim.cmd([[packadd packer.nvim]])
+    require("packer").packadd = "packer.nvim"
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
@@ -23,15 +23,28 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = "packer.lua",
     group = group,
 })
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+        vim.notify("Compile Done", vim.log.levels.INFO)
+    end,
+})
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
 end
 
+local icons = require("user.plugins.icons").ui
 -- Have packer use a popup window
 packer.init({
     display = {
+        working_sym = icons.package_pending,
+        error_sym = icons.package_error,
+        done_sym = icons.package_installed,
+        removed_sym = icons.package_uninstalled,
+        moved_sym = icons.package_moved,
         open_fn = function()
             return require("packer.util").float({ border = "rounded" })
         end,
@@ -199,12 +212,13 @@ return packer.startup(function(use)
     use({
         "tamton-aquib/duck.nvim",
         config = function()
+            vim.keymap.set("n", "<leader>Dd", function() require("duck").hatch() end, { desc = "Hatch a duck" })
+            vim.keymap.set("n", "<leader>Dk", function() require("duck").cook() end, { desc = "Cook a duck" })
+
             local wk_status_ok, wk = pcall(require, "which-key")
             if not wk_status_ok then
                 return
             end
-            vim.keymap.set("n", "<leader>Dd", function() require("duck").hatch() end, { desc = "Hatch a duck" })
-            vim.keymap.set("n", "<leader>Dk", function() require("duck").cook() end, { desc = "Cook a duck" })
 
             wk.register({
                 D = { name = "+Duck", },

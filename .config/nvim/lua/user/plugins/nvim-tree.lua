@@ -16,6 +16,8 @@ nvim_tree.setup({
         "dashboard",
         "alpha",
     },
+    disable_netrw = false,
+    hijack_netrw = true,
     sync_root_with_cwd = true,
     respect_buf_cwd = true,
     update_focused_file = {
@@ -38,8 +40,9 @@ nvim_tree.setup({
         timeout = 500,
     },
     view = {
+        adaptive_size = true,
         width = 30,
-        hide_root_folder = false,
+        hide_root_folder = true,
         side = "left",
         mappings = {
             custom_only = false,

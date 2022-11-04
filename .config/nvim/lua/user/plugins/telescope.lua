@@ -8,12 +8,32 @@ local actions_layout = require "telescope.actions.layout"
 
 telescope.setup {
     defaults = {
-        -- theme = "dropdown",
-        -- layout_strategy = "vertical",
-        prompt_prefix = " ",
-        selection_caret = " ",
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        entry_prefix = "  ",
         path_display = { "smart" },
-
+        sorting_strategy = "ascending",
+        layout_strategy = "flex",
+        layout_config = {
+            horizontal = {
+                prompt_position = "top",
+                preview_width = 0.55,
+            },
+            vertical = {
+                mirror = false,
+            },
+            flex = {
+                prompt_position = "top",
+                preview_width = 0.55,
+                flip_columns = 120,
+            },
+            bottom_pane = {
+                height = 0.50,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
+        },
         mappings = {
             i = {
                 ["<C-n>"] = actions.cycle_history_next,
@@ -82,42 +102,21 @@ telescope.setup {
         },
     },
     pickers = {
-        find_files = {
-            theme = "dropdown",
-            previewer = false,
-            find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
-        },
+        -- find_files = {
+        --     theme = "dropdown",
+        --     previewer = false,
+        --     find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
+        -- },
         live_grep = {
-            theme = "ivy",
+            layout_strategy = "bottom_pane"
         },
         buffers = {
             theme = "dropdown",
             previewer = false,
         },
-        lsp_references = {
-            theme = "dropdown",
-        },
-        lsp_definitions = {
-            theme = "dropdown",
-        },
-        lsp_declarations = {
-            theme = "dropdown",
-        },
-        lsp_implementations = {
-            theme = "dropdown",
-        },
-        git_branches = {
-            theme = "dropdown",
-        },
-        git_files = {
-            theme = "dropdown",
-        },
     },
     extensions = {
         media_files = {
-            -- filetypes whitelist
-            -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-            -- filetypes = { "png", "webp", "jpg", "jpeg" },
             find_cmd = "fdfind" -- find command (defaults to `fd`)
         },
     },

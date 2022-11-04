@@ -34,8 +34,9 @@ vim.opt.scrolloff      = 8 -- is one of my fav
 vim.opt.sidescrolloff  = 8
 vim.opt.guifont        = "hack:h16" -- the font used in graphical neovim applications
 vim.opt.shell          = "/usr/bin/zsh"
+vim.opt.showmode       = false -- don't show vim mode in the command line
+
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap = "<,>,[,],h,l"
-
 vim.opt.iskeyword:append({ "-" })
 vim.opt.formatoptions:remove({ "c", "r", "o" })

@@ -76,10 +76,7 @@ local function lsp_keymaps(bufnr)
         return
     end
 
-    local function map(mode, lhs, rhs, opts)
-        opts = vim.tbl_extend("keep", opts, { silent = true, buffer = true })
-        vim.keymap.set(mode, lhs, rhs, opts)
-    end
+    local map = require("user.core.utils").map
 
     -- Movement
     map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
