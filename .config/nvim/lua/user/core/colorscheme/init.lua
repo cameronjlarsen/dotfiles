@@ -1,6 +1,6 @@
 local name = "catppuccin"
 
-pcall(require, "user.colorscheme." .. name)
+pcall(require, "user.core.colorscheme." .. name)
 
 ---@diagnostic disable-next-line: param-type-mismatch
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. name)

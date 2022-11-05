@@ -3,11 +3,6 @@ if not dap_ui_status_ok then
     return
 end
 
-local dap_status_ok, dap = pcall(require, "dap")
-if not dap_status_ok then
-    return
-end
-
 dapui.setup({
     icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
     mappings = {
@@ -74,9 +69,18 @@ dapui.setup({
     }
 })
 
-vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-vim.fn.sign_define("DapLogPoint", { text = "●", texthl = "DapLogPoint", linehl = "", numhl = "" })
+local icons = require("user.icons")
+vim.fn.sign_define("DapBreakpoint", { text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition",
+    { text = icons.dap.BreakpointCondition, texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointRejected",
+    { text = icons.dap.BreakpointRejected, texthl = "DapBreakpointRejected", linehl = "", numhl = "" })
+vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
+
+local dap_status_ok, dap = pcall(require, "dap")
+if not dap_status_ok then
+    return
+end
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()

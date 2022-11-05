@@ -1,3 +1,5 @@
+local icons = require("user.icons")
+
 local status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not status_ok then
     vim.notify("mason_lspconfig not loaded")
@@ -30,13 +32,12 @@ end
 
 require("lspconfig.ui.windows").default_options.border = "rounded"
 
-local icons = require("user.plugins.icons").ui
 mason.setup({
     ui = {
         icons = {
-            package_installed = icons.package_installed,
-            package_pending = icons.package_pending,
-            package_uninstalled = icons.package_uninstalled,
+            package_installed = icons.dap.PackageInstalled,
+            package_pending = icons.dap.PackagePending,
+            package_uninstalled = icons.dap.PackageUninstalled,
         },
         border = "rounded"
     }

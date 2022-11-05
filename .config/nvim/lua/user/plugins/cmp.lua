@@ -21,7 +21,7 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local kind_icons = require("user.plugins.icons").lspkind
+local kind_icons = require("user.icons").lspkind
 
 cmp.setup({
     performance = {
@@ -80,7 +80,11 @@ cmp.setup({
                 -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                 vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             else
-                return lspkind.cmp_format()
+                return lspkind.cmp_format({
+                    mode = "symbol",
+                    max_width = 50,
+                    symbol_map = { Copilot = " " }
+                })
             end
             vim_item.menu = ({
                 nvim_lsp_signature_help = "[LSP SignatureHelp]",
@@ -93,6 +97,7 @@ cmp.setup({
                 latex_symbols = "[LaTeX]",
                 emoji = "[Emoji]",
                 dap = "[Dap]",
+                copilot = "[Copilot]"
             })[entry.source.name]
             return vim_item
         end,
@@ -105,6 +110,7 @@ cmp.setup({
             { name = "nvim_lua" },
         },
         {
+            { name = "copilot" },
             { name = "buffer", keyword_length = 5 },
             { name = "rg", keyword_length = 5 },
             { name = "path" },

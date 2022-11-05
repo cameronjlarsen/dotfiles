@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("User", {
     pattern = "PackerCompileDone",
     callback = function()
-        vim.notify("Compile Done", vim.log.levels.INFO)
+        vim.notify_once("Compile Done", vim.log.levels.INFO)
     end,
 })
 -- Use a protected call so we don't error out on first use
@@ -36,15 +36,15 @@ if not status_ok then
     return
 end
 
-local icons = require("user.plugins.icons").ui
+local icons = require("user.icons")
 -- Have packer use a popup window
 packer.init({
     display = {
-        working_sym = icons.package_pending,
-        error_sym = icons.package_error,
-        done_sym = icons.package_installed,
-        removed_sym = icons.package_uninstalled,
-        moved_sym = icons.package_moved,
+        working_sym = icons.ui.PackagePending,
+        error_sym = icons.ui.PackageError,
+        done_sym = icons.ui.PackageInstalled,
+        removed_sym = icons.ui.PackageUninstalled,
+        moved_sym = icons.ui.PackageMoved,
         open_fn = function()
             return require("packer.util").float({ border = "rounded" })
         end,
@@ -102,7 +102,22 @@ return packer.startup(function(use)
     use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
     -- Github Copilot
-    use("github/copilot.vim")
+    use({ "zbirenbaum/copilot.lua",
+        disable = true,
+        event = "VimEnter",
+        config = function()
+            ---@diagnostic disable-next-line: param-type-mismatch
+            vim.defer_fn(function()
+                require("user.plugins.copilot")
+                ---@diagnostic disable-next-line: param-type-mismatch
+            end, 100)
+        end,
+    }, { "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+            require("copilot_cmp").setup()
+        end
+    })
 
     -- Dashboard --
     use({ "goolord/alpha-nvim",
@@ -110,11 +125,11 @@ return packer.startup(function(use)
     })
 
     -- Debugging --
-    use {
+    use({
         "mfussenegger/nvim-dap",
         "mfussenegger/nvim-dap-python",
         "leoluz/nvim-dap-go"
-    }
+    })
     use({ "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" }
     })
@@ -138,7 +153,7 @@ return packer.startup(function(use)
     use("kdheepak/lazygit.nvim")
 
     -- Java --
-    use({ "mfussenegger/nvim-jdtls" })
+    use("mfussenegger/nvim-jdtls")
 
     -- Keymaps --
     use("folke/which-key.nvim")
@@ -182,11 +197,11 @@ return packer.startup(function(use)
         requires = {
             "nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim
             "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
-        }
+        },
+        { "nvim-telescope/telescope-media-files.nvim" },
+        { "nvim-telescope/telescope-symbols.nvim" },
+        { "nvim-telescope/telescope-ui-select.nvim" },
     })
-    use({ "nvim-telescope/telescope-media-files.nvim" }) -- Allows media files preview
-    use({ "nvim-telescope/telescope-symbols.nvim" })
-    use { 'nvim-telescope/telescope-ui-select.nvim' }
 
     -- Terminal --
     use("akinsho/toggleterm.nvim") -- Terminal
@@ -228,7 +243,6 @@ return packer.startup(function(use)
 
     -- UI --
     use({ "stevearc/dressing.nvim" })
-
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

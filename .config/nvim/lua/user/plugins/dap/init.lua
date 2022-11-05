@@ -47,4 +47,4 @@ map("n", "<leader>dp", function() dap.set_breakpoint(nil, nil, vim.fn.input("Log
     { desc = "Set Breakpoint with Log Point Message" })
 map("n", "<leader>du", function() dapui.toggle() end, { desc = "UI" })
 map("n", "<leader>df", function() dapui.float_element() end, { desc = "Floating Element" })
-map({ "n", "v" }, "<leader>de", function() dapui.eval() end, { desc = "Evaluate Expression" })
+map({ "n", "v" }, "<leader>de", function() dapui.eval() end, { desc = "Eval Expression" })

@@ -88,4 +88,15 @@ which_key.register({
         t = { name = "+Toggle" },
         w = { name = "+Window" },
     },
-})
+}, { mode = "n" })
+which_key.register({
+    ["<leader>"] = {
+        d = { name = "+Debug", },
+        g = { name = "+Git",
+            h = { name = "+hunk" },
+            t = { name = "+toggle" }
+        },
+        l = { name = "+LSP",
+        },
+    },
+}, { mode = "v" })

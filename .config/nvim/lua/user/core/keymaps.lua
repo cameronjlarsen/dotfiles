@@ -124,7 +124,7 @@ map("n", "<leader>ft", function() require("nvim-tree").toggle() end, { desc = "F
 map("n", "<leader>gb", function() require("telescope.builtin").git_branches() end, { desc = "Checkout Branch" })
 map("n", "<leader>gc", function() require("telescope.builtin").git_commits() end, { desc = "Checkout Commit" })
 map("n", "<leader>gs", function() require("telescope.builtin").git_status() end, { desc = "Open Changed File" })
-map("n", "<leader>gg", function() vim.cmd("LazyGit") end, { desc = "LazyGit" })
+map("n", "<leader>gg", function() require("lazygit").lazygitcurrentfile() end, { desc = "LazyGit" })
 map("n", "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
 
 -- Knap --
@@ -134,7 +134,8 @@ map({ "n", "v" }, "<F8>", function() require("knap").forward_jump() end, { desc 
 
 -- LSP --
 map("n", "<leader>li", function() vim.cmd("LspInfo") end, { silent = true, desc = "LSP Info" })
-map("n", "<leader>lm", function() vim.cmd("Mason") end, { silent = true, desc = "Mason Installer Info" })
+map("n", "<leader>lm", function() vim.cmd("Mason") end, { silent = true, desc = "Mason Info" })
+map("n", "<leader>ln", function() vim.cmd("NullLsInfo") end, { silent = true, desc = "Null-Ls Info" })
 map({ "n", "v" }, "<Leader>ll",
     function()
         local new_value = not vim.diagnostic.config().virtual_lines
@@ -146,8 +147,10 @@ map({ "n", "v" }, "<Leader>ll",
     { desc = "Toggle lsp_lines" })
 
 -- Packer --
-map("n", "<leader>pc", function() vim.cmd("PackerCompile") end, { desc = "Packer Compile" })
-map("n", "<leader>pi", function() vim.cmd("PackerInstall") end, { desc = "Packer Install" })
-map("n", "<leader>pp", function() vim.cmd("PackerSync") end, { desc = "Packer Sync" })
-map("n", "<leader>ps", function() vim.cmd("PackerStatus") end, { desc = "Packer Status" })
-map("n", "<leader>pu", function() vim.cmd("PackerUpdate") end, { desc = "Packer Update" })
+map("n", "<leader>pc", function() require("packer").compile() end, { desc = "Packer Compile" })
+map("n", "<leader>pi", function() require("packer").install(vim.ui.input()) end, { desc = "Packer Install" })
+map("n", "<leader>pp", function() require("packer").sync() end, { desc = "Packer Sync" })
+map("n", "<leader>ps", function() require("packer").status() end, { desc = "Packer Status" })
+map("n", "<leader>pu", function() require("packer").update({ preview_updates = true }) end,
+    { desc = "Packer Update Preview" })
+map("n", "<leader>pU", function() require("packer").update() end, { desc = "Packer Update" })
