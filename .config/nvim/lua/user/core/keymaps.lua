@@ -149,7 +149,8 @@ map({ "n", "v" }, "<Leader>ll",
 -- Packer --
 map("n", "<leader>pc", function() require("packer").compile() end, { desc = "Packer Compile" })
 map("n", "<leader>pi", function() require("packer").install(vim.ui.input()) end, { desc = "Packer Install" })
-map("n", "<leader>pp", function() require("packer").sync() end, { desc = "Packer Sync" })
+map("n", "<leader>pp", function() require("packer").sync({preview_updates = true}) end, { desc = "Packer Sync Preview" })
+map("n", "<leader>pP", function() require("packer").sync() end, { desc = "Packer Sync" })
 map("n", "<leader>ps", function() require("packer").status() end, { desc = "Packer Status" })
 map("n", "<leader>pu", function() require("packer").update({ preview_updates = true }) end,
     { desc = "Packer Update Preview" })

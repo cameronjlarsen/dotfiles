@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         vim.notify_once("Compile Done", vim.log.levels.INFO)
     end,
+    group = group,
 })
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -103,8 +104,7 @@ return packer.startup(function(use)
 
     -- Github Copilot
     use({ "zbirenbaum/copilot.lua",
-        disable = true,
-        event = "VimEnter",
+        opt = true,
         config = function()
             ---@diagnostic disable-next-line: param-type-mismatch
             vim.defer_fn(function()
