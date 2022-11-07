@@ -76,7 +76,7 @@ local function lsp_keymaps(bufnr)
         return
     end
 
-    local map = require("user.core.utils").map
+    local map = require("user.utils").map
 
     -- Movement
     map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
@@ -89,7 +89,7 @@ local function lsp_keymaps(bufnr)
     map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
     map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
     map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
-    map("n", "<leader>lR", vim.lsp.codelens.run, { desc = "CodeLens Action" })
+    map("n", "<leader>ll", vim.lsp.codelens.run, { desc = "CodeLens Action" })
 
     -- Diagnostics --
     map("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostic" })

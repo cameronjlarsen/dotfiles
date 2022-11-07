@@ -85,7 +85,6 @@ which_key.register({
         },
         p = { name = "+Packer" },
         s = { name = "+Search", },
-        t = { name = "+Toggle" },
         w = { name = "+Window" },
     },
 }, { mode = "n" })

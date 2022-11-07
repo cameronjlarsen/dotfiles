@@ -1,4 +1,4 @@
-local map = require("user.core.utils").map
+local map = require("user.utils").map
 
 --Remap space as leader key
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -49,7 +49,7 @@ map("n", "<leader>bd", function() vim.cmd("Bdelete") end, { desc = "Delete Buffe
 -- zv = open enough folds to display the cursor position
 map("n", "n", "nzzzv", { desc = "Next search result" })
 map("n", "N", "Nzzzv", { desc = "Prev search result" })
-map("n", "<leader>th", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
+map("n", "<leader>sH", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
 
 -- Insert --
 -- Press jk fast to enter
@@ -136,20 +136,14 @@ map({ "n", "v" }, "<F8>", function() require("knap").forward_jump() end, { desc 
 map("n", "<leader>li", function() vim.cmd("LspInfo") end, { silent = true, desc = "LSP Info" })
 map("n", "<leader>lm", function() vim.cmd("Mason") end, { silent = true, desc = "Mason Info" })
 map("n", "<leader>ln", function() vim.cmd("NullLsInfo") end, { silent = true, desc = "Null-Ls Info" })
-map({ "n", "v" }, "<Leader>ll",
-    function()
-        local new_value = not vim.diagnostic.config().virtual_lines
-        vim.diagnostic.config({
-            virtual_text = not new_value,
-            virtual_lines = new_value,
-        })
-    end,
-    { desc = "Toggle lsp_lines" })
+map({ "n", "v" }, "<Leader>lv", function() require("user.utils").toggle_virtual_text() end, { desc = "Virtual Text" })
+map({ "n", "v" }, "<Leader>lt", function() require("user.utils").toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
 
 -- Packer --
 map("n", "<leader>pc", function() require("packer").compile() end, { desc = "Packer Compile" })
 map("n", "<leader>pi", function() require("packer").install(vim.ui.input()) end, { desc = "Packer Install" })
-map("n", "<leader>pp", function() require("packer").sync({preview_updates = true}) end, { desc = "Packer Sync Preview" })
+map("n", "<leader>pp", function() require("packer").sync({ preview_updates = true }) end,
+    { desc = "Packer Sync Preview" })
 map("n", "<leader>pP", function() require("packer").sync() end, { desc = "Packer Sync" })
 map("n", "<leader>ps", function() require("packer").status() end, { desc = "Packer Status" })
 map("n", "<leader>pu", function() require("packer").update({ preview_updates = true }) end,

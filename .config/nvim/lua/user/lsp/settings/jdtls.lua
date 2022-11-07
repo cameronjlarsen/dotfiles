@@ -36,11 +36,12 @@ local function java_keymaps()
     end
 
     map("n", "<leader>jo", function() jdtls.organize_imports() end, { desc = "Organize Imports" })
-    map({ "n", "v" }, "<leader>je", function() jdtls.extract_variable() end, { desc = "Extract Variable" })
-    map({ "n", "v" }, "<leader>jc", function() jdtls.extract_variable() end, { desc = "Extract Constant" })
+    map({ "n", "v" }, "<leader>jv", function() jdtls.extract_variable() end, { desc = "Extract Variable" })
+    map({ "n", "v" }, "<leader>jc", function() jdtls.extract_constant() end, { desc = "Extract Constant" })
     map("v", "<leader>jm", function() jdtls.extract_method() end, { desc = "Extract Method" })
-    map("n", "<leader>jt", function() jdtls.test_class() end, { desc = "Test Java Class" })
-    map("n", "<leader>jn", function() jdtls.test_nearest_method() end, { desc = "Test Nearest Java Method" })
+    map("n", "<leader>jt", function() jdtls.test_nearest_method() end, { desc = "Test Method" })
+    map("n", "<leader>jT", function() jdtls.test_class() end, { desc = "Test Class" })
+    map("n", "<leader>ju", function() jdtls.update_project_config() end, { desc = "Update Config" })
 
     local status_ok, wk = pcall(require, "which-key")
     if not status_ok then

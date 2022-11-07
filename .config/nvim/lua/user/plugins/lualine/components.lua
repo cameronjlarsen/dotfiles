@@ -39,7 +39,7 @@ return {
     filetype = {
         "filetype",
         icon_only = true,
-        colored = false,
+        colored = true,
         padding = 0,
         separator = { right = sep_r }
     },

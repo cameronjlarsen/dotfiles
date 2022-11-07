@@ -1,5 +1,4 @@
 local M = {
-
     lspkind = {
         Text = "",
         Method = "m",
