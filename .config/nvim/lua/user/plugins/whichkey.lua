@@ -58,7 +58,8 @@ which_key.setup({
     },
     ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true, -- show help message on the command line when the popup is visible
+    show_help = false, -- show help message on the command line when the popup is visible
+    show_keys = false,
     triggers = "auto", -- automatically setup triggers
     -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
@@ -74,7 +75,7 @@ which_key.register({
     ["<leader>"] = {
         b = { name = "+Buffer" },
         d = { name = "+Debug", },
-        f = { name = "+Files", },
+        f = { name = "+Find", },
         g = { name = "+Git",
             h = { name = "+hunk" },
             t = { name = "+toggle" }
@@ -84,7 +85,8 @@ which_key.register({
             w = "+Workspace"
         },
         p = { name = "+Packer" },
-        s = { name = "+Search", },
+        s = { name = "+Silicon" },
+        t = { name = "+toggle" },
         w = { name = "+Window" },
     },
 }, { mode = "n" })
@@ -97,5 +99,6 @@ which_key.register({
         },
         l = { name = "+LSP",
         },
+        S = { name = "+Silicon" },
     },
 }, { mode = "v" })

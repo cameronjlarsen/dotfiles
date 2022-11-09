@@ -114,12 +114,22 @@ local function lsp_keymaps(bufnr)
     -- Docs
     map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
     map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
+    map("n", "<leader>ls", function() tb.lsp_document_symbols({
+            symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
+                "Variable" },
+        })
+    end, { desc = "Document Symbols" })
 
     -- Workspaces
     map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
     map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
     map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
         { desc = "List workspace folders" })
+    map("n", "<leader>lws", function() tb.lsp_dynamic_workspace_symbols({
+            symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
+                "Variable" },
+        })
+    end, { desc = "Workspace Symbols" })
 end
 
 M.on_attach = function(client, bufnr)

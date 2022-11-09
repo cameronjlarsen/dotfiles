@@ -1,5 +1,6 @@
 ---@diagnostic disable: assign-type-mismatch
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 local usercmd = vim.api.nvim_create_user_command
 
 autocmd({ "FileType" }, {
@@ -49,3 +50,15 @@ autocmd("FileType", {
         vim.api.nvim_buf_set_option(args.buf, "buflisted", false)
     end,
 })
+
+augroup('SiliconRefresh', { clear = true })
+autocmd({ 'ColorScheme' },
+    {
+        group = 'SiliconRefresh',
+        callback = function()
+            require("silicon.utils").build_tmTheme()
+            require("silicon.utils").reload_silicon_cache({ async = true })
+        end,
+        desc = 'Reload silicon themes cache on colorscheme switch',
+    }
+)

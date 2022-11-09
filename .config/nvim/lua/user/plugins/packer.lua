@@ -58,15 +58,49 @@ return packer.startup(function(use)
 
     use("wbthomason/packer.nvim") -- Have packer manage itself
     use("lewis6991/impatient.nvim") -- Load plugins faster
-
-    -- Autopairs --
-    use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and Treesitter
-
-    -- Buffers --
     use("akinsho/bufferline.nvim") -- Buffers as tabs
     use("moll/vim-bbye") -- Close buffers without closing windows
+    use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
+    use("numToStr/Comment.nvim") -- Easily comment stuff
+    use("JoosepAlviste/nvim-ts-context-commentstring")
+    use("stevearc/dressing.nvim") -- Improves vim ui input
+    use("rcarriga/nvim-notify") -- Fancy notifications
+    use("nvim-lualine/lualine.nvim") -- Statusline
+    use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and Treesitter
+    use("folke/which-key.nvim") -- Show keymaps
+    use("folke/neodev.nvim") -- Neovim api completions
+    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+    use("kdheepak/lazygit.nvim") -- Lazygit nvim integration
+    use("mfussenegger/nvim-jdtls")
+    use("frabjous/knap") -- allows livepreviewing of markdown and latex files
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+    use("kylechui/nvim-surround") -- Surround text objects with characters
+    use("ahmedkhalf/project.nvim") -- Project management
+    use("akinsho/toggleterm.nvim") -- Terminal
+    use("fladson/vim-kitty") -- Enables syntax highlighting in kitty.conf
+    use("lukas-reineke/indent-blankline.nvim") -- Indentation lines
+    use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
+    use("b0o/SchemaStore.nvim") -- JSON schemas
+    use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Show lsp errors inline
+    use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
+    use("j-hui/fidget.nvim") -- Show LSP progress
 
-    -- Colorschemes & Color --
+    use({
+        "narutoxy/silicon.lua",
+        requires = { "nvim-lua/plenary.nvim" },
+    }) -- Screenshots with silicon
+    use({
+        "goolord/alpha-nvim",
+        requires = { "kyazdani42/nvim-web-devicons" }
+    }) -- Dashboard
+    use({
+        "kyazdani42/nvim-tree.lua",
+        requires = { "kyazdani42/nvim-web-devicons" }
+    })
+    use({
+        "lewis6991/gitsigns.nvim",
+        requires = { "nvim-lua/plenary.nvim" }
+    })
     use({
         "catppuccin/nvim",
         as = "catppuccin",
@@ -74,15 +108,16 @@ return packer.startup(function(use)
             require("catppuccin").compile()
         end,
     }) -- Catpuccin color scheme
-    use("norcalli/nvim-colorizer.lua") -- Colororizes color codes
+    use({
+        "folke/noice.nvim",
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    }) -- Improved cmdline, messages, popupmenu UI
 
-    -- Comments --
-    use("numToStr/Comment.nvim") -- Easily comment stuff
-    use("JoosepAlviste/nvim-ts-context-commentstring")
-
-    -- Completion & Snippets plugins --
-    -- Cmp
-    use({ "hrsh7th/nvim-cmp",
+    use({
+        "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -95,15 +130,12 @@ return packer.startup(function(use)
             "lukas-reineke/cmp-rg"
         }
     })
-    use("folke/neodev.nvim")
-    -- Snippets
-    use({ "L3MON4D3/LuaSnip", --snippet engine
+    use({
+        "L3MON4D3/LuaSnip", --snippet engine
         requires = { "saadparwaiz1/cmp_luasnip" }
     })
-    use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
-    -- Github Copilot
-    use({ "zbirenbaum/copilot.lua",
+    use({
+        "zbirenbaum/copilot.lua",
         opt = true,
         config = function()
             ---@diagnostic disable-next-line: param-type-mismatch
@@ -112,16 +144,13 @@ return packer.startup(function(use)
                 ---@diagnostic disable-next-line: param-type-mismatch
             end, 100)
         end,
-    }, { "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
-        config = function()
-            require("copilot_cmp").setup()
-        end
-    })
-
-    -- Dashboard --
-    use({ "goolord/alpha-nvim",
-        requires = { "kyazdani42/nvim-web-devicons" }
+        {
+            "zbirenbaum/copilot-cmp",
+            after = { "copilot.lua" },
+            config = function()
+                require("copilot_cmp").setup()
+            end
+        },
     })
 
     -- Debugging --
@@ -130,38 +159,17 @@ return packer.startup(function(use)
         "mfussenegger/nvim-dap-python",
         "leoluz/nvim-dap-go"
     })
-    use({ "rcarriga/nvim-dap-ui",
+    use({
+        "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" }
     })
-    use({ "theHamsta/nvim-dap-virtual-text",
+    use({
+        "theHamsta/nvim-dap-virtual-text",
         requires = {
             "mfussenegger/nvim-dap",
             "nvim-treesitter/nvim-treesitter"
         }
     })
-    use("Pocco81/DAPInstall.nvim")
-
-    -- File Explorer --
-    use({ "kyazdani42/nvim-tree.lua",
-        requires = { "kyazdani42/nvim-web-devicons" }
-    })
-
-    -- Git --
-    use({ "lewis6991/gitsigns.nvim",
-        requires = { "nvim-lua/plenary.nvim" }
-    })
-    use("kdheepak/lazygit.nvim")
-
-    -- Java --
-    use("mfussenegger/nvim-jdtls")
-
-    -- Keymaps --
-    use("folke/which-key.nvim")
-
-    -- Latex & Markdown Previews --
-    use("frabjous/knap") -- allows livepreviewing of markdown and latex files
-    use("ellisonleao/glow.nvim") -- preview markdown files in nvim
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
 
     -- LSP --
     use {
@@ -174,26 +182,9 @@ return packer.startup(function(use)
         "jayp0521/mason-null-ls.nvim",
     }
 
-    use("tamago324/nlsp-settings.nvim") --language server settings defined in json for
-    use("b0o/SchemaStore.nvim") -- JSON schemas
-    use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Show lsp errors inline
-    use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
-    use("j-hui/fidget.nvim") -- Show LSP progress
-
-    -- Motions --
-    use("kylechui/nvim-surround")
-
-    -- Notifications --
-    use("rcarriga/nvim-notify") -- Fancy notifications
-
-    -- Projects --
-    use("ahmedkhalf/project.nvim") -- Project management
-
-    -- Statusline --
-    use("nvim-lualine/lualine.nvim") -- Statusline
-
     -- Telescope --
-    use({ "nvim-telescope/telescope.nvim",
+    use({
+        "nvim-telescope/telescope.nvim",
         requires = {
             "nvim-lua/popup.nvim", -- An implementation of the Popup API from vim in Neovim
             "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
@@ -202,47 +193,26 @@ return packer.startup(function(use)
         { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-ui-select.nvim" },
     })
-
-    -- Terminal --
-    use("akinsho/toggleterm.nvim") -- Terminal
-
     -- Treesitter & Highlighting --
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
+        { "p00f/nvim-ts-rainbow",
+            requires = { "nvim-treesitter/nvim-treesitter" },
+            after = { "nvim-treesitter" }
+        },
+        { "nvim-treesitter/playground",
+            requires = { "nvim-treesitter/nvim-treesitter" },
+            after = { "nvim-treesitter" }
+        }
     })
-    use({ "p00f/nvim-ts-rainbow",
-        requires = { "nvim-treesitter/nvim-treesitter" },
-        after = { "nvim-treesitter" }
-    })
-    use({ "nvim-treesitter/playground",
-        requires = { "nvim-treesitter/nvim-treesitter" },
-        after = { "nvim-treesitter" }
-    })
-    -- Syntax highlighting
-    use("fladson/vim-kitty") -- Enables syntax highlighting in kitty.conf
-    use("lukas-reineke/indent-blankline.nvim") -- Indentation lines
 
-    -- Pet duck --
     use({
         "tamton-aquib/duck.nvim",
         config = function()
-            vim.keymap.set("n", "<leader>Dd", function() require("duck").hatch() end, { desc = "Hatch a duck" })
-            vim.keymap.set("n", "<leader>Dk", function() require("duck").cook() end, { desc = "Cook a duck" })
-
-            local wk_status_ok, wk = pcall(require, "which-key")
-            if not wk_status_ok then
-                return
-            end
-
-            wk.register({
-                D = { name = "+Duck", },
-            }, { prefix = "<leader>" })
+            require("user.plugins.duck").setup()
         end
-    })
-
-    -- UI --
-    use({ "stevearc/dressing.nvim" })
+    }) -- Show a pet duck on the screen
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
