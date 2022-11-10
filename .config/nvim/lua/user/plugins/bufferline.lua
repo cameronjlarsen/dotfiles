@@ -11,8 +11,8 @@ bufferline.setup {
         left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
         middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
         indicator = {
-            icon = "▎",
-            style = "icon",
+            icon = "▌",
+            style = "icon"
         },
         buffer_close_icon = "",
         modified_icon = "●",
@@ -24,20 +24,28 @@ bufferline.setup {
         tab_size = 21,
         diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
         diagnostics_update_in_insert = false,
-        ---@diagnostic disable-next-line: unused-local
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        diagnostics_indicator = function(count, level, _, context)
+            if context.buffer:current() then
+                return ""
+            end
             local icon = level:match("error") and " " or " "
             return " " .. icon .. count
         end,
         offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
         show_buffer_icons = true,
         show_buffer_close_icons = true,
-        show_close_icon = true,
+        show_close_icon = false,
         show_tab_indicators = true,
         persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-        separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+        separator_style = "thick", -- "slant" | "thick" | "thin" | { 'any', 'any' },
         enforce_regular_tabs = true,
         always_show_bufferline = true,
+        hover = {
+            enabled = true,
+            delay = 200,
+            reveal = { 'close' }
+        },
     },
+    ---@diagnostic disable-next-line: assign-type-mismatch
     highlights = require("catppuccin.groups.integrations.bufferline").get()
 }

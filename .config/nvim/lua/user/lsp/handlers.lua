@@ -20,7 +20,7 @@ M.setup = function()
         signs = {
             active = signs,
         },
-        update_in_insert = true,
+        update_in_insert = false,
         underline = true,
         severity_sort = true,
         float = {
@@ -70,13 +70,13 @@ end
 local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+    local map = require("user.utils").map
     local tb_status_ok, tb = pcall(require, "telescope.builtin")
     if not tb_status_ok then
         vim.notify("Telescope lsp not loaded")
         return
     end
 
-    local map = require("user.utils").map
 
     -- Movement
     map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
