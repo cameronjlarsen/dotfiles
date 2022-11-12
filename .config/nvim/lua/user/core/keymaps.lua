@@ -88,6 +88,7 @@ map("n", "<leader>fc", function() require("telescope.builtin").colorscheme() end
 map("n", "<leader>ff", function() require("telescope.builtin").find_files() end, { desc = "Find Files" })
 map("n", "<leader>fg", function() require("telescope.builtin").git_files() end, { desc = "Find Git Files" })
 map("n", "<leader>fh", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
+map("n", "<leader>fs", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
 map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
 map("n", "<leader>ft", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
 map("n", "<leader>fw", function() require("telescope.builtin").grep_string() end, { desc = "Grep String" })
@@ -95,6 +96,8 @@ map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fu
     { desc = "Current Buffer" })
 map("n", "<leader>fn", function() require("telescope").extensions.notify.notify() end, { desc = "Notifications" })
 map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
+map("n", "<leader>fe", function() require("telescope").extensions.file_browser.file_browser() end,
+    { desc = "File Browser" })
 map("n", "<leader>fm", function() require("telescope").extensions.media_files.media_files() end,
     { desc = "Find Media Files" })
 

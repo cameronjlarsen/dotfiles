@@ -51,6 +51,22 @@ autocmd("FileType", {
     end,
 })
 
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+local packer_group = augroup("PackerUserConfig", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+    command = "source <afile> | PackerSync",
+    pattern = "packer.lua",
+    group = packer_group,
+})
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerCompileDone",
+    callback = function()
+        vim.notify_once("Compile Done", vim.log.levels.INFO)
+    end,
+    group = packer_group,
+})
+
 augroup('SiliconRefresh', { clear = true })
 autocmd({ 'ColorScheme' },
     {

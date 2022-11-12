@@ -3,6 +3,7 @@ if status_ok then
     impatient.enable_profile()
 end
 
+require("user.packer")
 require("user.core")
 require("user.plugins")
 require("user.lsp")
