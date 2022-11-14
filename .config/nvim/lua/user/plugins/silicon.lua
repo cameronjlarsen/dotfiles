@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 silicon.setup({
-    theme = "auto",
+    theme = "Catppuccin-mocha",
     output = vim.fn.expand("$HOME") .. "/Pictures/Screenshots/SILICON_${year}-${month}-${date}-${time}.png",
     bgColor = vim.g.terminal_color_5,
     bgImage = "", -- path to image, must be png

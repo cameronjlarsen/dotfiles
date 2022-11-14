@@ -5,7 +5,7 @@ end
 
 catppuccin.setup({
     flavour = "mocha",
-    transparent_background = true,
+    transparent_background = false,
     integrations = {
         aerial = false,
         barbar = false,
@@ -41,7 +41,7 @@ catppuccin.setup({
         telescope = true,
         treesitter = true,
         treesitter_context = true,
-        ts_rainbow = false,
+        ts_rainbow = true,
         vim_sneak = false,
         vimwiki = false,
         which_key = true,

@@ -75,7 +75,7 @@ which_key.register({
     ["<leader>"] = {
         b = { name = "+Buffer" },
         d = { name = "+Debug", },
-        f = { name = "+Find", },
+        f = { name = "+Files", },
         g = { name = "+Git",
             h = { name = "+hunk" },
             t = { name = "+toggle" }
@@ -85,7 +85,8 @@ which_key.register({
             w = "+Workspace"
         },
         p = { name = "+Packer" },
-        s = { name = "+Silicon" },
+        s = { name = "+Search" },
+        S = { name = "+Silicon" },
         t = { name = "+toggle" },
         w = { name = "+Window" },
     },

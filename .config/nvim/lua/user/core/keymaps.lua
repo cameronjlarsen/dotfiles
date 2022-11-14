@@ -80,37 +80,35 @@ map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Focus terminal down" })
 map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
 
--- File explorer --
-map("n", "<leader>e", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
-
--- Find --
-map("n", "<leader>fc", function() require("telescope.builtin").colorscheme() end, { desc = "Colorschemes" })
-map("n", "<leader>ff", function() require("telescope.builtin").find_files() end, { desc = "Find Files" })
-map("n", "<leader>fg", function() require("telescope.builtin").git_files() end, { desc = "Find Git Files" })
-map("n", "<leader>fh", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
-map("n", "<leader>fs", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
+-- Files --
+map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
+map("n", "<leader>ff", function() require("user.utils").telescope_find_files() end, { desc = "Find Files" })
 map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
-map("n", "<leader>ft", function() require("telescope.builtin").live_grep() end, { desc = "Grep" })
-map("n", "<leader>fw", function() require("telescope.builtin").grep_string() end, { desc = "Grep String" })
 map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,
     { desc = "Current Buffer" })
-map("n", "<leader>fn", function() require("telescope").extensions.notify.notify() end, { desc = "Notifications" })
 map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
-map("n", "<leader>fe", function() require("telescope").extensions.file_browser.file_browser() end,
+map("n", "<leader>fb", function() require("telescope").extensions.file_browser.file_browser() end,
     { desc = "File Browser" })
 map("n", "<leader>fm", function() require("telescope").extensions.media_files.media_files() end,
     { desc = "Find Media Files" })
 
+-- Search --
+map("n", "<leader>s?", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
+map("n", "<leader>s:", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
+map("n", "<leader>st", function() require("telescope.builtin").live_grep() end, { desc = "Live Grep" })
+map("n", "<leader>sw", function() require("telescope.builtin").grep_string() end, { desc = "Word Under Cursor" })
+map("n", "<leader>so", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
+map("n", "<leader>ss", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
+map("n", "<leader>sa", function() require("telescope.builtin").autocommands() end, { desc = "Auto Commands" })
+map("n", "<leader>sc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
+map("n", "<leader>sl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
+map("n", "<leader>sk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>sr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
+
 -- Help --
-map("n", "<leader>ha", function() require("telescope.builtin").autocommands() end, { desc = "Auto Commands" })
-map("n", "<leader>hc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
 map("n", "<leader>hh", function() require("telescope.builtin").help_tags() end, { desc = "Help Pages" })
-map("n", "<leader>hk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
-map("n", "<leader>hl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
 map("n", "<leader>hm", function() require("telescope.builtin").man_pages() end, { desc = "Man Pages" })
-map("n", "<leader>ho", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
-map("n", "<leader>hr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
-map("n", "<leader>hs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
+map("n", "<leader>hn", function() require("telescope").extensions.notify.notify() end, { desc = "Notifications" })
 map("n", "<leader>ht", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
 
 -- Git --
@@ -145,8 +143,8 @@ map("n", "<leader>pu", function() require("packer").update({ preview_updates = t
 map("n", "<leader>pU", function() require("packer").update() end, { desc = "Packer Update" })
 
 -- Silicon --
-map({ "n", "v" }, "<leader>sl", function() require("silicon").visualise_api({}) end, { desc = "Screenshot Line(s)" })
-map({ "n", "v" }, "<leader>sb", function() require("silicon").visualise_api({ show_buf = true }) end,
+map({ "n", "v" }, "<leader>Sl", function() require("silicon").visualise_api({}) end, { desc = "Screenshot Line(s)" })
+map({ "n", "v" }, "<leader>Sb", function() require("silicon").visualise_api({ show_buf = true }) end,
     { desc = "Screenshot Line(s) with Buffer" })
-map({ "n", "v" }, "<leader>sy", function() require("silicon").visualise_api({ to_clip = true }) end,
+map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ to_clip = true }) end,
     { desc = "Screenshot Line(s) to Clipboard" })

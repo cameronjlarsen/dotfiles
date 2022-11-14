@@ -1,10 +1,9 @@
 local name = "catppuccin"
 
-pcall(require, "user.core.colorscheme." .. name)
-
----@diagnostic disable-next-line: param-type-mismatch
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. name)
+local status_ok, _ = pcall(require, "user.core.colorscheme." .. name)
 if not status_ok then
-    vim.notify("colorscheme " .. name .. " not found!")
+    vim.notify("whoops! colorscheme " .. name .. " not found!")
     return
+else
+    vim.cmd.colorscheme("catppuccin")
 end
