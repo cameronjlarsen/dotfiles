@@ -36,6 +36,7 @@ mason_null_ls.setup_handlers({
 })
 -- null_ls.setup()
 null_ls.setup({
+    on_attach = require("user.lsp.handlers").on_attach,
     sources = {
         b.code_actions.gitsigns,
         b.formatting.google_java_format,

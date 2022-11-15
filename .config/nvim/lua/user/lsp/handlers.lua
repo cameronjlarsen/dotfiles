@@ -67,9 +67,9 @@ local function lsp_highlight_document(client, bufnr)
     end
 end
 
-local function lsp_keymaps(bufnr)
+local function lsp_keymaps(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
+    local sc = client.server_capabilities
     local map = require("user.utils").map
     local tb_status_ok, tb = pcall(require, "telescope.builtin")
     if not tb_status_ok then
@@ -79,17 +79,38 @@ local function lsp_keymaps(bufnr)
 
 
     -- Movement
-    map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
-    map("n", "gd", tb.lsp_definitions, { desc = "Goto definition" })
-    map("n", "gi", tb.lsp_implementations, { desc = "Goto implementation" })
-    map("n", "gt", tb.lsp_type_definitions, { desc = "Goto type definition" })
-    map("n", "gr", tb.lsp_references, { desc = "Goto references" })
+    if sc.declarationProvider then
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
+    end
+    if sc.definitionProvider then
+        map("n", "gd", tb.lsp_definitions, { desc = "Goto definition" })
+    end
+    if sc.implementationProvider then
+        map("n", "gi", tb.lsp_implementations, { desc = "Goto implementation" })
+    end
+    if sc.typeDefinitionProvider then
+        map("n", "gt", tb.lsp_type_definitions, { desc = "Goto type definition" })
+    end
+    if sc.referencesProvider then
+        map("n", "gr", tb.lsp_references, { desc = "Goto references" })
+    end
 
     -- Code actions
-    map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
-    map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
-    map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
-    map("n", "<leader>ll", vim.lsp.codelens.run, { desc = "CodeLens Action" })
+    if sc.documentFormattingProvider then
+        map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
+    end
+    if sc.documentRangeFormattingProvider then
+        map("v", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format Document" })
+    end
+    if sc.renameProvider then
+        map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
+    end
+    if sc.codeActionProvider then
+        map({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
+    end
+    if sc.codeLensProvider then
+        map("n", "<leader>ll", vim.lsp.codelens.run, { desc = "CodeLens Action" })
+    end
 
     -- Diagnostics --
     map("n", "gl", vim.diagnostic.open_float, { desc = "Show Line Diagnostic" })
@@ -112,28 +133,36 @@ local function lsp_keymaps(bufnr)
     map("n", "<leader>lwd", tb.diagnostics, { desc = "Workspace Diagnostics" })
 
     -- Docs
-    map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
-    map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
-    map("n", "<leader>ls", function() tb.lsp_document_symbols({
-            symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
-                "Variable" },
-        })
-    end, { desc = "Document Symbols" })
+    if sc.hoverProvider then
+        map("n", "K", vim.lsp.buf.hover, { desc = "LSP hover information" })
+    end
+    if sc.signatureHelpProvider then
+        map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
+    end
+    if sc.documentSymbolProvider then
+        map("n", "<leader>ls", function() tb.lsp_document_symbols({
+                symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
+                    "Variable" },
+            })
+        end, { desc = "Document Symbols" })
+    end
 
     -- Workspaces
     map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
     map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
     map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
         { desc = "List workspace folders" })
-    map("n", "<leader>lws", function() tb.lsp_dynamic_workspace_symbols({
-            symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
-                "Variable" },
-        })
-    end, { desc = "Workspace Symbols" })
+    if sc.workspaceSymbolProvider then
+        map("n", "<leader>lws", function() tb.lsp_dynamic_workspace_symbols({
+                symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
+                    "Variable" },
+            })
+        end, { desc = "Workspace Symbols" })
+    end
 end
 
 M.on_attach = function(client, bufnr)
-    lsp_keymaps(bufnr)
+    lsp_keymaps(client, bufnr)
     lsp_highlight_document(client, bufnr)
 end
 
