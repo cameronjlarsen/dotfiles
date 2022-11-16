@@ -21,6 +21,7 @@ require("user.plugins.dap.cpp")
 require("user.plugins.dap.cs")
 require("user.plugins.dap.python")
 require("user.plugins.dap.go")
+require("user.plugins.dap.bash")
 require("user.plugins.dap.ui")
 dapvt.setup()
 

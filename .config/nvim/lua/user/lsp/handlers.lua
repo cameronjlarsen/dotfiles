@@ -148,10 +148,12 @@ local function lsp_keymaps(client, bufnr)
     end
 
     -- Workspaces
-    map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
-    map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
-    map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-        { desc = "List workspace folders" })
+    if sc.workspace then
+        map("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "Add folder to workspace" })
+        map("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove folder from workspace" })
+        map("n", "<leader>lwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+            { desc = "List workspace folders" })
+    end
     if sc.workspaceSymbolProvider then
         map("n", "<leader>lws", function() tb.lsp_dynamic_workspace_symbols({
                 symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
@@ -166,13 +168,13 @@ M.on_attach = function(client, bufnr)
     lsp_highlight_document(client, bufnr)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
     return
 end
 
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 return M
