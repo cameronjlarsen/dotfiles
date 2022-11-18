@@ -3,7 +3,7 @@ if not status_ok then
     return
 end
 
-local components = require("user.plugins.lualine.components")
+local components = require("plugins.lualine.components")
 
 lualine.setup({
     options = {

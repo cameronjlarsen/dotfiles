@@ -81,13 +81,13 @@ local config = {
         workspace_dir,
     },
     on_attach = function(client, bufnr)
-        require("user.lsp.handlers").on_attach(client, bufnr)
+        require("lsp.providers.defaults").on_attach(client, bufnr)
         require("jdtls.dap").setup_dap_main_class_configs()
         jdtls.setup_dap()
         jdtls.setup.add_commands()
         java_keymaps()
     end,
-    capabilities = require("user.lsp.handlers").capabilities,
+    capabilities = require("lsp.providers.defaults").capabilities,
     settings = {
         java = {
             eclipse = {

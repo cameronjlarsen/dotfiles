@@ -17,15 +17,15 @@ end
 dap.defaults.fallback.exception_breakpoints = { "raised" }
 
 -- Configure language adapters
-require("user.plugins.dap.cpp")
-require("user.plugins.dap.cs")
-require("user.plugins.dap.python")
-require("user.plugins.dap.go")
-require("user.plugins.dap.bash")
-require("user.plugins.dap.ui")
+require("plugins.dap.cpp")
+require("plugins.dap.cs")
+require("plugins.dap.python")
+require("plugins.dap.go")
+require("plugins.dap.bash")
+require("plugins.dap.ui")
 dapvt.setup()
 
-local map = require("user.utils").map
+local map = require("core.utils").map
 
 map("n", "<F5>", function() dap.continue() end, { desc = "Continue" })
 map("n", "<F9>", function() dap.step_back() end, { desc = "Step Back" })
@@ -49,3 +49,19 @@ map("n", "<leader>dp", function() dap.set_breakpoint(nil, nil, vim.fn.input("Log
 map("n", "<leader>du", function() dapui.toggle({ reset = true }) end, { desc = "UI" })
 map("n", "<leader>df", function() dapui.float_element() end, { desc = "Floating Element" })
 map({ "n", "v" }, "<leader>de", function() dapui.eval() end, { desc = "Eval Expression" })
+
+local wk_status_ok, which_key = pcall(require, "which-key")
+if not wk_status_ok then
+    return
+end
+
+which_key.register({
+    ["<leader>"] = {
+        d = { name = "+Debug", },
+    }
+}, { mode = "n" })
+which_key.register({
+    ["<leader>"] = {
+        d = { name = "+Debug", },
+    },
+}, { mode = "v" })

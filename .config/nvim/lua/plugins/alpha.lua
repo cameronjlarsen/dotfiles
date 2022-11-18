@@ -9,6 +9,7 @@ local dashboard = require("alpha.themes.dashboard")
 local function info()
     local datetime = os.date("  %m-%d-%Y    %I:%M %p")
     local version = vim.version()
+    ---@diagnostic disable-next-line: need-check-nil
     local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
     return datetime .. nvim_version_info
 end
@@ -27,7 +28,7 @@ local heading = {
     val = info(),
     opts = {
         position = "center",
-        hl = "String",
+        hl = "DashboardCenter",
     },
 }
 
@@ -43,6 +44,7 @@ local buttons = {
 
 local function footer()
     -- Get number of plugins loaded by packer
+    ---@diagnostic disable-next-line: param-type-mismatch
     local plugins_count = vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1))
     return "Neovim loaded " .. plugins_count .. " plugins "
 end
@@ -50,9 +52,9 @@ end
 dashboard.section.header.val = logo
 dashboard.section.buttons.val = buttons
 dashboard.section.footer.val = footer()
-dashboard.section.header.opts.hl = "Type"
-dashboard.section.buttons.opts.hl = "Keyword"
-dashboard.section.footer.opts.hl = "Type"
+dashboard.section.header.opts.hl = "DashboardHeader"
+dashboard.section.buttons.opts.hl = "DashboardShortcut"
+dashboard.section.footer.opts.hl = "DashboardFooter"
 
 local opts = {
     layout = {

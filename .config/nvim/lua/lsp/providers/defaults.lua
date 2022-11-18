@@ -1,49 +1,5 @@
 local M = {}
 
-M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
-
-    local config = {
-        -- disable virtual text
-        virtual_text = false,
-        virtual_lines = true,
-        -- show signs
-        signs = {
-            active = signs,
-        },
-        update_in_insert = false,
-        underline = true,
-        severity_sort = true,
-        float = {
-            focusable = false,
-            style     = "minimal",
-            border    = "rounded",
-            source    = "always",
-            header    = "",
-            prefix    = "",
-        },
-    }
-
-    vim.diagnostic.config(config)
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-    })
-end
-
 local function lsp_highlight_document(client, bufnr)
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
@@ -70,7 +26,7 @@ end
 local function lsp_keymaps(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     local sc = client.server_capabilities
-    local map = require("user.utils").map
+    local map = require("core.utils").map
     local tb_status_ok, tb = pcall(require, "telescope.builtin")
     if not tb_status_ok then
         vim.notify("Telescope lsp not loaded")
@@ -161,6 +117,19 @@ local function lsp_keymaps(client, bufnr)
             })
         end, { desc = "Workspace Symbols" })
     end
+
+    local wk_status_ok, which_key = pcall(require, "which-key")
+    if not wk_status_ok then
+        return
+    end
+
+    which_key.register({
+        ["<leader>"] = {
+            l = { name = "+LSP",
+                w = "+Workspace"
+            },
+        }
+    }, { mode = "n" })
 end
 
 M.on_attach = function(client, bufnr)

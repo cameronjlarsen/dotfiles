@@ -24,7 +24,7 @@ if not status_ok then
     return
 end
 
-local icons = require("user.icons")
+local icons = require("core.icons")
 -- Have packer use a popup window
 packer.init({
     display = {
@@ -59,10 +59,12 @@ return packer.startup(function(use)
     use("windwp/nvim-autopairs") -- A super powerful autopair plugin for Neovim that supports multiple characters.
     use("nvim-tree/nvim-tree.lua") -- A file explorer tree for neovim written in lua.
     use("kylechui/nvim-surround") -- Add/change/delete surrounding delimiter pairs with ease.
+    use("gpanders/editorconfig.nvim") -- EditorConfig plugin for Neovim
 
     -- Git --
     use("kdheepak/lazygit.nvim") -- Plugin for calling lazygit from within neovim.
     use("lewis6991/gitsigns.nvim") -- Git integration for buffers.
+    use("sindrets/diffview.nvim") -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
 
 
     -- Colorschemes --
@@ -93,7 +95,7 @@ return packer.startup(function(use)
         "zbirenbaum/copilot.lua",
         opt = true,
         config = function()
-            require("user.plugins.copilot")
+            require("plugins.copilot")
         end
     })
     use({ -- Lua plugin to turn github copilot into a cmp source.

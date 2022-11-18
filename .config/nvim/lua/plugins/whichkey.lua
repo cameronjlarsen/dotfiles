@@ -70,36 +70,3 @@ which_key.setup({
         v = { "j", "k" },
     },
 })
-
-which_key.register({
-    ["<leader>"] = {
-        b = { name = "+Buffer" },
-        d = { name = "+Debug", },
-        f = { name = "+Files", },
-        g = { name = "+Git",
-            h = { name = "+hunk" },
-            t = { name = "+toggle" }
-        },
-        h = { name = "+Help", },
-        l = { name = "+LSP",
-            w = "+Workspace"
-        },
-        p = { name = "+Packer" },
-        s = { name = "+Search" },
-        S = { name = "+Silicon" },
-        t = { name = "+toggle" },
-        w = { name = "+Window" },
-    },
-}, { mode = "n" })
-which_key.register({
-    ["<leader>"] = {
-        d = { name = "+Debug", },
-        g = { name = "+Git",
-            h = { name = "+hunk" },
-            t = { name = "+toggle" }
-        },
-        l = { name = "+LSP",
-        },
-        S = { name = "+Silicon" },
-    },
-}, { mode = "v" })

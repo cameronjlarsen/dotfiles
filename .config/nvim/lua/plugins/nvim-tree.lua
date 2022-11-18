@@ -4,7 +4,7 @@ if not status_ok then
     return
 end
 
-local icons = require("user.icons")
+local icons = require("core.icons")
 local lib = require("nvim-tree.lib")
 local view = require("nvim-tree.view")
 

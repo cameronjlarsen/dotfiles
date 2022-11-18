@@ -1,4 +1,4 @@
-local map = require("user.utils").map
+local map = require("core.utils").map
 
 --Remap space as leader key
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -82,7 +82,7 @@ map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
 
 -- Files --
 map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
-map("n", "<leader>ff", function() require("user.utils").telescope_find_files() end, { desc = "Find Files" })
+map("n", "<leader>ff", function() require("core.utils").telescope_find_files() end, { desc = "Find Files" })
 map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
 map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,
     { desc = "Current Buffer" })
@@ -127,8 +127,8 @@ map({ "n", "v" }, "<F8>", function() require("knap").forward_jump() end, { desc 
 map("n", "<leader>li", function() vim.cmd("LspInfo") end, { silent = true, desc = "LSP Info" })
 map("n", "<leader>lm", function() vim.cmd("Mason") end, { silent = true, desc = "Mason Info" })
 map("n", "<leader>ln", function() vim.cmd("NullLsInfo") end, { silent = true, desc = "Null-Ls Info" })
-map({ "n", "v" }, "<Leader>lv", function() require("user.utils").toggle_virtual_text() end, { desc = "Virtual Text" })
-map({ "n", "v" }, "<Leader>lt", function() require("user.utils").toggle_diagnostics() end,
+map({ "n", "v" }, "<Leader>lv", function() require("core.utils").toggle_virtual_text() end, { desc = "Virtual Text" })
+map({ "n", "v" }, "<Leader>lt", function() require("core.utils").toggle_diagnostics() end,
     { desc = "Toggle Diagnostics" })
 
 -- Packer --
@@ -148,3 +148,29 @@ map({ "n", "v" }, "<leader>Sb", function() require("silicon").visualise_api({ sh
     { desc = "Screenshot Line(s) with Buffer" })
 map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ to_clip = true }) end,
     { desc = "Screenshot Line(s) to Clipboard" })
+
+local wk_status_ok, which_key = pcall(require, "which-key")
+if not wk_status_ok then
+    return
+end
+
+which_key.register({
+    ["<leader>"] = {
+        b = { name = "+Buffer" },
+        f = { name = "+Files" },
+        g = { name = "+Git" },
+        h = { name = "+Help" },
+        l = { name = "+LSP" },
+        p = { name = "+Packer" },
+        s = { name = "+Search" },
+        S = { name = "+Silicon" },
+        t = { name = "+Toggle" },
+        w = { name = "+Window" },
+    },
+}, { mode = "n" })
+which_key.register({
+    ["<leader>"] = {
+        l = { name = "+LSP" },
+        S = { name = "+Silicon" },
+    },
+}, { mode = "v" })

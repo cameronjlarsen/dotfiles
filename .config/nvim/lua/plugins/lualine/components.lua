@@ -1,5 +1,5 @@
-local icons = require("user.icons")
-local conditions = require("user.plugins.lualine.conditions")
+local icons = require("core.icons")
+local conditions = require("plugins.lualine.conditions")
 local sep_style = "Default"
 local separators = icons.statusline_separators
 local sep_l = separators[sep_style].Left

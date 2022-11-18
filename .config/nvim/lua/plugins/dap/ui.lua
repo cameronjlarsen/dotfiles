@@ -69,7 +69,7 @@ dapui.setup({
     }
 })
 
-local icons = require("user.icons")
+local icons = require("core.icons")
 vim.fn.sign_define("DapBreakpoint", { text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointCondition",
     { text = icons.dap.BreakpointCondition, texthl = "DapBreakpointCondition", linehl = "", numhl = "" })

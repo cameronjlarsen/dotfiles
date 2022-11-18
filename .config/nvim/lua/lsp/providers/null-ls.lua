@@ -5,6 +5,13 @@ if not status_ok then
     return
 end
 
+local function with_root_file(...)
+    local files = { ... }
+    return function(utils)
+        return utils.root_has_file(files)
+    end
+end
+
 local b = null_ls.builtins
 
 mason_null_ls.setup({
@@ -20,9 +27,7 @@ mason_null_ls.setup_handlers({
     end,
     stylua = function()
         null_ls.register(b.formatting.stylua.with({
-            condition = function(utils)
-                return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
-            end,
+            condition = with_root_file({ "stylua.toml", ".stylua.toml" }),
         }))
     end,
     flake8 = function()
@@ -32,11 +37,16 @@ mason_null_ls.setup_handlers({
         null_ls.register(b.formatting.clang_format.with({
             disabled_filetypes = { "java", "cs" }
         }))
+    end,
+    cbfmt = function()
+        null_ls.register(b.formatting.cbfmt.with({
+            condition = with_root_file(".cbfmt.toml"),
+        }))
     end
 })
 -- null_ls.setup()
 null_ls.setup({
-    on_attach = require("user.lsp.handlers").on_attach,
+    on_attach = require("lsp.providers.defaults").on_attach,
     sources = {
         b.code_actions.gitsigns,
         b.formatting.google_java_format,

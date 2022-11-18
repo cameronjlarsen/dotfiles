@@ -21,7 +21,7 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local kind_icons = require("user.icons").lspkind
+local kind_icons = require("core.icons").lspkind
 
 cmp.setup({
     performance = {

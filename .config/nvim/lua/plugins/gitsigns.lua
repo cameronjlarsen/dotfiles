@@ -93,5 +93,28 @@ gitsigns.setup {
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+
+
+        local wk_status_ok, which_key = pcall(require, "which-key")
+        if not wk_status_ok then
+            return
+        end
+
+        which_key.register({
+            ["<leader>"] = {
+                g = { name = "+Git",
+                    h = { name = "+Hunk" },
+                    t = { name = "+Toggle" }
+                },
+            }
+        }, { mode = "n" })
+        which_key.register({
+            ["<leader>"] = {
+                g = { name = "+Git",
+                    h = { name = "+Hunk" },
+                    t = { name = "+Toggle" }
+                },
+            },
+        }, { mode = "v" })
     end,
 }
