@@ -93,9 +93,9 @@ return packer.startup(function(use)
     use("folke/neodev.nvim") --Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
     use({ -- Lua plugin for starting and interacting with github copilot.
         "zbirenbaum/copilot.lua",
-        opt = true,
+        opt = false,
         config = function()
-            require("plugins.copilot")
+            require("lsp.providers.copilot")
         end
     })
     use({ -- Lua plugin to turn github copilot into a cmp source.
