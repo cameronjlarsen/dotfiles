@@ -4,28 +4,24 @@ if not cmp_status_ok then
     return
 end
 
-local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
-if not cmp_dap_status_ok then
-    return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
+local deps_ok, cmp_dap, luasnip = pcall(function()
+    return require("cmp_dap"), require("luasnip")
+end)
+if not deps_ok then
     return
 end
 
 require("luasnip.loaders.from_vscode").lazy_load()
+local kind_icons = require("core.icons").lspkind
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local kind_icons = require("core.icons").lspkind
-
 cmp.setup({
     performance = {
-        debounce = 150
+        debounce = 60
     },
     snippet = {
         expand = function(args)
@@ -49,7 +45,10 @@ cmp.setup({
         }),
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -104,26 +103,22 @@ cmp.setup({
     },
     sources = cmp.config.sources(
         {
-            { name = "nvim_lsp_signature_help", keyword_length = 1 },
             { name = "nvim_lsp", keyword_length = 1 },
-            { name = "luasnip" },
+            { name = "nvim_lsp_signature_help", keyword_length = 1 },
             { name = "nvim_lua" },
+            { name = "luasnip" },
         },
         {
             { name = "copilot" },
+            { name = "path" },
             { name = "buffer", keyword_length = 5 },
             { name = "rg", keyword_length = 5 },
-            { name = "path" },
         },
         {
             { name = "latex_symbols" },
             { name = "emoji" },
         }
     ),
-    confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-    },
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),

@@ -5,18 +5,14 @@ local catppuccin = {}
 local transparent_bg = config.transparent_background and "NONE" or cp.mantle
 
 catppuccin.normal = {
-    a = { bg = cp.lavender, fg = cp.mantle, gui = "bold" },
+    a = { bg = cp.blue, fg = cp.mantle, gui = "bold" },
     b = { bg = cp.surface1, fg = cp.text },
     c = { bg = transparent_bg, fg = cp.text },
-    x = { bg = transparent_bg, fg = cp.text },
-    y = { bg = cp.surface1, fg = cp.text },
-    z = { bg = cp.lavender, fg = cp.mantle, gui = "bold" },
-
 }
 
 catppuccin.insert = {
     a = { bg = cp.green, fg = cp.base, gui = "bold" },
-    b = { bg = cp.surface1, fg = cp.teal },
+    b = { bg = cp.surface1, fg = cp.text },
 }
 
 catppuccin.command = {

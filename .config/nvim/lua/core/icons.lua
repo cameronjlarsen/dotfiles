@@ -68,6 +68,7 @@ local M = {
         Tab = " ",
         Vim = " ",
         Term = " ",
+        LSP = " ",
     },
 
     diagnostics = {

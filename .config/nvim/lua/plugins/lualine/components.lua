@@ -82,7 +82,9 @@ return {
     -- Git
     branch = {
         "branch",
+        icons_enabled = true,
         icon = icons.git.Branch,
+        colored = true,
         padding = { left = 0, right = 1 },
         separator = { right = sep_r }
     },
@@ -142,7 +144,7 @@ return {
 
     lsp = {
         function()
-            local icon = " "
+            local icon = icons.ui.LSP
             local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
             local clients = vim.lsp.get_active_clients()
             local client_names = {}
@@ -186,10 +188,10 @@ return {
             local language_servers = ""
             local client_names_str_len = #client_names_str
             if client_names_str_len ~= 0 then
-                language_servers = icon .. client_names_str
+                language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. client_names_str
             end
             if copilot_active then
-                language_servers = language_servers .. " " .. icons.git.Octoface
+                language_servers = language_servers .. " " .. "%#SLCopilot#" .. icons.git.Octoface
             end
 
             if client_names_str_len == 0 and not copilot_active then

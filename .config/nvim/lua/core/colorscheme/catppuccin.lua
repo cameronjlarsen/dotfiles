@@ -5,7 +5,7 @@ end
 
 catppuccin.setup({
     flavour = "mocha",
-    transparent_background = false,
+    transparent_background = true,
     integrations = {
         aerial = false,
         barbar = false,
@@ -75,4 +75,12 @@ catppuccin.setup({
             custom_bg = "NONE",
         },
     },
+    custom_highlights = function(cp)
+        local cnf = catppuccin.options
+        return {
+            ["SLCopilot"] = { fg = cp.green, bg = cnf.transparent_background and cp.none or cp.mantle },
+            ["SLGitIcon"] = { fg = cp.text, bg = cnf.transparent_background and cp.none or cp.mantle },
+            ["SLLSPIcon"] = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
+        }
+    end,
 })

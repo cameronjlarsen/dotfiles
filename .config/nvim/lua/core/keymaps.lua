@@ -143,10 +143,11 @@ map("n", "<leader>pu", function() require("packer").update({ preview_updates = t
 map("n", "<leader>pU", function() require("packer").update() end, { desc = "Packer Update" })
 
 -- Silicon --
-map({ "n", "v" }, "<leader>Sl", function() require("silicon").visualise_api({}) end, { desc = "Screenshot Line(s)" })
-map({ "n", "v" }, "<leader>Sb", function() require("silicon").visualise_api({ show_buf = true }) end,
+map({ "n", "v" }, "<leader>Sl", function() require("silicon").visualise_api({ debug = true }) end,
+    { desc = "Screenshot Line(s)" })
+map({ "n", "v" }, "<leader>Sb", function() require("silicon").visualise_api({ debug = true, show_buf = true }) end,
     { desc = "Screenshot Line(s) with Buffer" })
-map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ to_clip = true }) end,
+map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ debug = true, to_clip = true }) end,
     { desc = "Screenshot Line(s) to Clipboard" })
 
 local wk_status_ok, which_key = pcall(require, "which-key")

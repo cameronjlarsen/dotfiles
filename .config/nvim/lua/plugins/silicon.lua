@@ -20,6 +20,6 @@ silicon.setup({
     shadowColor = "#555555",
     shadowOffsetX = 8,
     shadowOffsetY = 8,
-    gobble = false, -- enable lsautogobble like feature
-    debug = false, -- enable debug output
+    gobble = true, -- enable lsautogobble like feature
+    debug = true, -- enable debug output
 })

@@ -67,14 +67,14 @@ vim.api.nvim_create_autocmd("User", {
     group = packer_group,
 })
 
-augroup('SiliconRefresh', { clear = true })
-autocmd({ 'ColorScheme' },
-    {
-        group = 'SiliconRefresh',
-        callback = function()
-            require("silicon.utils").build_tmTheme()
-            require("silicon.utils").reload_silicon_cache({ async = true })
-        end,
-        desc = 'Reload silicon themes cache on colorscheme switch',
-    }
-)
+-- augroup('SiliconRefresh', { clear = true })
+-- autocmd({ 'ColorScheme' },
+--     {
+--         group = 'SiliconRefresh',
+--         callback = function()
+--             require("silicon.utils").build_tmTheme()
+--             require("silicon.utils").reload_silicon_cache({ async = true })
+--         end,
+--         desc = 'Reload silicon themes cache on colorscheme switch',
+--     }
+-- )
