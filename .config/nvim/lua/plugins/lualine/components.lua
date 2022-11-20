@@ -16,6 +16,7 @@ local function contains(t, value)
 end
 
 local function diff_source()
+    ---@diagnostic disable-next-line: undefined-field
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
         return {
@@ -150,40 +151,31 @@ return {
             local client_names = {}
             local copilot_active = false
 
+            -- add client
             for _, client in ipairs(clients) do
-                -- local filetypes = client.config.filetypes
-                -- if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
                 if client.name ~= "copilot" and client.name ~= "null-ls" then
                     table.insert(client_names, client.name)
                 end
                 if client.name == "copilot" then
                     copilot_active = true
                 end
-                -- end
             end
 
             -- add formatter
-            local s = require("null-ls.sources")
-            local available_sources = s.get_available(buf_ft)
-            local registered = {}
-            for _, source in ipairs(available_sources) do
-                for method in pairs(source.methods) do
-                    registered[method] = registered[method] or {}
-                    table.insert(registered[method], source.name)
-                end
-            end
+            local formatters = require("lsp.providers.null-ls.formatters")
+            local registered_formatters = formatters.list_registered(buf_ft)
+            vim.list_extend(client_names, registered_formatters)
 
-            local formatter = registered["NULL_LS_FORMATTING"]
-            local linter = registered["NULL_LS_DIAGNOSTICS"]
-            if formatter ~= nil then
-                vim.list_extend(client_names, formatter)
-            end
-            if linter ~= nil then
-                vim.list_extend(client_names, linter)
-            end
+            -- add linter
+            local linters = require("lsp.providers.null-ls.linters")
+            local registered_linters = linters.list_registered(buf_ft)
+            vim.list_extend(client_names, registered_linters)
+
+            -- get unique names
+            local unique_client_names = vim.fn.uniq(client_names)
 
             -- join client names with commas
-            local client_names_str = table.concat(client_names, ", ")
+            local client_names_str = table.concat(unique_client_names, ", ")
 
             local language_servers = ""
             local client_names_str_len = #client_names_str

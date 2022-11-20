@@ -41,3 +41,6 @@ copilot.setup({
     plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
     server_opts_overrides = {},
 })
+
+-- Setup cmp source
+require("copilot_cmp").setup()
