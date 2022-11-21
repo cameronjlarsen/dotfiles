@@ -137,6 +137,7 @@ cmp.setup.cmdline(":", {
         { name = "path" },
     }, {
         { name = "cmdline" },
+        { name = "nvim_lua" },
     }),
 })
 

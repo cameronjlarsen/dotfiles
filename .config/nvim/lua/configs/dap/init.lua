@@ -17,12 +17,12 @@ end
 dap.defaults.fallback.exception_breakpoints = { "raised" }
 
 -- Configure language adapters
-require("plugins.dap.cpp")
-require("plugins.dap.cs")
-require("plugins.dap.python")
-require("plugins.dap.go")
-require("plugins.dap.bash")
-require("plugins.dap.ui")
+require("configs.dap.cpp")
+require("configs.dap.cs")
+require("configs.dap.python")
+require("configs.dap.go")
+require("configs.dap.bash")
+require("configs.dap.ui")
 dapvt.setup()
 
 local map = require("core.utils").map

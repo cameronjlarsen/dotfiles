@@ -31,6 +31,13 @@ mason_lspconfig.setup_handlers({
         end
         lspconfig[server].setup(defaults)
     end,
+    ["sumneko_lua"] = function()
+        local defaults = require("lsp.providers.defaults").default_config
+        local custom_config = require("lsp.providers.sumneko_lua")
+        defaults = vim.tbl_deep_extend("keep", defaults, custom_config)
+        require("configs.neodev")
+        lspconfig["sumneko_lua"].setup(defaults)
+    end,
     ["jdtls"] = function()
         lspconfig["jdtls"].setup(require("lsp.providers.jdtls"))
     end,

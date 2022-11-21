@@ -4,5 +4,5 @@ if status_ok then
 end
 
 require("core")
-require("plugins")
+require("configs")
 require("lsp")
