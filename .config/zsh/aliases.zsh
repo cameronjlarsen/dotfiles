@@ -3,6 +3,7 @@ alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git
 alias zshrc="$EDITOR $ZDOTDIR/.zshrc"
 alias nvimrc="$EDITOR $HOME/.config/nvim/init.lua"
 alias awesomerc="$EDITOR $HOME/.config/awesome/rc.lua"
+alias dots="cd $HOME/dotfiles"
 alias sudo="sudo -v; sudo "
 
 #Colorize ls output
