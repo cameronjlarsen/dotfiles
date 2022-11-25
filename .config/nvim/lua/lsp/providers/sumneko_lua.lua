@@ -11,10 +11,13 @@ return {
                 callSnippet = "Replace",
             },
             workspace = {
+                checkThirdParty = false,
                 library = {
-                    vim.api.nvim_get_runtime_file("", true),
-                    "${3rd}/luassert/library"
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.stdpath("config")] = true,
                 },
+                maxPreload = 5000,
+                preloadFileSize = 10000,
             },
             telemetry = {
                 enable = false,

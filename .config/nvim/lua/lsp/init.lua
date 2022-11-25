@@ -18,6 +18,7 @@ mason_lspconfig.setup({
         "marksman",
         "sqlls",
         "jdtls",
+        "gopls",
     },
 })
 
@@ -34,7 +35,7 @@ mason_lspconfig.setup_handlers({
     ["sumneko_lua"] = function()
         local defaults = require("lsp.providers.defaults").default_config
         local custom_config = require("lsp.providers.sumneko_lua")
-        defaults = vim.tbl_deep_extend("keep", defaults, custom_config)
+        defaults = vim.tbl_deep_extend("force", defaults, custom_config)
         require("configs.neodev")
         lspconfig["sumneko_lua"].setup(defaults)
     end,
