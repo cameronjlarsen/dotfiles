@@ -31,6 +31,7 @@ function M.common_capabilities()
 end
 
 M.default_config = {
+    autostart = true,
     on_attach = M.on_attach,
     capabilities = M.common_capabilities(),
     flags = {

@@ -122,7 +122,6 @@ return packer.startup(function(use)
     use("neovim/nvim-lspconfig") -- Quickstart configs for Nvim LSP.
     use("jose-elias-alvarez/null-ls.nvim") -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua.
     use("jayp0521/mason-null-ls.nvim") -- Extension to Mason and null-ls that can automatically install the required tools for null-ls sources to work via Mason.
-    use("tamago324/nlsp-settings.nvim") -- A plugin for setting Neovim LSP with JSON or YAML files.
     use("b0o/SchemaStore.nvim") -- JSON schemas for Neovim.
     use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
 
