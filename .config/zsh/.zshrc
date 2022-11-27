@@ -1,10 +1,12 @@
 #!/bin/sh
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 export ZDOTDIR=$HOME/.config/zsh
-HISTFILE=~/.zsh_history
+HISTFILE=$ZDOTDIR/.zsh_history
 
 # Add catppuccin-zsh-syntax-highlighting
-plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+if [ -e "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]; then
+    plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+fi
 
 # Normal files to source
 plug "$ZDOTDIR/aliases.zsh"
