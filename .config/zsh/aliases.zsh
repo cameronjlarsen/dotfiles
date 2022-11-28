@@ -1,10 +1,10 @@
 #!/bin/sh
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
-alias zshrc="$EDITOR $ZDOTDIR/.zshrc"
-alias nvimrc="$EDITOR $HOME/.config/nvim/init.lua"
-alias awesomerc="$EDITOR $HOME/.config/awesome/rc.lua"
-alias dots="cd $HOME/dotfiles"
-alias sudo="sudo -v; sudo "
+alias zshrc='$EDITOR $ZDOTDIR/.zshrc'
+alias nvimrc='$EDITOR $HOME/.config/nvim/init.lua'
+alias awesomerc='$EDITOR $HOME/.config/awesome/rc.lua'
+alias dots='cd $HOME/dotfiles'
+alias sudo='sudo -v; sudo '
 
 #Colorize ls output
 alias ls='ls --color=auto'
@@ -18,10 +18,10 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # confirm before overwriting something
-alias cp="cp -i"
+alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
