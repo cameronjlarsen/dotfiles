@@ -5,5 +5,5 @@ if not status_ok then
     vim.notify("whoops! colorscheme " .. name .. " not found!")
     return
 else
-    vim.cmd.colorscheme("catppuccin")
+    vim.cmd.colorscheme(name)
 end

@@ -54,14 +54,16 @@ cmp.setup({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
-        -- Accept currently selected item. If none selected, `select` first item.
+        -- Accept currently selected item. If none selected, and selections are visible, close cmp, else fallback.
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<CR>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            if cmp.visible() and cmp.get_selected_entry() then
                 cmp.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = false,
                 })
+            elseif cmp.visible() then
+                cmp.close()
             else
                 fallback()
             end
@@ -152,13 +154,12 @@ cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
         { name = "path" },
-    }, {
         { name = "cmdline" },
         { name = "nvim_lua" },
     }),
 })
 
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = "buffer" },
