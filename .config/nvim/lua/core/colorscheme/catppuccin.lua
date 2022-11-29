@@ -81,6 +81,8 @@ catppuccin.setup({
             ["SLCopilot"] = { fg = cp.green, bg = cnf.transparent_background and cp.none or cp.mantle },
             ["SLGitIcon"] = { fg = cp.text, bg = cnf.transparent_background and cp.none or cp.mantle },
             ["SLLSPIcon"] = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
+            ["LSPInlayHint"] = { fg = cp.surface2, bg = cnf.transparent_background and cp.none or cp.mantle,
+                style = { "italic" } },
         }
     end,
 })

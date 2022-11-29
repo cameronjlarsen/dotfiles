@@ -24,7 +24,10 @@ return {
             },
             format = {
                 enable = true,
-            }
+            },
+            hint = {
+                enable = true,
+            },
         },
     },
 }

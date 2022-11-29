@@ -9,6 +9,10 @@ function M.on_attach(client, bufnr)
 
     -- Configure formatting
     require("lsp.providers.null-ls.formatters").setup(client, bufnr)
+
+    -- Setup inlay hints
+    require("lsp-inlayhints").setup()
+    require("lsp-inlayhints").on_attach(client, bufnr, false)
 end
 
 function M.common_capabilities()
