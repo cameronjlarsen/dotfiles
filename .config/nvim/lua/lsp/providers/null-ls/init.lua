@@ -50,6 +50,7 @@ null_ls.setup({
     sources = {
         b.code_actions.gitsigns,
         b.formatting.google_java_format,
+        b.formatting.latexindent,
         b.diagnostics.zsh,
         b.hover.dictionary,
         b.hover.printenv,

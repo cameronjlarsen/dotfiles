@@ -133,7 +133,7 @@ map({ "n", "v" }, "<Leader>lt", function() require("core.utils").toggle_diagnost
 
 -- Packer --
 map("n", "<leader>pc", function() require("packer").compile() end, { desc = "Packer Compile" })
-map("n", "<leader>pi", function() require("packer").install(vim.ui.input()) end, { desc = "Packer Install" })
+map("n", "<leader>pi", function() require("packer").install() end, { desc = "Packer Install" })
 map("n", "<leader>pp", function() require("packer").sync({ preview_updates = true }) end,
     { desc = "Packer Sync Preview" })
 map("n", "<leader>pP", function() require("packer").sync() end, { desc = "Packer Sync" })
