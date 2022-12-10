@@ -69,7 +69,7 @@ theme.fg_minimize = theme.colors.subtext0
 
 -- Bling
 theme.flash_focus_start_opacity = 0.6
-theme.flash_focus_step           = 0.01
+theme.flash_focus_step          = 0.01
 
 theme.tabbed_spawn_in_tab       = false
 theme.tabbar_disable            = true
@@ -194,6 +194,18 @@ theme.tooltop_opacity = 0
 -- No taglist squares:
 theme.taglist_squares_sel   = nil
 theme.taglist_squares_unsel = nil
+
+-- Taglist Preview
+theme.tag_preview_widget_border_radius = dpi(5) * 2 -- Border radius of the widget (With AA)
+theme.tag_preview_client_border_radius = dpi(5) -- Border radius of each client in the widget (With AA)
+theme.tag_preview_client_opacity = 0.5 -- Opacity of each client
+theme.tag_preview_client_bg = theme.bg_normal -- The bg color of each client
+theme.tag_preview_client_border_color = theme.border_color_active -- The border color of each client
+theme.tag_preview_client_border_width = theme.border_width -- The border width of each client
+theme.tag_preview_widget_bg = theme.bg_normal -- The bg color of the widget
+theme.tag_preview_widget_border_color = theme.border_color_active -- The border color of the widget
+theme.tag_preview_widget_border_width = theme.border_width -- The border width of the widget
+theme.tag_preview_widget_margin = theme.useless_gap -- The margin of the widget
 
 -- Define the image to load
 theme.titlebar_close_button_normal = gears.surface.load_from_shape(50, 50, gears.shape.circle, theme.colors.red)

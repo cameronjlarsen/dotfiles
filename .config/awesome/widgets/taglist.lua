@@ -71,8 +71,19 @@ function module.new(cfg)
                 spacing = internal_spacing,
                 layout  = wibox.layout.fixed.horizontal
             },
-            id     = "background_role",
-            widget = wibox.container.background,
+            id              = "background_role",
+            widget          = wibox.container.background,
+            create_callback = function(self, c3, _, _)
+                self:connect_signal("mouse::enter", function()
+                    if #c3:clients() > 0 then
+                        awesome.emit_signal("bling::tag_preview::update", c3)
+                        awesome.emit_signal("bling::tag_preview::visibility", screen, true)
+                    end
+                end)
+                self:connect_signal("mouse::leave", function()
+                    awesome.emit_signal("bling::tag_preview::visibility", screen, false)
+                end)
+            end,
         }
     }
     return awful.widget.taglist(gears.table.join(taglist_cfg, overrides))
