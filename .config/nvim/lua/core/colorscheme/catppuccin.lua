@@ -83,6 +83,7 @@ catppuccin.setup({
             ["SLLSPIcon"] = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
             ["LSPInlayHint"] = { fg = cp.surface2, bg = cnf.transparent_background and cp.none or cp.mantle,
                 style = { "italic" } },
+            ["FloatBorder"] = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
         }
     end,
 })

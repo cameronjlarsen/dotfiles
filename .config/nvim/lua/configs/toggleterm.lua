@@ -4,8 +4,14 @@ if not status_ok then
 end
 
 toggleterm.setup({
-    size = 20,
-    open_mapping = [[<M-t>]],
+    size = function(term)
+        if term.direction == "horizontal" then
+            return 15
+        elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+        end
+    end,
+    open_mapping = "<M-t>",
     hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = true,
@@ -15,14 +21,12 @@ toggleterm.setup({
     persist_size = true,
     direction = "float",
     close_on_exit = true,
-    -- shell = vim.o.shell,
+    highlights = {
+        FloatBorder = { link = "FloatBorder" },
+    },
     float_opts = {
         border = "curved",
         winblend = 0,
-        highlights = {
-            border = "Normal",
-            background = "Normal",
-        },
     },
 })
 
@@ -42,4 +46,37 @@ function _G.set_terminal_keymaps()
     map('t', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+    pattern = { "term://*" },
+    callback = function() set_terminal_keymaps() end,
+}
+)
+
+local Terminal = require("toggleterm.terminal").Terminal
+local vertical = Terminal:new({
+    direction = "vertical",
+    hidden = true,
+})
+
+function _G.toggle_vertical()
+    vertical:toggle()
+end
+
+local horizontal = Terminal:new({
+    direction = "horizontal",
+    hidden = true,
+})
+
+function _G.toggle_horizontal()
+    horizontal:toggle()
+end
+
+local float = Terminal:new({
+    direction = "float",
+    hidden = true,
+})
+
+function _G.toggle_float()
+    float:toggle()
+end

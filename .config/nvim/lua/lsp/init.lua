@@ -25,12 +25,12 @@ mason_lspconfig.setup({
 -- Setup servers with either the default or with custom settings defined in providers/[language].lua
 mason_lspconfig.setup_handlers({
     function(server)
-        local defaults = require("lsp.providers.defaults").default_config
+        local opts = require("lsp.providers.defaults").default_config
         local has_custom_provider, custom_config = pcall(require, "lsp.providers." .. server)
         if has_custom_provider then
-            defaults = vim.tbl_deep_extend("force", defaults, custom_config)
+            opts = vim.tbl_deep_extend("force", opts, custom_config)
         end
-        lspconfig[server].setup(defaults)
+        lspconfig[server].setup(opts)
     end,
     ["sumneko_lua"] = function()
         local defaults = require("lsp.providers.defaults").default_config

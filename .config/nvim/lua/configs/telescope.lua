@@ -102,11 +102,6 @@ telescope.setup {
         },
     },
     pickers = {
-        -- find_files = {
-        --     theme = "dropdown",
-        --     previewer = false,
-        --     find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" }
-        -- },
         live_grep = {
             layout_strategy = "bottom_pane"
         },
@@ -114,10 +109,13 @@ telescope.setup {
             theme = "dropdown",
             previewer = false,
         },
+        git_files = {
+            show_untracked = true,
+        },
     },
     extensions = {
         media_files = {
-            find_cmd = "fdfind" -- find command (defaults to `fd`)
+            find_cmd = "fd" -- find command (defaults to `fd`)
         },
         fzf = {
             fuzzy = true, -- false will only do exact matching
@@ -125,6 +123,10 @@ telescope.setup {
             override_file_sorter = true, -- override the file sorter
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
+        },
+        harpoon = {
+            theme = "dropdown",
+            preview = false,
         }
     },
 }

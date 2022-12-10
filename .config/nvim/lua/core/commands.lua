@@ -53,13 +53,13 @@ autocmd("FileType", {
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 local packer_group = augroup("PackerUserConfig", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
+autocmd("BufWritePost", {
     command = "source <afile> | PackerSync",
     pattern = "packer.lua",
     group = packer_group,
 })
 
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
     pattern = "PackerCompileDone",
     callback = function()
         vim.notify_once("Compile Done", vim.log.levels.INFO)
@@ -67,14 +67,10 @@ vim.api.nvim_create_autocmd("User", {
     group = packer_group,
 })
 
--- augroup('SiliconRefresh', { clear = true })
--- autocmd({ 'ColorScheme' },
---     {
---         group = 'SiliconRefresh',
---         callback = function()
---             require("silicon.utils").build_tmTheme()
---             require("silicon.utils").reload_silicon_cache({ async = true })
---         end,
---         desc = 'Reload silicon themes cache on colorscheme switch',
---     }
--- )
+autocmd("FileType", {
+    pattern = "harpoon",
+    callback = function()
+        vim.notify_once("Harpoon autocmd", vim.log.levels.INFO)
+        vim.opt_local.cursorline = true
+    end,
+})

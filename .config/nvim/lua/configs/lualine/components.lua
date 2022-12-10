@@ -15,6 +15,15 @@ local function contains(t, value)
     return false
 end
 
+local function matches(table, element)
+    for key, _ in pairs(table) do
+        if string.match(key, element) then
+            return true
+        end
+    end
+    return false
+end
+
 local function diff_source()
     ---@diagnostic disable-next-line: undefined-field
     local gitsigns = vim.b.gitsigns_status_dict
@@ -26,6 +35,84 @@ local function diff_source()
         }
     end
 end
+
+local function get_toggleterm_name()
+    local shell = vim.fn.fnamemodify(vim.env.SHELL, ':t')
+    return string.format('Terminal(%s)[%s]', shell, vim.api.nvim_buf_get_var(0, 'toggle_number'))
+end
+
+local plain = {
+    filetypes = {
+        'help',
+        'minimap',
+        'Trouble',
+        'tsplayground',
+        'NvimTree_1',
+        'undotree',
+        'neoterm',
+        'startify',
+        'markdown',
+        'norg',
+        'neo-tree',
+        'NeogitStatus',
+        'dap-repl',
+        'dapui',
+    },
+    buftypes = {
+        'terminal',
+        'quickfix',
+        'nofile',
+        'nowrite',
+        'acwrite',
+    },
+}
+
+local exceptions = {
+    buftypes = {
+        terminal = ' ',
+        quickfix = '',
+    },
+    filetypes = {
+        ['org'] = '',
+        ['orgagenda'] = '',
+        ['himalaya-msg-list'] = '',
+        ['mail'] = '',
+        ['dbui'] = '',
+        ['DiffviewFiles'] = 'פּ',
+        ['tsplayground'] = '侮',
+        ['Trouble'] = '',
+        ['NeogitStatus'] = '', -- '',
+        ['norg'] = 'ﴬ',
+        ['help'] = '',
+        ['undotree'] = 'פּ',
+        ['NvimTree'] = 'פּ',
+        ['neo-tree'] = 'פּ',
+        ['toggleterm'] = ' ',
+        ['minimap'] = '',
+        ['octo'] = '',
+        ['dap-repl'] = '',
+    },
+    names = {
+        ['orgagenda'] = 'Org',
+        ['himalaya-msg-list'] = 'Inbox',
+        ['mail'] = 'Mail',
+        ['minimap'] = '',
+        ['dbui'] = 'Dadbod UI',
+        ['tsplayground'] = 'Treesitter',
+        ['NeogitStatus'] = 'Neogit Status',
+        ['Trouble'] = 'Lsp Trouble',
+        ['gitcommit'] = 'Git commit',
+        ['help'] = 'help',
+        ['undotree'] = 'UndoTree',
+        ['octo'] = 'Octo',
+        ['NvimTree'] = 'Nvim Tree',
+        ['dap-repl'] = 'Debugger REPL',
+        ['neo-tree'] = 'Neo Tree',
+        ['toggleterm'] = get_toggleterm_name,
+        ['DiffviewFiles'] = 'Diff View',
+        ['TelescopePrompt'] = 'Telescope'
+    },
+}
 
 return {
     mode = {
@@ -39,7 +126,16 @@ return {
 
     filetype = {
         "filetype",
+        fmt = function(str)
+            if exceptions.filetypes[str] then
+                return exceptions.filetypes[str]
+            elseif str == "TelescopePrompt" then
+                return icons.ui.Telescope
+            end
+            return require("nvim-web-devicons").get_icon(str, vim.fn.expand("%:t"), { default = true })
+        end,
         icon_only = true,
+        icons_enabled = true,
         colored = true,
         padding = 0,
         separator = { right = sep_r }
@@ -48,23 +144,11 @@ return {
     filename = {
         "filename",
         fmt = function(str)
-            local ui_filetypes = {
-                "help",
-                "packer",
-                "neogitstatus",
-                "NvimTree_1",
-                "Trouble",
-                "lir",
-                "Outline",
-                "spectre_panel",
-                "toggleterm",
-                "DressingSelect",
-                "",
-                "nil",
-            }
-
-            if contains(ui_filetypes, str) or contains(ui_filetypes, vim.bo.filetype) then
-                return " "
+            local ft = vim.bo.filetype
+            if str:match("toggleterm") then
+                return get_toggleterm_name()
+            elseif exceptions.names[ft] then
+                return exceptions.names[ft]
             else
                 return vim.fn.expand("%:t:r")
             end

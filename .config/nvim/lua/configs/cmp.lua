@@ -125,10 +125,10 @@ cmp.setup({
             { name = "nvim_lsp", keyword_length = 1 },
             { name = "nvim_lsp_signature_help", keyword_length = 1 },
             { name = "nvim_lua" },
+            { name = "copilot" },
             { name = "luasnip" },
         },
         {
-            { name = "copilot" },
             { name = "path" },
             { name = "buffer", keyword_length = 5 },
             { name = "rg", keyword_length = 5 },

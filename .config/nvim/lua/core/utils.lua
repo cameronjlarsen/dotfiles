@@ -23,8 +23,8 @@ function M.toggle_diagnostics()
     end
 end
 
-function M.telescope_find_files()
-    local opts = {}
+function M.telescope_find_files(opts)
+    opts = opts or {}
     vim.fn.system("git rev-parse --is-inside-work-tree")
     if vim.v.shell_error == 0 then
         require("telescope.builtin").git_files(opts)

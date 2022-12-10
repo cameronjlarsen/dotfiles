@@ -49,7 +49,7 @@ return packer.startup(function(use)
     -- Libraries --
     use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim.
     use("nvim-lua/plenary.nvim") -- All the lua functions I don't want to write twice.
-    use("nvim-tree/nvim-web-devicons") -- Adds filetype icons for plugins.
+    use({ "nvim-tree/nvim-web-devicons", config = require("configs.devicons") }) -- Adds filetype icons for plugins.
 
     -- Editor --
     use("akinsho/bufferline.nvim") -- A snazzy bufferline for Neovim.
@@ -91,23 +91,8 @@ return packer.startup(function(use)
     use("rafamadriz/friendly-snippets") -- Set of preconfigured snippets for different languages.
     use("L3MON4D3/LuaSnip") -- Snippet Engine for Neovim written in Lua.
     use("folke/neodev.nvim") --Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-    use({ -- Lua plugin for starting and interacting with github copilot.
-        "zbirenbaum/copilot.lua",
-        -- opt = false,
-        -- event = "InsertEnter",
-        -- config = function()
-        --     vim.schedule(function()
-        --         require("lsp.providers.copilot")
-        --     end)
-        -- end
-    })
-    use({ -- Lua plugin to turn github copilot into a cmp source.
-        "zbirenbaum/copilot-cmp",
-        -- after = { "copilot.lua" },
-        -- config = function()
-        --     require("copilot_cmp").setup()
-        -- end
-    })
+    use("zbirenbaum/copilot.lua") -- Lua plugin for starting and interacting with github copilot
+    use("zbirenbaum/copilot-cmp") -- Lua plugin to turn github copilot into a cmp source.
 
     -- Debugging --
     use("mfussenegger/nvim-dap") -- Debug Adapter Protocol client implementation for Neovim.
@@ -161,6 +146,7 @@ return packer.startup(function(use)
     use("akinsho/toggleterm.nvim") -- A neovim lua plugin to help easily manage multiple terminal windows.
     use("narutoxy/silicon.lua") -- Beautiful code snippet images right in the most epic editor.
     use("tamton-aquib/duck.nvim") -- A duck that waddles arbitrarily in neovim.
+    use("ThePrimeagen/harpoon") -- Per project, auto updating and editable marks utility for fast file navigation.
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

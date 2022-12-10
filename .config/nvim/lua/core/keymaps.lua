@@ -43,14 +43,13 @@ map("n", "<leader>bc", function() vim.cmd("Bdelete!") end, { desc = "Close Buffe
 map("n", "<leader>bd", function() vim.cmd("Bdelete") end, { desc = "Delete Buffer & Window" })
 map("n", "<leader>bb", function() require("telescope.builtin").buffers() end, { desc = "Buffers" })
 
-
 -- Keep text centered while searching
 -- n = next result
 -- zz = redraw at cursor (center screen)
 -- zv = open enough folds to display the cursor position
 map("n", "n", "nzzzv", { desc = "Next search result" })
 map("n", "N", "Nzzzv", { desc = "Prev search result" })
-map("n", "<leader>th", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
+map("n", "<leader>sh", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
 
 -- Insert --
 -- Press jk fast to enter
@@ -79,6 +78,12 @@ map("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Focus terminal left" })
 map("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Focus terminal down" })
 map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
+
+-- Toggle terminal
+map("n", "<leader>tt", function() toggle_float() end, { desc = "Toggle Float Terminal" })
+map("n", "<leader>tv", function() toggle_vertical() end, { desc = "Toggle Vertical Terminal" })
+map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Toggle Horizontal Terminal" })
+
 
 -- Files --
 map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
@@ -117,6 +122,14 @@ map("n", "<leader>gc", function() require("telescope.builtin").git_commits() end
 map("n", "<leader>gs", function() require("telescope.builtin").git_status() end, { desc = "Open Changed File" })
 map("n", "<leader>gg", function() require("lazygit").lazygitcurrentfile() end, { desc = "LazyGit" })
 map("n", "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
+
+-- Marks
+map("n", "<leader>ma", function() require("harpoon.mark").add_file() end, { desc = "Add file to Harpoon" })
+map("n", "<leader>mm", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "Harpoon Quick Menu" })
+map("n", "<leader>m.", function() require("harpoon.ui").nav_next() end, { desc = "Harpoon Next" })
+map("n", "<leader>m,", function() require("harpoon.ui").nav_prev() end, { desc = "Harpoon Prev" })
+map("n", "<leader>ms", function() require("telescope").extensions.harpoon.marks() end, { desc = "Harpoon Telescope Marks" })
+
 
 -- Knap --
 map({ "n", "v" }, "<F6>", function() require("knap").close_viewer() end, { desc = "Close Viewer" })
