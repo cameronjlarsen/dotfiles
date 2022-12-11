@@ -400,8 +400,11 @@ awful.keyboard.append_global_keybindings {
         on_press    = function(index)
             local s
             if screen.count() > 1 then
-                if index < 6 then
+                if index > 0 and index < 6 then
                     s = screen[1]
+                elseif index == 0 then
+                    s = screen[2]
+                    index = 5
                 else
                     s = screen[2]
                     index = index - 5
@@ -423,8 +426,11 @@ awful.keyboard.append_global_keybindings {
         on_press    = function(index)
             local s
             if screen.count() > 1 then
-                if index < 6 then
+                if index > 0 and index < 6 then
                     s = screen[1]
+                elseif index == 0 then
+                    s = screen[2]
+                    index = 5
                 else
                     s = screen[2]
                     index = index - 5
@@ -447,8 +453,11 @@ awful.keyboard.append_global_keybindings {
             if client.focus then
                 local s
                 if screen.count() > 1 then
-                    if index < 6 then
+                    if index > 0 and index < 6 then
                         s = screen[1]
+                    elseif index == 0 then
+                        s = screen[2]
+                        index = 5
                     else
                         s = screen[2]
                         index = index - 5
@@ -459,6 +468,7 @@ awful.keyboard.append_global_keybindings {
                 local tag = s.tags[index]
                 if tag then
                     client.focus:move_to_tag(tag)
+                    tag:view_only()
                 end
             end
         end
@@ -472,8 +482,11 @@ awful.keyboard.append_global_keybindings {
             if client.focus then
                 local s
                 if screen.count() > 1 then
-                    if index < 6 then
+                    if index > 0 and index < 6 then
                         s = screen[1]
+                    elseif index == 0 then
+                        s = screen[2]
+                        index = 5
                     else
                         s = screen[2]
                         index = index - 5
