@@ -10,10 +10,12 @@ ruled.client.connect_signal("request::rules", function()
         id         = "global",
         rule       = {},
         properties = {
-            focus     = awful.client.focus.filter,
-            raise     = true,
-            screen    = awful.screen.preferred,
-            placement = awful.placement.no_overlap + awful.placement.no_offscreen
+            focus             = awful.client.focus.filter,
+            raise             = true,
+            size_hints_honor  = false,
+            screen            = awful.screen.preferred,
+            titlebars_enabled = true,
+            placement         = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen
         },
     }
 
@@ -37,7 +39,8 @@ ruled.client.connect_signal("request::rules", function()
                 "AlarmWindow", -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
                 "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-            }
+            },
+            type     = { "splash", "dialog" }
         },
         properties = {
             floating = true,
