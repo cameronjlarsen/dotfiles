@@ -3,6 +3,7 @@ if not status_ok then
     return
 end
 
+local cp = require("catppuccin.palettes").get_palette()
 bufferline.setup {
     options = {
         numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -16,7 +17,7 @@ bufferline.setup {
         },
         buffer_close_icon = "",
         modified_icon = "●",
-        close_icon = "",
+        close_icon = "",
         left_trunc_marker = "",
         right_trunc_marker = "",
         max_name_length = 30,
@@ -37,7 +38,7 @@ bufferline.setup {
         show_close_icon = false,
         show_tab_indicators = true,
         persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-        separator_style = "thick", -- "slant" | "thick" | "thin" | { 'any', 'any' },
+        separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
         enforce_regular_tabs = true,
         always_show_bufferline = true,
         hover = {
@@ -47,5 +48,15 @@ bufferline.setup {
         },
     },
     ---@diagnostic disable-next-line: assign-type-mismatch
-    highlights = require("catppuccin.groups.integrations.bufferline").get()
+    highlights = require("catppuccin.groups.integrations.bufferline").get({
+        custom = {
+            all = {
+                -- fill = { bg = cp.crust },
+                buffer_selected = { bg = cp.mantle },
+                separator_selected = { bg = cp.mantle },
+                close_button_selected = { bg = cp.mantle },
+            }
+        }
+
+    })
 }

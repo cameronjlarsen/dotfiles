@@ -16,7 +16,6 @@ mason_lspconfig.setup({
         "omnisharp",
         "bashls",
         "marksman",
-        "sqlls",
         "jdtls",
         "gopls",
     },

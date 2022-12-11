@@ -42,7 +42,12 @@ mason_null_ls.setup_handlers({
         null_ls.register(b.formatting.cbfmt.with({
             condition = with_root_file(".cbfmt.toml"),
         }))
-    end
+    end,
+    sql_formatter = function()
+        null_ls.register(b.formatting.sql_formatter.with({
+            extra_args = { "--language", "postgres" },
+        }))
+    end,
 })
 -- null_ls.setup()
 null_ls.setup({
