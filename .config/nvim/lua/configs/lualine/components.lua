@@ -131,14 +131,15 @@ return {
                 return exceptions.filetypes[str]
             elseif str == "TelescopePrompt" then
                 return icons.ui.Telescope
+            else return " "
             end
-            return require("nvim-web-devicons").get_icon(str, vim.fn.expand("%:t"), { default = true })
+
         end,
         icon_only = true,
         icons_enabled = true,
         colored = true,
         padding = 0,
-        separator = { right = sep_r }
+        separator = { right = sep_r },
     },
 
     filename = {
@@ -150,7 +151,7 @@ return {
             elseif exceptions.names[ft] then
                 return exceptions.names[ft]
             else
-                return vim.fn.expand("%:t:r")
+                return vim.fn.expand("%:t")
             end
         end,
         path = 0,
