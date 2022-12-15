@@ -87,7 +87,7 @@ map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Toggle Hori
 
 -- Files --
 map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
-map("n", "<leader>ff", function() require("core.utils").telescope_find_files() end, { desc = "Find Files" })
+map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Find Files" })
 map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
 map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,
     { desc = "Current Buffer" })
@@ -128,7 +128,8 @@ map("n", "<leader>ma", function() require("harpoon.mark").add_file() end, { desc
 map("n", "<leader>mm", function() require("harpoon.ui").toggle_quick_menu() end, { desc = "Harpoon Quick Menu" })
 map("n", "<leader>m.", function() require("harpoon.ui").nav_next() end, { desc = "Harpoon Next" })
 map("n", "<leader>m,", function() require("harpoon.ui").nav_prev() end, { desc = "Harpoon Prev" })
-map("n", "<leader>ms", function() require("telescope").extensions.harpoon.marks() end, { desc = "Harpoon Telescope Marks" })
+map("n", "<leader>ms", function() require("telescope").extensions.harpoon.marks() end,
+    { desc = "Harpoon Telescope Marks" })
 
 
 -- Knap --
@@ -175,6 +176,7 @@ which_key.register({
         g = { name = "+Git" },
         h = { name = "+Help" },
         l = { name = "+LSP" },
+        m = { name = "+Marks" },
         p = { name = "+Packer" },
         s = { name = "+Search" },
         S = { name = "+Silicon" },

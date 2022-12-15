@@ -8,6 +8,16 @@ local actions_layout = require "telescope.actions.layout"
 
 telescope.setup {
     defaults = {
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--hidden",
+            "--smart-case",
+        },
         prompt_prefix = "   ",
         selection_caret = "  ",
         entry_prefix = "  ",
@@ -17,20 +27,21 @@ telescope.setup {
         layout_config = {
             horizontal = {
                 prompt_position = "top",
-                preview_width = 0.55,
+                preview_width = 0.7,
             },
             vertical = {
+                prompt_position = "top",
                 mirror = false,
             },
             flex = {
                 prompt_position = "top",
-                preview_width = 0.55,
+                preview_width = 0.7,
                 flip_columns = 120,
             },
             bottom_pane = {
                 height = 0.50,
             },
-            width = 0.87,
+            width = 0.9,
             height = 0.80,
             preview_cutoff = 120,
         },
@@ -136,3 +147,18 @@ telescope.load_extension("fzf")
 telescope.load_extension("media_files")
 telescope.load_extension("lazygit")
 telescope.load_extension("notify")
+
+local M = {}
+
+-- Functions
+function M.find_files(opts)
+    opts = opts or {}
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    if vim.v.shell_error == 0 then
+        require("telescope.builtin").git_files(opts)
+    else
+        require("telescope.builtin").find_files(opts)
+    end
+end
+
+return M

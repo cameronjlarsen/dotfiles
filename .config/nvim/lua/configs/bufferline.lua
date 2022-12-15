@@ -4,6 +4,7 @@ if not status_ok then
 end
 
 local cp = require("catppuccin.palettes").get_palette()
+local active_bg = cp.surface0
 bufferline.setup {
     options = {
         numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -51,10 +52,15 @@ bufferline.setup {
     highlights = require("catppuccin.groups.integrations.bufferline").get({
         custom = {
             all = {
-                -- fill = { bg = cp.crust },
-                buffer_selected = { bg = cp.mantle },
-                separator_selected = { bg = cp.mantle },
-                close_button_selected = { bg = cp.mantle },
+                buffer_selected = { bg = active_bg },
+                separator_selected = { bg = active_bg },
+                close_button_selected = { bg = active_bg },
+                indicator_selected = { fg = cp.lavender, bg = active_bg },
+                error_selected = { bg = active_bg },
+                warning_selected = { bg = active_bg },
+                info_selected = { bg = active_bg },
+                hint_selected = { bg = active_bg },
+                diagnostic_selected = { bg = active_bg },
             }
         }
 

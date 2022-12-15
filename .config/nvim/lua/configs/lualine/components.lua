@@ -126,15 +126,22 @@ return {
 
     filetype = {
         "filetype",
-        fmt = function(str)
-            if exceptions.filetypes[str] then
-                return exceptions.filetypes[str]
-            elseif str == "TelescopePrompt" then
-                return icons.ui.Telescope
-            else return " "
-            end
-
-        end,
+        -- fmt = function(str)
+        --     -- This highlights the filetype icon but not the background
+        --     if exceptions.filetypes[str] then
+        --         return exceptions.filetypes[str]
+        --     elseif str == "TelescopePrompt" then
+        --         return icons.ui.Telescope
+        --     else
+        --         local devicons = pcall(require, "nvim-web-devicons")
+        --         if not devicons then
+        --             return str
+        --         else
+        --             local icon, icon_color = require("nvim-web-devicons").get_icon_by_filetype(str)
+        --             return "%#" .. icon_color .. "#" .. icon .. "%*"
+        --         end
+        --     end
+        -- end,
         icon_only = true,
         icons_enabled = true,
         colored = true,

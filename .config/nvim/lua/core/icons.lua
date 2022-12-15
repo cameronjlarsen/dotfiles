@@ -69,6 +69,7 @@ local M = {
         Vim = " ",
         Term = " ",
         LSP = " ",
+        LSP_Alt = "לּ ",
     },
 
     diagnostics = {

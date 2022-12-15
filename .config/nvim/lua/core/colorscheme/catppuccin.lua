@@ -17,7 +17,7 @@ catppuccin.setup({
         fidget = true,
         gitgutter = false,
         gitsigns = true,
-        harpoon = false,
+        harpoon = true,
         hop = false,
         illuminate = false,
         leap = false,
@@ -84,6 +84,25 @@ catppuccin.setup({
             ["LSPInlayHint"] = { fg = cp.surface2, bg = cnf.transparent_background and cp.none or cp.mantle,
                 style = { "italic" } },
             ["FloatBorder"] = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
+
+            -- Telescope
+            TelescopeBorder = { bg = cp.crust, fg = cp.crust },
+            TelescopeNormal = { bg = cp.crust },
+
+            -- Telescope Preview
+            TelescopePreviewBorder = { bg = cp.mantle, fg = cp.mantle },
+            TelescopePreviewNormal = { bg = cp.mantle },
+            TelescopePreviewTitle = { bg = cp.mantle, fg = cp.lavender },
+
+            -- Telescope Prompt
+            TelescopePromptBorder = { bg = cp.surface0, fg = cp.surface0 },
+            TelescopePromptNormal = { bg = cp.surface0 },
+            TelescopePromptTitle = { bg = cp.surface0, fg = cp.green },
+            -- TelescopePromptPrefix = { bg = cp.surface0, fg = cp.red },
+
+            -- Telescope Selection
+            TelescopeSelection = { bg = cp.crust, fg = cp.green },
+            TelescopeMultiSelection = { bg = cp.crust, fg = cp.blue },
         }
     end,
 })
