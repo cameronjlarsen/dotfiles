@@ -53,6 +53,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
     else
         awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
     end
+
+    s:connect_signal("swapped", function(self, other, is_source)
+        if not is_source then return end
+
+        local st = self.selected_tag
+        local sc = st:clients() -- NOTE: this is only here for convinience
+        local ot = other.selected_tag
+        local oc = ot:clients() -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
+
+        for _, c in ipairs(sc) do
+            c:move_to_tag(ot)
+        end
+
+        for _, c in ipairs(oc) do
+            c:move_to_tag(st)
+        end
+    end)
 end)
 
 

@@ -4,6 +4,7 @@ local menu          = require("widgets.menu")
 local mod           = require("config.bindings.mod")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local bling         = require("modules.bling")
+local naughty       = require("naughty")
 require("awful.hotkeys_popup.keys.firefox")
 require("awful.hotkeys_popup.keys.vim")
 
@@ -386,6 +387,28 @@ awful.keyboard.append_global_keybindings {
         group = "tabs",
         on_press = function()
             bling.module.tabbed.iter()
+        end,
+    },
+    awful.key {
+        modifiers   = { Super, Ctrl },
+        key         = "o",
+        description = "swap screens",
+        group       = "client",
+        on_press    = function()
+            local focused_screen = awful.screen.focused()
+            local s = focused_screen.get_next_in_direction(focused_screen, "right")
+
+            -- FIXME: this only makes sense for two screens
+            if not s then
+                s = focused_screen.get_next_in_direction(focused_screen, "left")
+            end
+
+            if not s then
+                naughty.notify { preset = naughty.config.presets.critical, title = "could not get other screen" }
+                return
+            end
+            focused_screen:swap(s)
+
         end,
     },
 }
