@@ -5,24 +5,6 @@ local separators = icons.statusline_separators
 local sep_l = separators[sep_style].Left
 local sep_r = separators[sep_style].Right
 
--- check if value in table
-local function contains(t, value)
-    for _, v in pairs(t) do
-        if v == value then
-            return true
-        end
-    end
-    return false
-end
-
-local function matches(table, element)
-    for key, _ in pairs(table) do
-        if string.match(key, element) then
-            return true
-        end
-    end
-    return false
-end
 
 local function diff_source()
     ---@diagnostic disable-next-line: undefined-field
@@ -163,10 +145,10 @@ return {
         end,
         path = 0,
         symbols = {
-            modified = "",
-            readonly = "",
-            unnamed = "",
-            newfile = "",
+            modified = "[+]",
+            readonly = "",
+            unnamed = " ",
+            newfile = " ",
         },
         file_status = false,
         separator = { right = sep_r }

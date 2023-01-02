@@ -124,6 +124,7 @@ return packer.startup(function(use)
 
     -- Syntax & Highlighting --
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- Nvim Treesitter configurations and abstraction layer.
+    use("nvim-treesitter/nvim-treesitter-textobjects") -- Nvim Treesitter textobjects.
     use("p00f/nvim-ts-rainbow") -- Rainbow parentheses for neovim using tree-sitter.
     use("nvim-treesitter/playground") -- Treesitter playground integrated into Neovim.
     use("norcalli/nvim-colorizer.lua") -- A high-performance color highlighter for Neovim.
@@ -147,6 +148,7 @@ return packer.startup(function(use)
     use("narutoxy/silicon.lua") -- Beautiful code snippet images right in the most epic editor.
     use("tamton-aquib/duck.nvim") -- A duck that waddles arbitrarily in neovim.
     use("ThePrimeagen/harpoon") -- Per project, auto updating and editable marks utility for fast file navigation.
+    use("mbbill/undotree") -- The ultimate undo history visualizer for vim.
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

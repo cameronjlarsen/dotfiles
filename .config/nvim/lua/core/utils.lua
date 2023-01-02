@@ -23,4 +23,24 @@ function M.toggle_diagnostics()
     end
 end
 
+-- check if value in table
+function M.contains(table, value)
+    for _, v in pairs(table) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+-- check if value is part of a key in a table
+function M.matches(table, element)
+    for key, _ in pairs(table) do
+        if string.match(key, element) then
+            return true
+        end
+    end
+    return false
+end
+
 return M

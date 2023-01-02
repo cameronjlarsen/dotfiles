@@ -33,7 +33,18 @@ bufferline.setup {
             local icon = level:match("error") and " " or " "
             return " " .. icon .. count
         end,
-        offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                padding = 1
+            },
+            {
+                filetype = "undotree",
+                text = "Undo Tree",
+                padding = 1
+            },
+        },
         show_buffer_icons = true,
         show_buffer_close_icons = true,
         show_close_icon = false,

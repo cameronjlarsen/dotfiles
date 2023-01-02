@@ -33,7 +33,6 @@ map("n", "<leader>wK", function() vim.cmd("resize -2") end, { desc = "Resize up"
 map("n", "<leader>wL", function() vim.cmd("vertical resize +2") end, { desc = "Resize right" })
 map("n", "<leader>w=", "<C-w>=", { desc = "Balance windows" })
 
-
 -- Navigate buffers
 map("n", "<S-Right>", function() vim.cmd("bnext") end, { desc = "Go to next buffer" })
 map("n", "<S-Left>", function() vim.cmd("bprevious") end, { desc = "Go to previous buffer" })
@@ -84,7 +83,6 @@ map("n", "<leader>tt", function() toggle_float() end, { desc = "Toggle Float Ter
 map("n", "<leader>tv", function() toggle_vertical() end, { desc = "Toggle Vertical Terminal" })
 map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Toggle Horizontal Terminal" })
 
-
 -- Files --
 map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
 map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Find Files" })
@@ -131,7 +129,6 @@ map("n", "<leader>m,", function() require("harpoon.ui").nav_prev() end, { desc =
 map("n", "<leader>ms", function() require("telescope").extensions.harpoon.marks() end,
     { desc = "Harpoon Telescope Marks" })
 
-
 -- Knap --
 map({ "n", "v" }, "<F6>", function() require("knap").close_viewer() end, { desc = "Close Viewer" })
 map({ "n", "v" }, "<F7>", function() require("knap").toggle_autopreviewing() end, { desc = "Toggle Auto-Preview" })
@@ -164,6 +161,9 @@ map({ "n", "v" }, "<leader>Sb", function() require("silicon").visualise_api({ de
 map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ debug = true, to_clip = true }) end,
     { desc = "Screenshot Line(s) to Clipboard" })
 
+-- Undo Tree --
+map({ "n", "v" }, "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Undo Tree" })
+
 local wk_status_ok, which_key = pcall(require, "which-key")
 if not wk_status_ok then
     return
@@ -181,6 +181,7 @@ which_key.register({
         s = { name = "+Search" },
         S = { name = "+Silicon" },
         t = { name = "+Toggle" },
+        u = { name = "+Undo Tree" },
         w = { name = "+Window" },
     },
 }, { mode = "n" })
@@ -188,5 +189,6 @@ which_key.register({
     ["<leader>"] = {
         l = { name = "+LSP" },
         S = { name = "+Silicon" },
+        u = { name = "+Undo Tree" },
     },
 }, { mode = "v" })
