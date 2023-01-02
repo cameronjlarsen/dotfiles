@@ -31,7 +31,13 @@ client.connect_signal("request::default_keybindings", function()
             key         = "space",
             description = "toggle floating",
             group       = "client",
-            on_press    = awful.client.floating.toggle,
+            on_press    = function(c)
+                c.floating = not c.floating
+                if c.floating then
+                    awful.placement.centered(c, { honor_workarea = true })
+                    c:raise()
+                end
+            end,
         },
         awful.key {
             modifiers   = { Super, Ctrl },
