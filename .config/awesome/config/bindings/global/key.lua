@@ -245,6 +245,7 @@ awful.keyboard.append_global_keybindings {
             awful.client.focus.history.previous()
             if client.focus then
                 client.focus:raise()
+                bling.module.flash_focus.flashfocus(client.focus)
             end
         end,
     },
@@ -253,7 +254,10 @@ awful.keyboard.append_global_keybindings {
         key         = "j",
         description = "focus the next screen",
         group       = "screen",
-        on_press    = function() awful.screen.focus_relative(1) end,
+        on_press    = function()
+            awful.screen.focus_relative(1)
+            bling.module.flash_focus.flashfocus(client.focus)
+        end,
     },
     awful.key {
         modifiers   = { Super, Ctrl },
@@ -407,8 +411,18 @@ awful.keyboard.append_global_keybindings {
                 naughty.notify { preset = naughty.config.presets.critical, title = "could not get other screen" }
                 return
             end
-            focused_screen:swap(s)
+            -- Get each screens clients
+            local s_clients = s.all_clients
+            local focused_screen_clients = focused_screen.all_clients
 
+            -- Move each client to the other screen
+            for _, c in ipairs(focused_screen_clients) do
+                c.screen = s
+            end
+            for _, c in ipairs(s_clients) do
+                c.screen = focused_screen
+            end
+            awful.screen.focus_relative(1)
         end,
     },
 }

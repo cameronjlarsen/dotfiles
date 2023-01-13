@@ -33,7 +33,8 @@ ruled.client.connect_signal("request::rules", function()
             -- and the name shown there might not match defined rules here.
             name     = {
                 "Event Tester", -- xev.
-                "Capture Launcher"
+                "Capture Launcher",
+                "PayPal Checkout - Review your payment - Mozilla Firefox",
             },
             role     = {
                 "AlarmWindow", -- Thunderbird's calendar.
