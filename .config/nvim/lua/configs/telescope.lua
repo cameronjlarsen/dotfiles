@@ -8,6 +8,7 @@ local actions_layout = require "telescope.actions.layout"
 
 telescope.setup {
     defaults = {
+        error_mode = "notify",
         vimgrep_arguments = {
             "rg",
             "--color=never",
@@ -152,11 +153,14 @@ local M = {}
 
 -- Functions
 function M.find_files(opts)
-    opts = opts or {}
-    vim.fn.system("git rev-parse --is-inside-work-tree")
-    if vim.v.shell_error == 0 then
-        require("telescope.builtin").git_files(opts)
-    else
+    opts = opts or {
+        follow = true,
+        hidden = true,
+        show_untracked = true,
+        use_git_root = false,
+    }
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then
         require("telescope.builtin").find_files(opts)
     end
 end
