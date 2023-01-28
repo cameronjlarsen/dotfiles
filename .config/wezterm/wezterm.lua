@@ -148,7 +148,7 @@ end
 
 local function get_current_working_dir(tab)
     local current_dir = tab.active_pane.current_working_dir
-    local HOME_DIR = string.format("file://%s%s/", hostname, os.getenv("HOME"))
+    local HOME_DIR = string.format("file://%s%s/", hostname:lower(), os.getenv("HOME"))
 
     return current_dir
         == HOME_DIR
