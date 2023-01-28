@@ -35,3 +35,6 @@ if command -v bat &> /dev/null; then
 fi
 # Starship prompt
 eval "$(starship init zsh)"
+
+# Wezterm shell integration
+[ -f "$HOME/.config/wezterm/wezterm.sh" ] && source "$HOME/.config/wezterm/wezterm.sh"
