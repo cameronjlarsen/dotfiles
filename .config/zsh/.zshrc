@@ -8,9 +8,6 @@ if [ -e "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-sy
     plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 fi
 
-# Normal files to source
-plug "$ZDOTDIR/aliases.zsh"
-plug "$ZDOTDIR/exports.zsh"
 
 # Plugins
 plug "zsh-users/zsh-autosuggestions"
@@ -28,6 +25,9 @@ plug "zap-zsh/nvm"
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
+# Normal files to source
+plug "$ZDOTDIR/aliases.zsh"
+plug "$ZDOTDIR/exports.zsh"
 
 # Key-bindings
 bindkey '^ ' autosuggest-accept
