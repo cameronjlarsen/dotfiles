@@ -23,6 +23,7 @@ plug "zap-zsh/fzf"
 plug "zap-zsh/completions"
 plug "gradle/gradle-completion"
 plug "wintermi/zsh-brew"
+plug "zap-zsh/nvm"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
@@ -38,11 +39,6 @@ fi
 
 # Wezterm shell integration
 [ -f "$HOME/.config/wezterm/wezterm.sh" ] && source "$HOME/.config/wezterm/wezterm.sh"
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Starship prompt
 eval "$(starship init zsh)"
