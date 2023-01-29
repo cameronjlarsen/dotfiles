@@ -22,9 +22,11 @@ plug "zap-zsh/vim"
 plug "zap-zsh/fzf"
 plug "zap-zsh/completions"
 plug "gradle/gradle-completion"
+plug "wintermi/zsh-brew"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
+
 
 # Key-bindings
 bindkey '^ ' autosuggest-accept
