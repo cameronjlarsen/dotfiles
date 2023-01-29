@@ -8,6 +8,8 @@ if [ -e "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-sy
     plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 fi
 
+# Exports
+plug "$ZDOTDIR/exports.zsh"
 
 # Plugins
 plug "zsh-users/zsh-autosuggestions"
@@ -20,14 +22,13 @@ plug "zap-zsh/fzf"
 plug "zap-zsh/completions"
 plug "gradle/gradle-completion"
 plug "wintermi/zsh-brew"
-plug "zap-zsh/nvm"
+plug "wintermi/zsh-fnm"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
-# Normal files to source
+# Aliases
 plug "$ZDOTDIR/aliases.zsh"
-plug "$ZDOTDIR/exports.zsh"
 
 # Key-bindings
 bindkey '^ ' autosuggest-accept
@@ -42,4 +43,3 @@ fi
 
 # Starship prompt
 eval "$(starship init zsh)"
-
