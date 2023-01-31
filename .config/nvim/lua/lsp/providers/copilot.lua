@@ -8,9 +8,9 @@ copilot.setup({
         enabled = true,
         auto_refresh = true,
         keymap = {
+            accept = "<CR>",
             jump_prev = "[[",
             jump_next = "]]",
-            accept = "<CR>",
             refresh = "gr",
             open = "<M-CR>"
         },
@@ -18,9 +18,11 @@ copilot.setup({
     suggestion = {
         enabled = true,
         auto_trigger = true,
-        debounce = 75,
+        debounce = 50,
         keymap = {
-            accept = "<M-l>",
+            accept = false,
+            accept_word = "<M-Right>",
+            accept_line = "<M-Down>",
             next = "<M-j>",
             prev = "<M-k>",
             dismiss = "<M-h>",
@@ -54,11 +56,8 @@ copilot.setup({
 require("copilot_cmp").setup()
 
 local map = require("core.utils").map
-map("i", "<M-Right>", function() require("copilot.suggestion").accept() end, { desc = "Accept Copilot Suggestion" })
-map("i", "<M-Left>", function() require("copilot.suggestion").dismiss() end, { desc = "Dismiss Copilot Suggestion" })
-map("i", "<M-Up>", function() require("copilot.suggestion").prev() end, { desc = "Previous Copilot Suggestion" })
-map("i", "<M-Down>", function() require("copilot.suggestion").next() end, { desc = "Next Copilot Suggestion" })
-map("n", "<leader>lcp", function() require("copilot.panel").open() end, { desc = "Open Copilot Panel" })
+map("n", "<leader>lcp", function() require("copilot.panel").open({ position = "bottom", ratio = 0.3 }) end,
+    { desc = "Open Copilot Panel" })
 map("n", "<leader>lcs", function() require("copilot.suggestion").toggle_auto_trigger() end,
     { desc = "Toggle Copilot Auto Trigger" })
 
