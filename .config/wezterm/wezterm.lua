@@ -365,6 +365,7 @@ return {
         { key = "7", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 6 }) },
         { key = "8", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 7 }) },
         { key = "9", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
+        { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
     },
     hyperlink_rules = {
         {
