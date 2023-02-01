@@ -98,11 +98,11 @@ local config = {
                 runtimes = {
                     {
                         name = "JavaSE-17",
-                        path = "/usr/lib/jvm/java-17-openjdk/",
+                        path = "~/.sdkman/candidates/java/17.0.6-tem"
                     },
                     {
                         name = "JavaSE-19",
-                        path = "/usr/lib/jvm/java-19-openjdk/",
+                        path = "~/.sdkman/candidates/java/19.0.1-open"
                     },
                 }
             },
