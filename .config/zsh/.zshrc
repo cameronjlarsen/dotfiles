@@ -41,5 +41,8 @@ fi
 # Wezterm shell integration
 [ -f "$HOME/.config/wezterm/wezterm.sh" ] && source "$HOME/.config/wezterm/wezterm.sh"
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Starship prompt
 eval "$(starship init zsh)"
+

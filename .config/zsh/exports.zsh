@@ -44,3 +44,6 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
+
+export SDKMAN_DIR="$HOME/.sdkman"
+
