@@ -102,7 +102,7 @@ local config = {
                     },
                     {
                         name = "JavaSE-19",
-                        path = "~/.sdkman/candidates/java/19.0.1-open"
+                        path = "~/.sdkman/candidates/java/19.0.2-open"
                     },
                 }
             },

@@ -5,7 +5,7 @@ end
 
 copilot.setup({
     panel = {
-        enabled = true,
+        enabled = false,
         auto_refresh = true,
         keymap = {
             accept = "<CR>",
@@ -16,7 +16,7 @@ copilot.setup({
         },
     },
     suggestion = {
-        enabled = true,
+        enabled = false,
         auto_trigger = true,
         debounce = 50,
         keymap = {

@@ -69,9 +69,7 @@ cmp.setup({
             end
         end),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-                require("copilot.suggestion").accept_word()
-            elseif cmp.visible() then
+            if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
@@ -124,10 +122,10 @@ cmp.setup({
     },
     sources = cmp.config.sources(
         {
+            { name = "copilot" },
             { name = "nvim_lsp", keyword_length = 1 },
             { name = "nvim_lsp_signature_help", keyword_length = 1 },
             { name = "nvim_lua" },
-            { name = "copilot" },
             { name = "luasnip" },
         },
         {
@@ -140,6 +138,20 @@ cmp.setup({
             { name = "emoji" },
         }
     ),
+    sorting = {
+        priority_weight = 2,
+        comparators = {
+            require("copilot_cmp.comparators").prioritize,
+            require("copilot_cmp.comparators").score,
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
+    },
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
