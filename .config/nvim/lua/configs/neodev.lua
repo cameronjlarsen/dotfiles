@@ -3,4 +3,12 @@ if not status_ok then
     return
 end
 
-dev.setup()
+dev.setup({
+    library = {
+        plugins =
+        {
+            "nvim-dap-ui",
+        },
+        types = true
+    },
+})

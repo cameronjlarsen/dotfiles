@@ -16,7 +16,7 @@ dapui.setup({
     },
     -- Expand lines larger than the window
     -- Requires >= 0.7
-    expand_lines = vim.fn.has("nvim-0.7"),
+    expand_lines = vim.fn.has("nvim-0.7") == 1,
     layouts = {
         {
             elements = {
@@ -44,6 +44,7 @@ dapui.setup({
         -- Display controls in this element
         element = "repl",
         icons = {
+            disconnect = "",
             pause = "",
             play = "",
             step_into = "",
@@ -64,6 +65,7 @@ dapui.setup({
     },
     windows = { indent = 1 },
     render = {
+        indent = 1,
         max_type_length = nil, -- Can be integer or nil.
         max_value_lines = 100, -- Can be integer or nil.
     }
