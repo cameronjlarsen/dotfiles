@@ -48,7 +48,6 @@ map("n", "<leader>bb", function() require("telescope.builtin").buffers() end, { 
 -- zv = open enough folds to display the cursor position
 map("n", "n", "nzzzv", { desc = "Next search result" })
 map("n", "N", "Nzzzv", { desc = "Prev search result" })
-map("n", "<leader>sh", function() vim.cmd("nohlsearch") end, { desc = "No Highlight Search" })
 
 -- Insert --
 -- Press jk fast to enter
@@ -84,40 +83,37 @@ map("n", "<leader>tv", function() toggle_vertical() end, { desc = "Toggle Vertic
 map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Toggle Horizontal Terminal" })
 
 -- Files --
-map("n", "<leader>fe", function() require("nvim-tree").toggle() end, { desc = "Filetree" })
-map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Find Files" })
-map("n", "<leader>fr", function() require("telescope.builtin").oldfiles() end, { desc = "Find Recent Files" })
+map("n", "<leader>f?", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
+map("n", "<leader>f:", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
+map("n", "<leader>fa", function() require("telescope.builtin").autocommands() end, { desc = "Auto Commands" })
 map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fuzzy_find() end,
     { desc = "Current Buffer" })
-map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
-map("n", "<leader>fb", function() require("telescope").extensions.file_browser.file_browser() end,
+map("n", "<leader>fB", function() require("telescope").extensions.file_browser.file_browser() end,
     { desc = "File Browser" })
-map("n", "<leader>fm", function() require("telescope").extensions.media_files.media_files() end,
-    { desc = "Find Media Files" })
+map("n", "<leader>fc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
+map("n", "<leader>fe", function() require("nvim-tree").toggle({ find_file = false }) end, { desc = "Filetree" })
+map("n", "<leader>fE", function() require("nvim-tree").toggle({ find_file = true }) end, { desc = "Filetree Focus File" })
+map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Files" })
+map("n", "<leader>fgb", function() require("telescope.builtin").git_branches() end, { desc = "Branchs" })
+map("n", "<leader>fgc", function() require("telescope.builtin").git_commits() end, { desc = "Commits" })
+map("n", "<leader>fgs", function() require("telescope.builtin").git_status() end, { desc = "Changed Files" })
+map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end, { desc = "Help Pages" })
+map("n", "<leader>fk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
+map("n", "<leader>fl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
+map("n", "<leader>fn", function() require("telescope").extensions.notify.notify() end, { desc = "Notifications" })
+map("n", "<leader>fm", function() require("telescope").extensions.media_files.media_files() end, { desc = "Media Files" })
+map("n", "<leader>fM", function() require("telescope.builtin").man_pages() end, { desc = "Man Pages" })
+map("n", "<leader>fo", function() require("telescope.builtin").oldfiles() end, { desc = "Old Files" })
+map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
+map("n", "<leader>fr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
+map("n", "<leader>ft", function() require("telescope.builtin").live_grep() end, { desc = "Live Grep" })
+map("n", "<leader>fT", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
+map("n", "<leader>fs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
+map("n", "<leader>fv", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
+map("n", "<leader>fw", function() require("telescope.builtin").grep_string() end, { desc = "Word Under Cursor" })
 
--- Search --
-map("n", "<leader>s?", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
-map("n", "<leader>s:", function() require("telescope.builtin").command_history() end, { desc = "Command History" })
-map("n", "<leader>st", function() require("telescope.builtin").live_grep() end, { desc = "Live Grep" })
-map("n", "<leader>sw", function() require("telescope.builtin").grep_string() end, { desc = "Word Under Cursor" })
-map("n", "<leader>so", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
-map("n", "<leader>ss", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
-map("n", "<leader>sa", function() require("telescope.builtin").autocommands() end, { desc = "Auto Commands" })
-map("n", "<leader>sc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
-map("n", "<leader>sl", function() require("telescope.builtin").resume() end, { desc = "Last Search" })
-map("n", "<leader>sk", function() require("telescope.builtin").keymaps() end, { desc = "Keymaps" })
-map("n", "<leader>sr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
-
--- Help --
-map("n", "<leader>hh", function() require("telescope.builtin").help_tags() end, { desc = "Help Pages" })
-map("n", "<leader>hm", function() require("telescope.builtin").man_pages() end, { desc = "Man Pages" })
-map("n", "<leader>hn", function() require("telescope").extensions.notify.notify() end, { desc = "Notifications" })
-map("n", "<leader>ht", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
 
 -- Git --
-map("n", "<leader>gb", function() require("telescope.builtin").git_branches() end, { desc = "Checkout Branch" })
-map("n", "<leader>gc", function() require("telescope.builtin").git_commits() end, { desc = "Checkout Commit" })
-map("n", "<leader>gs", function() require("telescope.builtin").git_status() end, { desc = "Open Changed File" })
 map("n", "<leader>gg", function() require("lazygit").lazygitcurrentfile() end, { desc = "LazyGit" })
 map("n", "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, { desc = "LazyGit Repos" })
 
@@ -172,13 +168,13 @@ end
 which_key.register({
     ["<leader>"] = {
         b = { name = "+Buffer" },
-        f = { name = "+Files" },
+        f = { name = "+Find",
+            g = { name = "+Git" },
+        },
         g = { name = "+Git" },
-        h = { name = "+Help" },
         l = { name = "+LSP" },
         m = { name = "+Marks" },
         p = { name = "+Packer" },
-        s = { name = "+Search" },
         S = { name = "+Silicon" },
         t = { name = "+Toggle" },
         u = { name = "+Undo Tree" },

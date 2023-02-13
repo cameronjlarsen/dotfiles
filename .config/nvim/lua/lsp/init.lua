@@ -9,7 +9,7 @@ require("lspconfig.ui.windows").default_options.border = "rounded"
 
 mason_lspconfig.setup({
     ensure_installed = {
-        "sumneko_lua",
+        "lua_ls",
         "clangd",
         "jsonls",
         "texlab",
@@ -31,12 +31,12 @@ mason_lspconfig.setup_handlers({
         end
         lspconfig[server].setup(opts)
     end,
-    ["sumneko_lua"] = function()
+    ["lua_ls"] = function()
         local defaults = require("lsp.providers.defaults").default_config
-        local custom_config = require("lsp.providers.sumneko_lua")
+        local custom_config = require("lsp.providers.lua_ls")
         defaults = vim.tbl_deep_extend("force", defaults, custom_config)
         require("configs.neodev")
-        lspconfig["sumneko_lua"].setup(defaults)
+        lspconfig["lua_ls"].setup(defaults)
     end,
     ["jdtls"] = function()
         lspconfig["jdtls"].setup(require("lsp.providers.jdtls"))
