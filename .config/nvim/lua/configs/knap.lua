@@ -6,14 +6,14 @@ end
 local gknapsettings = {
     mdoutputext           = "pdf",
     mdtopdf               = "pandoc %docroot% -o %outputfile%",
-    mdtopdfviewerlaunch   = "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+    mdtopdfviewerlaunch   = "sioyek %outputfile%",
     mdtopdfviewerrefresh  = "none",
-    mdtopdfforwardjump    = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
+    mdtopdfforwardjump    = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
     texoutputext          = "pdf",
     textopdf              = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
-    textopdfviewerlaunch  = "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+    textopdfviewerlaunch  = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --new-windoow %outputfile%",
     textopdfviewerrefresh = "none",
-    textopdfforwardjump   = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
+    textopdfforwardjump   = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%"
 }
 
 vim.g.knap_settings = gknapsettings

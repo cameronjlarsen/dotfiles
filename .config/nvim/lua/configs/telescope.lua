@@ -139,6 +139,9 @@ telescope.setup {
         harpoon = {
             theme = "dropdown",
             preview = false,
+        },
+        file_browser = {
+            grouped = true,
         }
     },
 }
@@ -154,11 +157,11 @@ local M = {}
 -- Functions
 function M.find_files(opts)
     opts = opts or {
-        follow = true,
-        hidden = true,
-        show_untracked = true,
-        use_git_root = false,
-    }
+            follow = true,
+            hidden = true,
+            show_untracked = true,
+            use_git_root = false,
+        }
     local ok = pcall(require("telescope.builtin").git_files, opts)
     if not ok then
         require("telescope.builtin").find_files(opts)

@@ -149,6 +149,7 @@ return packer.startup(function(use)
     use("tamton-aquib/duck.nvim") -- A duck that waddles arbitrarily in neovim.
     use("ThePrimeagen/harpoon") -- Per project, auto updating and editable marks utility for fast file navigation.
     use("mbbill/undotree") -- The ultimate undo history visualizer for vim.
+    use("lervag/vimtex") -- A modern vim and neovim filetype plugin for LaTeX files.
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

@@ -35,13 +35,13 @@ local function java_keymaps()
         vim.keymap.set(mode, lhs, rhs, opts)
     end
 
-    map("n", "<leader>jo", function() jdtls.organize_imports() end, { desc = "Organize Imports" })
-    map({ "n", "v" }, "<leader>jv", function() jdtls.extract_variable() end, { desc = "Extract Variable" })
-    map({ "n", "v" }, "<leader>jc", function() jdtls.extract_constant() end, { desc = "Extract Constant" })
-    map("v", "<leader>jm", function() jdtls.extract_method() end, { desc = "Extract Method" })
-    map("n", "<leader>jt", function() jdtls.test_nearest_method() end, { desc = "Test Method" })
-    map("n", "<leader>jT", function() jdtls.test_class() end, { desc = "Test Class" })
-    map("n", "<leader>ju", function() jdtls.update_project_config() end, { desc = "Update Config" })
+    map("n", "<leader>lo", function() jdtls.organize_imports() end, { desc = "Organize Imports" })
+    map({ "n", "v" }, "<leader>lxv", function() jdtls.extract_variable() end, { desc = "Extract Variable" })
+    map({ "n", "v" }, "<leader>lxc", function() jdtls.extract_constant() end, { desc = "Extract Constant" })
+    map("v", "<leader>lxm", function() jdtls.extract_method() end, { desc = "Extract Method" })
+    map("n", "<leader>ltm", function() jdtls.test_nearest_method() end, { desc = "Test Method" })
+    map("n", "<leader>ltc", function() jdtls.test_class() end, { desc = "Test Class" })
+    map("n", "<leader>lu", function() jdtls.update_project_config() end, { desc = "Update Config" })
 
     local status_ok, wk = pcall(require, "which-key")
     if not status_ok then
@@ -51,8 +51,11 @@ local function java_keymaps()
 
     wk.register({
         ["<leader>"] = {
-            j = { name = "+Java" },
-        },
+            l = { name = "+LSP",
+                x = { name = "+Extract" },
+                t = { name = "+Test" },
+            },
+        }
     })
 end
 
@@ -153,11 +156,9 @@ local config = {
             useBlocks = true,
         },
     },
-
     flags = {
         allow_incremental_sync = true,
     },
-
     init_options = {
         bundles = bundles,
         extendedClientCapabilities = {
