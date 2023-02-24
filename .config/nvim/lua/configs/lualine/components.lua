@@ -4,49 +4,10 @@ local sep_style = "Default"
 local separators = icons.statusline_separators
 local sep_l = separators[sep_style].Left
 local sep_r = separators[sep_style].Right
-
-
-local function diff_source()
-    ---@diagnostic disable-next-line: undefined-field
-    local gitsigns = vim.b.gitsigns_status_dict
-    if gitsigns then
-        return {
-            added = gitsigns.added,
-            modified = gitsigns.changed,
-            removed = gitsigns.removed,
-        }
-    end
-end
-
-local function get_toggleterm_name()
-    local shell = vim.fn.fnamemodify(vim.env.SHELL, ':t')
-    return string.format('Terminal(%s)[%s]', shell, vim.api.nvim_buf_get_var(0, 'toggle_number'))
-end
-
-local plain = {
-    filetypes = {
-        'help',
-        'minimap',
-        'Trouble',
-        'tsplayground',
-        'NvimTree_1',
-        'undotree',
-        'neoterm',
-        'startify',
-        'markdown',
-        'norg',
-        'neo-tree',
-        'NeogitStatus',
-        'dap-repl',
-        'dapui',
-    },
-    buftypes = {
-        'terminal',
-        'quickfix',
-        'nofile',
-        'nowrite',
-        'acwrite',
-    },
+local filetype = require("lualine.components.filetype"):extend()
+local modules = {
+    highlight = require("lualine.highlight"),
+    utils = require("lualine.utils.utils")
 }
 
 local exceptions = {
@@ -96,7 +57,94 @@ local exceptions = {
     },
 }
 
-return {
+local function diff_source()
+    ---@diagnostic disable-next-line: undefined-field
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+        return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed,
+        }
+    end
+end
+
+local function get_toggleterm_name()
+    local shell = vim.fn.fnamemodify(vim.env.SHELL, ':t')
+    return string.format('Terminal(%s)[%s]', shell, vim.api.nvim_buf_get_var(0, 'toggle_number'))
+end
+
+function filetype:init(options)
+    filetype.super.init(self, options)
+    self.options = options or {}
+    self.icon_hl_cache = {}
+end
+
+function filetype:update_status()
+    local ft = vim.bo.filetype or ""
+    return modules.utils.stl_escape(ft)
+end
+
+function filetype:apply_icon()
+    if not self.options.icons_enabled then
+        return
+    end
+
+    local icon, icon_highlight_group
+    local ok, devicons = pcall(require, "nvim-web-devicons")
+    if ok then
+        icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+        if icon == nil then
+            icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+        end
+
+        if icon == nil and icon_highlight_group == nil then
+            if exceptions.filetypes[vim.bo.filetype] then
+                icon = exceptions.filetypes[vim.bo.filetype]
+                icon_highlight_group = ("DevIcon" .. vim.bo.filetype) or "DevIconDefault"
+            elseif "TelescopePrompt" then
+                icon = require("core.icons").ui.Telescope
+                icon_highlight_group = "DevIconhelp"
+            else
+                icon = ""
+                icon_highlight_group = "DevIconDefault"
+            end
+        end
+        if self.options.colored then
+            local highlight_color = modules.utils.extract_highlight_colors(icon_highlight_group, "fg")
+            if highlight_color then
+                local default_highlight = self:get_default_hl()
+                local icon_highlight = self.icon_hl_cache[highlight_color]
+                if not icon_highlight or not modules.highlight.highlight_exists(icon_highlight.name .. "_normal") then
+                    icon_highlight = self:create_hl({ fg = highlight_color }, icon_highlight_group)
+                    self.icon_hl_cache[highlight_color] = icon_highlight
+                end
+
+                icon = self:format_hl(icon_highlight) .. icon .. default_highlight
+            end
+        end
+    else
+        ok = vim.fn.exists("*WebDevIconsGetFileTypeSymbol")
+        if ok ~= 0 then
+            icon = vim.fn.WebDevIconsGetFileTypeSymbol()
+        end
+    end
+
+    if not icon then
+        return
+    end
+
+    if self.options.icon_only then
+        self.status = icon
+    elseif type(self.options.icon) == "table" and self.options.icon.align == "right" then
+        self.status = self.status .. " " .. icon
+    else
+        self.status = icon .. " " .. self.status
+    end
+end
+
+local M = {}
+M = {
     mode = {
         "mode",
         fmt = function(str)
@@ -105,32 +153,14 @@ return {
         icons_enabled = true,
         separator = { right = sep_r }
     },
-
     filetype = {
-        "filetype",
-        -- fmt = function(str)
-        --     -- This highlights the filetype icon but not the background
-        --     if exceptions.filetypes[str] then
-        --         return exceptions.filetypes[str]
-        --     elseif str == "TelescopePrompt" then
-        --         return icons.ui.Telescope
-        --     else
-        --         local devicons = pcall(require, "nvim-web-devicons")
-        --         if not devicons then
-        --             return str
-        --         else
-        --             local icon, icon_color = require("nvim-web-devicons").get_icon_by_filetype(str)
-        --             return "%#" .. icon_color .. "#" .. icon .. "%*"
-        --         end
-        --     end
-        -- end,
+        filetype,
         icon_only = true,
         icons_enabled = true,
         colored = true,
         padding = 0,
         separator = { right = sep_r },
     },
-
     filename = {
         "filename",
         fmt = function(str)
@@ -153,7 +183,6 @@ return {
         file_status = false,
         separator = { right = sep_r }
     },
-
     -- Git
     branch = {
         "branch",
@@ -163,7 +192,6 @@ return {
         padding = { left = 0, right = 1 },
         separator = { right = sep_r }
     },
-
     diff = {
         "diff",
         source = diff_source,
@@ -176,13 +204,11 @@ return {
         cond = conditions.hide_in_width,
         separator = { right = sep_r }
     },
-
     location = {
         "location",
         padding = { right = 1 },
         separator = { left = sep_l },
     },
-
     progress = {
         "progress",
         ---@diagnostic disable-next-line: unused-local
@@ -191,7 +217,6 @@ return {
         end,
         separator = { left = sep_l },
     },
-
     spaces = {
         function()
             local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
@@ -199,7 +224,6 @@ return {
         end,
         separator = { left = sep_l },
     },
-
     -- LSP
     diagnostics = {
         "diagnostics",
@@ -216,7 +240,6 @@ return {
         update_in_insert = false,
         always_visible = false,
     },
-
     lsp = {
         function()
             local icon = icons.ui.LSP
@@ -269,3 +292,5 @@ return {
         cond = conditions.hide_in_width,
     }
 }
+
+return M
