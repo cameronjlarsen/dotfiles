@@ -20,7 +20,7 @@ lualine.setup({
         lualine_a = { components.mode },
         lualine_b = { components.filetype, components.filename, },
         lualine_c = { components.branch, components.diff },
-        lualine_x = { components.diagnostics, components.lsp },
+        lualine_x = { components.diagnostics, components.treesitter, components.lsp },
         lualine_y = { components.spaces },
         lualine_z = { components.progress },
     },

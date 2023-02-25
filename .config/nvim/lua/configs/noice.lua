@@ -52,7 +52,7 @@ noice.setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp", kind = "message" },
+                    { event = "lsp",      kind = "message" },
                 },
             },
         },
@@ -66,7 +66,7 @@ noice.setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp", kind = "message" },
+                    { event = "lsp",      kind = "message" },
                 },
             },
             filter_opts = { count = 1 },
@@ -167,11 +167,12 @@ noice.setup({
     presets = {
         -- you can enable a preset by setting it to true, or a table that will override the preset config
         -- you can also add custom presets that you can enable/disable with enabled=true
-        bottom_search = false, -- use a classic bottom cmdline for search
+        bottom_search = true, -- use a classic bottom cmdline for search
         command_palette = false, -- position the cmdline and popupmenu together
-        long_message_to_split = false, -- long messages will be sent to a split
+        long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
+        cmdline_output_to_split = false, -- send cmdline output to a split
     },
     throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
     views = {}, ---@see section on views

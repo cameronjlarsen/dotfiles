@@ -1,4 +1,4 @@
-local M = {
+return {
     lspkind = {
         Text = "",
         Method = "m",
@@ -27,7 +27,6 @@ local M = {
         TypeParameter = "",
         Copilot = " ",
     },
-
     statusline_separators = {
         Default = {
             Left = "",
@@ -49,29 +48,51 @@ local M = {
             Right = "",
         },
     },
-
     git = {
         Added = " ",
         Changed = " ",
         Removed = " ",
-        Branch = " ",
+        Diff = "",
+        Repo = "",
+        Branch = "",
         Octoface = " ",
     },
-
     ui = {
-        Telescope = " ",
+        Bug = "",
+        Stacks = "",
+        Scopes = "",
+        Watches = "",
+        Search = " ",
+        DebugConsole = "",
+        Database = "",
+        Calendar = " ",
+        Mail = " ",
+        LSP = " ",
+        LSP_Alt = "לּ ",
+        NewFile = " ",
+        Modified = " ",
+        FileTree = "פּ ",
+        Lock = " ",
+        Help = " ",
+        Lightbulb = "",
+        NoteBook = "ﴬ",
+        Git = " ",
+        GitHub = " ",
         PackageInstalled = " ",
         PackagePending = " ",
         PackageUninstalled = " ",
         PackageError = " ",
         PackageMoved = " ",
+        Stethescope = "",
         Tab = " ",
-        Vim = " ",
+        Telescope = " ",
+        Target = " ",
         Term = " ",
-        LSP = " ",
-        LSP_Alt = "לּ ",
+        Tree = "",
+        Tree_Alt = "侮",
+        Vim = " ",
+        Wand = " ",
     },
-
     diagnostics = {
         Error = " ",
         Warn = " ",
@@ -79,7 +100,6 @@ local M = {
         Hint = " ",
         Question = " ",
     },
-
     dap = {
         Breakpoint = " ",
         BreakpointCondition = "ﳁ ",
@@ -96,5 +116,3 @@ local M = {
         Terminate = "ﱢ ",
     },
 }
-
-return M

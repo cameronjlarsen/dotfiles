@@ -9,53 +9,7 @@ local modules = {
     highlight = require("lualine.highlight"),
     utils = require("lualine.utils.utils")
 }
-
-local exceptions = {
-    buftypes = {
-        terminal = ' ',
-        quickfix = '',
-    },
-    filetypes = {
-        ['org'] = '',
-        ['orgagenda'] = '',
-        ['himalaya-msg-list'] = '',
-        ['mail'] = '',
-        ['dbui'] = '',
-        ['DiffviewFiles'] = 'פּ',
-        ['tsplayground'] = '侮',
-        ['Trouble'] = '',
-        ['NeogitStatus'] = '', -- '',
-        ['norg'] = 'ﴬ',
-        ['help'] = '',
-        ['undotree'] = 'פּ',
-        ['NvimTree'] = 'פּ',
-        ['neo-tree'] = 'פּ',
-        ['toggleterm'] = ' ',
-        ['minimap'] = '',
-        ['octo'] = '',
-        ['dap-repl'] = '',
-    },
-    names = {
-        ['orgagenda'] = 'Org',
-        ['himalaya-msg-list'] = 'Inbox',
-        ['mail'] = 'Mail',
-        ['minimap'] = '',
-        ['dbui'] = 'Dadbod UI',
-        ['tsplayground'] = 'Treesitter',
-        ['NeogitStatus'] = 'Neogit Status',
-        ['Trouble'] = 'Lsp Trouble',
-        ['gitcommit'] = 'Git commit',
-        ['help'] = 'help',
-        ['undotree'] = 'UndoTree',
-        ['octo'] = 'Octo',
-        ['NvimTree'] = 'Nvim Tree',
-        ['dap-repl'] = 'Debugger REPL',
-        ['neo-tree'] = 'Neo Tree',
-        ['toggleterm'] = get_toggleterm_name,
-        ['DiffviewFiles'] = 'Diff View',
-        ['TelescopePrompt'] = 'Telescope'
-    },
-}
+local get_colors = modules.utils.extract_highlight_colors
 
 local function diff_source()
     ---@diagnostic disable-next-line: undefined-field
@@ -73,6 +27,53 @@ local function get_toggleterm_name()
     local shell = vim.fn.fnamemodify(vim.env.SHELL, ':t')
     return string.format('Terminal(%s)[%s]', shell, vim.api.nvim_buf_get_var(0, 'toggle_number'))
 end
+
+local exceptions = {
+    filetypes = {
+        ["org"] = icons.ui.Calendar,
+        ["orgagenda"] = icons.ui.Calendar,
+        ["mail"] = icons.ui.Mail,
+        ["dbui"] = icons.ui.Database,
+        ["DiffviewFiles"] = icons.git.Diff,
+        ["tsplayground"] = icons.ui.Tree_Alt,
+        ["Trouble"] = icons.ui.Stethescope,
+        ["lazygit"] = icons.ui.Git,
+        ["norg"] = icons.ui.NoteBook,
+        ["help"] = icons.ui.Help,
+        ["undotree"] = icons.ui.FileTree,
+        ["NvimTree"] = icons.ui.FileTree,
+        ["neo-tree"] = icons.ui.FileTree,
+        ["toggleterm"] = icons.ui.Term,
+        ["minimap"] = "",
+        ["octo"] = icons.git.Octoface,
+        ["dap-repl"] = icons.ui.Term,
+        ["qf"] = icons.ui.Wand,
+        ["TelescopePrompt"] = icons.ui.Telescope,
+        ["dapui_console"] = icons.ui.DebugConsole,
+        ["dapui_watches"] = icons.ui.Watches,
+        ["dapui_stacks"] = icons.ui.Stacks,
+        ["dapui_breakpoints"] = icons.dap.Breakpoint,
+        ["dapui_scopes"] = icons.ui.Scopes,
+    },
+    names = {
+        ["orgagenda"] = "Org",
+        ["mail"] = "Mail",
+        ["minimap"] = "",
+        ["dbui"] = "Dadbod UI",
+        ["tsplayground"] = "Treesitter",
+        ["Trouble"] = "Lsp Trouble",
+        ["gitcommit"] = "Git Commit",
+        ["help"] = "help",
+        ["undotree"] = "UndoTree",
+        ["octo"] = "Octo",
+        ["NvimTree"] = "Nvim Tree",
+        ["dap-repl"] = "Debugger REPL",
+        ["neo-tree"] = "Neo Tree",
+        ["toggleterm"] = get_toggleterm_name,
+        ["TelescopePrompt"] = "Telescope",
+        ["qf"] = "Quickfix List",
+    },
+}
 
 function filetype:init(options)
     filetype.super.init(self, options)
@@ -102,9 +103,6 @@ function filetype:apply_icon()
             if exceptions.filetypes[vim.bo.filetype] then
                 icon = exceptions.filetypes[vim.bo.filetype]
                 icon_highlight_group = ("DevIcon" .. vim.bo.filetype) or "DevIconDefault"
-            elseif "TelescopePrompt" then
-                icon = require("core.icons").ui.Telescope
-                icon_highlight_group = "DevIconhelp"
             else
                 icon = ""
                 icon_highlight_group = "DevIconDefault"
@@ -175,19 +173,19 @@ M = {
         end,
         path = 0,
         symbols = {
-            modified = "[+]",
-            readonly = "",
+            modified = icons.ui.Modified,
+            readonly = icons.ui.Lock,
             unnamed = " ",
-            newfile = " ",
+            newfile = icons.ui.NewFile,
         },
-        file_status = false,
+        file_status = true,
         separator = { right = sep_r }
     },
     -- Git
     branch = {
         "branch",
         icons_enabled = true,
-        icon = icons.git.Branch,
+        icon = icons.ui.GitHub,
         colored = true,
         padding = { left = 0, right = 1 },
         separator = { right = sep_r }
@@ -261,12 +259,12 @@ M = {
             -- add formatter
             local formatters = require("lsp.providers.null-ls.formatters")
             local registered_formatters = formatters.list_registered(buf_ft)
-            vim.list_extend(client_names, registered_formatters)
+            vim.list_extend(client_names, registered_formatters, 1, #registered_formatters)
 
             -- add linter
             local linters = require("lsp.providers.null-ls.linters")
             local registered_linters = linters.list_registered(buf_ft)
-            vim.list_extend(client_names, registered_linters)
+            vim.list_extend(client_names, registered_linters, 1, #registered_linters)
 
             -- get unique names
             local unique_client_names = vim.fn.uniq(client_names)
@@ -290,7 +288,19 @@ M = {
             end
         end,
         cond = conditions.hide_in_width,
-    }
+    },
+    treesitter = {
+        function()
+            return icons.ui.Tree
+        end,
+        color = function()
+            local buf = vim.api.nvim_get_current_buf()
+            local ts = vim.treesitter.highlighter.active[buf]
+            return {
+                fg = ts and not vim.tbl_isempty(ts) and get_colors("diffAdded", "fg") or get_colors("diffRemoved", "fg") }
+        end,
+        cond = conditions.hide_in_width,
+    },
 }
 
 return M
