@@ -121,6 +121,7 @@ return packer.startup(function(use)
     use("nvim-telescope/telescope-symbols.nvim") -- Picking symbols and insert them at point.
     use("nvim-telescope/telescope-ui-select.nvim") -- Sets vim.ui.select to Telescope.
     use("nvim-telescope/telescope-file-browser.nvim") -- A file browser extension supporting synchronized creation, deletion, renaming, and moving of files and folders.
+    use("nvim-telescope/telescope-live-grep-args.nvim") -- Live grep with args
 
     -- Syntax & Highlighting --
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- Nvim Treesitter configurations and abstraction layer.

@@ -114,8 +114,8 @@ telescope.setup {
         },
     },
     pickers = {
-        live_grep = {
-            layout_strategy = "bottom_pane"
+        current_buffer_fuzzy_find = {
+            previewer = false,
         },
         buffers = {
             theme = "dropdown",
@@ -142,6 +142,14 @@ telescope.setup {
         },
         file_browser = {
             grouped = true,
+        },
+        live_grep_args = {
+            mappings = {
+                i = {
+                    ["<C-o>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+                    ["<C-g>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+                }
+            }
         }
     },
 }
@@ -151,6 +159,7 @@ telescope.load_extension("fzf")
 telescope.load_extension("media_files")
 telescope.load_extension("lazygit")
 telescope.load_extension("notify")
+telescope.load_extension("live_grep_args")
 
 local M = {}
 

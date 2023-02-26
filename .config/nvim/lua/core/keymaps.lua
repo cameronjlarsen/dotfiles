@@ -106,7 +106,7 @@ map("n", "<leader>fM", function() require("telescope.builtin").man_pages() end, 
 map("n", "<leader>fo", function() require("telescope.builtin").oldfiles() end, { desc = "Old Files" })
 map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
 map("n", "<leader>fr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
-map("n", "<leader>ft", function() require("telescope.builtin").live_grep() end, { desc = "Live Grep" })
+map("n", "<leader>ft", function() require("telescope").extensions.live_grep_args.live_grep_args() end, { desc = "Live Grep" })
 map("n", "<leader>fT", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
 map("n", "<leader>fs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
 map("n", "<leader>fv", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
