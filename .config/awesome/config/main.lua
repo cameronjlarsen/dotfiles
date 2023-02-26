@@ -2,26 +2,10 @@ local awful     = require("awful")
 local gears     = require("gears")
 local beautiful = require("beautiful")
 local naughty   = require("naughty")
-local bling     = require("modules.bling")
 require("awful.autofocus")
 
 -- Wallpaper
 screen.connect_signal("request::wallpaper", function(s)
-    -- awful.wallpaper {
-    --     screen = s,
-    --     widget = {
-    --         image     = beautiful.wallpaper,
-    --         upscale   = true,
-    --         downscale = true,
-    --         horizontal_fit_policy = "fit",
-    --         vertical_fit_policy = "fit",
-    --         widget    = wibox.widget.imagebox,
-    --         -- halign = "center",
-    --         -- valign = "center",
-    --         -- tiled  = false,
-    --         -- widget = wibox.container.tile,
-    --     }
-    -- }
     gears.wallpaper.maximized(beautiful.wallpaper, s, false)
 end)
 
@@ -36,9 +20,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         awful.layout.append_default_layouts({
             awful.layout.suit.spiral.dwindle,
             awful.layout.suit.tile,
-            awful.layout.suit.fair,
-            awful.layout.suit.floating,
-            bling.layout.mstab,
         })
     end)
     -- Each screen has its own tag table.

@@ -2,10 +2,10 @@ local awful     = require("awful")
 local mod       = require("config.bindings.mod")
 local beautiful = require("beautiful")
 
-local Alt   = mod.alt
-local Super = mod.super
-local Shift = mod.shift
-local Ctrl  = mod.ctrl
+local Alt       = mod.alt
+local Super     = mod.super
+local Shift     = mod.shift
+local Ctrl      = mod.ctrl
 
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings {
@@ -27,8 +27,8 @@ client.connect_signal("request::default_keybindings", function()
             on_press    = function(c) c:kill() end,
         },
         awful.key {
-            modifiers   = { Super, Ctrl },
-            key         = "space",
+            modifiers   = { Super },
+            key         = "t",
             description = "toggle floating",
             group       = "client",
             on_press    = function(c)
@@ -55,13 +55,6 @@ client.connect_signal("request::default_keybindings", function()
         },
         awful.key {
             modifiers   = { Super },
-            key         = "t",
-            description = "toggle keep on top",
-            group       = "client",
-            on_press    = function(c) c.ontop = not c.ontop end,
-        },
-        awful.key {
-            modifiers   = { Super },
             key         = "n",
             description = "minimize",
             group       = "client",
@@ -74,12 +67,13 @@ client.connect_signal("request::default_keybindings", function()
             group       = "client",
             on_press    = function(c)
                 local s = awful.screen.focused()
-                if c.maximized then
-                    s.padding = 0
-                else
-                    s.padding = beautiful.useless_gap * 2
-                end
                 c.maximized = not c.maximized
+                if c.maximized then
+                    s.padding = beautiful.useless_gap * 2
+                    awful.placement.maximize(c, { honor_workarea = true, honor_padding = true })
+                else
+                    s.padding = 0
+                end
                 c:raise()
             end,
         },
@@ -90,12 +84,13 @@ client.connect_signal("request::default_keybindings", function()
             group       = "client",
             on_press    = function(c)
                 local s = awful.screen.focused()
-                if c.maximized_vertical then
-                    s.padding = 0
-                else
-                    s.padding = beautiful.useless_gap
-                end
                 c.maximized_vertical = not c.maximized_vertical
+                if c.maximized_vertical then
+                    s.padding = beautiful.useless_gap
+                    awful.placement.maximize_vertically(c, { honor_workarea = true, honor_padding = true })
+                else
+                    s.padding = 0
+                end
                 c:raise()
             end,
         },
@@ -106,12 +101,13 @@ client.connect_signal("request::default_keybindings", function()
             group       = "client",
             on_press    = function(c)
                 local s = awful.screen.focused()
-                if c.maximized_horizontal then
-                    s.padding = 0
-                else
-                    s.padding = beautiful.useless_gap * 2
-                end
                 c.maximized_horizontal = not c.maximized_horizontal
+                if c.maximized_horizontal then
+                    s.padding = beautiful.useless_gap * 2
+                    awful.placement.maximize_horizontally(c, { honor_workarea = true, honor_padding = true })
+                else
+                    s.padding = 0
+                end
                 c:raise()
             end,
         },
