@@ -10,6 +10,15 @@ local function get_opacity(os)
     end
 end
 
+local function enable_wayland()
+    local wayland = os.getenv("XDG_SESSION_TYPE")
+    if wayland == "wayland" then
+        return true
+    else
+        return false
+    end
+end
+
 local function font_with_fallback(name, params)
     local names = { name, "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded" }
     return wezterm.font_with_fallback(names, params)
@@ -200,7 +209,7 @@ return {
     -- Cursor style
     default_cursor_style                       = "BlinkingUnderline",
     -- X11
-    enable_wayland                             = false,
+    enable_wayland                             = enable_wayland(),
     -- Colorscheme
     colors                                     = {
         split = colors.surface0,
