@@ -1,5 +1,14 @@
 local wezterm = require("wezterm")
 local hostname = wezterm.hostname()
+local get_os = io.popen("uname -s", "r"):read("*l")
+
+local function get_opacity(os)
+    if os == "Darwin" then
+        return 0.85
+    else
+        return 1
+    end
+end
 
 local function font_with_fallback(name, params)
     local names = { name, "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded" }
@@ -179,8 +188,7 @@ end)
 
 return {
     -- OpenGL for GPU acceleration, Software for CPU
-    front_end = "OpenGL",
-
+    front_end                                  = "OpenGL",
     -- Font config
     font                                       = font_with_fallback(font_name),
     harfbuzz_features                          = { "calt=0", "clig=0", "liga=0" },
@@ -189,15 +197,12 @@ return {
     line_height                                = 1.0,
     adjust_window_size_when_changing_font_size = false,
     show_update_window                         = false,
-
     -- Cursor style
-    default_cursor_style = "BlinkingUnderline",
-
+    default_cursor_style                       = "BlinkingUnderline",
     -- X11
-    enable_wayland = false,
-
+    enable_wayland                             = false,
     -- Colorscheme
-    colors = {
+    colors                                     = {
         split = colors.surface0,
         foreground = colors.text,
         background = colors.base,
@@ -261,45 +266,40 @@ return {
             },
         },
     },
-
     -- Window
-    window_padding    = {
+    window_padding                             = {
         left   = 8,
         right  = 8,
         top    = 8,
         bottom = 8,
     },
-    initial_cols      = 110,
-    initial_rows      = 25,
-    inactive_pane_hsb = {
+    initial_cols                               = 110,
+    initial_rows                               = 25,
+    inactive_pane_hsb                          = {
         saturation = 1.0,
         brightness = 0.85
     },
-
-    window_background_opacity = 1.0,
-    window_frame              = {
+    window_background_opacity                  = get_opacity(get_os),
+    window_frame                               = {
         font = font_with_fallback(font_name, { bold = true })
     },
-    window_decorations        = "RESIZE",
-    window_close_confirmation = "NeverPrompt",
-
+    window_decorations                         = "RESIZE",
+    window_close_confirmation                  = "NeverPrompt",
     -- General
-    automatically_reload_config = true,
-    audible_bell                = "Disabled",
-    enable_scroll_bar           = false,
-
+    automatically_reload_config                = true,
+    audible_bell                               = "Disabled",
+    enable_scroll_bar                          = false,
     -- Tab Bar
-    enable_tab_bar                 = true,
-    use_fancy_tab_bar              = false,
-    hide_tab_bar_if_only_one_tab   = true,
-    show_tab_index_in_tab_bar      = false,
-    tab_bar_at_bottom              = true,
-    show_new_tab_button_in_tab_bar = false,
-    tab_max_width                  = 150,
-
+    enable_tab_bar                             = true,
+    use_fancy_tab_bar                          = false,
+    hide_tab_bar_if_only_one_tab               = true,
+    show_tab_index_in_tab_bar                  = false,
+    tab_bar_at_bottom                          = true,
+    show_new_tab_button_in_tab_bar             = false,
+    tab_max_width                              = 150,
     -- Keybinds
-    disable_default_key_bindings = false,
-    keys = {
+    disable_default_key_bindings               = false,
+    keys                                       = {
         {
             mods = "ALT",
             key = [[\]],
@@ -332,42 +332,42 @@ return {
                 size = { Percent = 50 },
             }),
         },
-        { key = "t", mods = "CTRL|SHIFT", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }), },
-        { key = "w", mods = "CTRL|SHIFT", action = wezterm.action({ CloseCurrentTab = { confirm = false } }), },
-        { key = "q", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
-        { key = "z", mods = "ALT", action = wezterm.action.TogglePaneZoomState },
-        { key = "F11", mods = "", action = wezterm.action.ToggleFullScreen },
-        { key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-        { key = "j", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
-        { key = "k", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-        { key = "l", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+        { key = "t",     mods = "CTRL|SHIFT", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }), },
+        { key = "w",     mods = "CTRL|SHIFT", action = wezterm.action({ CloseCurrentTab = { confirm = false } }), },
+        { key = "q",     mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+        { key = "z",     mods = "ALT",        action = wezterm.action.TogglePaneZoomState },
+        { key = "F11",   mods = "",           action = wezterm.action.ToggleFullScreen },
+        { key = "h",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+        { key = "j",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+        { key = "k",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+        { key = "l",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
 
-        { key = "h", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
-        { key = "j", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
-        { key = "k", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
-        { key = "l", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
+        { key = "h",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
+        { key = "j",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
+        { key = "k",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
+        { key = "l",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
 
-        { key = "[", mods = "ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
-        { key = "]", mods = "ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
-        { key = "{", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(-1) },
-        { key = "}", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
-        { key = "v", mods = "ALT", action = wezterm.action.ActivateCopyMode },
-        { key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
-        { key = "v", mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
-        { key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
-        { key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
-        { key = "1", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 0 }) },
-        { key = "2", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 1 }) },
-        { key = "3", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 2 }) },
-        { key = "4", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 3 }) },
-        { key = "5", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 4 }) },
-        { key = "6", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 5 }) },
-        { key = "7", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 6 }) },
-        { key = "8", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 7 }) },
-        { key = "9", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
-        { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
+        { key = "[",     mods = "ALT",        action = wezterm.action({ ActivateTabRelative = -1 }) },
+        { key = "]",     mods = "ALT",        action = wezterm.action({ ActivateTabRelative = 1 }) },
+        { key = "{",     mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative( -1) },
+        { key = "}",     mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative(1) },
+        { key = "v",     mods = "ALT",        action = wezterm.action.ActivateCopyMode },
+        { key = "c",     mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
+        { key = "v",     mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
+        { key = "=",     mods = "CTRL",       action = wezterm.action.IncreaseFontSize },
+        { key = "-",     mods = "CTRL",       action = wezterm.action.DecreaseFontSize },
+        { key = "1",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 0 }) },
+        { key = "2",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 1 }) },
+        { key = "3",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 2 }) },
+        { key = "4",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 3 }) },
+        { key = "5",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 4 }) },
+        { key = "6",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 5 }) },
+        { key = "7",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 6 }) },
+        { key = "8",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 7 }) },
+        { key = "9",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
+        { key = "Enter", mods = "ALT",        action = wezterm.action.DisableDefaultAssignment },
     },
-    hyperlink_rules = {
+    hyperlink_rules                            = {
         {
             regex = "\\b\\w+://[\\w.-]+:[0-9]{2,15}\\S*\\b",
             format = "$0",
