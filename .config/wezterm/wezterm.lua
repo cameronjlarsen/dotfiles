@@ -196,6 +196,7 @@ end)
 
 
 return {
+    term                                       = "wezterm",
     -- OpenGL for GPU acceleration, Software for CPU
     front_end                                  = "OpenGL",
     -- Font config
