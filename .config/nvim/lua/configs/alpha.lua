@@ -6,7 +6,7 @@ end
 local home = os.getenv("HOME")
 local dashboard = require("alpha.themes.dashboard")
 
-local function info()
+local function heading_info()
     local datetime = os.date("  %m-%d-%Y    %I:%M %p")
     local version = vim.version()
     ---@diagnostic disable-next-line: need-check-nil
@@ -14,18 +14,113 @@ local function info()
     return datetime .. nvim_version_info
 end
 
-local logo = {
-    [[                               __                ]],
-    [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-    [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-    [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-    [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+local function footer_info()
+    -- Get number of plugins loaded by packer
+    ---@diagnostic disable-next-line: param-type-mismatch
+    local plugins_count = vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1))
+    return "Neovim loaded " .. plugins_count .. " plugins "
+end
+
+local Headers = {
+    NEOVIM = {
+        [[                               __                ]],
+        [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+        [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+        [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+        [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+        [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+    },
+    OCTOPI = {
+        [[                                    ██████                                    ]],
+        [[                                ████▒▒▒▒▒▒████                                ]],
+        [[                              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                              ]],
+        [[                            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                            ]],
+        [[                          ██▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒                              ]],
+        [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▓▓▓▓                          ]],
+        [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▒▒▓▓                          ]],
+        [[                        ██▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒    ██                        ]],
+        [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+        [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+        [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+        [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+        [[                        ██▒▒██▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒██                        ]],
+        [[                        ████  ██▒▒██  ██▒▒▒▒██  ██▒▒██                        ]],
+        [[                        ██      ██      ████      ████                        ]],
+    },
+    SEASONAL = {
+        XMAS = {
+            [[                                                        *                 ]],
+            [[     *                                                          *         ]],
+            [[                                  *                  *        .--.        ]],
+            [[     \/ \/  \/  \/                                        ./   /=*        ]],
+            [[        \/     \/      *            *                ...  (_____)         ]],
+            [[        \ ^ ^/                                       \ \_((^o^))-.     *  ]],
+            [[        (o)(O)--)--------\.                           \   (   ) \  \._.   ]],
+            [[        |    |  ||================((~~~~~~~~~~~~~~~~~))|   ( )   |     \  ]],
+            [[         \__/             ,|        \. * * * * * * ./  (~~~~~~~~~~~)    \ ]],
+            [[  *        ||^||\.____./|| |          \___________/     ~||~~~~|~'\____/ *]],
+            [[           || ||     || || A            ||    ||          ||    |   jurcy ]],
+            [[    *      <> <>     <> <>          (___||____||_____)   ((~~~~~|   *     ]],
+        },
+        HALLOWEEN = {
+            [[                                             ,           ^'^  _      ]],
+            [[                                             )               (_) ^'^ ]],
+            [[        _/\_                    .---------. ((        ^'^            ]],
+            [[        (('>                    )`'`'`'`'`( ||                 ^'^   ]],
+            [[   _    /^|                    /`'`'`'`'`'`\||           ^'^         ]],
+            [[   =>--/__|m---               /`'`'`'`'`'`'`\|                       ]],
+            [[        ^^           ,,,,,,, /`'`'`'`'`'`'`'`\      ,                ]],
+            [[                    .-------.`|`````````````|`  .   )                ]],
+            [[                   / .^. .^. \|  ,^^, ,^^,  |  / \ ((                ]],
+            [[                  /  |_| |_|  \  |__| |__|  | /,-,\||                ]],
+            [[       _         /_____________\ |")| |  |  |/ |_| \|                ]],
+            [[      (")         |  __   __  |  '==' '=='  /_______\     _          ]],
+            [[     (' ')        | /  \ /  \ |   _______   |,^, ,^,|    (")         ]],
+            [[      \  \        | |--| |--| |  ((--.--))  ||_| |_||   (' ')        ]],
+            [[    _  ^^^ _      | |__| |("| |  ||  |  ||  |,-, ,-,|   /  /         ]],
+            [[  ,' ',  ,' ',    |           |  ||  |  ||  ||_| |_||   ^^^          ]],
+            [[.,,|RIP|,.|RIP|,.,,'==========='==''=='==''=='=======',,....,,,,.,ldb]],
+        },
+        SUMMER = {
+            [[                              _                         ]],
+            [[                           ,--.\`-. __                  ]],
+            [[                         _,.`. \:/,"  `-._              ]],
+            [[                    ,-*" _,.-;-*`-.+"*._ )              ]],
+            [[                   ( ,."* ,-" / `.  \.  `.              ]],
+            [[                  ,"   ,;"  ,"\../\  \:   \             ]],
+            [[                 (   ,"/   / \.,' :   ))  /             ]],
+            [[                  \  |/   / \.,'  /  // ,'              ]],
+            [[                   \_)\ ,' \.,'  (  / )/                ]],
+            [[                       `  \._,'   `"                    ]],
+            [[                          \../                          ]],
+            [[                          \../                          ]],
+            [[                ~        ~\../           ~~             ]],
+            [[         ~~          ~~   \../   ~~   ~      ~~         ]],
+            [[    ~~    ~   ~~  __...---\../-...__ ~~~     ~~         ]],
+            [[      ~~~~  ~_,--'        \../      `--.__ ~~    ~~     ]],
+            [[  ~~~  __,--'              `"             `--.__   ~~~  ]],
+            [[~~  ,--'                                         `--.   ]],
+            [[  '------......______             ______......------` ~~]],
+            [[~~~   ~    ~~      ~ `````---"""""  ~~   ~     ~~       ]],
+            [[       ~~~~    ~~  ~~~~       ~~~~~~  ~ ~~   ~~ ~~~  ~  ]],
+            [[    ~~   ~   ~~~     ~~~ ~         ~~       ~~   SSt    ]],
+            [[             ~        ~~       ~~~       ~              ]],
+        },
+    },
+}
+
+local header = {
+    type = "text",
+    val = Headers.OCTOPI,
+    opts = {
+        position = "center",
+        hl = "DashboardHeader",
+    },
 }
 
 local heading = {
     type = "text",
-    val = info(),
+    val = heading_info(),
     opts = {
         position = "center",
         hl = "DashboardCenter",
@@ -33,45 +128,72 @@ local heading = {
 }
 
 local buttons = {
-    dashboard.button("f", "  Find file", "<cmd>Telescope find_files <CR>", {}),
-    dashboard.button("e", "  New file", "<cmd>ene <BAR> startinsert <CR>", {}),
-    dashboard.button("p", "  Find project", "<cmd>Telescope projects <CR>", {}),
-    dashboard.button("r", "  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
-    dashboard.button("t", "  Find text", "<cmd>Telescope live_grep <CR>", {}),
-    dashboard.button("c", "  Configuration", "<cmd>e" .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>", {}),
-    dashboard.button("q", "  Quit Neovim", "<cmd>qa<CR>", {}),
+    type = "group",
+    val = {
+        dashboard.button("f", "  Find file", "<cmd>Telescope find_files <CR>", {}),
+        dashboard.button("e", "  New file", "<cmd>ene <BAR> startinsert <CR>", {}),
+        dashboard.button("p", "  Find project", "<cmd>Telescope projects <CR>", {}),
+        dashboard.button("r", "  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
+        dashboard.button("t", "  Find text", "<cmd>Telescope live_grep <CR>", {}),
+        dashboard.button("c", "  Configuration", "<cmd>e" .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>", {}),
+        dashboard.button("q", "  Quit Neovim", "<cmd>qa<CR>", {}),
+    },
+    opts = {
+        position = "center",
+        spacing = 1,
+        hl = "DashboardShortcut",
+    },
 }
 
-local function footer()
-    -- Get number of plugins loaded by packer
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local plugins_count = vim.fn.len(vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1))
-    return "Neovim loaded " .. plugins_count .. " plugins "
-end
+local footer = {
+    type = "text",
+    val = footer_info(),
+    opts = {
+        position = "center",
+        hl = "DashboardFooter",
+    },
+}
 
-dashboard.section.header.val = logo
-dashboard.section.buttons.val = buttons
-dashboard.section.footer.val = footer()
-dashboard.section.header.opts.hl = "DashboardHeader"
-dashboard.section.buttons.opts.hl = "DashboardShortcut"
-dashboard.section.footer.opts.hl = "DashboardFooter"
+local section = {
+    header = header,
+    heading = heading,
+    buttons = buttons,
+    footer = footer,
+}
 
-local opts = {
+-- Set padding
+local occupied_lines = {
+    -- occupied lines
+    header = #header.val, -- CONST: number of lines that your header will occupy
+    heading = 1, -- CONST: number of lines that your heading will occupy
+    buttons = #buttons.val * 2 - 1, -- CONST: it calculate the number that buttons will occupy
+    footer = 1, -- CONST: number of lines that the footer will occupy
+    neovim_lines = 3, -- CONST: 2 of command line, 1 of the top bar
+}
+
+local total_padding = vim.api.nvim_get_option('lines') -
+    (occupied_lines.header + occupied_lines.heading + occupied_lines.buttons + occupied_lines.footer + occupied_lines.neovim_lines)
+local top_padding = math.ceil(total_padding * 0.25)
+local middle_padding = math.ceil(total_padding * 0.20)
+local bottom_padding = math.floor(total_padding * 0.30)
+
+local config = {
     layout = {
-        { type = "padding", val = 2 },
-        dashboard.section.header,
-        { type = "padding", val = 3 },
-        heading,
-        { type = "padding", val = 2 },
-        dashboard.section.buttons,
-        { type = "padding", val = 1 },
-        dashboard.section.footer,
+        { type = "padding", val = top_padding },
+        section.header,
+        { type = "padding", val = middle_padding },
+        section.heading,
+        { type = "padding", val = middle_padding },
+        section.buttons,
+        { type = "padding", val = middle_padding },
+        section.footer,
+        { type = "padding", val = bottom_padding },
     },
     opts = {
         margin = 5
     },
 }
--- vim.cmd([[autocmd User AlphaReady echo 'ready']])
+
 vim.api.nvim_create_autocmd({ "User" }, {
     pattern = { "AlphaReady" },
     callback = function()
@@ -88,4 +210,4 @@ vim.api.nvim_create_autocmd({ "User" }, {
     end,
 })
 
-alpha.setup(opts)
+alpha.setup(config)
