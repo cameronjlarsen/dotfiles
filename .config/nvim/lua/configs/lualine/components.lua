@@ -94,6 +94,7 @@ function filetype:apply_icon()
             end
         end
     else
+        ---@diagnostic disable-next-line: cast-local-type
         ok = vim.fn.exists("*WebDevIconsGetFileTypeSymbol")
         if ok ~= 0 then
             icon = vim.fn.WebDevIconsGetFileTypeSymbol()
@@ -133,7 +134,7 @@ M = {
         "filename",
         fmt = function(str)
             local ft = vim.bo.filetype
-            if str:match("toggleterm") then
+            if str:match("toggleterm") and (str ~= "toggleterm.lua") then
                 return get_toggleterm_name()
             elseif exceptions.names[ft] then
                 return exceptions.names[ft]
@@ -267,7 +268,8 @@ M = {
             local buf = vim.api.nvim_get_current_buf()
             local ts = vim.treesitter.highlighter.active[buf]
             return {
-                fg = ts and not vim.tbl_isempty(ts) and get_colors("GitSignsAdd", "fg") or get_colors("GitSignsDelte", "fg") }
+                fg = ts and not vim.tbl_isempty(ts) and get_colors("GitSignsAdd", "fg") or
+                get_colors("GitSignsDelte", "fg") }
         end,
         cond = conditions.hide_in_width,
     },
