@@ -62,7 +62,13 @@ local function keymaps(client, bufnr)
     map("n", "]w",
         function() vim.diagnostic.goto_next({ border = "rounded", severity = vim.diagnostic.severity.WARN }) end,
         { desc = "Next Warning" })
-    map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Send Diagnostics to Quickfix" })
+    map("n", "<leader>lq", function()
+        vim.diagnostic.setloclist({ open = false })
+        local window = vim.api.nvim_get_current_win()
+        vim.cmd.lwindow()
+        vim.api.nvim_set_current_win(window)
+    end
+    , { desc = "Send Diagnostics to Quickfix" })
     map("n", "<leader>ld", function() telescope.diagnostics({ bufnr = 0 }) end, { desc = "Document Diagnostics" })
     map("n", "<leader>lwd", telescope.diagnostics, { desc = "Workspace Diagnostics" })
 
@@ -74,7 +80,8 @@ local function keymaps(client, bufnr)
         map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP signature_help" })
     end
     if caps.documentSymbolProvider then
-        map("n", "<leader>ls", function() telescope.lsp_document_symbols({
+        map("n", "<leader>ls", function()
+            telescope.lsp_document_symbols({
                 symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
                     "Variable" },
             })
@@ -89,7 +96,8 @@ local function keymaps(client, bufnr)
             { desc = "List workspace folders" })
     end
     if caps.workspaceSymbolProvider then
-        map("n", "<leader>lws", function() telescope.lsp_dynamic_workspace_symbols({
+        map("n", "<leader>lws", function()
+            telescope.lsp_dynamic_workspace_symbols({
                 symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait",
                     "Variable" },
             })
@@ -102,8 +110,9 @@ local function keymaps(client, bufnr)
     end
 
     which_key.register({
-        ["<leader>"] = {
-            l = { name = "+LSP",
+            ["<leader>"] = {
+            l = {
+                name = "+LSP",
                 w = "+Workspace"
             },
         }
