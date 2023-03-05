@@ -29,49 +29,23 @@ local function get_toggleterm_name()
 end
 
 local exceptions = {
-    filetypes = {
-        ["org"] = icons.ui.Calendar,
-        ["orgagenda"] = icons.ui.Calendar,
-        ["mail"] = icons.ui.Mail,
-        ["dbui"] = icons.ui.Database,
-        ["DiffviewFiles"] = icons.git.Diff,
-        ["tsplayground"] = icons.ui.Tree_Alt,
-        ["Trouble"] = icons.ui.Stethescope,
-        ["lazygit"] = icons.ui.Git,
-        ["norg"] = icons.ui.NoteBook,
-        ["help"] = icons.ui.Help,
-        ["undotree"] = icons.ui.FileTree,
-        ["NvimTree"] = icons.ui.FileTree,
-        ["neo-tree"] = icons.ui.FileTree,
-        ["toggleterm"] = icons.ui.Term,
-        ["minimap"] = "",
-        ["octo"] = icons.git.Octoface,
-        ["dap-repl"] = icons.ui.Term,
-        ["qf"] = icons.ui.Wand,
-        ["TelescopePrompt"] = icons.ui.Telescope,
-        ["dapui_console"] = icons.ui.DebugConsole,
-        ["dapui_watches"] = icons.ui.Watches,
-        ["dapui_stacks"] = icons.ui.Stacks,
-        ["dapui_breakpoints"] = icons.dap.Breakpoint,
-        ["dapui_scopes"] = icons.ui.Scopes,
-    },
     names = {
-        ["orgagenda"] = "Org",
-        ["mail"] = "Mail",
-        ["minimap"] = "",
-        ["dbui"] = "Dadbod UI",
-        ["tsplayground"] = "Treesitter",
-        ["Trouble"] = "Lsp Trouble",
-        ["gitcommit"] = "Git Commit",
-        ["help"] = "help",
-        ["undotree"] = "UndoTree",
-        ["octo"] = "Octo",
-        ["NvimTree"] = "Nvim Tree",
-        ["dap-repl"] = "Debugger REPL",
-        ["neo-tree"] = "Neo Tree",
-        ["toggleterm"] = get_toggleterm_name,
-        ["TelescopePrompt"] = "Telescope",
-        ["qf"] = "Quickfix List",
+            ["orgagenda"] = "Org",
+            ["mail"] = "Mail",
+            ["minimap"] = "",
+            ["dbui"] = "Dadbod UI",
+            ["tsplayground"] = "Treesitter",
+            ["Trouble"] = "Lsp Trouble",
+            ["gitcommit"] = "Git Commit",
+            ["help"] = "help",
+            ["undotree"] = "UndoTree",
+            ["octo"] = "Octo",
+            ["NvimTree"] = "Nvim Tree",
+            ["dap-repl"] = "Debugger REPL",
+            ["neo-tree"] = "Neo Tree",
+            ["toggleterm"] = get_toggleterm_name,
+            ["TelescopePrompt"] = "Telescope",
+            ["qf"] = "Quickfix List",
     },
 }
 
@@ -94,19 +68,17 @@ function filetype:apply_icon()
     local icon, icon_highlight_group
     local ok, devicons = pcall(require, "nvim-web-devicons")
     if ok then
-        icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+        icon, icon_highlight_group = devicons.get_icon(vim.bo.filetype)
         if icon == nil then
-            icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+            icon, icon_highlight_group = devicons.get_icon(vim.fn.expand("%:t"))
+            if icon == nil then
+                icon, icon_highlight_group = devicons.get_icon_by_filetype(vim.bo.filetype)
+            end
         end
 
         if icon == nil and icon_highlight_group == nil then
-            if exceptions.filetypes[vim.bo.filetype] then
-                icon = exceptions.filetypes[vim.bo.filetype]
-                icon_highlight_group = ("DevIcon" .. vim.bo.filetype) or "DevIconDefault"
-            else
-                icon = ""
-                icon_highlight_group = "DevIconDefault"
-            end
+            icon = ""
+            icon_highlight_group = "DevIconDefault"
         end
         if self.options.colored then
             local highlight_color = modules.utils.extract_highlight_colors(icon_highlight_group, "fg")
@@ -145,9 +117,7 @@ local M = {}
 M = {
     mode = {
         "mode",
-        fmt = function(str)
-            return icons.ui.Vim .. str
-        end,
+        icon = icons.ui.Vim,
         icons_enabled = true,
         separator = { right = sep_r }
     },
@@ -173,10 +143,10 @@ M = {
         end,
         path = 0,
         symbols = {
-            modified = icons.ui.Modified,
-            readonly = icons.ui.Lock,
+            modified = icons.ui.Modified .. " ",
+            readonly = icons.ui.Lock .. " ",
             unnamed = " ",
-            newfile = icons.ui.NewFile,
+            newfile = icons.ui.NewFile .. " ",
         },
         file_status = true,
         separator = { right = sep_r }
@@ -185,7 +155,7 @@ M = {
     branch = {
         "branch",
         icons_enabled = true,
-        icon = icons.ui.GitHub,
+        icon = icons.ui.GitHub .. " ",
         colored = true,
         padding = { left = 0, right = 1 },
         separator = { right = sep_r }
@@ -195,9 +165,9 @@ M = {
         source = diff_source,
         colored = true,
         symbols = {
-            added = icons.git.Added,
-            modified = icons.git.Changed,
-            removed = icons.git.Removed,
+            added = icons.git.Added .. " ",
+            modified = icons.git.Changed .. " ",
+            removed = icons.git.Removed .. " ",
         },
         cond = conditions.hide_in_width,
         separator = { right = sep_r }
@@ -228,10 +198,10 @@ M = {
         sources = { "nvim_diagnostic" },
         sections = { "error", "warn", "info", "hint" },
         symbols = {
-            error = icons.diagnostics.Error,
-            warn = icons.diagnostics.Warn,
-            info = icons.diagnostics.Info,
-            hint = icons.diagnostics.Hint,
+            error = icons.diagnostics.Error .. " ",
+            warn = icons.diagnostics.Warn .. " ",
+            info = icons.diagnostics.Info .. " ",
+            hint = icons.diagnostics.Hint .. " ",
         },
         cond = conditions.hide_in_width,
         colored = true,
@@ -275,7 +245,7 @@ M = {
             local language_servers = ""
             local client_names_str_len = #client_names_str
             if client_names_str_len ~= 0 then
-                language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. client_names_str
+                language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. " " .. client_names_str
             end
             if copilot_active then
                 language_servers = language_servers .. " " .. "%#SLCopilot#" .. icons.git.Octoface
@@ -297,7 +267,7 @@ M = {
             local buf = vim.api.nvim_get_current_buf()
             local ts = vim.treesitter.highlighter.active[buf]
             return {
-                fg = ts and not vim.tbl_isempty(ts) and get_colors("diffAdded", "fg") or get_colors("diffRemoved", "fg") }
+                fg = ts and not vim.tbl_isempty(ts) and get_colors("GitSignsAdd", "fg") or get_colors("GitSignsDelte", "fg") }
         end,
         cond = conditions.hide_in_width,
     },
