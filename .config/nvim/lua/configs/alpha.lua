@@ -130,11 +130,12 @@ local heading = {
 local buttons = {
     type = "group",
     val = {
-        dashboard.button("f", "  Find file", "<cmd>Telescope find_files <CR>", {}),
+        dashboard.button("f", "  Find file", "<cmd>lua require('configs.telescope').find_files() <CR>", {}),
         dashboard.button("e", "  New file", "<cmd>ene <BAR> startinsert <CR>", {}),
         dashboard.button("p", "  Find project", "<cmd>Telescope projects <CR>", {}),
         dashboard.button("r", "  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
-        dashboard.button("t", "  Find text", "<cmd>Telescope live_grep <CR>", {}),
+        dashboard.button("t", "  Find text",
+        "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {}),
         dashboard.button("c", "  Configuration", "<cmd>e" .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>", {}),
         dashboard.button("q", "  Quit Neovim", "<cmd>qa<CR>", {}),
     },
@@ -164,18 +165,26 @@ local section = {
 -- Set padding
 local occupied_lines = {
     -- occupied lines
-    header = #header.val, -- CONST: number of lines that your header will occupy
-    heading = 1, -- CONST: number of lines that your heading will occupy
+    header = #header.val,           -- CONST: number of lines that your header will occupy
+    heading = 1,                    -- CONST: number of lines that your heading will occupy
     buttons = #buttons.val * 2 - 1, -- CONST: it calculate the number that buttons will occupy
-    footer = 1, -- CONST: number of lines that the footer will occupy
-    neovim_lines = 3, -- CONST: 2 of command line, 1 of the top bar
+    footer = 1,                     -- CONST: number of lines that the footer will occupy
 }
 
-local total_padding = vim.api.nvim_get_option('lines') -
-    (occupied_lines.header + occupied_lines.heading + occupied_lines.buttons + occupied_lines.footer + occupied_lines.neovim_lines)
-local top_padding = math.ceil(total_padding * 0.25)
-local middle_padding = math.ceil(total_padding * 0.20)
-local bottom_padding = math.floor(total_padding * 0.30)
+local function calculate_padding()
+    return vim.fn.winheight(0) -
+        (occupied_lines.header + occupied_lines.heading + occupied_lines.buttons + occupied_lines.footer)
+end
+local total_padding = calculate_padding()
+-- If the padding is negative, then we need to reduce the spacing between buttons
+if total_padding <= 0 then
+    buttons.opts.spacing = 0
+    occupied_lines.buttons = #buttons.val
+    total_padding = calculate_padding()
+end
+local top_padding = vim.fn.max({ 2, vim.fn.floor(total_padding * 0.25) })
+local middle_padding = vim.fn.max({ 2, vim.fn.floor(total_padding * 0.20) })
+local bottom_padding = vim.fn.max({ 2, vim.fn.ceil(total_padding * 0.30) })
 
 local config = {
     layout = {
@@ -193,21 +202,5 @@ local config = {
         margin = 5
     },
 }
-
-vim.api.nvim_create_autocmd({ "User" }, {
-    pattern = { "AlphaReady" },
-    callback = function()
-        vim.opt.showtabline = 0
-        vim.opt.laststatus = 0
-        vim.opt.cmdheight = 0
-        vim.api.nvim_create_autocmd({ "BufUnload" }, {
-            callback = function()
-                vim.opt.showtabline = 2
-                vim.opt.laststatus = 3
-                vim.opt.cmdheight = 1
-            end,
-        })
-    end,
-})
 
 alpha.setup(config)

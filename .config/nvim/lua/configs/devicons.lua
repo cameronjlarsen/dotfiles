@@ -2,7 +2,11 @@ local ok, devicons = pcall(require, "nvim-web-devicons")
 if not ok then
     return
 end
-local icons = require("core.icons")
+local icons = {
+    ui = require("core.icons").get("ui"),
+    git = require("core.icons").get("git"),
+    dap = require("core.icons").get("dap"),
+}
 local get_color = require("core.utils").get_hl_colors
 
 devicons.setup({

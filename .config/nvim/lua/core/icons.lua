@@ -1,5 +1,7 @@
-return {
-    lspkind = {
+local icons = {}
+
+local data = {
+    kind = {
         Text = "",
         Method = "m",
         Function = "",
@@ -47,12 +49,11 @@ return {
     },
     git = {
         Added = "",
-        Changed = "",
+        Changed = "ﯽ",
         Removed = "",
         Diff = "",
         Repo = "",
         Branch = "",
-        Octoface = " ",
     },
     ui = {
         Bug = "",
@@ -66,8 +67,10 @@ return {
         Mail = "",
         LSP = "",
         LSP_Alt = "לּ",
+        Check = "",
         NewFile = "",
-        Modified = "",
+        Modified = "ﯽ",
+        Modified_Alt = "",
         FileTree = "פּ",
         Lock = "",
         Help = "",
@@ -89,7 +92,8 @@ return {
         Tree_Alt = "侮",
         Vim = "",
         Wand = "",
-        Close_Thin = "",
+        Close = "",
+        Close_Alt = "",
         Close_Circle_Filled = "",
         Close_Circle_Empty = "",
         Arrow_Left = "",
@@ -100,6 +104,8 @@ return {
         Arrow_Circle_Right = "",
         Arrow_Circle_Up = "",
         Arrow_Circle_Down = "",
+        Circle = "",
+        Octoface = " ",
     },
     diagnostics = {
         Error = "",
@@ -124,3 +130,21 @@ return {
         Terminate = "ﱢ",
     },
 }
+
+---Get an icon from the specified category
+---@param category "kind" | "statusline_separators" | "git" | "ui" | "diagnostics" | "dap"
+---@param add_space? boolean @Add trailing space after the icon.
+---@return table
+function icons.get(category, add_space)
+    if add_space then
+        return setmetatable({}, {
+            __index = function(_, key)
+                return data[category][key] .. " "
+            end,
+        })
+    else
+        return data[category]
+    end
+end
+
+return icons

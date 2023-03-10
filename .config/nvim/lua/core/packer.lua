@@ -24,7 +24,7 @@ if not status_ok then
     return
 end
 
-local icons = require("core.icons")
+local icons = {ui = require("core.icons").get("ui")}
 -- Have packer use a popup window
 packer.init({
     display = {

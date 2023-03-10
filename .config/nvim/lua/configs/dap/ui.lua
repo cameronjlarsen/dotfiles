@@ -21,17 +21,17 @@ dapui.setup({
         {
             elements = {
                 -- Elements can be strings or table with id and size keys.
-                { id = "scopes", size = 0.33 },
+                { id = "scopes",      size = 0.33 },
                 { id = "breakpoints", size = 0.17 },
-                { id = "stacks", size = 0.25 },
-                { id = "watches", size = 0.25 },
+                { id = "stacks",      size = 0.25 },
+                { id = "watches",     size = 0.25 },
             },
             size = 0.33, -- 40 columns
             position = "right",
         },
         {
             elements = {
-                { id = "repl", size = 0.45 },
+                { id = "repl",    size = 0.45 },
                 { id = "console", size = 0.55 },
             },
             size = 0.25, -- 25% of total lines
@@ -56,8 +56,8 @@ dapui.setup({
         },
     },
     floating = {
-        max_height = 0.9, -- These can be integers or a float between 0 and 1.
-        max_width = 0.5, -- Floats will be treated as percentage of your screen.
+        max_height = 0.9,   -- These can be integers or a float between 0 and 1.
+        max_width = 0.5,    -- Floats will be treated as percentage of your screen.
         border = "rounded", -- Border style. Can be "single", "double" or "rounded"
         mappings = {
             close = { "q", "<Esc>" },
@@ -71,7 +71,7 @@ dapui.setup({
     }
 })
 
-local icons = require("core.icons")
+local icons = { dap = require("core.icons").get("dap") }
 vim.fn.sign_define("DapBreakpoint", { text = icons.dap.Breakpoint, texthl = "DapBreakpoint", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointCondition",
     { text = icons.dap.BreakpointCondition, texthl = "DapBreakpointCondition", linehl = "", numhl = "" })

@@ -1,7 +1,13 @@
-local icons = require("core.icons")
+local icons = {
+    ui = require("core.icons").get("ui", true),
+    _ui = require("core.icons").get("ui"),
+    git = require("core.icons").get("git", true),
+    diagnostics = require("core.icons").get("diagnostics", true),
+    separators = require("core.icons").get("statusline_separators"),
+}
 local conditions = require("configs.lualine.conditions")
 local sep_style = "Default"
-local separators = icons.statusline_separators
+local separators = icons.separators
 local sep_l = separators[sep_style].Left
 local sep_r = separators[sep_style].Right
 local filetype = require("lualine.components.filetype"):extend()
@@ -118,7 +124,7 @@ local M = {}
 M = {
     mode = {
         "mode",
-        icon = icons.ui.Vim,
+        icon = icons._ui.Vim,
         icons_enabled = true,
         separator = { right = sep_r }
     },
@@ -144,10 +150,10 @@ M = {
         end,
         path = 0,
         symbols = {
-            modified = icons.ui.Modified .. " ",
-            readonly = icons.ui.Lock .. " ",
+            modified = icons.ui.Modified,
+            readonly = icons.ui.Lock,
             unnamed = " ",
-            newfile = icons.ui.NewFile .. " ",
+            newfile = icons.ui.NewFile,
         },
         file_status = true,
         separator = { right = sep_r }
@@ -156,7 +162,7 @@ M = {
     branch = {
         "branch",
         icons_enabled = true,
-        icon = icons.ui.GitHub .. " ",
+        icon = icons.ui.GitHub,
         colored = true,
         padding = { left = 0, right = 1 },
         separator = { right = sep_r }
@@ -166,9 +172,9 @@ M = {
         source = diff_source,
         colored = true,
         symbols = {
-            added = icons.git.Added .. " ",
-            modified = icons.git.Changed .. " ",
-            removed = icons.git.Removed .. " ",
+            added = icons.git.Added,
+            modified = icons.git.Changed,
+            removed = icons.git.Removed,
         },
         cond = conditions.hide_in_width,
         separator = { right = sep_r }
@@ -189,7 +195,7 @@ M = {
     spaces = {
         function()
             local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
-            return icons.ui.Tab .. " " .. shiftwidth
+            return icons.ui.Tab .. shiftwidth
         end,
         separator = { left = sep_l },
     },
@@ -199,10 +205,10 @@ M = {
         sources = { "nvim_diagnostic" },
         sections = { "error", "warn", "info", "hint" },
         symbols = {
-            error = icons.diagnostics.Error .. " ",
-            warn = icons.diagnostics.Warn .. " ",
-            info = icons.diagnostics.Info .. " ",
-            hint = icons.diagnostics.Hint .. " ",
+            error = icons.diagnostics.Error,
+            warn = icons.diagnostics.Warn,
+            info = icons.diagnostics.Info,
+            hint = icons.diagnostics.Hint,
         },
         cond = conditions.hide_in_width,
         colored = true,
@@ -212,6 +218,7 @@ M = {
     lsp = {
         function()
             local icon = icons.ui.LSP
+            local copilot_icon = icons.ui.Octoface
             local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
             local clients = vim.lsp.get_active_clients()
             local client_names = {}
@@ -246,10 +253,10 @@ M = {
             local language_servers = ""
             local client_names_str_len = #client_names_str
             if client_names_str_len ~= 0 then
-                language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. " " .. client_names_str
+                language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. client_names_str
             end
             if copilot_active then
-                language_servers = language_servers .. " " .. "%#SLCopilot#" .. icons.git.Octoface
+                language_servers = language_servers .. " " .. "%#SLCopilot#" .. copilot_icon
             end
 
             if client_names_str_len == 0 and not copilot_active then
@@ -262,14 +269,15 @@ M = {
     },
     treesitter = {
         function()
-            return icons.ui.Tree
+            return icons._ui.Tree
         end,
         color = function()
             local buf = vim.api.nvim_get_current_buf()
             local ts = vim.treesitter.highlighter.active[buf]
             return {
-                fg = ts and not vim.tbl_isempty(ts) and get_colors("GitSignsAdd", "fg") or
-                get_colors("GitSignsDelte", "fg") }
+                fg = ts and (not vim.tbl_isempty(ts)) and get_colors("GitSignsAdd", "fg") or
+                    get_colors("GitSignsDelete", "fg")
+            }
         end,
         cond = conditions.hide_in_width,
     },

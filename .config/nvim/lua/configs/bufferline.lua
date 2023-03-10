@@ -3,9 +3,10 @@ if not status_ok then
     return
 end
 
-local icons = require("core.icons")
+local icons = {
+    ui = require("core.icons").get("ui"),
+}
 local cp = require("catppuccin.palettes").get_palette()
-local active_bg = cp.surface0
 bufferline.setup {
     options = {
         numbers = "none",                    -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -15,10 +16,10 @@ bufferline.setup {
         middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
         indicator = {
             icon = "▌",
-            style = "icon"
+            style = "underline"
         },
-        buffer_close_icon = icons.ui.Close_Thin,
-        modified_icon = icons.git.Changed,
+        buffer_close_icon = icons.ui.Close,
+        modified_icon = icons.ui.Modified,
         close_icon = icons.ui.Close_Circle_Filled,
         left_trunc_marker = icons.ui.Arrow_Circle_Left,
         right_trunc_marker = icons.ui.Arrow_Circle_Right,
@@ -36,14 +37,26 @@ bufferline.setup {
         end,
         offsets = {
             {
-                filetype = "NvimTree",
                 text = "File Explorer",
-                padding = 1
+                filetype = "NvimTree",
+                highlight = "NvimTreeNormal",
+                text_align = "left",
+                separator = true,
             },
             {
-                filetype = "undotree",
                 text = "Undo Tree",
-                padding = 1
+                filetype = "undotree",
+                separator = true,
+            },
+            {
+                text = "Database UI",
+                filetype = "dbui",
+                separator = true,
+            },
+            {
+                text = " DIFF VIEW",
+                filetype = "DiffviewFiles",
+                separator = true,
             },
         },
         show_buffer_icons = true,
@@ -64,15 +77,7 @@ bufferline.setup {
     highlights = require("catppuccin.groups.integrations.bufferline").get({
         custom = {
             all = {
-                buffer_selected = { bg = active_bg },
-                separator_selected = { bg = active_bg },
-                close_button_selected = { bg = active_bg },
-                indicator_selected = { fg = cp.lavender, bg = active_bg },
-                error_selected = { bg = active_bg },
-                warning_selected = { bg = active_bg },
-                info_selected = { bg = active_bg },
-                hint_selected = { bg = active_bg },
-                diagnostic_selected = { bg = active_bg },
+                indicator_selected = { fg = cp.lavender },
             }
         }
     })

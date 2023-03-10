@@ -11,7 +11,7 @@ lualine.setup({
         theme = "catppuccin",
         component_separators = "",
         section_separators = { left = "", right = "" },
-        disabled_filetypes = { "dashboard", "Outline", "lspinfo", "mason", "checkhealth", },
+        disabled_filetypes = { "alpha", "dashboard", "Outline", "lspinfo", "mason", "checkhealth", },
         ignore_focus = {},
         always_divide_middle = true,
         globalstatus = true,

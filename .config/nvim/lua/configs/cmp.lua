@@ -12,7 +12,9 @@ if not deps_ok then
 end
 
 require("luasnip.loaders.from_vscode").lazy_load()
-local kind_icons = require("core.icons").lspkind
+local icons = {
+    kind = require("core.icons").get("kind"),
+}
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -33,14 +35,14 @@ cmp.setup({
             or cmp_dap.is_dap_buffer()
     end,
     mapping = cmp.mapping.preset.insert({
-        ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-        ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-        ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-y>"] = cmp.mapping({
+            ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+            ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+            ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+            ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-y>"] = cmp.mapping({
             i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
             c = function(fallback)
                 if cmp.visible() then
@@ -50,13 +52,13 @@ cmp.setup({
                 end
             end,
         }),
-        ["<C-e>"] = cmp.mapping({
+            ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
         -- Accept currently selected item. If none selected, and selections are visible, close cmp, else fallback.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping(function(fallback)
+            ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() and cmp.get_selected_entry() then
                 cmp.confirm({
                     behavior = cmp.ConfirmBehavior.Replace,
@@ -68,7 +70,7 @@ cmp.setup({
                 fallback()
             end
         end),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+            ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
@@ -79,7 +81,7 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s", }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -96,7 +98,7 @@ cmp.setup({
             if not prsnt then
                 -- Kind icons
                 -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-                vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+                vim_item.kind = string.format("%s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             else
                 return lspkind.cmp_format({
                     mode = "symbol",
@@ -105,25 +107,25 @@ cmp.setup({
                 })
             end
             vim_item.menu = ({
-                nvim_lsp_signature_help = "[LSP SignatureHelp]",
-                nvim_lsp = "[LSP]",
-                luasnip = "[LuaSnip]",
-                nvim_lua = "[Lua]",
-                buffer = "[Buffer]",
-                rg = "[Rg]",
-                path = "[Path]",
-                latex_symbols = "[LaTeX]",
-                emoji = "[Emoji]",
-                dap = "[Dap]",
-                copilot = "[Copilot]"
-            })[entry.source.name]
+                    nvim_lsp_signature_help = "[LSP SignatureHelp]",
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[LuaSnip]",
+                    nvim_lua = "[Lua]",
+                    buffer = "[Buffer]",
+                    rg = "[Rg]",
+                    path = "[Path]",
+                    latex_symbols = "[LaTeX]",
+                    emoji = "[Emoji]",
+                    dap = "[Dap]",
+                    copilot = "[Copilot]"
+                })[entry.source.name]
             return vim_item
         end,
     },
     sources = cmp.config.sources(
         {
             { name = "copilot" },
-            { name = "nvim_lsp", keyword_length = 1 },
+            { name = "nvim_lsp",                keyword_length = 1 },
             { name = "nvim_lsp_signature_help", keyword_length = 1 },
             { name = "nvim_lua" },
             { name = "luasnip" },
@@ -131,7 +133,7 @@ cmp.setup({
         {
             { name = "path" },
             { name = "buffer", keyword_length = 5 },
-            { name = "rg", keyword_length = 5 },
+            { name = "rg",     keyword_length = 5 },
         },
         {
             { name = "latex_symbols" },
