@@ -82,75 +82,75 @@ local colors = {
 
 local function get_process(tab)
     local process_icons = {
-        ["docker"] = {
+            ["docker"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-        ["docker-compose"] = {
+            ["docker-compose"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-        ["nvim"] = {
+            ["nvim"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.custom_vim },
         },
-        ["vim"] = {
+            ["vim"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.dev_vim },
         },
-        ["node"] = {
+            ["node"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.mdi_hexagon },
         },
-        ["zsh"] = {
+            ["zsh"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_terminal },
         },
-        ["bash"] = {
+            ["bash"] = {
             { Foreground = { Color = colors.subtext0 } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
         },
-        ["htop"] = {
+            ["htop"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
         },
-        ["btop"] = {
+            ["btop"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
         },
-        ["cargo"] = {
+            ["cargo"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_rust },
         },
-        ["go"] = {
+            ["go"] = {
             { Foreground = { Color = colors.sapphire } },
             { Text = wezterm.nerdfonts.mdi_language_go },
         },
-        ["lazydocker"] = {
+            ["lazydocker"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-        ["git"] = {
+            ["git"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_git },
         },
-        ["lazygit"] = {
+            ["lazygit"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_git },
         },
-        ["lua"] = {
+            ["lua"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.seti_lua },
         },
-        ["wget"] = {
+            ["wget"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_arrow_down_box },
         },
-        ["curl"] = {
+            ["curl"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_flattr },
         },
-        ["gh"] = {
+            ["gh"] = {
             { Foreground = { Color = colors.mauve } },
             { Text = wezterm.nerdfonts.dev_github_badge },
         },
@@ -201,14 +201,14 @@ return {
     front_end                                  = "OpenGL",
     -- Font config
     font                                       = font_with_fallback(font_name),
-    harfbuzz_features                          = { "calt=0", "clig=0", "liga=0" },
     warn_about_missing_glyphs                  = false,
     font_size                                  = 16,
     line_height                                = 1.0,
+    underline_thickness                        = "300%",
     adjust_window_size_when_changing_font_size = false,
     show_update_window                         = false,
     -- Cursor style
-    default_cursor_style                       = "BlinkingUnderline",
+    default_cursor_style                       = "BlinkingBar",
     -- X11
     enable_wayland                             = enable_wayland(),
     -- Colorscheme
@@ -223,8 +223,8 @@ return {
         selection_fg = colors.text,
         visual_bell = colors.surface0,
         indexed = {
-            [16] = colors.peach,
-            [17] = colors.rosewater,
+                [16] = colors.peach,
+                [17] = colors.rosewater,
         },
         scrollbar_thumb = colors.surface2,
         compose_cursor = colors.flamingo,
@@ -351,15 +351,13 @@ return {
         { key = "j",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
         { key = "k",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
         { key = "l",     mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
-
         { key = "h",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
         { key = "j",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
         { key = "k",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
         { key = "l",     mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
-
         { key = "[",     mods = "ALT",        action = wezterm.action({ ActivateTabRelative = -1 }) },
         { key = "]",     mods = "ALT",        action = wezterm.action({ ActivateTabRelative = 1 }) },
-        { key = "{",     mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative( -1) },
+        { key = "{",     mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative(-1) },
         { key = "}",     mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative(1) },
         { key = "v",     mods = "ALT",        action = wezterm.action.ActivateCopyMode },
         { key = "c",     mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
