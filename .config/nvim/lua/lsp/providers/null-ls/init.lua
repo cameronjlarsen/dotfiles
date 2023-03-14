@@ -54,6 +54,7 @@ null_ls.setup({
     on_attach = require("lsp.providers.defaults").on_attach,
     sources = {
         b.code_actions.gitsigns,
+        b.code_actions.refactoring,
         b.formatting.google_java_format,
         b.formatting.latexindent,
         b.diagnostics.zsh,

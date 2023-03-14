@@ -5,6 +5,7 @@ end
 
 local icons = {
     ui = require("core.icons").get("ui"),
+    diagnostics = require("core.icons").get("diagnostics"),
 }
 local cp = require("catppuccin.palettes").get_palette()
 bufferline.setup {

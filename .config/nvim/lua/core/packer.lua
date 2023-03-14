@@ -145,6 +145,7 @@ return packer.startup(function(use)
     use("b0o/SchemaStore.nvim") -- JSON schemas for Neovim.
     use("https://git.sr.ht/~whynothugo/lsp_lines.nvim") -- Simple neovim plugin that renders diagnostics using virtual lines on top of the real line of code.
     use("lvimuser/lsp-inlayhints.nvim") -- Partial implementation of LSP inlay hint
+    use("ThePrimeagen/refactoring.nvim") -- Refactoring plugin for Neovim.
 
     -- Language Support
     use("mfussenegger/nvim-jdtls") -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.ls.
