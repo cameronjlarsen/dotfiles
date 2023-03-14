@@ -91,8 +91,8 @@ map("n", "<leader>fb", function() require("telescope.builtin").current_buffer_fu
 map("n", "<leader>fB", function() require("telescope").extensions.file_browser.file_browser() end,
     { desc = "File Browser" })
 map("n", "<leader>fc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
-map("n", "<leader>fe", function() require("nvim-tree").toggle({ find_file = false }) end, { desc = "Filetree" })
-map("n", "<leader>fE", function() require("nvim-tree").toggle({ find_file = true }) end, { desc = "Filetree Focus File" })
+map("n", "<leader>fe", function() require("nvim-tree.api").tree.toggle({ find_file = false }) end, { desc = "Filetree" })
+map("n", "<leader>fE", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end, { desc = "Filetree Focus File" })
 map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Files" })
 map("n", "<leader>fgb", function() require("telescope.builtin").git_branches() end, { desc = "Branchs" })
 map("n", "<leader>fgc", function() require("telescope.builtin").git_commits() end, { desc = "Commits" })
