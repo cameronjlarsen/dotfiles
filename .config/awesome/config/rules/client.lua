@@ -35,17 +35,20 @@ ruled.client.connect_signal("request::rules", function()
                 "Event Tester", -- xev.
                 "Capture Launcher",
                 "PayPal Checkout - Review your payment - Mozilla Firefox",
+                "Library",
+                "Friends List",
+                "Steam - News",
             },
             role     = {
-                "AlarmWindow", -- Thunderbird's calendar.
+                "AlarmWindow",   -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
             },
             type     = { "splash", "dialog" }
         },
         properties = {
-            floating = true,
-            placement = awful.placement.centered
+            floating  = true,
+            placement = awful.placement.centered + awful.placement.no_offscreen
         }
     }
 
@@ -70,12 +73,6 @@ ruled.client.connect_signal("request::rules", function()
         rule_any   = { type = { "normal", "dialog" } },
         properties = { titlebars_enabled = true }
     }
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- ruled.client.append_rule {
-    --     rule       = { class = "Firefox"     },
-    --     properties = { screen = 1, tag = "2" }
-    -- }
 end)
 
 -- This fixes fullscreen applications like games starting offset on screen

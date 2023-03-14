@@ -71,22 +71,26 @@ theme.fg_minimize = theme.colors.subtext0
 theme.flash_focus_start_opacity = 0.6
 theme.flash_focus_step          = 0.01
 
-theme.tabbed_spawn_in_tab       = false
+theme.tabbed_spawn_in_tab       = true
 theme.tabbar_disable            = true
 theme.tabbar_ontop              = false
-theme.tabbar_radius             = 0
+theme.tabbar_radius             = dpi(10)
 theme.tabbar_style              = "modern"
-theme.tabbar_font               = nil
-theme.tabbar_size               = 40
-theme.tabbar_position           = "bottom"
-theme.tabbar_bg_normal          = theme.titlebar_bg_normal
-theme.tabbar_fg_normal          = theme.titlebar_fg_normal
-theme.tabbar_bg_focus           = theme.titlebar_bg_focus
-theme.tabbar_fg_focus           = theme.titlebar_fg_focus
+theme.tabbar_font               = theme.font
+theme.tabbar_size               = dpi(35)
+theme.tabbar_position           = "top"
+theme.tabbar_bg_normal          = theme.colors.base
+theme.tabbar_fg_normal          = theme.colors.text
+theme.tabbar_bg_focus           = theme.colors.surface1
+theme.tabbar_fg_focus           = theme.colors.text
 theme.tabbar_bg_focus_inactive  = nil
 theme.tabbar_fg_focus_inactive  = nil
 theme.tabbar_bg_normal_inactive = nil
 theme.tabbar_fg_normal_inactive = nil
+theme.tabbar_color_close        = theme.colors.red
+theme.tabbar_color_min          = theme.colors.yellow
+theme.tabbar_color_float        = theme.colors.green
+
 
 -- Titlebar
 theme.titlebar_bg_normal   = theme.colors.base
@@ -165,6 +169,7 @@ theme.border_color_normal     = theme.colors.surface0
 theme.border_color_active     = theme.colors.lavender
 theme.border_color_urgent     = theme.colors.maroon
 theme.border_color_maximized  = theme.colors.green
+theme.border_color_tabbed     = theme.colors.red
 theme.border_radius           = dpi(5)
 -- theme.bg_systray           = theme.wibar_container_bg
 theme.systray_icon_spacing    = dpi(5)

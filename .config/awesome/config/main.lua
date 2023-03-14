@@ -38,17 +38,17 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s:connect_signal("swapped", function(self, other, is_source)
         if not is_source then return end
 
-        local st = self.selected_tag
-        local sc = st:clients() -- NOTE: this is only here for convinience
-        local ot = other.selected_tag
-        local oc = ot:clients() -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
+        local selected_tag = self.selected_tag
+        local selected_clients = selected_tag:clients() -- NOTE: this is only here for convinience
+        local other_tag = other.selected_tag
+        local other_clients = other_tag:clients()       -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
 
-        for _, c in ipairs(sc) do
-            c:move_to_tag(ot)
+        for _, c in ipairs(selected_clients) do
+            c:move_to_tag(other_tag)
         end
 
-        for _, c in ipairs(oc) do
-            c:move_to_tag(st)
+        for _, c in ipairs(other_clients) do
+            c:move_to_tag(selected_tag)
         end
     end)
 end)

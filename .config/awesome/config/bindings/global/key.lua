@@ -236,19 +236,19 @@ awful.keyboard.append_global_keybindings {
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
-    awful.key {
-        modifiers   = { Super },
-        key         = "Tab",
-        description = "go back",
-        group       = "client",
-        on_press    = function()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-                bling.module.flash_focus.flashfocus(client.focus)
-            end
-        end,
-    },
+    -- awful.key {
+    --     modifiers   = { Super },
+    --     key         = "Tab",
+    --     description = "go back",
+    --     group       = "client",
+    --     on_press    = function()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --             bling.module.flash_focus.flashfocus(client.focus)
+    --         end
+    --     end,
+    -- },
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "j",
@@ -367,8 +367,8 @@ awful.keyboard.append_global_keybindings {
         on_press    = function() awful.layout.inc(-1) end,
     },
     awful.key {
-        modifiers = { Alt },
-        key = "a",
+        modifiers = { Super },
+        key = "g",
         description = "add client to tab group",
         group = "tabs",
         on_press = function()
@@ -376,8 +376,8 @@ awful.keyboard.append_global_keybindings {
         end,
     },
     awful.key {
-        modifiers = { Alt },
-        key = "d",
+        modifiers = { Super, Shift },
+        key = "g",
         description = "remove client from tab group",
         group = "tabs",
         on_press = function()
@@ -385,8 +385,8 @@ awful.keyboard.append_global_keybindings {
         end,
     },
     awful.key {
-        modifiers = { Alt },
-        key = "s",
+        modifiers = { Super },
+        key = "Tab",
         description = "cycle through tab group",
         group = "tabs",
         on_press = function()
@@ -399,30 +399,30 @@ awful.keyboard.append_global_keybindings {
         description = "swap screens",
         group       = "client",
         on_press    = function()
-            local focused_screen = awful.screen.focused()
-            local s = focused_screen.get_next_in_direction(focused_screen, "right")
+            local self = awful.screen.focused()
+            local other = self.get_next_in_direction(self, "right")
 
             -- FIXME: this only makes sense for two screens
-            if not s then
-                s = focused_screen.get_next_in_direction(focused_screen, "left")
+            if not other then
+                other = self.get_next_in_direction(self, "left")
             end
 
-            if not s then
+            if not other then
                 naughty.notify { preset = naughty.config.presets.critical, title = "could not get other screen" }
                 return
             end
-            -- Get each screens clients
-            local s_clients = s.all_clients
-            local focused_screen_clients = focused_screen.all_clients
+            local selected_tag = self.selected_tag
+            local selected_clients = selected_tag:clients() -- NOTE: this is only here for convinience
+            local other_tag = other.selected_tag
+            local other_clients = other_tag:clients()   -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
 
-            -- Move each client to the other screen
-            for _, c in ipairs(focused_screen_clients) do
-                c.screen = s
+            for _, c in ipairs(selected_clients) do
+                c:move_to_tag(other_tag)
             end
-            for _, c in ipairs(s_clients) do
-                c.screen = focused_screen
+
+            for _, c in ipairs(other_clients) do
+                c:move_to_tag(selected_tag)
             end
-            awful.screen.focus_relative(1)
         end,
     },
 }
