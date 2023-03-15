@@ -1,10 +1,11 @@
-local awful           = require "awful"
-local gears           = require "gears"
-local naughty         = require("naughty")
-local widget_icon_dir = gears.filesystem.get_configuration_dir() .. "icons/network/"
+local awful             = require "awful"
+local gears             = require "gears"
+local naughty           = require("naughty")
+local widget_icon_dir   = gears.filesystem.get_configuration_dir() .. "icons/network/"
+local beautiful         = require("beautiful")
 
-local network_mode = nil
-local interfaces   = {
+local network_mode      = nil
+local interfaces        = {
     lan = "eno1",
     wlan = "wlan0"
 }
@@ -30,7 +31,7 @@ local function network_notify(message, title, app_name, icon)
         message = message,
         title = title,
         app_name = app_name,
-        icon = icon
+        icon = icon,
     })
 end
 
@@ -43,7 +44,6 @@ local function update_widget_icon(icon)
 end
 
 local function update_wireless()
-
     network_mode = "wireless"
 
     -- Create wireless connection notification
@@ -107,7 +107,7 @@ local function update_wireless()
         awful.spawn.easy_async_with_shell(
             [[
 				awk 'NR==3 {printf "%3.0f" ,($3/70)*100}' /proc/net/wireless
-				]]       ,
+				]],
             function(stdout)
                 if not tonumber(stdout) then
                     return
@@ -124,7 +124,6 @@ local function update_wireless()
 end
 
 local function update_wired()
-
     network_mode = "wired"
 
     local function notify_connected()
@@ -138,7 +137,6 @@ local function update_wired()
     awful.spawn.easy_async_with_shell(
         check_internet_health,
         function(stdout)
-
             local widget_icon_name = "wired"
 
             if stdout:match("none") then
@@ -162,7 +160,6 @@ local function update_wired()
 end
 
 local function update_disconnected()
-
     local function notify_wireless_disconnected()
         local message = "Wi-Fi network has been disconnected"
         local title = "Connection Disconnected"

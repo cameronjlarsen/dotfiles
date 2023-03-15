@@ -1,7 +1,6 @@
 local awful     = require("awful")
 local gears     = require("gears")
 local beautiful = require("beautiful")
-local naughty   = require("naughty")
 require("awful.autofocus")
 
 -- Wallpaper
@@ -53,16 +52,25 @@ screen.connect_signal("request::desktop_decoration", function(s)
     end)
 end)
 
+-- This fixes fullscreen applications like games starting offset on screen
+client.connect_signal("property::fullscreen", function(c)
+    if c.fullscreen then
+        gears.timer.delayed_call(function()
+            if c.valid then
+                c:geometry(c.screen.geometry)
+            end
+        end)
+    end
+end)
 
--- Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
-naughty.connect_signal("request::display_error", function(message, startup)
-    naughty.notification {
-        urgency = "critical",
-        title   = "Oops, an error happened" .. (startup and " during startup!" or "!"),
-        message = message
-    }
+-- Set new clients as slave
+client.connect_signal("request::manage", function(c)
+    if not awesome.startup then awful.client.setslave(c) end
+end)
+
+-- Jump to urgent clients automatically
+client.connect_signal("property::urgent", function(c)
+    c:jump_to()
 end)
 
 -- Run autostart script

@@ -1,6 +1,5 @@
 local awful = require("awful")
 local ruled = require("ruled")
-local gears = require("gears")
 
 -- Rules
 -- Rules to apply to new clients.
@@ -73,20 +72,4 @@ ruled.client.connect_signal("request::rules", function()
         rule_any   = { type = { "normal", "dialog" } },
         properties = { titlebars_enabled = true }
     }
-end)
-
--- This fixes fullscreen applications like games starting offset on screen
-client.connect_signal("property::fullscreen", function(c)
-    if c.fullscreen then
-        gears.timer.delayed_call(function()
-            if c.valid then
-                c:geometry(c.screen.geometry)
-            end
-        end)
-    end
-end)
-
--- Set new clients as slave
-client.connect_signal("request::manage", function(c)
-    if not awesome.startup then awful.client.setslave(c) end
 end)

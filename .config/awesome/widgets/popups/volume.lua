@@ -124,8 +124,10 @@ awesome.connect_signal("widget::volume", function()
 
     awful.placement.top_right(volumeDisplay, {
         margins = {
-            top = dpi(70),
-            right = dpi(30),
+            top = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+            bottom = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+            right = beautiful.useless_gap * 2,
+            left = beautiful.useless_gap * 2,
         },
         parent = awful.screen.focused(),
     })

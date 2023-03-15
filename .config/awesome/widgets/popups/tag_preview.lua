@@ -2,20 +2,21 @@ local bling = require("modules.bling")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local dpi = beautiful.xresources.apply_dpi
 
 bling.widget.tag_preview.enable {
     show_client_content = true,
-    x = 10, -- x-coord of the popup
-    y = 10, -- y-coord of the popup
-    scale = 0.25, -- The scaling factor of the previews compared to the screen.
-    honor_padding = true, -- Honor screen padding
+    x = 10,                 -- x-coord of the popup
+    y = 10,                 -- y-coord of the popup
+    scale = 0.25,           -- The scaling factor of the previews compared to the screen.
+    honor_padding = true,   -- Honor screen padding
     honor_workarea = false, -- Honor screen workarea
     placement_fn = function(c)
         awful.placement.top_left(c, {
             margins = {
-                top = dpi(70),
-                left = dpi(30),
+                top = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+                bottom = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+                right = beautiful.useless_gap * 2,
+                left = beautiful.useless_gap * 2,
             },
             parent = awful.screen.focused(),
         })

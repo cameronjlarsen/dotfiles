@@ -7,8 +7,8 @@ local function emit_volume_info()
     awful.spawn.easy_async_with_shell(
         "pamixer --get-mute --get-volume",
         function(stdout)
-            local muted = stdout:match('true')
-            local volume = stdout:match('(%d+)')
+            local muted = stdout:match("true")
+            local volume = stdout:match("(%d+)")
             local muted_int = muted and 1 or 0
             local volume_int = tonumber(volume)
 
@@ -20,7 +20,7 @@ local function emit_volume_info()
             -- when a media file starts playing.
             if volume_int ~= nil then
                 if volume_int ~= volume_old or muted_int ~= muted_old then
-                    awesome.emit_signal('signal::volume', volume_int, muted)
+                    awesome.emit_signal("signal::volume", volume_int, muted)
                     volume_old = volume_int
                     muted_old = muted_int
                 end

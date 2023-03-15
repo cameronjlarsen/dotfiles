@@ -6,7 +6,8 @@ local gears     = require("gears")
 local beautiful = require("beautiful")
 
 local theme_dir = gears.filesystem.get_configuration_dir() .. "themes/"
-beautiful.init(theme_dir .. "catppuccin/theme.lua")
+local theme     = theme_dir .. "catppuccin/theme.lua"
+beautiful.init(theme)
 
 -- Use bash for every shell cmd
 require("awful").util.shell = "/usr/bin/bash"
