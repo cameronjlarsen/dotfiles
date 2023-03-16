@@ -70,7 +70,6 @@ client.connect_signal("request::default_keybindings", function()
                 if c.maximized then
                     awful.placement.maximize(c,
                         { honor_workarea = true, honor_padding = true, margins = beautiful.useless_gap * 2 })
-                else
                 end
                 c:raise()
             end,

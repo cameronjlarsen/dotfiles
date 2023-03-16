@@ -73,5 +73,10 @@ client.connect_signal("property::urgent", function(c)
     c:jump_to()
 end)
 
+client.connect_signal("property::maximized", function(c)
+    awful.placement.maximize(c,
+        { honor_workarea = true, honor_padding = true, margins = beautiful.useless_gap * 2 })
+end)
+
 -- Run autostart script
 awful.spawn.with_shell("~/.config/awesome/config/autorun.sh")
