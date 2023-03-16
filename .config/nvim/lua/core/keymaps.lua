@@ -48,6 +48,7 @@ map("n", "<leader>bb", function() require("telescope.builtin").buffers() end, { 
 -- zv = open enough folds to display the cursor position
 map("n", "n", "nzzzv", { desc = "Next search result" })
 map("n", "N", "Nzzzv", { desc = "Prev search result" })
+map({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
 
 -- Insert --
 -- Press jk fast to enter
@@ -92,7 +93,8 @@ map("n", "<leader>fB", function() require("telescope").extensions.file_browser.f
     { desc = "File Browser" })
 map("n", "<leader>fc", function() require("telescope.builtin").commands() end, { desc = "Commands" })
 map("n", "<leader>fe", function() require("nvim-tree.api").tree.toggle({ find_file = false }) end, { desc = "Filetree" })
-map("n", "<leader>fE", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end, { desc = "Filetree Focus File" })
+map("n", "<leader>fE", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end,
+    { desc = "Filetree Focus File" })
 map("n", "<leader>ff", function() require("configs.telescope").find_files() end, { desc = "Files" })
 map("n", "<leader>fgb", function() require("telescope.builtin").git_branches() end, { desc = "Branchs" })
 map("n", "<leader>fgc", function() require("telescope.builtin").git_commits() end, { desc = "Commits" })
@@ -106,7 +108,8 @@ map("n", "<leader>fM", function() require("telescope.builtin").man_pages() end, 
 map("n", "<leader>fo", function() require("telescope.builtin").oldfiles() end, { desc = "Old Files" })
 map("n", "<leader>fp", function() require("telescope").extensions.projects.projects() end, { desc = "Projects" })
 map("n", "<leader>fr", function() require("telescope.builtin").registers() end, { desc = "Registers" })
-map("n", "<leader>ft", function() require("telescope").extensions.live_grep_args.live_grep_args() end, { desc = "Live Grep" })
+map("n", "<leader>ft", function() require("telescope").extensions.live_grep_args.live_grep_args() end,
+    { desc = "Live Grep" })
 map("n", "<leader>fT", function() vim.cmd("Telescope builtin") end, { desc = "Telescope" })
 map("n", "<leader>fs", function() require("telescope.builtin").symbols() end, { desc = "Symbols" })
 map("n", "<leader>fv", function() require("telescope.builtin").vim_options() end, { desc = "Vim Options" })
@@ -168,7 +171,8 @@ end
 which_key.register({
     ["<leader>"] = {
         b = { name = "+Buffer" },
-        f = { name = "+Find",
+        f = {
+            name = "+Find",
             g = { name = "+Git" },
         },
         g = { name = "+Git" },
