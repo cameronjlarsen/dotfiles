@@ -69,8 +69,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
         placement = function(d)
             return awful.placement.top(d, {
                 margins = {
-                    top = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
-                    bottom = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+                    top = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
+                    bottom = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
                     right = beautiful.useless_gap * 2,
                     left = beautiful.useless_gap * 2,
                 },

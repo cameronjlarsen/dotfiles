@@ -124,8 +124,8 @@ awesome.connect_signal("widget::volume", function()
 
     awful.placement.top_right(volumeDisplay, {
         margins = {
-            top = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
-            bottom = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+            top = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
+            bottom = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
             right = beautiful.useless_gap * 2,
             left = beautiful.useless_gap * 2,
         },
