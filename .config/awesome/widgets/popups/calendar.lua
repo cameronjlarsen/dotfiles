@@ -26,6 +26,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
     s.calendar.calendar = wibox.widget {
         date = os.date("*t"),
+        start_sunday = true,
         font = beautiful.font_family .. " 10",
         spacing = dpi(2),
         widget = wibox.widget.calendar.month,

@@ -140,7 +140,7 @@ theme.taglist_shape                             = gears.shape.rounded_rect
 theme.wibar_bg                                  = theme.colors.base
 theme.wibar_container_bg                        = theme.colors.surface0
 theme.wibar_height                              = dpi(38)
-theme.wibar_margin                              = dpi(10)
+theme.wibar_margin                              = { top = dpi(10), bottom = dpi(5), left = dpi(10), right = dpi(10) }
 
 -- Tooltips
 theme.tooltip_border_color                      = theme.colors.lavender

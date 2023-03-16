@@ -66,13 +66,11 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize",
             group       = "client",
             on_press    = function(c)
-                local s = awful.screen.focused()
                 c.maximized = not c.maximized
                 if c.maximized then
-                    s.padding = beautiful.useless_gap * 2
-                    awful.placement.maximize(c, { honor_workarea = true, honor_padding = true })
+                    awful.placement.maximize(c,
+                        { honor_workarea = true, honor_padding = true, margins = beautiful.useless_gap * 2 })
                 else
-                    s.padding = 0
                 end
                 c:raise()
             end,
@@ -83,13 +81,10 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize vertically",
             group       = "client",
             on_press    = function(c)
-                local s = awful.screen.focused()
                 c.maximized_vertical = not c.maximized_vertical
                 if c.maximized_vertical then
-                    s.padding = beautiful.useless_gap
-                    awful.placement.maximize_vertically(c, { honor_workarea = true, honor_padding = true })
-                else
-                    s.padding = 0
+                    awful.placement.maximize_vertically(c,
+                        { honor_workarea = true, honor_padding = true, margins = beautiful.useless_gap * 2 })
                 end
                 c:raise()
             end,
@@ -100,13 +95,10 @@ client.connect_signal("request::default_keybindings", function()
             description = "(un)maximize horizontally",
             group       = "client",
             on_press    = function(c)
-                local s = awful.screen.focused()
                 c.maximized_horizontal = not c.maximized_horizontal
                 if c.maximized_horizontal then
-                    s.padding = beautiful.useless_gap * 2
-                    awful.placement.maximize_horizontally(c, { honor_workarea = true, honor_padding = true })
-                else
-                    s.padding = 0
+                    awful.placement.maximize_horizontally(c,
+                        { honor_workarea = true, honor_padding = true, margins = beautiful.useless_gap * 2 })
                 end
                 c:raise()
             end,
