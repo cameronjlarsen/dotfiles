@@ -17,7 +17,7 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-completions"
 plug "hlissner/zsh-autopair"
 plug "zap-zsh/supercharge"
-plug "zap-zsh/vim"
+plug "$HOME/repos/vim"
 plug "zap-zsh/fzf"
 plug "zap-zsh/completions"
 plug "gradle/gradle-completion"
@@ -45,4 +45,3 @@ fi
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Starship prompt
 eval "$(starship init zsh)"
-
