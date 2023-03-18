@@ -13,8 +13,8 @@ bling.widget.tag_preview.enable {
     placement_fn = function(c)
         awful.placement.top_left(c, {
             margins = {
-                top = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
-                bottom = beautiful.wibar_height + beautiful.wibar_margin + beautiful.useless_gap * 2,
+                top = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
+                bottom = beautiful.wibar_height + beautiful.wibar_margin.top + beautiful.useless_gap * 2,
                 right = beautiful.useless_gap * 2,
                 left = beautiful.useless_gap * 2,
             },
