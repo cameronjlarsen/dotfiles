@@ -41,6 +41,7 @@ mason_null_ls.setup_handlers({
     cbfmt = function()
         null_ls.register(b.formatting.cbfmt.with({
             condition = with_root_file(".cbfmt.toml"),
+            extra_filetypes = { "pandoc" }
         }))
     end,
     sql_formatter = function()
@@ -48,6 +49,11 @@ mason_null_ls.setup_handlers({
             extra_args = { "--language", "postgres" },
         }))
     end,
+    prettierd = function()
+        null_ls.register(b.formatting.prettierd.with({
+            extra_filetypes = { "pandoc" }
+        }))
+    end
 })
 -- null_ls.setup()
 null_ls.setup({

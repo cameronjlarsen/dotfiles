@@ -5,7 +5,7 @@ end
 
 local gknapsettings = {
     mdoutputext           = "pdf",
-    mdtopdf               = "pandoc %docroot% -o %outputfile%",
+    mdtopdf               = "pandoc -F mermaid-filter %docroot% -o %outputfile%",
     mdtopdfviewerlaunch   = "sioyek %outputfile%",
     mdtopdfviewerrefresh  = "none",
     mdtopdfforwardjump    = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,0)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",

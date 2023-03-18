@@ -41,6 +41,7 @@ local exceptions = {
             ["minimap"] = "",
             ["dbui"] = "Dadbod UI",
             ["tsplayground"] = "Treesitter",
+            ["query"] = "Treesitter",
             ["Trouble"] = "Lsp Trouble",
             ["gitcommit"] = "Git Commit",
             ["help"] = "help",
