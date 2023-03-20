@@ -42,6 +42,12 @@ map("n", "<leader>bc", function() vim.cmd("Bdelete!") end, { desc = "Close Buffe
 map("n", "<leader>bd", function() vim.cmd("Bdelete") end, { desc = "Delete Buffer & Window" })
 map("n", "<leader>bb", function() require("telescope.builtin").buffers() end, { desc = "Buffers" })
 
+-- Navigate mux panes
+map("n", "<A-h>", function() require("Navigator").left() end, { desc = "Navigate mux Pane Left" })
+map("n", "<A-j>", function() require("Navigator").down() end, { desc = "Navigate mux Pane Down" })
+map("n", "<A-k>", function() require("Navigator").up() end, { desc = "Navigate mux Pane Up" })
+map("n", "<A-l>", function() require("Navigator").right() end, { desc = "Navigate mux Pane Right" })
+
 -- Keep text centered while searching
 -- n = next result
 -- zz = redraw at cursor (center screen)

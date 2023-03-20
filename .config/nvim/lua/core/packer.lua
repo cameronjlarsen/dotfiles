@@ -231,6 +231,12 @@ return packer.startup(function(use)
         requires = { "nvim-lua/plenary.nvim" }
     })
     use("mbbill/undotree") -- The ultimate undo history visualizer for vim.
+    use({
+        "numToStr/Navigator.nvim",
+        config = function()
+            require("Navigator").setup()
+        end
+    })    -- Smoothly navigate between neovim and terminal multiplexer(s)
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
