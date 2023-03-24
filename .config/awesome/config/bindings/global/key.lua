@@ -19,63 +19,63 @@ awful.keyboard.append_global_keybindings({
         modifiers   = { Super, },
         key         = "/",
         description = "show help",
-        group       = "awesome",
+        group       = "Awesome",
         on_press    = hotkeys_popup.show_help,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "w",
         description = "show main menu",
-        group       = "awesome",
+        group       = "Awesome",
         on_press    = function() menu.rootmenu:show() end,
     },
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "r",
         description = "reload awesome",
-        group       = "awesome",
+        group       = "Awesome",
         on_press    = awesome.restart,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "q",
         description = "quit awesome",
-        group       = "awesome",
+        group       = "Awesome",
         on_press    = awesome.quit,
     },
     awful.key {
         modifiers   = { Super },
         key         = "Return",
         description = "open a terminal",
-        group       = "launcher",
+        group       = "Launcher",
         on_press    = function() awful.spawn(apps.terminal) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "Return",
         description = "open a Tdrop terminal",
-        group       = "launcher",
+        group       = "Launcher",
         on_press    = function() awful.spawn(apps.tdrop) end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "r",
         description = "run rofi",
-        group       = "launcher",
+        group       = "Launcher",
         on_press    = function() awful.spawn(apps.launcher) end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "w",
         description = "launch web browser",
-        group       = "launcher",
+        group       = "Launcher",
         on_press    = function() awful.spawn(apps.web_browser) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "f",
         description = "launch file manager",
-        group       = "launcher",
+        group       = "Launcher",
         on_press    = function() awful.spawn(apps.file_manager) end,
     },
 })
@@ -86,7 +86,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "XF86AudioRaiseVolume",
         description = "increase volume",
-        group       = "volume",
+        group       = "Volume",
         on_press    = function()
             awful.spawn("pamixer -i 5")
             awesome.emit_signal("widget::volume")
@@ -96,7 +96,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "XF86AudioLowerVolume",
         description = "decrease volume",
-        group       = "volume",
+        group       = "Volume",
         on_press    = function()
             awful.spawn("pamixer -d 5")
             awesome.emit_signal("widget::volume")
@@ -106,7 +106,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "XF86AudioMute",
         description = "mute volume",
-        group       = "volume",
+        group       = "Volume",
         on_press    = function()
             awful.spawn("pamixer -t")
             awesome.emit_signal("widget::volume")
@@ -116,7 +116,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "XF86MonBrightnessUp",
         description = "Increase monitor brightness",
-        group       = "brightness",
+        group       = "Brightness",
         on_press    = function()
             awful.spawn("brightnessctl set 5%+ -q")
         end,
@@ -125,7 +125,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "XF86MonBrightnessDown",
         description = "Decrease monitor brightness",
-        group       = "brightness",
+        group       = "Brightness",
         on_press    = function()
             awful.spawn("brightnessctl set 5%- -q")
         end,
@@ -134,7 +134,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = {},
         key         = "Print",
         description = "manual capture",
-        group       = "screenshot",
+        group       = "Screenshot",
         on_press    = function()
             awful.spawn("flameshot gui")
         end,
@@ -143,7 +143,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Shift },
         key         = "Print",
         description = "single screen capture",
-        group       = "screenshot",
+        group       = "Screenshot",
         on_press    = function()
             awful.spawn("flameshot screen")
         end,
@@ -152,7 +152,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Ctrl },
         key         = "Print",
         description = "open capture launcher",
-        group       = "screenshot",
+        group       = "Screenshot",
         on_press    = function()
             awful.spawn("flameshot launcher")
         end,
@@ -161,7 +161,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Alt, Super },
         key         = "l",
         description = "lockscreen",
-        group       = "screen",
+        group       = "Screen",
         on_press    = function()
             awful.spawn.with_shell("betterlockscreen -l dim")
         end,
@@ -175,21 +175,21 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         key         = "Left",
         description = "view preivous",
-        group       = "tag",
+        group       = "Tags",
         on_press    = awful.tag.viewprev,
     },
     awful.key {
         modifiers   = { Super },
         key         = "Right",
         description = "view next",
-        group       = "tag",
+        group       = "Tags",
         on_press    = awful.tag.viewnext,
     },
     awful.key {
         modifiers   = { Super },
         key         = "Escape",
         description = "go back",
-        group       = "tag",
+        group       = "Tags",
         on_press    = awful.tag.history.restore,
     },
 }
@@ -200,7 +200,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         key         = "j",
         description = "focus next client below",
-        group       = "client",
+        group       = "Client",
         on_press    = function()
             awful.client.focus.global_bydirection("down")
             bling.module.flash_focus.flashfocus(client.focus)
@@ -210,7 +210,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         key         = "k",
         description = "focus next client above",
-        group       = "client",
+        group       = "Client",
         on_press    = function()
             awful.client.focus.global_bydirection("up")
             bling.module.flash_focus.flashfocus(client.focus)
@@ -220,7 +220,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         key         = "h",
         description = "focus next client left",
-        group       = "client",
+        group       = "Client",
         on_press    = function()
             awful.client.focus.global_bydirection("left")
             bling.module.flash_focus.flashfocus(client.focus)
@@ -230,7 +230,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         key         = "l",
         description = "focus next client right",
-        group       = "client",
+        group       = "Client",
         on_press    = function()
             awful.client.focus.global_bydirection("right")
             bling.module.flash_focus.flashfocus(client.focus)
@@ -240,7 +240,7 @@ awful.keyboard.append_global_keybindings {
     --     modifiers   = { Super },
     --     key         = "Tab",
     --     description = "go back",
-    --     group       = "client",
+    --     group       = "Client",
     --     on_press    = function()
     --         awful.client.focus.history.previous()
     --         if client.focus then
@@ -253,7 +253,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Ctrl },
         key         = "j",
         description = "focus the next screen",
-        group       = "screen",
+        group       = "Screen",
         on_press    = function()
             awful.screen.focus_relative(1)
             bling.module.flash_focus.flashfocus(client.focus)
@@ -263,7 +263,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Ctrl },
         key         = "n",
         description = "restore minimized",
-        group       = "client",
+        group       = "Client",
         on_press    = function()
             local c = awful.client.restore()
             if c then
@@ -279,98 +279,98 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Shift },
         key         = "j",
         description = "swap with next client below",
-        group       = "client",
+        group       = "Client",
         on_press    = function() awful.client.swap.global_bydirection("down") end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "k",
         description = "swap with next client above",
-        group       = "client",
+        group       = "Client",
         on_press    = function() awful.client.swap.global_bydirection("up") end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "h",
         description = "swap with next client left",
-        group       = "client",
+        group       = "Client",
         on_press    = function() awful.client.swap.global_bydirection("left") end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "l",
         description = "swap with next client right",
-        group       = "client",
+        group       = "Client",
         on_press    = function() awful.client.swap.global_bydirection("right") end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "u",
         description = "jump to urgent client",
-        group       = "client",
+        group       = "Client",
         on_press    = awful.client.urgent.jumpto,
     },
     awful.key {
         modifiers   = { Super, Alt },
         key         = "Left",
         description = "decrease master width factor",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incmwfact(-0.05) end,
     },
     awful.key {
         modifiers   = { Super, Alt },
         key         = "Right",
         description = "increase master width factor",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incmwfact(0.05) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "Left",
         description = "decrease the number of master clients",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incnmaster(-1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "Right",
         description = "increase the number of master clients",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incnmaster(1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "Left",
         description = "decrease the number of columns",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incnmaster(-1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "Right",
         description = "increase the number of columns",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.tag.incnmaster(1, nil, true) end,
     },
     awful.key {
         modifiers   = { Super },
         key         = "space",
         description = "select next",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.layout.inc(1) end,
     },
     awful.key {
         modifiers   = { Super, Shift },
         key         = "space",
         description = "select previous",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function() awful.layout.inc(-1) end,
     },
     awful.key {
         modifiers = { Super },
         key = "g",
         description = "add client to tab group",
-        group = "tabs",
+        group = "Tabs",
         on_press = function()
             bling.module.tabbed.pick_with_dmenu()
         end,
@@ -379,7 +379,7 @@ awful.keyboard.append_global_keybindings {
         modifiers = { Super, Shift },
         key = "g",
         description = "remove client from tab group",
-        group = "tabs",
+        group = "Tabs",
         on_press = function()
             bling.module.tabbed.pop()
         end,
@@ -388,7 +388,7 @@ awful.keyboard.append_global_keybindings {
         modifiers = { Super },
         key = "Tab",
         description = "cycle through tab group",
-        group = "tabs",
+        group = "Tabs",
         on_press = function()
             bling.module.tabbed.iter()
         end,
@@ -396,13 +396,12 @@ awful.keyboard.append_global_keybindings {
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "o",
-        description = "swap screens",
-        group       = "client",
+        description = "swap selected tags",
+        group       = "Screen",
         on_press    = function()
             local self = awful.screen.focused()
             local other = self.get_next_in_direction(self, "right")
 
-            -- FIXME: this only makes sense for two screens
             if not other then
                 other = self.get_next_in_direction(self, "left")
             end
@@ -414,7 +413,7 @@ awful.keyboard.append_global_keybindings {
             local selected_tag = self.selected_tag
             local selected_clients = selected_tag:clients() -- NOTE: this is only here for convinience
             local other_tag = other.selected_tag
-            local other_clients = other_tag:clients()   -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
+            local other_clients = other_tag:clients()       -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
 
             for _, c in ipairs(selected_clients) do
                 c:move_to_tag(other_tag)
@@ -425,6 +424,26 @@ awful.keyboard.append_global_keybindings {
             end
         end,
     },
+    awful.key {
+        modifiers   = { Super, Shift },
+        key         = "o",
+        description = "swap all tags",
+        group       = "Screen",
+        on_press    = function()
+            local self = awful.screen.focused()
+            local other = self.get_next_in_direction(self, "right")
+
+            if not other then
+                other = self.get_next_in_direction(self, "left")
+            end
+
+            if not other then
+                naughty.notify { preset = naughty.config.presets.critical, title = "could not get other screen" }
+                return
+            end
+            self:swap(other)
+        end,
+    },
 }
 
 -- Tag related keybindings
@@ -433,7 +452,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         keygroup    = "numrow",
         description = "only view tag",
-        group       = "tag",
+        group       = "Tags",
         on_press    = function(index)
             local s
             if screen.count() > 1 then
@@ -459,7 +478,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Ctrl },
         keygroup    = "numrow",
         description = "toggle tag",
-        group       = "tag",
+        group       = "Tags",
         on_press    = function(index)
             local s
             if screen.count() > 1 then
@@ -485,7 +504,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Shift },
         keygroup    = "numrow",
         description = "move focused client to tag",
-        group       = "tag",
+        group       = "Tags",
         on_press    = function(index)
             if client.focus then
                 local s
@@ -514,7 +533,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super, Ctrl, Shift },
         keygroup    = "numrow",
         description = "toggle focused client on tag",
-        group       = "tag",
+        group       = "Tags",
         on_press    = function(index)
             if client.focus then
                 local s
@@ -542,7 +561,7 @@ awful.keyboard.append_global_keybindings {
         modifiers   = { Super },
         keygroup    = "numpad",
         description = "select layout directrly",
-        group       = "layout",
+        group       = "Layout",
         on_press    = function(index)
             local tag = awful.screen.focused().selected_tag
             if tag then

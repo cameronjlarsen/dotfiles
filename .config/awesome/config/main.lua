@@ -34,20 +34,33 @@ screen.connect_signal("request::desktop_decoration", function(s)
         awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
     end
 
+    -- Swap each tag on each screen when swap is called
     s:connect_signal("swapped", function(self, other, is_source)
         if not is_source then return end
 
-        local selected_tag = self.selected_tag
-        local selected_clients = selected_tag:clients() -- NOTE: this is only here for convinience
-        local other_tag = other.selected_tag
-        local other_clients = other_tag:clients()       -- but this HAS to be saved in a variable because we modify the client list in the process of swapping
+        for _, t in ipairs(self.tags) do
+            local fallback_tag = awful.tag.find_by_name(other, tostring(t.name + 5)) or
+                awful.tag.find_by_name(other, tostring(t.name - 5))
+            local self_clients = t:clients()
+            local other_clients
 
-        for _, c in ipairs(selected_clients) do
-            c:move_to_tag(other_tag)
-        end
+            -- If we don't have a tag by the same name, we'll just "throw" the
+            -- client to the first tag on the other screen
+            if not fallback_tag then
+                fallback_tag = other.tags[1]
+                other_clients = {}
+            else
+                other_clients = fallback_tag:clients()
+            end
 
-        for _, c in ipairs(other_clients) do
-            c:move_to_tag(selected_tag)
+
+            for _, c in ipairs(self_clients) do
+                c:move_to_tag(fallback_tag)
+            end
+
+            for _, c in ipairs(other_clients) do
+                c:move_to_tag(t)
+            end
         end
     end)
 end)
