@@ -13,27 +13,7 @@ client.connect_signal("mouse::enter", function(c)
     c:activate { context = "mouse_enter", raise = false }
 end)
 
--- Layouts and tag table
-screen.connect_signal("request::desktop_decoration", function(s)
-    tag.connect_signal("request::default_layouts", function()
-        awful.layout.append_default_layouts({
-            awful.layout.suit.spiral.dwindle,
-            awful.layout.suit.tile,
-        })
-    end)
-    -- Each screen has its own tag table.
-    -- If two screens then split tag table
-    if screen.count() > 1 then
-        if s.index == 1 then
-            awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
-        elseif s.index == 2 then
-            awful.tag({ "6", "7", "8", "9", "10" }, s, awful.layout.layouts[1])
-        end
-        -- All tags on one screen
-    else
-        awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
-    end
-
+awful.screen.connect_for_each_screen(function(s)
     -- Swap each tag on each screen when swap is called
     s:connect_signal("swapped", function(self, other, is_source)
         if not is_source then return end
@@ -63,6 +43,29 @@ screen.connect_signal("request::desktop_decoration", function(s)
             end
         end
     end)
+end)
+
+
+-- Layouts and tag table
+screen.connect_signal("request::desktop_decoration", function(s)
+    tag.connect_signal("request::default_layouts", function()
+        awful.layout.append_default_layouts({
+            awful.layout.suit.spiral.dwindle,
+            awful.layout.suit.tile,
+        })
+    end)
+    -- Each screen has its own tag table.
+    -- If two screens then split tag table
+    if screen.count() > 1 then
+        if s.index == 1 then
+            awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+        elseif s.index == 2 then
+            awful.tag({ "6", "7", "8", "9", "10" }, s, awful.layout.layouts[1])
+        end
+        -- All tags on one screen
+    else
+        awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+    end
 end)
 
 -- This fixes fullscreen applications like games starting offset on screen

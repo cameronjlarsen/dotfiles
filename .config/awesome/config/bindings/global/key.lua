@@ -402,6 +402,7 @@ awful.keyboard.append_global_keybindings {
             local self = awful.screen.focused()
             local other = self.get_next_in_direction(self, "right")
 
+            -- FIXME: this only makes sense for two screens
             if not other then
                 other = self.get_next_in_direction(self, "left")
             end
@@ -433,6 +434,7 @@ awful.keyboard.append_global_keybindings {
             local self = awful.screen.focused()
             local other = self.get_next_in_direction(self, "right")
 
+            -- FIXME: this only makes sense for two screens
             if not other then
                 other = self.get_next_in_direction(self, "left")
             end
@@ -441,7 +443,31 @@ awful.keyboard.append_global_keybindings {
                 naughty.notify { preset = naughty.config.presets.critical, title = "could not get other screen" }
                 return
             end
-            self:swap(other)
+
+            for _, t in ipairs(self.tags) do
+                local fallback_tag = awful.tag.find_by_name(other, tostring(t.name + 5)) or
+                awful.tag.find_by_name(other, tostring(t.name - 5))
+                local self_clients = t:clients()
+                local other_clients
+
+                -- If we don't have a tag by the same name, we'll just "throw" the
+                -- client to the first tag on the other screen
+                if not fallback_tag then
+                    fallback_tag = other.tags[1]
+                    other_clients = {}
+                else
+                    other_clients = fallback_tag:clients()
+                end
+
+
+                for _, c in ipairs(self_clients) do
+                    c:move_to_tag(fallback_tag)
+                end
+
+                for _, c in ipairs(other_clients) do
+                    c:move_to_tag(t)
+                end
+            end
         end,
     },
 }

@@ -51,7 +51,8 @@ local function java_keymaps()
 
     wk.register({
         ["<leader>"] = {
-            l = { name = "+LSP",
+            l = {
+                name = "+LSP",
                 x = { name = "+Extract" },
                 t = { name = "+Test" },
             },
@@ -86,7 +87,19 @@ local config = {
     on_attach = function(client, bufnr)
         require("lsp.providers.defaults").on_attach(client, bufnr)
         require("jdtls.dap").setup_dap_main_class_configs()
-        jdtls.setup_dap()
+        jdtls.setup_dap({
+            config_overrides = {
+                -- args = function()
+                --     local args = {}
+                --     local args_string = vim.fn.input("Args: ")
+                --     for word in args_string:gmatch("%S+") do
+                --         table.insert(args, word)
+                --     end
+                --     return args
+                -- end
+            },
+            hotcodereplace = "auto",
+        })
         jdtls.setup.add_commands()
         java_keymaps()
     end,
