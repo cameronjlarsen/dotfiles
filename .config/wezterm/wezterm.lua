@@ -82,75 +82,75 @@ local colors = {
 
 local function get_process(tab)
     local process_icons = {
-            ["docker"] = {
+        ["docker"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-            ["docker-compose"] = {
+        ["docker-compose"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-            ["nvim"] = {
+        ["nvim"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.custom_vim },
         },
-            ["vim"] = {
+        ["vim"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.dev_vim },
         },
-            ["node"] = {
+        ["node"] = {
             { Foreground = { Color = colors.green } },
             { Text = wezterm.nerdfonts.mdi_hexagon },
         },
-            ["zsh"] = {
+        ["zsh"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_terminal },
         },
-            ["bash"] = {
+        ["bash"] = {
             { Foreground = { Color = colors.subtext0 } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
         },
-            ["htop"] = {
+        ["htop"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
         },
-            ["btop"] = {
+        ["btop"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
         },
-            ["cargo"] = {
+        ["cargo"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_rust },
         },
-            ["go"] = {
+        ["go"] = {
             { Foreground = { Color = colors.sapphire } },
             { Text = wezterm.nerdfonts.mdi_language_go },
         },
-            ["lazydocker"] = {
+        ["lazydocker"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.linux_docker },
         },
-            ["git"] = {
+        ["git"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_git },
         },
-            ["lazygit"] = {
+        ["lazygit"] = {
             { Foreground = { Color = colors.peach } },
             { Text = wezterm.nerdfonts.dev_git },
         },
-            ["lua"] = {
+        ["lua"] = {
             { Foreground = { Color = colors.blue } },
             { Text = wezterm.nerdfonts.seti_lua },
         },
-            ["wget"] = {
+        ["wget"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_arrow_down_box },
         },
-            ["curl"] = {
+        ["curl"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.mdi_flattr },
         },
-            ["gh"] = {
+        ["gh"] = {
             { Foreground = { Color = colors.mauve } },
             { Text = wezterm.nerdfonts.dev_github_badge },
         },
@@ -188,9 +188,15 @@ wezterm.on("format-tab-title", function(tab)
 end)
 
 wezterm.on("update-right-status", function(window)
+    local battery_info = {}
+    for _, b in ipairs(wezterm.battery_info()) do
+        table.insert(battery_info, string.format("%.0f%%", b.state_of_charge * 100))
+    end
+
     window:set_right_status(wezterm.format({
         { Attribute = { Intensity = "Bold" } },
         { Text = wezterm.strftime(" %A, %B %d %Y %I:%M %p ") },
+        { Text = table.concat(battery_info, " ") },
     }))
 end)
 
@@ -223,8 +229,8 @@ return {
         selection_fg = colors.text,
         visual_bell = colors.surface0,
         indexed = {
-                [16] = colors.peach,
-                [17] = colors.rosewater,
+            [16] = colors.peach,
+            [17] = colors.rosewater,
         },
         scrollbar_thumb = colors.surface2,
         compose_cursor = colors.flamingo,
@@ -302,9 +308,9 @@ return {
     -- Tab Bar
     enable_tab_bar                             = true,
     use_fancy_tab_bar                          = false,
-    hide_tab_bar_if_only_one_tab               = true,
+    hide_tab_bar_if_only_one_tab               = false,
     show_tab_index_in_tab_bar                  = false,
-    tab_bar_at_bottom                          = true,
+    tab_bar_at_bottom                          = false,
     show_new_tab_button_in_tab_bar             = false,
     tab_max_width                              = 150,
     -- Keybinds
@@ -364,15 +370,15 @@ return {
         { key = "v",     mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
         { key = "=",     mods = "CTRL",       action = wezterm.action.IncreaseFontSize },
         { key = "-",     mods = "CTRL",       action = wezterm.action.DecreaseFontSize },
-        { key = "1",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 0 }) },
-        { key = "2",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 1 }) },
-        { key = "3",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 2 }) },
-        { key = "4",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 3 }) },
-        { key = "5",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 4 }) },
-        { key = "6",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 5 }) },
-        { key = "7",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 6 }) },
-        { key = "8",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 7 }) },
-        { key = "9",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
+        { key = "1",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 1 }) },
+        { key = "2",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 2 }) },
+        { key = "3",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 3 }) },
+        { key = "4",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 4 }) },
+        { key = "5",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 5 }) },
+        { key = "6",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 6 }) },
+        { key = "7",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 7 }) },
+        { key = "8",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
+        { key = "9",     mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 9 }) },
         { key = "Enter", mods = "ALT",        action = wezterm.action.DisableDefaultAssignment },
     },
     hyperlink_rules                            = {
