@@ -154,6 +154,14 @@ local function get_process(tab)
             { Foreground = { Color = colors.mauve } },
             { Text = wezterm.nerdfonts.dev_github_badge },
         },
+        ["yay"] = {
+            { Foreground = { Color = colors.blue } },
+            { Text = "󰮯" },
+        },
+        ["pacman"] = {
+            { Foreground = { Color = colors.blue } },
+            { Text = "󰮯" },
+        }
     }
 
     local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
