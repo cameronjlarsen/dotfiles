@@ -174,16 +174,95 @@ local function get_current_working_dir(tab)
         or string.format("  %s", string.gsub(current_dir, "(.*[/\\])(.*[^/\\])[/\\]?$", "%2"))
 end
 
-wezterm.on("format-tab-title", function(tab)
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    local active_tab_index = 0
+    for _, t in ipairs(tabs) do
+        if t.is_active then
+            active_tab_index = t.tab_index
+        end
+    end
+
+    local rainbow = {
+        config.resolved_palette.ansi[2],
+        config.resolved_palette.indexed[16],
+        config.resolved_palette.ansi[4],
+        config.resolved_palette.ansi[3],
+        config.resolved_palette.ansi[5],
+        config.resolved_palette.ansi[6],
+    }
+
+    local i = tab.tab_index % 6
+    local background = config.colors.tab_bar.background
+    -- local active_bg = rainbow[i + 1]
+    local active_bg = config.colors.tab_bar.active_tab.bg_color
+    local active_fg = config.colors.tab_bar.active_tab.fg_color
+    local inactive_bg = config.colors.tab_bar.inactive_tab.bg_color
+    local inactive_fg = config.colors.tab_bar.inactive_tab.fg_color
+    local new_tab_bg = config.colors.tab_bar.new_tab.bg_color
+    local inactive_hover_bg = config.colors.tab_bar.inactive_tab_hover.bg_color
+    local inactive_hover_fg = config.colors.tab_bar.inactive_tab_hover.fg_color
+
+    local s_bg, s_fg, e_bg, e_fg
+
+    -- the last tab
+    if tab.tab_index == #tabs - 1 then
+        if tab.is_active then
+            s_bg = active_bg
+            s_fg = active_fg
+            e_bg = new_tab_bg
+            e_fg = active_bg
+        elseif hover then
+            s_bg = inactive_hover_bg
+            s_fg = inactive_hover_fg
+            e_bg = new_tab_bg
+            e_fg = inactive_hover_bg
+        else
+            s_bg = inactive_bg
+            s_fg = inactive_fg
+            e_bg = new_tab_bg
+            e_fg = inactive_bg
+        end
+    elseif tab.tab_index == active_tab_index - 1 then
+        s_bg = inactive_bg
+        s_fg = inactive_fg
+        e_bg = active_bg
+        -- e_bg = rainbow[(i + 1) % 6 + 1]
+        e_fg = inactive_bg
+    elseif tab.is_active then
+        s_bg = active_bg
+        s_fg = active_fg
+        e_bg = inactive_bg
+        e_fg = active_bg
+    elseif hover then
+        s_bg = inactive_hover_bg
+        s_fg = inactive_hover_fg
+        e_bg = new_tab_bg
+        e_fg = inactive_hover_bg
+    else
+        s_bg = inactive_bg
+        s_fg = inactive_fg
+        e_bg = inactive_bg
+        e_fg = inactive_bg
+    end
+
+    local index = string.format(" %s ", tab.tab_index + 1)
+    local title = string.format("%s %s ", get_process(tab), get_current_working_dir(tab))
+
     return wezterm.format({
+        { Background = { Color = background } },
+        { Foreground = { Color = s_bg } },
+        { Text = " " },
+        { Background = { Color = s_bg } },
+        { Foreground = { Color = s_fg } },
         { Attribute = { Intensity = "Half" } },
-        { Text = string.format(" %s  ", tab.tab_index + 1) },
+        { Text = index },
         "ResetAttributes",
-        { Text = get_process(tab) },
-        { Text = " " },
-        { Text = get_current_working_dir(tab) },
-        { Foreground = { Color = colors.base } },
-        { Text = "  ▕" },
+        { Background = { Color = s_bg } },
+        { Foreground = { Color = s_fg } },
+        { Text = title },
+        { Background = { Color = background } },
+        { Foreground = { Color = e_fg } },
+        { Text = " " },
     })
 end)
 
@@ -257,7 +336,7 @@ return {
         tab_bar = {
             background = colors.crust,
             active_tab = {
-                bg_color = "none",
+                bg_color = colors.surface0,
                 fg_color = colors.subtext1,
                 intensity = "Bold",
                 underline = "None",
