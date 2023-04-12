@@ -174,12 +174,27 @@ end
 
 local function get_current_working_dir(tab)
     local current_dir = tab.active_pane.current_working_dir
+    local ROOT_DIR = string.format("file://%s/", hostname:lower())
     local HOME_DIR = string.format("file://%s%s/", hostname:lower(), os.getenv("HOME"))
 
-    return current_dir
-        == HOME_DIR
-        and "  ~"
-        or string.format("  %s", string.gsub(current_dir, "(.*[/\\])(.*[^/\\])[/\\]?$", "%2"))
+    local new_dir = string.format("%s", string.gsub(current_dir, "(.*[/\\])(.*[^/\\])[/\\]?$", "%2"))
+
+    if current_dir == HOME_DIR then
+        new_dir = "~"
+    elseif current_dir == ROOT_DIR then
+        new_dir = "/"
+    end
+
+    return new_dir
+end
+
+local function tab_title(tab_info)
+    local title = tab_info.tab_title
+    if title and #title > 0 then
+        return string.format("%s %s", get_process(tab_info), title)
+    end
+
+    return string.format("%s %s", get_process(tab_info), get_current_working_dir(tab_info))
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
@@ -254,7 +269,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     end
 
     local index = string.format(" %s ", tab.tab_index + 1)
-    local title = string.format("%s %s ", get_process(tab), get_current_working_dir(tab))
+    local title = tab_title(tab)
 
     return wezterm.format({
         { Background = { Color = background } },
