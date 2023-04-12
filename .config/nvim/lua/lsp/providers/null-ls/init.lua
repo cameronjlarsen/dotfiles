@@ -18,43 +18,42 @@ mason_null_ls.setup({
     ensure_installed = {
         "stylua",
     },
+    handlers = {
+        function(source_name, methods)
+            require("mason-null-ls.automatic_setup")(source_name, methods)
+        end,
+        stylua = function()
+            null_ls.register(b.formatting.stylua.with({
+                condition = with_root_file({ "stylua.toml", ".stylua.toml" }),
+            }))
+        end,
+        flake8 = function()
+            null_ls.register(b.diagnostics.flake8)
+        end,
+        clang_format = function()
+            null_ls.register(b.formatting.clang_format.with({
+                disabled_filetypes = { "java", "cs" }
+            }))
+        end,
+        cbfmt = function()
+            null_ls.register(b.formatting.cbfmt.with({
+                condition = with_root_file(".cbfmt.toml"),
+                extra_filetypes = { "pandoc" }
+            }))
+        end,
+        sql_formatter = function()
+            null_ls.register(b.formatting.sql_formatter.with({
+                extra_args = { "--language", "postgres" },
+            }))
+        end,
+        prettierd = function()
+            null_ls.register(b.formatting.prettierd.with({
+                extra_filetypes = { "pandoc" }
+            }))
+        end
+    }
 })
 
--- Setup mason null-ls sources
-mason_null_ls.setup_handlers({
-    function(source_name, methods)
-        require("mason-null-ls.automatic_setup")(source_name, methods)
-    end,
-    stylua = function()
-        null_ls.register(b.formatting.stylua.with({
-            condition = with_root_file({ "stylua.toml", ".stylua.toml" }),
-        }))
-    end,
-    flake8 = function()
-        null_ls.register(b.diagnostics.flake8)
-    end,
-    clang_format = function()
-        null_ls.register(b.formatting.clang_format.with({
-            disabled_filetypes = { "java", "cs" }
-        }))
-    end,
-    cbfmt = function()
-        null_ls.register(b.formatting.cbfmt.with({
-            condition = with_root_file(".cbfmt.toml"),
-            extra_filetypes = { "pandoc" }
-        }))
-    end,
-    sql_formatter = function()
-        null_ls.register(b.formatting.sql_formatter.with({
-            extra_args = { "--language", "postgres" },
-        }))
-    end,
-    prettierd = function()
-        null_ls.register(b.formatting.prettierd.with({
-            extra_filetypes = { "pandoc" }
-        }))
-    end
-})
 -- null_ls.setup()
 null_ls.setup({
     on_attach = require("lsp.providers.defaults").on_attach,
