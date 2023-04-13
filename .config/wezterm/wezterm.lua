@@ -161,7 +161,19 @@ local function get_process(tab)
         ["pacman"] = {
             { Foreground = { Color = colors.blue } },
             { Text = "󰮯" },
-        }
+        },
+        ["ruby"] = {
+            { Foreground = { Color = colors.red } },
+            { Text = wezterm.nerdfonts.dev_ruby },
+        },
+        ["python"] = {
+            { Foreground = { Color = colors.yellow } },
+            { Text = wezterm.nerdfonts.dev_python },
+        },
+        ["python3.10"] = {
+            { Foreground = { Color = colors.yellow } },
+            { Text = wezterm.nerdfonts.dev_python },
+        },
     }
 
     local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
@@ -394,8 +406,8 @@ return {
     initial_cols                               = 110,
     initial_rows                               = 25,
     inactive_pane_hsb                          = {
-        saturation = 1.0,
-        brightness = 0.85
+        saturation = 0.9,
+        brightness = 0.50
     },
     window_background_opacity                  = get_opacity(get_os),
     window_frame                               = {
