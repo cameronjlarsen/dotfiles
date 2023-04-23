@@ -16,6 +16,32 @@ local icons = {
     kind = require("core.icons").get("kind"),
 }
 
+vim.api.nvim_create_autocmd('CursorMovedI', {
+    pattern = '*',
+    callback = function(ev)
+        if not luasnip.session
+            or not luasnip.session.current_nodes[ev.buf]
+            or luasnip.session.jump_active
+        then
+            return
+        end
+
+        local current_node = luasnip.session.current_nodes[ev.buf]
+        local current_start, current_end = current_node:get_buf_position()
+        current_start[1] = current_start[1] + 1 -- (1, 0) indexed
+        current_end[1] = current_end[1] + 1     -- (1, 0) indexed
+        local cursor = vim.api.nvim_win_get_cursor(0)
+
+        if cursor[1] < current_start[1]
+            or cursor[1] > current_end[1]
+            or cursor[2] < current_start[2]
+            or cursor[2] > current_end[2]
+        then
+            luasnip.unlink_current()
+        end
+    end
+})
+
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -100,11 +126,16 @@ cmp.setup({
                 -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
                 vim_item.kind = string.format("%s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             else
-                return lspkind.cmp_format({
-                    mode = "symbol",
+                local kind = lspkind.cmp_format({
+                    mode = "symbol_text",
                     max_width = 50,
                     symbol_map = { Copilot = " " }
-                })
+                })(entry, vim_item)
+                local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                kind.kind = " " .. strings[1] .. " "
+                kind.menu = "    (" .. strings[2] .. ")"
+
+                return kind
             end
             vim_item.menu = ({
                 nvim_lsp_signature_help = "[LSP SignatureHelp]",
@@ -155,8 +186,14 @@ cmp.setup({
         },
     },
     window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Visual,Search:Search",
+            col_offset = -3,
+            side_padding = 0,
+        },
+        documentation = {
+            winhighlight = "Normal:Normal,FloatBorder:Pmenu,CursorLine:Visual,Search:None",
+        },
     },
     experimental = {
         ghost_text = true,

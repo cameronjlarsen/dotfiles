@@ -120,6 +120,10 @@ local config = {
                         name = "JavaSE-19",
                         path = "~/.sdkman/candidates/java/19.0.2-open"
                     },
+                    {
+                        name = "JavaSE-11",
+                        path = "~/.sdkman/candidates/java/11.0.18-amzn"
+                    }
                 }
             },
             maven = {

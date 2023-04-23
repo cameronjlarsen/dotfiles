@@ -36,7 +36,7 @@ noice.setup({
     },
     popupmenu = {
         enabled = true, -- enables the Noice popupmenu UI
-        backend = "nui", -- backend to use to show regular cmdline completions
+        backend = "cmp", -- backend to use to show regular cmdline completions
         -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
         kind_icons = {}, -- set to `false` to disable icons
     },
@@ -171,7 +171,7 @@ noice.setup({
         command_palette = false, -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
+        lsp_doc_border = false, -- add a border to hover docs and signature help
         cmdline_output_to_split = false, -- send cmdline output to a split
     },
     throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.

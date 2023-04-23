@@ -97,6 +97,7 @@ return packer.startup(function(use)
     use("rcarriga/cmp-dap")             -- nvim-cmp source for nvim-dap REPL and nvim-dap-ui buffers.
     use("kdheepak/cmp-latex-symbols")   -- Add latex symbol support for nvim-cmp.
     use("lukas-reineke/cmp-rg")         -- nvim-cmp source for ripgrep.
+    use("onsails/lspkind-nvim")         -- VSCode-like pictograms for neovim lsp completion items.
     use("saadparwaiz1/cmp_luasnip")     -- luasnip completion source for nvim-cmp.
     use("rafamadriz/friendly-snippets") -- Set of preconfigured snippets for different languages.
     use({
@@ -236,7 +237,7 @@ return packer.startup(function(use)
         config = function()
             require("Navigator").setup()
         end
-    })    -- Smoothly navigate between neovim and terminal multiplexer(s)
+    }) -- Smoothly navigate between neovim and terminal multiplexer(s)
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

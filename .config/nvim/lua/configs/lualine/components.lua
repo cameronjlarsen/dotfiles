@@ -36,23 +36,23 @@ end
 
 local exceptions = {
     names = {
-            ["orgagenda"] = "Org",
-            ["mail"] = "Mail",
-            ["minimap"] = "",
-            ["dbui"] = "Dadbod UI",
-            ["tsplayground"] = "Treesitter",
-            ["query"] = "Treesitter",
-            ["Trouble"] = "Lsp Trouble",
-            ["gitcommit"] = "Git Commit",
-            ["help"] = "help",
-            ["undotree"] = "UndoTree",
-            ["octo"] = "Octo",
-            ["NvimTree"] = "Nvim Tree",
-            ["dap-repl"] = "Debugger REPL",
-            ["neo-tree"] = "Neo Tree",
-            ["toggleterm"] = get_toggleterm_name,
-            ["TelescopePrompt"] = "Telescope",
-            ["qf"] = "Quickfix List",
+        ["orgagenda"] = "Org",
+        ["mail"] = "Mail",
+        ["minimap"] = "",
+        ["dbui"] = "Dadbod UI",
+        ["tsplayground"] = "Treesitter",
+        ["query"] = "Treesitter",
+        ["Trouble"] = "Lsp Trouble",
+        ["gitcommit"] = "Git Commit",
+        ["help"] = "help",
+        ["undotree"] = "UndoTree",
+        ["octo"] = "Octo",
+        ["NvimTree"] = "Nvim Tree",
+        ["dap-repl"] = "Debugger REPL",
+        ["neo-tree"] = "Neo Tree",
+        ["toggleterm"] = get_toggleterm_name,
+        ["TelescopePrompt"] = "Telescope",
+        ["qf"] = "Quickfix List",
     },
 }
 
@@ -219,19 +219,14 @@ M = {
     lsp = {
         function()
             local icon = icons.ui.LSP
-            local copilot_icon = icons.ui.Octoface
             local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
             local clients = vim.lsp.get_active_clients()
             local client_names = {}
-            local copilot_active = false
 
             -- add client
             for _, client in ipairs(clients) do
                 if client.name ~= "copilot" and client.name ~= "null-ls" then
                     table.insert(client_names, client.name)
-                end
-                if client.name == "copilot" then
-                    copilot_active = true
                 end
             end
 
@@ -256,17 +251,26 @@ M = {
             if client_names_str_len ~= 0 then
                 language_servers = "%#SLLSPIcon#" .. icon .. "%*" .. client_names_str
             end
-            if copilot_active then
-                language_servers = language_servers .. " " .. "%#SLCopilot#" .. copilot_icon
-            end
 
-            if client_names_str_len == 0 and not copilot_active then
-                return ""
+            if client_names_str_len == 0 then
+                return "%#GitSignsDelete#" .. icon .. "%*" .. "No Active LSP"
             else
                 return language_servers
             end
         end,
         cond = conditions.hide_in_width,
+    },
+    copilot = {
+        function()
+            return icons.ui.Octoface
+        end,
+        color = function()
+            local client = require("copilot.client").get(true)
+            return {
+                fg = client and (not vim.tbl_isempty(client)) and get_colors("GitSignsAdd", "fg") or
+                    get_colors("GitSignsDelete", "fg")
+            }
+        end
     },
     treesitter = {
         function()
