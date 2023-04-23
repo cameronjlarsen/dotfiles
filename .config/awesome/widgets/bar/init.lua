@@ -8,7 +8,7 @@ local beautiful = require("beautiful")
 local volume    = require("widgets.volume")
 local clock     = require("widgets.clock")
 local network   = require("widgets.network")
-local margins   = { top = dpi(5), bottom = dpi(5), left = dpi(10), right = dpi(10) }
+local margins   = { top = dpi(6), bottom = dpi(6), left = dpi(10), right = dpi(10) }
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -36,18 +36,13 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.tray.widget = wibox.widget {
         {
             {
-                {
-                    widget = wibox.widget.systray,
-                    horizontal = false,
-                    screen = "primary",
-                    base_size = 16,
-                },
-                layout = wibox.layout.fixed.horizontal,
+                widget = wibox.widget.systray,
+                horizontal = false,
+                screen = "primary",
+                base_size = 16,
             },
-            margins = dpi(5),
-            widget = wibox.container.margin,
+            layout = wibox.layout.fixed.horizontal,
         },
-        visible = false,
         widget = wibox.container.place,
         valign = "center",
         halign = "center",
@@ -69,10 +64,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
         {
             -- Left widgets
             {
-                s.taglist,
-                widget  = wibox.widget,
-                layout  = wibox.layout.fixed.horizontal,
-                spacing = dpi(10),
+                {
+                    {
+                        s.taglist,
+                        widget = wibox.widget,
+                        layout = wibox.layout.fixed.horizontal,
+                    },
+                    margins = { top = dpi(2), bottom = dpi(2), left = dpi(10), right = dpi(10) },
+                    widget = wibox.container.margin,
+                },
+                widget = wibox.container.background,
+                shape = gears.shape.rounded_rect,
+                bg = beautiful.wibar_container_bg,
             },
             margins = margins,
             widget  = wibox.container.margin
@@ -80,10 +83,19 @@ screen.connect_signal("request::desktop_decoration", function(s)
         {
             -- Middle widget
             {
-                clock,
-                widget  = wibox.widget,
-                layout  = wibox.layout.fixed.horizontal,
-                spacing = dpi(10),
+                {
+                    {
+                        clock,
+                        widget  = wibox.widget,
+                        layout  = wibox.layout.fixed.horizontal,
+                        spacing = dpi(10),
+                    },
+                    margins = margins,
+                    widget = wibox.container.margin,
+                },
+                widget = wibox.container.background,
+                shape = gears.shape.rounded_rect,
+                bg = beautiful.wibar_container_bg,
             },
             margins = margins,
             widget  = wibox.container.margin
@@ -91,14 +103,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
         {
             -- Right widgets
             {
-                s.tray,
-                s.tray.widget,
-                network,
-                volume,
-                s.layoutbox,
-                widget  = wibox.widget,
-                layout  = wibox.layout.fixed.horizontal,
-                spacing = dpi(5),
+                {
+                    {
+                        -- s.tray,
+                        s.tray.widget,
+                        network,
+                        volume,
+                        s.layoutbox,
+                        widget  = wibox.widget,
+                        layout  = wibox.layout.fixed.horizontal,
+                        spacing = dpi(5),
+                    },
+                    margins = margins,
+                    widget  = wibox.container.margin,
+                },
+                widget = wibox.container.background,
+                shape = gears.shape.rounded_rect,
+                bg = beautiful.wibar_container_bg,
             },
             margins = margins,
             widget  = wibox.container.margin

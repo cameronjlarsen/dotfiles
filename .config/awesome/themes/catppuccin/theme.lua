@@ -122,7 +122,7 @@ theme.taglist_bg_normal                         = theme.colors.base
 theme.taglist_bg_focus                          = theme.colors.lavender
 theme.taglist_bg_urgent                         = theme.colors.maroon
 theme.taglist_bg_minimize                       = theme.colors.overlay1
-theme.taglist_bg_empty                          = theme.colors.base
+theme.taglist_bg_empty                          = theme.colors.surface1
 theme.taglist_bg_occupied                       = theme.colors.pink
 
 theme.taglist_fg_normal                         = theme.colors.text
@@ -138,9 +138,9 @@ theme.taglist_shape                             = gears.shape.rounded_rect
 
 -- Wibar
 theme.wibar_bg                                  = theme.colors.base
-theme.wibar_container_bg                        = theme.colors.surface0
-theme.wibar_height                              = dpi(38)
-theme.wibar_margin                              = { top = dpi(10), bottom = dpi(5), left = dpi(10), right = dpi(10) }
+theme.wibar_container_bg                        = theme.colors.surface1
+theme.wibar_height                              = dpi(40)
+theme.wibar_margin                              = { top = dpi(5), bottom = dpi(0), left = dpi(10), right = dpi(10) }
 
 -- Tooltips
 theme.tooltip_border_color                      = theme.colors.lavender
