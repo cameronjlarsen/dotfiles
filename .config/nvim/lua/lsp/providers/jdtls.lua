@@ -88,16 +88,6 @@ local config = {
         require("lsp.providers.defaults").on_attach(client, bufnr)
         require("jdtls.dap").setup_dap_main_class_configs()
         jdtls.setup_dap({
-            config_overrides = {
-                -- args = function()
-                --     local args = {}
-                --     local args_string = vim.fn.input("Args: ")
-                --     for word in args_string:gmatch("%S+") do
-                --         table.insert(args, word)
-                --     end
-                --     return args
-                -- end
-            },
             hotcodereplace = "auto",
         })
         jdtls.setup.add_commands()
@@ -113,16 +103,12 @@ local config = {
                 updateBuildConfiguration = "interactive",
                 runtimes = {
                     {
-                        name = "JavaSE-17",
-                        path = "~/.sdkman/candidates/java/17.0.6-tem"
-                    },
-                    {
                         name = "JavaSE-19",
                         path = "~/.sdkman/candidates/java/19.0.2-open"
                     },
                     {
                         name = "JavaSE-11",
-                        path = "~/.sdkman/candidates/java/11.0.18-amzn"
+                        path = "~/.sdkman/candidates/java/11.0.19-amzn"
                     }
                 }
             },

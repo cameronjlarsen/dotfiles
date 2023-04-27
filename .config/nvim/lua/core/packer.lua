@@ -151,8 +151,8 @@ return packer.startup(function(use)
     -- Language Support
     use("mfussenegger/nvim-jdtls")      -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.ls.
     use("lervag/vimtex")                -- A modern vim and neovim filetype plugin for LaTeX files.
-    use("vim-pandoc/vim-pandoc")        -- Vim plugin for the Pandoc document converter.
-    use("vim-pandoc/vim-pandoc-syntax") -- Syntax files for Pandoc's markdown.
+    -- use("vim-pandoc/vim-pandoc")        -- Vim plugin for the Pandoc document converter.
+    -- use("vim-pandoc/vim-pandoc-syntax") -- Syntax files for Pandoc's markdown.
 
     -- Files/Search --
     use({
