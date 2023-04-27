@@ -49,7 +49,7 @@ theme                           = {
 }
 
 -- Wallpaper
-theme.wallpaper                 = walls_path .. "evening-sky.png"
+theme.wallpaper                 = walls_path .. "cloud.png"
 
 -- Default
 theme.font_family               = "Ubuntu "
