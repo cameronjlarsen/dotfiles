@@ -107,6 +107,10 @@ local config = {
                         path = "~/.sdkman/candidates/java/19.0.2-open"
                     },
                     {
+                        name = "JavaSE-17",
+                        path = "~/.sdkman/candidates/java/17.0.7-amzn"
+                    },
+                    {
                         name = "JavaSE-11",
                         path = "~/.sdkman/candidates/java/11.0.19-amzn"
                     }
