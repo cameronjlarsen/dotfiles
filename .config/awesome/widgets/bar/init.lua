@@ -5,49 +5,17 @@ local dpi       = require("beautiful").xresources.apply_dpi
 local beautiful = require("beautiful")
 
 -- Get widgets
-local volume    = require("widgets.volume")
-local clock     = require("widgets.clock")
-local network   = require("widgets.network")
+local widgets   = {
+    volume    = require("widgets.volume"),
+    clock     = require("widgets.clock"),
+    network   = require("widgets.network"),
+    layoutbox = require("widgets.layoutbox"),
+    taglist   = require("widgets.taglist"),
+    systray   = require("widgets.systray")
+}
 local margins   = { top = dpi(6), bottom = dpi(6), left = dpi(10), right = dpi(10) }
 
 screen.connect_signal("request::desktop_decoration", function(s)
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.layoutbox = require("widgets.layoutbox")(s)
-
-    -- Create a taglist widget
-    s.taglist   = require("widgets.taglist").new({
-        screen = s,
-    })
-
-    s.tray      = wibox.widget {
-        font   = beautiful.font_icon .. 12,
-        text   = " ",
-        valign = "center",
-        halign = "center",
-        widget = wibox.widget.textbox
-    }
-
-    s.tray:add_button(awful.button({}, 1, function()
-        s.tray.text = s.tray.text == " " and "" or " "
-        s.tray.widget.visible = not s.tray.widget.visible
-    end))
-
-    s.tray.widget = wibox.widget {
-        {
-            {
-                widget = wibox.widget.systray,
-                horizontal = false,
-                screen = "primary",
-                base_size = 16,
-            },
-            layout = wibox.layout.fixed.horizontal,
-        },
-        widget = wibox.container.place,
-        valign = "center",
-        halign = "center",
-    }
-
     -- Create the wibox
     s.bar = awful.wibar({
         position          = "top",
@@ -66,7 +34,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             {
                 {
                     {
-                        s.taglist,
+                        widgets.taglist.new({ screen = s }),
                         widget = wibox.widget,
                         layout = wibox.layout.fixed.horizontal,
                     },
@@ -78,14 +46,14 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 bg = beautiful.wibar_container_bg,
             },
             margins = margins,
-            widget  = wibox.container.margin
+            widget  = wibox.container.margin,
         },
         {
             -- Middle widget
             {
                 {
                     {
-                        clock,
+                        widgets.clock,
                         widget  = wibox.widget,
                         layout  = wibox.layout.fixed.horizontal,
                         spacing = dpi(10),
@@ -106,10 +74,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 {
                     {
                         -- s.tray,
-                        s.tray.widget,
-                        network,
-                        volume,
-                        s.layoutbox,
+                        -- widgets.systray,
+                        widgets.network,
+                        widgets.volume,
+                        widgets.layoutbox(s),
                         widget  = wibox.widget,
                         layout  = wibox.layout.fixed.horizontal,
                         spacing = dpi(5),
