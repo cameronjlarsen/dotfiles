@@ -7,7 +7,7 @@ local home = os.getenv("HOME")
 local dashboard = require("alpha.themes.dashboard")
 
 local function heading_info()
-    local datetime = os.date("  %m-%d-%Y    %I:%M %p")
+    local datetime = os.date("  %m-%d-%Y  󰥔  %I:%M %p")
     local version = vim.version()
     ---@diagnostic disable-next-line: need-check-nil
     local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
@@ -130,14 +130,14 @@ local heading = {
 local buttons = {
     type = "group",
     val = {
-        dashboard.button("f", "  Find file", "<cmd>lua require('configs.telescope').find_files() <CR>", {}),
+        dashboard.button("f", "󰈞  Find file", "<cmd>lua require('configs.telescope').find_files() <CR>", {}),
         dashboard.button("e", "  New file", "<cmd>ene <BAR> startinsert <CR>", {}),
         dashboard.button("p", "  Find project", "<cmd>Telescope projects <CR>", {}),
-        dashboard.button("r", "  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
-        dashboard.button("t", "  Find text",
+        dashboard.button("r", "󰄉  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
+        dashboard.button("t", "󰊄  Find text",
         "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {}),
         dashboard.button("c", "  Configuration", "<cmd>e" .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>", {}),
-        dashboard.button("q", "  Quit Neovim", "<cmd>qa<CR>", {}),
+        dashboard.button("q", "󰅚  Quit Neovim", "<cmd>qa<CR>", {}),
     },
     opts = {
         position = "center",
