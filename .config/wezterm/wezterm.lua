@@ -27,7 +27,7 @@ end
 local font_name = "JetBrainsMono Nerd Font"
 
 local function is_vi_process(pane)
-    return pane:get_foreground_process_name():find("n?vim") ~= nil
+    return pane:get_user_vars().IS_NVIM == true
 end
 
 local function conditional_activate_pane(window, pane, pane_direction, vim_direction)
