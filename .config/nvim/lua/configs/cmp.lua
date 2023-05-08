@@ -129,7 +129,7 @@ cmp.setup({
                 local kind = lspkind.cmp_format({
                     mode = "symbol_text",
                     max_width = 50,
-                    symbol_map = { Copilot = " " }
+                    symbol_map = { Copilot = icons.kind.Copilot }
                 })(entry, vim_item)
                 local strings = vim.split(kind.kind, "%s", { trimempty = true })
                 kind.kind = " " .. strings[1] .. " "
@@ -196,7 +196,7 @@ cmp.setup({
         },
     },
     experimental = {
-        ghost_text = true,
+        ghost_text = { hl_group = "Comment" },
     },
     view = {
         entries = { name = "custom", selection_order = "near_cursor" },
