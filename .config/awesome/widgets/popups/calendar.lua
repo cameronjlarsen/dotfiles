@@ -40,9 +40,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
             local torender = flag == "focus" and focus_widget or widget
 
             local colors = {
-                header = beautiful.colors.lavender,
-                focus = beautiful.colors.blue,
-                weekday = beautiful.colors.green
+                header = beautiful.border_color_active,
+                focus = beautiful.border_color_urgent,
+                weekday = beautiful.border_color_maximized,
             }
 
             local color = colors[flag] or beautiful.fg_normal
@@ -53,7 +53,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     margins = dpi(7),
                     widget = wibox.container.margin,
                 },
-                bg = flag == "focus" and beautiful.colors.base or beautiful.bg_normal,
+                bg = flag == "focus" and beautiful.bg_normal or beautiful.bg_normal,
                 fg = color,
                 widget = wibox.container.background,
                 shape = flag == "focus" and gears.shape.circle or nil,
