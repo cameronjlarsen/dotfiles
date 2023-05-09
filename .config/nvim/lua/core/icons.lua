@@ -27,7 +27,7 @@ local data = {
         Event = "",
         Operator = "󰆕",
         TypeParameter = "󰊄",
-        Copilot = "",
+        Copilot = "",
     },
     statusline_separators = {
         Default = {
@@ -105,7 +105,7 @@ local data = {
         Arrow_Circle_Up = "",
         Arrow_Circle_Down = "",
         Circle = "",
-        Octoface = " ",
+        Octoface = "" ,
     },
     diagnostics = {
         Error = "",
