@@ -19,7 +19,7 @@ format = "[]($style)[[ ](bg:surface1 fg:bright-red)$branch](bg:surface1 fg
 style = "bg:none fg:surface1"
 
 [git_status]
-format = "[]($style)[$all_status$ahead_behind](bg:surface1 fg:bold red)[ ]($style)"
+format = "([]($style)[$all_status$ahead_behind](bg:surface1 fg:bold red)[ ]($style))"
 style = "bg:none fg:surface1"
 
 [git_state]
