@@ -1,33 +1,61 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # Use custom format:
-format = "$directory$git_branch$git_status$git_state$jobs$character"
+format = """$username$hostname$directory\
+$git_branch$git_status$git_state$git_metrics\
+$jobs$character"""
 
 # Sets user-defined palette
 palette = "catppuccin_mocha"
 
 # Prompt symbols 
 [character]
-success_symbol = "[󰉁](green bold)"
+success_symbol = "[󰉁](bold green)"
 error_symbol = "[](red)"
-vicmd_symbol = "[](green)"
+vimcmd_symbol = "[](green)"
 
 [directory]
-format = "[]($style)[[󰊠 ](bg:surface1 fg:blue bold)$path](bg:surface1 fg:text)[ ]($style)"
+format = """[]($style)[[󰊠 ](bg:surface1 fg:bold blue)$path](bg:surface1 fg:text)\
+[$read_only]($read_only_style)[ ]($style)"""
+read_only = ""
+read_only_style = "bg:surface1 fg:bold red"
 style = "bg:none fg:surface1"
 
 [git_branch]
-format = "[]($style)[[ ](bg:surface1 fg:bright-red)$branch](bg:surface1 fg:text)[ ]($style)"
+format = "[]($style)[[$symbol](bg:surface1 fg:bright-red)$branch(:$remote_name/$remote_branch)](bg:surface1 fg:text)[ ]($style)"
+symbol = " "
 style = "bg:none fg:surface1"
 
 [git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
 format = "([]($style)[$all_status$ahead_behind](bg:surface1 fg:bold red)[ ]($style))"
 style = "bg:none fg:surface1"
 
 [git_state]
-format = "[]($style)[$state($progress_current/$progress_total)](bg:surface1 fg:bright-red)[ ]($style)"
+format = "([]($style)[$state($progress_current/$progress_total)](bg:surface1 fg:bright-red)[ ]($style))"
 style = "bg:none fg:surface1"
 
+[git_metrics]
+format = "([](bg:none fg:surface1)([ $added]($added_style))([  $deleted]($deleted_style))[ ](bg:none fg:surface1))"
+added_style = "bg:surface1 fg:bold green"
+deleted_style = "bg:surface1 fg:bold red"
+disabled = false
+
 [jobs]
-format = "[]($style)[$symbol$number](bg:surface1 fg:bright-green)[ ]($style) " 
+format = "[]($style)[$symbol$number](bg:surface1 fg:bright-green)[ ]($style)"
+style = "bg:none fg:surface1"
+
+[username]
+format = "[](bg:none fg:surface1)[$user]($style)[on](bg:surface1 fg:text)"
+style_user = "bg:surface1 fg:bold dimmed blue"
+style_root = "bg:surface1 fg:bold red"
+
+[hostname]
+ssh_symbol = "[󰣀](bold red)"
+format = "[$ssh_symbol$hostname](bg:surface1 fg:bold dimmed green)[ in](bg:surface1 fg:text)[ ]($style)"
 style = "bg:none fg:surface1"
 
 # palette tables should be last in the config ⚓️
@@ -142,4 +170,3 @@ surface0 = "#ccd0da"
 base = "#eff1f5"
 mantle = "#e6e9ef"
 crust = "#dce0e8"
-
