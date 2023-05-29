@@ -37,6 +37,7 @@ ruled.client.connect_signal("request::rules", function()
                 "Library",
                 "Friends List",
                 "Steam - News",
+                "tdropdropdown",
             },
             role     = {
                 "AlarmWindow",   -- Thunderbird's calendar.
