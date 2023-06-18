@@ -50,7 +50,14 @@ mason_null_ls.setup({
             null_ls.register(b.formatting.prettierd.with({
                 extra_filetypes = { "pandoc" }
             }))
+        end,
+        ruff = function()
+            null_ls.register(b.diagnostics.ruff)
+        end,
+        mypy = function()
+            null_ls.register(b.diagnostics.mypy)
         end
+
     }
 })
 

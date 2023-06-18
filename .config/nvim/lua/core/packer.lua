@@ -149,8 +149,8 @@ return packer.startup(function(use)
     use("ThePrimeagen/refactoring.nvim")                -- Refactoring plugin for Neovim.
 
     -- Language Support
-    use("mfussenegger/nvim-jdtls")      -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.ls.
-    use("lervag/vimtex")                -- A modern vim and neovim filetype plugin for LaTeX files.
+    use("mfussenegger/nvim-jdtls") -- Extensions for the built-in LSP support in Neovim for eclipse.jdt.ls.
+    use("lervag/vimtex")           -- A modern vim and neovim filetype plugin for LaTeX files.
     -- use("vim-pandoc/vim-pandoc")        -- Vim plugin for the Pandoc document converter.
     -- use("vim-pandoc/vim-pandoc-syntax") -- Syntax files for Pandoc's markdown.
 
@@ -238,6 +238,11 @@ return packer.startup(function(use)
             require("Navigator").setup()
         end
     }) -- Smoothly navigate between neovim and terminal multiplexer(s)
+    use({
+        "Dhanus3133/LeetBuddy.nvim",
+        requires = { "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim" }
+    }) -- Solve Leetcode problems within Neovim 🔥
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

@@ -169,6 +169,15 @@ map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ de
 -- Undo Tree --
 map({ "n", "v" }, "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Undo Tree" })
 
+-- LeetBuddy --
+map("n", "<leader>cq", function() vim.cmd("LBQuestions") end, { desc = "List Questions" })
+map("n", "<leader>cc", function() vim.cmd("LBQuestion") end, { desc = "View Question" })
+map("n", "<leader>cr", function() vim.cmd("LBReset") end, { desc = "Reset Code" })
+map("n", "<leader>ct", function() vim.cmd("LBTest") end, { desc = "Run Code" })
+map("n", "<leader>cs", function() vim.cmd("LBSubmit") end, { desc = "Submit Code" })
+
+
+
 local wk_status_ok, which_key = pcall(require, "which-key")
 if not wk_status_ok then
     return
@@ -177,6 +186,7 @@ end
 which_key.register({
     ["<leader>"] = {
         b = { name = "+Buffer" },
+        c = { name = "LeetCode" },
         f = {
             name = "+Find",
             g = { name = "+Git" },
