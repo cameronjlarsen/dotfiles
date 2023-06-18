@@ -17,7 +17,7 @@ local color                     = catppuccin.select("mocha")
 local theme                     = {}
 
 -- Wallpaper
-theme.wallpaper                 = walls_path .. "lawson.jpg"
+theme.wallpaper                 = walls_path .. "cloudymountains.jpeg"
 
 -- Default
 theme.font_family               = "Ubuntu "
