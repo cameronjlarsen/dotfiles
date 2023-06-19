@@ -85,9 +85,9 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
 
 -- Toggle terminal
-map("n", "<leader>tt", function() toggle_float() end, { desc = "Toggle Float Terminal" })
-map("n", "<leader>tv", function() toggle_vertical() end, { desc = "Toggle Vertical Terminal" })
-map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Toggle Horizontal Terminal" })
+map("n", "<leader>tt", function() toggle_float() end, { desc = "Float Terminal" })
+map("n", "<leader>tv", function() toggle_vertical() end, { desc = "Vertical Terminal" })
+map("n", "<leader>th", function() toggle_horizontal() end, { desc = "Horizontal Terminal" })
 
 -- Files --
 map("n", "<leader>f?", function() require("telescope.builtin").search_history() end, { desc = "Search History" })
@@ -167,7 +167,7 @@ map({ "n", "v" }, "<leader>Sy", function() require("silicon").visualise_api({ de
     { desc = "Screenshot Line(s) to Clipboard" })
 
 -- Undo Tree --
-map({ "n", "v" }, "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Undo Tree" })
+map({ "n", "v" }, "<leader>fu", vim.cmd.UndotreeToggle, { desc = "Undo Tree" })
 
 -- LeetBuddy --
 map("n", "<leader>cq", function() vim.cmd("LBQuestions") end, { desc = "List Questions" })
@@ -185,26 +185,24 @@ end
 
 which_key.register({
     ["<leader>"] = {
-        b = { name = "+Buffer" },
+        b = { name = "Buffers" },
         c = { name = "LeetCode" },
         f = {
-            name = "+Find",
-            g = { name = "+Git" },
+            name = "Find",
+            g = { name = "Git" },
         },
-        g = { name = "+Git" },
-        l = { name = "+LSP" },
-        m = { name = "+Marks" },
-        p = { name = "+Packer" },
-        S = { name = "+Silicon" },
-        t = { name = "+Toggle" },
-        u = { name = "+Undo Tree" },
-        w = { name = "+Window" },
+        g = { name = "Git" },
+        l = { name = "LSP" },
+        m = { name = "Marks" },
+        p = { name = "Packages" },
+        S = { name = "Screenshot" },
+        t = { name = "Terminal" },
+        w = { name = "Windows" },
     },
 }, { mode = "n" })
 which_key.register({
     ["<leader>"] = {
-        l = { name = "+LSP" },
-        S = { name = "+Silicon" },
-        u = { name = "+Undo Tree" },
+        l = { name = "LSP" },
+        S = { name = "Silicon" },
     },
 }, { mode = "v" })

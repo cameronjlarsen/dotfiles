@@ -3,7 +3,7 @@ if not status_ok then
     return
 end
 duck.setup({
-    character = "🎅"
+    character = "👻"
 })
 
 vim.keymap.set("n", "<leader>Dd", function() duck.hatch() end, { desc = "Hatch a duck" })
@@ -15,5 +15,5 @@ if not wk_status_ok then
 end
 
 wk.register({
-    D = { name = "+Duck", },
+    D = { name = "Duck", },
 }, { prefix = "<leader>" })

@@ -112,8 +112,8 @@ local function keymaps(client, bufnr)
     which_key.register({
             ["<leader>"] = {
             l = {
-                name = "+LSP",
-                w = "+Workspace"
+                name = "LSP",
+                w = "Workspace"
             },
         }
     }, { mode = "n" })
