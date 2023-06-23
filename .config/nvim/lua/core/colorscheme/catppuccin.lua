@@ -5,18 +5,19 @@ end
 
 catppuccin.setup({
     flavour = "mocha",
-    transparent_background = true,
+    background = { light = "latte", dark = "mocha" },
     dim_inactive = {
         enabled = false,
         shade = "dark",
         percentage = 0.15,
     },
+    transparent_background = true,
     show_end_of_buffer = false,
     term_colors = true,
     styles = {
         comments = { "italic" },
         properties = { "italic" },
-        functions = { "italic", "bold" },
+        functions = { "bold" },
         keywords = { "italic" },
         operators = { "bold" },
         conditionals = { "bold" },
@@ -99,27 +100,23 @@ catppuccin.setup({
     custom_highlights = function(cp)
         local cnf = catppuccin.options
         return {
-            Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
-            IncSearch = { bg = cp.pink, fg = cp.surface1 },
-            Keyword = { fg = cp.pink },
-            Type = { fg = cp.blue },
-            Typedef = { fg = cp.yellow },
-            StorageClass = { fg = cp.red, style = { "italic" } },
+            -- For base configs
+            NormalFloat = { fg = cp.text, bg = cnf.transparent_background and cp.none or cp.mantle },
+            FloatBorder = {
+                fg = cnf.transparent_background and cp.blue or cp.mantle,
+                bg = cnf.transparent_background and cp.none or cp.mantle,
+            },
+            CursorLineNr = { fg = cp.green },
+
+            -- For native lsp configs
+            LspInfoBorder = { link = "FloatBorder" },
+
+            -- For mason.nvim
+            MasonNormal = { link = "NormalFloat" },
+
+            -- For nvim-cmp and wilder.nvim
             Pmenu = { bg = cp.surface0, fg = cp.text },
             PmenuSel = { bg = cp.overlay0, fg = cp.text },
-            -- Status Line --
-            SLCopilot = { fg = cp.green, bg = cnf.transparent_background and cp.none or cp.mantle },
-            SLGitIcon = { fg = cp.text, bg = cnf.transparent_background and cp.none or cp.mantle },
-            SLLSPIcon = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
-            -- LSP --
-            LSPInlayHint = {
-                fg = cp.surface2,
-                bg = cnf.transparent_background and cp.none or cp.mantle,
-                style = { "italic" }
-            },
-            -- LSP Info --
-            FloatBorder = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
-            -- CMP --
             CmpItemKindSnippet = { fg = cp.base, bg = cp.mauve },
             CmpItemKindKeyword = { fg = cp.base, bg = cp.red },
             CmpItemKindText = { fg = cp.base, bg = cp.teal },
@@ -146,81 +143,34 @@ catppuccin.setup({
             CmpItemKindOperator = { fg = cp.base, bg = cp.blue },
             CmpItemKindTypeParameter = { fg = cp.base, bg = cp.blue },
             CmpItemKindCopilot = { fg = cp.base, bg = cp.teal },
+
+            -- For fidget.nvim
+            FidgetTask = { fg = cp.surface2, bg = cp.none },
+            FidgetTitle = { fg = cp.blue, style = { "bold" } },
+
+            -- Status Line --
+            SLCopilot = { fg = cp.green, bg = cnf.transparent_background and cp.none or cp.mantle },
+            SLGitIcon = { fg = cp.text, bg = cnf.transparent_background and cp.none or cp.mantle },
+            SLLSPIcon = { fg = cp.blue, bg = cnf.transparent_background and cp.none or cp.mantle },
+
+            -- For tabline selected tab
+            TabLineSel = { fg = cp.lavender, bg = cp.lavender },
+
             -- Telescope
             TelescopeBorder = { bg = cp.crust, fg = cp.crust },
             TelescopeNormal = { bg = cp.crust },
-            -- Telescope Preview
             TelescopePreviewBorder = { bg = cp.mantle, fg = cp.mantle },
             TelescopePreviewNormal = { bg = cp.mantle },
             TelescopePreviewTitle = { bg = cp.mantle, fg = cp.lavender },
-            -- Telescope Prompt
             TelescopePromptBorder = { bg = cp.surface0, fg = cp.surface0 },
             TelescopePromptNormal = { bg = cp.surface0 },
             TelescopePromptTitle = { bg = cp.surface0, fg = cp.green },
-            -- Telescope Selection
             TelescopeSelection = { bg = cp.crust, fg = cp.green },
             TelescopeMultiSelection = { bg = cp.crust, fg = cp.blue },
-            -- Semantic Highlighting --
-            ["@lsp.type.comment"] = { fg = cp.overlay0 },
-            ["@lsp.type.enum"] = { link = "@type" },
-            ["@lsp.type.property"] = { link = "@property" },
-            ["@lsp.type.macro"] = { link = "@constant" },
-            ["@lsp.typemod.function.defaultLibrary"] = { fg = cp.blue, style = { "bold", "italic" } },
-            ["@lsp.typemod.function.defaultLibrary.c"] = { fg = cp.blue, style = { "bold" } },
-            ["@lsp.typemod.function.defaultLibrary.cpp"] = { fg = cp.blue, style = { "bold" } },
-            ["@lsp.typemod.method.defaultLibrary"] = { link = "@lsp.typemod.function.defaultLibrary" },
-            ["@lsp.typemod.variable.defaultLibrary"] = { fg = cp.flamingo },
-            ["@lsp.type.function.builton.bash"] = { link = "@function.builtin.bash" },
-            ["@lsp.type.parameter.bash"] = { link = "@parameter.bash" },
-            ["@lsp.type.field.lua"] = { link = "@field.lua" },
-            ["@lsp.type.constructor.lua"] = { link = "@constructor.lua" },
-            ["@lsp.type.property.lua"] = { link = "@property.lua" },
-            ["@lsp.type.constant.java"] = { link = "@constant.java" },
-            ["@lsp.type.property.typescript"] = { link = "@property.typescript" },
-            ["@lsp.type.type.css"] = { link = "@type.css" },
-            ["@lsp.type.property.css"] = { link = "@property.css" },
-            ["@lsp.type.type.builtin.c"] = { link = "@type.builtin.c" },
-            ["@lsp.type.property.cpp"] = { link = "@property.cpp" },
-            ["@lsp.type.type.builtin.cpp"] = { link = "@type.builtin.cpp" },
-            -- Treesitter --
-            ["@field"] = { fg = cp.rosewater },
-            ["@property"] = { fg = cp.yellow },
-            ["@include"] = { fg = cp.teal },
-            ["@keyword.operator"] = { fg = cp.sky },
-            ["@punctuation.special"] = { fg = cp.maroon },
-            ["@constructor"] = { fg = cp.lavender },
-            ["@exception"] = { fg = cp.peach },
-            ["@constant.builtin"] = { fg = cp.lavender },
-            ["@type.qualifier"] = { link = "@keyword" },
-            ["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
-            ["@function.macro"] = { fg = cp.red, style = {} },
-            ["@parameter"] = { fg = cp.rosewater },
-            ["@keyword"] = { fg = cp.red, style = { "italic" } },
-            ["@keyword.function"] = { fg = cp.maroon },
+
+            -- For treesitter
             ["@keyword.return"] = { fg = cp.pink, style = {} },
-            ["@method"] = { fg = cp.blue, style = { "italic" } },
-            ["@namespace"] = { fg = cp.rosewater, style = {} },
-            ["@punctuation.delimiter"] = { fg = cp.teal },
-            ["@punctuation.bracket"] = { fg = cp.overlay2 },
-            ["@type"] = { fg = cp.yellow },
-            ["@variable"] = { fg = cp.text },
-            ["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
-            ["@tag"] = { fg = cp.peach },
-            ["@tag.delimiter"] = { fg = cp.maroon },
-            ["@text"] = { fg = cp.text },
-            ["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-            ["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
-            ["@field.lua"] = { fg = cp.lavender },
-            ["@constructor.lua"] = { fg = cp.flamingo },
-            ["@property.lua"] = { fg = cp.lavender },
-            ["@variable.builtin.lua"] = { fg = cp.flamingo, style = { "italic" } },
-            ["@constant.java"] = { fg = cp.teal },
-            ["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
-            ["@type.css"] = { fg = cp.lavender },
-            ["@property.css"] = { fg = cp.yellow, style = { "italic" } },
-            ["@type.builtin.c"] = { fg = cp.yellow, style = {} },
-            ["@property.cpp"] = { fg = cp.text },
-            ["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
+
             -- VimTeX --
             texArg = { link = "@include" },
             texFileArg = { link = "texArg" },
@@ -243,7 +193,6 @@ catppuccin.setup({
             texMathZoneGS = { link = "texMathZoneEnvStarred" },
             texMathZoneZ = { link = "texMathZoneEnsured" },
             texStatement = { link = "texCmd" },
-            TabLineSel = { fg = cp.lavender, bg = cp.lavender },
         }
     end,
 })

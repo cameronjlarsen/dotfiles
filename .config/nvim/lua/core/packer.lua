@@ -211,7 +211,7 @@ return packer.startup(function(use)
         "goolord/alpha-nvim",                  -- A fast and fully programmable greeter for neovim.
         requires = { "nvim-tree/nvim-web-devicons" }
     })
-    use("j-hui/fidget.nvim") -- Standalone UI for nvim-lsp progress.
+    use({ "j-hui/fidget.nvim", tag = "legacy" }) -- Standalone UI for nvim-lsp progress.
 
     -- Utilities --
     use("moll/vim-bbye")                                                   -- Close buffers without closing windows
