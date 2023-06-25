@@ -100,7 +100,7 @@ local function get_process(tab)
         },
         ["node"] = {
             { Foreground = { Color = colors.green } },
-            { Text = wezterm.nerdfonts.mdi_hexagon },
+            { Text = wezterm.nerdfonts.md_hexagon },
         },
         ["zsh"] = {
             { Foreground = { Color = colors.peach } },
@@ -112,11 +112,11 @@ local function get_process(tab)
         },
         ["htop"] = {
             { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
+            { Text = wezterm.nerdfonts.md_chart_donut_variant },
         },
         ["btop"] = {
             { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.mdi_chart_donut_variant },
+            { Text = wezterm.nerdfonts.md_chart_donut_variant },
         },
         ["cargo"] = {
             { Foreground = { Color = colors.peach } },
@@ -124,7 +124,7 @@ local function get_process(tab)
         },
         ["go"] = {
             { Foreground = { Color = colors.sapphire } },
-            { Text = wezterm.nerdfonts.mdi_language_go },
+            { Text = wezterm.nerdfonts.md_language_go },
         },
         ["lazydocker"] = {
             { Foreground = { Color = colors.blue } },
@@ -144,11 +144,11 @@ local function get_process(tab)
         },
         ["wget"] = {
             { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.mdi_arrow_down_box },
+            { Text = wezterm.nerdfonts.md_arrow_down_box },
         },
         ["curl"] = {
             { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.mdi_flattr },
+            { Text = wezterm.nerdfonts.md_flattr },
         },
         ["gh"] = {
             { Foreground = { Color = colors.mauve } },
@@ -177,6 +177,10 @@ local function get_process(tab)
         ["python3.11"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.dev_python },
+        },
+        ["lf"] = {
+            { Foreground = { Color = colors.blue } },
+            { Text = wezterm.nerdfonts.custom_folder_open },
         },
     }
 
@@ -375,8 +379,8 @@ return {
         tab_bar = {
             background = colors.crust,
             active_tab = {
-                bg_color = colors.surface0,
-                fg_color = colors.subtext1,
+                bg_color = colors.surface1,
+                fg_color = colors.text,
                 intensity = "Bold",
                 underline = "None",
                 italic = false,
