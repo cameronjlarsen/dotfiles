@@ -1,5 +1,4 @@
-require("core.packer")
 require("core.options")
 require("core.keymaps")
 require("core.commands")
-require("core.colorscheme")
+require("core.lazy")
