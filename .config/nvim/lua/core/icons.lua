@@ -32,7 +32,7 @@ local data = {
     statusline_separators = {
         Default = {
             Left = "",
-            Right = " ",
+            Right = "",
         },
         Round = {
             Left = "",

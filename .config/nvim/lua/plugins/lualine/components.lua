@@ -134,7 +134,7 @@ M = {
         icon_only = true,
         icons_enabled = true,
         colored = true,
-        padding = 0,
+        padding = { left = 1, right = 0 },
         separator = { right = sep_r },
     },
     filename = {
@@ -165,7 +165,6 @@ M = {
         icons_enabled = true,
         icon = icons.ui.GitHub,
         colored = true,
-        padding = { left = 0, right = 1 },
         separator = { right = sep_r }
     },
     diff = {

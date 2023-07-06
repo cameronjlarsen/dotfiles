@@ -88,5 +88,14 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         opts = {}
+    },
+    {
+        "Wansmer/treesj",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        keys = { { "J", function() require("treesj").toggle() end, desc = "Join toggle" } },
+        opts = {
+            use_default_keymaps = false,
+            max_join_length = 150,
+        },
     }
 }

@@ -75,6 +75,7 @@
   "telescope-ui-select.nvim": { "branch": "master", "commit": "62ea5e58c7bbe191297b983a9e7e89420f581369" },
   "telescope.nvim": { "branch": "master", "commit": "c5b11f4fe780f4acd6ed0d58575d3cb7af3e893a" },
   "toggleterm.nvim": { "branch": "main", "commit": "95204ece0f2a54c89c4395295432f9aeedca7b5f" },
+  "treesj": { "branch": "main", "commit": "3203aa553217921fd4dcb79245f9df07278910b2" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },
   "vimtex": { "branch": "master", "commit": "b38bbcab7ab05067ce460e2d9e69c896fea7ebe0" },

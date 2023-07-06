@@ -84,13 +84,6 @@ return {
                             extra_filetypes = { "pandoc" }
                         }))
                     end,
-                    ruff = function()
-                        nls.register(nls.builtins.diagnostics.ruff)
-                    end,
-                    mypy = function()
-                        nls.register(nls.builtins.diagnostics.mypy)
-                    end
-
                 }
             }
         end,
