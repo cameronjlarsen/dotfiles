@@ -8,6 +8,8 @@ return {
         config = function()
             local luasnip = require("luasnip")
 
+            luasnip.filetype_extend("typescriptreact", { "html" })
+
             require("luasnip.loaders.from_vscode").lazy_load()
 
             vim.api.nvim_create_autocmd('CursorMovedI', {

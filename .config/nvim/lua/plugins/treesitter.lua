@@ -11,7 +11,8 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "HiPhish/nvim-ts-rainbow2",
             "nvim-treesitter/playground",
-            "JoosepAlviste/nvim-ts-context-commentstring"
+            "JoosepAlviste/nvim-ts-context-commentstring",
+            "windwp/nvim-ts-autotag",
         },
         opts = {
             ensure_installed = "all",
@@ -54,6 +55,9 @@ return {
                 enable = true,
                 extended_mode = true,  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
                 max_file_lines = 2000, -- Do not enable for files with more than specified lines
+            },
+            autotag = {
+                enable = true,
             },
         },
         config = function(_, opts)
