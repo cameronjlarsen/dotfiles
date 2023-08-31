@@ -44,4 +44,4 @@ vim.opt.shortmess:append("c")
 vim.opt.whichwrap = "<,>,[,],h,l"
 vim.opt.iskeyword:append({ "-" })
 vim.opt.formatoptions:remove({ "c", "r", "o" })
-vim.opt.fillchars:append({ eob = "~", fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
+vim.opt.fillchars:append({ eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
