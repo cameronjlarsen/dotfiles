@@ -8,10 +8,28 @@ local naughty       = require("naughty")
 require("awful.hotkeys_popup.keys.firefox")
 require("awful.hotkeys_popup.keys.vim")
 
-local Alt   = mod.alt
-local Super = mod.super
-local Shift = mod.shift
-local Ctrl  = mod.ctrl
+local Alt               = mod.alt
+local Super             = mod.super
+local Shift             = mod.shift
+local Ctrl              = mod.ctrl
+
+local focus_bydirection = function(direction)
+    awful.client.focus.global_bydirection(direction)
+    if client.focus then
+        -- focus on the client
+        client.focus:raise()
+    end
+
+    -- BUG: focus across screens is wonky when there are no clients on the destination screen
+    -- https://github.com/awesomeWM/awesome/issues/3638
+    -- Workaround: manually unfocus client after moving focus to an empty screen
+    local is_empty_destination = #awful.screen.focused().clients < 1
+
+    if is_empty_destination then
+        -- manually unfocus the current focused client
+        client.focus = nil
+    end
+end
 
 -- general awesome keybindings
 awful.keyboard.append_global_keybindings({
@@ -202,7 +220,8 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client below",
         group       = "Client",
         on_press    = function()
-            awful.client.focus.global_bydirection("down")
+            -- awful.client.focus.global_bydirection("down")
+            focus_bydirection("down")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
@@ -212,7 +231,8 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client above",
         group       = "Client",
         on_press    = function()
-            awful.client.focus.global_bydirection("up")
+            -- awful.client.focus.global_bydirection("up")
+            focus_bydirection("up")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
@@ -222,7 +242,8 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client left",
         group       = "Client",
         on_press    = function()
-            awful.client.focus.global_bydirection("left")
+            -- awful.client.focus.global_bydirection("left")
+            focus_bydirection("left")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
@@ -232,7 +253,8 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client right",
         group       = "Client",
         on_press    = function()
-            awful.client.focus.global_bydirection("right")
+            -- awful.client.focus.global_bydirection("right")
+            focus_bydirection("right")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
@@ -446,7 +468,7 @@ awful.keyboard.append_global_keybindings {
 
             for _, t in ipairs(self.tags) do
                 local fallback_tag = awful.tag.find_by_name(other, tostring(t.name + 5)) or
-                awful.tag.find_by_name(other, tostring(t.name - 5))
+                    awful.tag.find_by_name(other, tostring(t.name - 5))
                 local self_clients = t:clients()
                 local other_clients
 
