@@ -46,7 +46,7 @@ inoremap <C-j> <Action>(PopupMenu-selectNext)
 inoremap <C-k> <Action>(PopupMenu-selectPrev)
 
 " Comment
-map <leader>/ <Action>(CommentByLineComment)
+map gcc <Action>(CommentByLineComment)
 
 " Window splits
 map <leader>wv <Action>(SplitVertically)
@@ -66,12 +66,27 @@ map <leader>fs <Action>(SearchEverywhere)
 
 
 " Refactoring
-map <leader>lr <Action>(RenameElement)
-map <leader>lrm <Action>(ExtractMethod)
+map <leader>lrn <Action>(RenameElement)
+map <leader>lrx <Action>(ExtractMethod)
 map <leader>lrv <Action>(IntroduceVariable)
 map <leader>lrf <Action>(IntroduceField)
+map <leader>lrc <Action>(IntroduceConstant)
+map <leader>lrp <Action>(IntroduceParameter)
 map <leader>lrs <Action>(ChangeSignature)
 map <leader>lrr <Action>(Refactorings.QuickListPopupAction)
+map <leader>lro <Action>(OptimizeImports)
+map <leader>lri <Action>(Inline)
+map <leader>lrm <Action>(Move)
+map <leader>lra <Action>(AnonymousToInner)
+
+" Source generation
+map <leader>lsa <Action>(Generate)
+map <leader>lsc <Action>(GenerateConstructor)
+map <leader>lsg <Action>(GenerateGetterSetter)
+map <leader>lse <Action>(GenerateEquals)
+map <leader>lso <Action>(OverrideMethods)
+map <leader>lsn <Action>(NewClass)
+map <leader>lsf <Action>(NewFile)
 
 map <leader>lf <Action>(ReformatCode)
 
