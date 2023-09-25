@@ -1,2 +1,3 @@
 # Ignore packer compiled 
 .config/nvim/plugin/packer_compiled.lua
+.config/zsh/.zsh_sessions/
