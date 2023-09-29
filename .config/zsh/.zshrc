@@ -23,6 +23,7 @@ plug "zap-zsh/completions"
 plug "gradle/gradle-completion"
 plug "wintermi/zsh-brew"
 plug "wintermi/zsh-fnm"
+plug "memark/zsh-dotnet-completion"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
