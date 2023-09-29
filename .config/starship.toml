@@ -4,7 +4,8 @@
 # Use custom format:
 format = """$username$hostname$directory\
 $git_branch$git_status$git_state$git_metrics\
-$jobs$character"""
+$jobs$conda$character
+"""
 
 # Sets user-defined palette
 palette = "catppuccin_mocha"
@@ -56,6 +57,10 @@ style_root = "bg:surface1 fg:bold red"
 [hostname]
 ssh_symbol = "[󰣀](bold red)"
 format = "[$ssh_symbol$hostname](bg:surface1 fg:bold dimmed green)[ in](bg:surface1 fg:text)[ ]($style)"
+style = "bg:none fg:surface1"
+
+[conda]
+format = "[]($style)[[$symbol$environment](bg:surface1 fg:dimmed green)](bg:surface1 fg:text)[ ]($style)"
 style = "bg:none fg:surface1"
 
 # palette tables should be last in the config ⚓️
