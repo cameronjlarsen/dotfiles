@@ -26,12 +26,13 @@ inoremap jk <Esc>
 " Tab navigation
 nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprev<CR>
+nnoremap <leader>bc :tabclose<CR>
 
 " Pane navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
 
 " Jump between methods
 nnoremap [[ <Action>(MethodUp)
