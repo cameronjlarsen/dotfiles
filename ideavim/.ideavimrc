@@ -1,6 +1,9 @@
 "" .ideavimrc - Cameron Larsen
+echo "Loading .ideavimrc"
 
 "" Base Settings
+map <Space> <Nop>
+let mapleader = " "
 
 set scrolloff=10
 set linenumber
@@ -13,14 +16,14 @@ set hlsearch
 
 set clipboard+=unnamedplus
 
-let mapleader = " "
-
+"" Plugins
 set surround
 set highlightedyank
 set nerdtree
+set argtextobj
+set textobj-entire
 
 "" Key Mappings
-
 inoremap jk <Esc>
 
 " Tab navigation
@@ -35,16 +38,16 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
 
 " Jump between methods
-nnoremap [[ <Action>(MethodUp)
-nnoremap ]] <Action>(MethodDown)
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
 
 " Easy visual indentation
 vnoremap < <gv
 vnoremap > >gv
 
 " Popup navigation
-inoremap <C-j> <Action>(PopupMenu-selectNext)
-inoremap <C-k> <Action>(PopupMenu-selectPrev)
+imap <C-j> <Action>(PopupMenu-selectNext)
+imap <C-k> <Action>(PopupMenu-selectPrev)
 
 " Comment
 map gcc <Action>(CommentByLineComment)
@@ -56,7 +59,7 @@ map <leader>wu <Action>(Unsplit)
 map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 
 " Open File Explorer
-map <leader>fe :NERDTreeToggle<CR>
+map <leader>fe :NERDTreeFocus<CR>
 
 map <leader>ff <Action>(GotoFile)
 map <leader>fo <Action>(RecentFiles)
@@ -86,7 +89,11 @@ map <leader>lsc <Action>(GenerateConstructor)
 map <leader>lsg <Action>(GenerateGetterSetter)
 map <leader>lse <Action>(GenerateEquals)
 map <leader>lso <Action>(OverrideMethods)
-map <leader>lsn <Action>(NewClass)
+if &ide =~? 'android studio'
+    map <leader>lsn <Action>(Kotlin.NewFile)
+else
+    map <leader>lsn <Action>(NewClass)
+endif
 map <leader>lsf <Action>(NewFile)
 
 map <leader>lf <Action>(ReformatCode)
@@ -101,8 +108,11 @@ nmap gf <Action>(Back)
 nmap gb <Action>(Forward)
 
 " Git windows
-map <leader>gc <Action>(CheckinProject)
-map <leader>gs <Action>(ActivateVersionControlToolWindow)
-map <leader>gb <Action>(Git.Branches)
+nmap <leader>gc <Action>(CheckinProject)
+nmap <leader>gs <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gb <Action>(Git.Branches)
 
-map gl <Action>(ShowErrorDescription)
+nmap gl <Action>(ShowErrorDescription)
+nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+
+echo "Finished loading .ideavimrc"
