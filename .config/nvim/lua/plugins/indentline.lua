@@ -1,54 +1,94 @@
 return {
     "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
     opts = {
-        char = "┆",
-        context_char = "│",
-        space_char_blankline = " ",
-        show_first_indent_level = false,
-        show_trailing_blankline_indent = false,
-        show_end_of_line = true,
-        show_current_context = true,
-        show_current_context_start = false,
-        use_treesitter = true,
-        context_highlight_list = {
-            "IndentBlanklineIndent6",
-            "IndentBlanklineIndent5",
-            "IndentBlanklineIndent4",
-            "IndentBlanklineIndent3",
-            "IndentBlanklineIndent2",
-            "IndentBlanklineIndent1",
+        indent = {
+            char = "│",
+            smart_indent_cap = true,
+            priority = 2,
         },
-        buftype_exclude = { "terminal", "nofile" },
-        filetype_exclude = {
-            "help",
-            "startify",
-            "dashboard",
-            "packer",
-            "neogitstatus",
-            "NvimTree",
-            "Trouble",
+        scope = {
+            char = "│",
+            show_start = false,
+            show_end = false,
+            injected_languages = true,
+            priority = 1000,
+            highlight = {
+                "RainbowRed",
+                "RainbowYellow",
+                "RainbowBlue",
+                "RainbowOrange",
+                "RainbowGreen",
+                "RainbowViolet",
+                "RainbowCyan",
+            },
+            include = {
+                node_type = {
+                    lua = {
+                        'chunk',
+                        'do_statement',
+                        'while_statement',
+                        'repeat_statement',
+                        'if_statement',
+                        'for_statement',
+                        'function_declaration',
+                        'function_definition',
+                        'table_constructor',
+                        'assignment_statement',
+                    },
+                    typescript = {
+                        'statement_block',
+                        'function',
+                        'arrow_function',
+                        'function_declaration',
+                        'method_definition',
+                        'for_statement',
+                        'for_in_statement',
+                        'catch_clause',
+                        'object_pattern',
+                        'arguments',
+                        'switch_case',
+                        'switch_statement',
+                        'switch_default',
+                        'object',
+                        'object_type',
+                        'ternary_expression',
+                    },
+                },
+            }
         },
-        context_patterns = {
-            "class",
-            "return",
-            "function",
-            "method",
-            "^if",
-            "^while",
-            "jsx_element",
-            "^for",
-            "^object",
-            "^table",
-            "block",
-            "arguments",
-            "if_statement",
-            "else_clause",
-            "jsx_element",
-            "jsx_self_closing_element",
-            "try_statement",
-            "catch_clause",
-            "import_statement",
-            "operation_type",
+        exclude = {
+            buftypes = { "terminal", "nofile" },
+            filetypes = {
+                "help",
+                "startify",
+                "alpha",
+                "dashboard",
+                "packer",
+                "neogitstatus",
+                "NvimTree",
+                "neo-tree",
+                "lazy",
+                "mason",
+                "notify",
+                "Trouble",
+            },
+
         },
-    }
+    },
+    config = function(_, opts)
+        local hooks = require "ibl.hooks"
+        hooks.register(
+            hooks.type.WHITESPACE,
+            hooks.builtin.hide_first_space_indent_level
+        )
+        hooks.register(
+            hooks.type.WHITESPACE,
+            hooks.builtin.hide_first_tab_indent_level
+        )
+
+        hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+        require("ibl").setup(opts)
+    end
 }
