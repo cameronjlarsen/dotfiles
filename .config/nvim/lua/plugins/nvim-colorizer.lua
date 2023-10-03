@@ -7,5 +7,15 @@ return {
         "ColorizerReloadAllBuffers"
     },
     ft = { "css", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "lua" },
-    opts = {},
+    opts = {
+        user_default_options = {
+            names = false,
+            mode = "virtualtext",
+        },
+        filetypes = {
+            "*",
+            css = { css = true },
+            sass = { css = true, tailwind = true },
+        },
+    },
 }
