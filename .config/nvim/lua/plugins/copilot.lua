@@ -65,7 +65,7 @@ return {
         opts = function(_, opts)
             local cmp = require("cmp")
 
-            table.insert(opts.sources, 1, { name = "copilot" })
+            table.insert(opts.sources, 4, { name = "copilot" })
 
             opts.sorting = {
                 priority_weight = 2,
