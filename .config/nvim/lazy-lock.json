@@ -79,6 +79,7 @@
   "treesj": { "branch": "main", "commit": "81d0ae51b84143e228d27b6cf79d09012d2021cb" },
   "undotree": { "branch": "master", "commit": "0e11ba7325efbbb3f3bebe06213afa3e7ec75131" },
   "vim-bbye": { "branch": "master", "commit": "25ef93ac5a87526111f43e5110675032dbcacf56" },
+  "vim-razor": { "branch": "master", "commit": "cc9a4c9de3252ba1cc0d485bc758fdaf09790662" },
   "vimtex": { "branch": "master", "commit": "7d453a61b0256337f341a1195ca9eb3f3890a7df" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" }
 }
