@@ -7,6 +7,8 @@ $git_branch$git_status$git_state$git_metrics\
 $jobs$conda$character
 """
 
+command_timeout = 750
+
 # Sets user-defined palette
 palette = "catppuccin_mocha"
 
@@ -61,6 +63,7 @@ style = "bg:none fg:surface1"
 
 [conda]
 format = "[]($style)[[$symbol$environment](bg:surface1 fg:dimmed green)](bg:surface1 fg:text)[ ]($style)"
+ignore_base = false
 style = "bg:none fg:surface1"
 
 # palette tables should be last in the config ⚓️
