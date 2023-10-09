@@ -1,10 +1,13 @@
 return {
     "nvim-tree/nvim-tree.lua",
+    cond = not vim.g.vscode,
     dependencies = "nvim-tree/nvim-web-devicons",
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose", "NvimTreeRefresh", "NvimTreeFindFile" },
     keys = {
         { "<leader>fe", function() require("nvim-tree.api").tree.toggle({ find_file = false }) end, desc = "Filetree" },
-        { "<leader>fE", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end, desc = "Filetree Focus File" },
+        { "<leader>fE", function() require("nvim-tree.api").tree.toggle({ find_file = true }) end,
+                                                                                                        desc =
+            "Filetree Focus File" },
     },
     opts = function()
         local icons = { diagnostics = require("core.icons").get("diagnostics"), }

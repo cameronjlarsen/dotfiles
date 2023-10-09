@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -10,11 +11,13 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
+        cond = not vim.g.vscode,
         dependencies = {
             "nvim-lua/popup.nvim",
             "nvim-lua/plenary.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
+                cond = not vim.g.vscode,
                 enabled = vim.fn.executable("make"),
                 build = "make",
                 config = function()
@@ -26,6 +29,7 @@ return {
             "nvim-telescope/telescope-file-browser.nvim",
             {
                 "nvim-telescope/telescope-live-grep-args.nvim",
+                cond = not vim.g.vscode,
                 config = function()
                     require("telescope").load_extension("live_grep_args")
                 end

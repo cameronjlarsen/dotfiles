@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -13,6 +14,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             {
@@ -91,6 +93,7 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        cond = not vim.g.vscode,
         cmd = { "LspInstall", "LspUninstall" },
         event = { "BufReadPre", "BufNewFile" },
         opts = {
@@ -122,6 +125,7 @@ return {
     },
     {
         "lvimuser/lsp-inlayhints.nvim",
+        cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
     },
 }

@@ -1,6 +1,7 @@
 return {
     {
         "zbirenbaum/copilot.lua",
+        cond = not vim.g.vscode,
         cmd = "Copilot",
         build = ":Copilot auth",
         opts = {
@@ -54,6 +55,7 @@ return {
     },
     {
         "nvim-cmp",
+        cond = not vim.g.vscode,
         dependencies = {
             "zbirenbaum/copilot-cmp",
             dependencies = "copilot.lua",

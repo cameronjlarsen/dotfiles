@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -15,6 +16,7 @@ return {
     },
     {
         "lewis6991/gitsigns.nvim",
+        cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             signs = {

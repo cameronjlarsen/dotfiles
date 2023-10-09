@@ -1,5 +1,6 @@
 return {
     "folke/which-key.nvim",
+    cond = not vim.g.vscode,
     opts =
     {
         plugins = {
@@ -34,7 +35,7 @@ return {
         icons = {
             breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
             separator = "➜", -- symbol used between a key and it's label
-            group = "+",      -- symbol prepended to a group
+            group = "+", -- symbol prepended to a group
         },
         popup_mappings = {
             scroll_down = "<c-d>", -- binding to scroll down inside the popup

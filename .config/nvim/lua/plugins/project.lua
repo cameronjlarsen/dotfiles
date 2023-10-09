@@ -1,9 +1,11 @@
 return {
     {
         "telescope.nvim",
+        cond = not vim.g.vscode,
         dependencies = {
             {
                 "ahmedkhalf/project.nvim",
+                cond = not vim.g.vscode,
                 event = "VeryLazy",
                 opts = {
                     active = true,

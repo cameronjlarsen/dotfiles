@@ -1,5 +1,6 @@
 return {
     "nvim-tree/nvim-web-devicons",
+    cond = not vim.g.vscode,
     lazy = true,
     opts = function()
         local icons = {

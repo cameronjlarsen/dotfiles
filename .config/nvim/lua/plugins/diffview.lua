@@ -1,5 +1,6 @@
 return {
     "sindrets/diffview.nvim",
+    cond = not vim.g.vscode,
     dependencies = "nvim-lua/plenary.nvim",
     opts = function()
         local actions = require("diffview.actions")

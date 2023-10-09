@@ -2,6 +2,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -11,6 +12,7 @@ return {
     },
     {
         "Dhanus3133/LeetBuddy.nvim",
+        cond = not vim.g.vscode,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim" },

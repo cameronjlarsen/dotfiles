@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -10,6 +11,7 @@ return {
     },
     {
         "narutoxy/silicon.lua", -- Beautiful code snippet images right in the most epic editor.
+        cond = not vim.g.vscode,
         dependencies = "nvim-lua/plenary.nvim",
         keys = {
             {
@@ -31,7 +33,6 @@ return {
                 desc = "Screenshot Line(s) to Buffer",
             },
         },
-
         opts = {
             theme = "auto",
             output = vim.fn.expand("$HOME") .. "/Pictures/Screenshots/SILICON_${year}-${month}-${date}-${time}.png",

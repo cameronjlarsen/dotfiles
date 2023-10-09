@@ -1,5 +1,5 @@
 return {
-    filetypes = { "cs", "vb", "razor", "cshtml" },
+    filetypes = { "cs", "vb" },
     enable_editorconfig_support = true,
     enalbe_roslyn_analyzers = true,
     organize_imports_on_format = true,

@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -10,6 +11,7 @@ return {
     },
     {
         "frabjous/knap",
+        cond = not vim.g.vscode,
         ft = { "markdown", "tex" },
         keys = {
             { "<leader>np", function() require("knap").process_once() end,          desc = "Preview" },
@@ -19,10 +21,10 @@ return {
         },
         init = function()
             vim.g.knap_settings = {
-                mdoutputext           = "pdf",
-                mdtopdf               = "pandoc -s -f markdown -t pdf -F mermaid-filter %docroot% -o %outputfile%",
-                mdtopdfviewerlaunch   = "sioyek %outputfile%",
-                mdtopdfviewerrefresh  = "none",
+                mdoutputext          = "pdf",
+                mdtopdf              = "pandoc -s -f markdown -t pdf -F mermaid-filter %docroot% -o %outputfile%",
+                mdtopdfviewerlaunch  = "sioyek %outputfile%",
+                mdtopdfviewerrefresh = "none",
                 -- texoutputext          = "pdf",
                 -- textopdf              = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
                 -- textopdfviewerlaunch  =

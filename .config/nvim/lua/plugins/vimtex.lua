@@ -1,5 +1,6 @@
 return {
     "lervag/vimtex",
+    cond = not vim.g.vscode,
     ft = "tex",
     config = function(_, opts)
         vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

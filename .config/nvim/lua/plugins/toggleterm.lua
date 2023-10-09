@@ -1,5 +1,6 @@
 return {
     "akinsho/toggleterm.nvim",
+    cond = not vim.g.vscode,
     version = "*",
     keys = {
         { "<leader>tt", function() toggle_float() end,      desc = "Float Terminal" },

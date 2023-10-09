@@ -1,5 +1,6 @@
 return {
     "windwp/nvim-autopairs",
+    cond = not vim.g.vscode,
     event = "InsertEnter",
     opts = {
         disable_filetype = { "TelescopePrompt", "spectre_panel" },

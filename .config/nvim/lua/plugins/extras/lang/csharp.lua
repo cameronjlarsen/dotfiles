@@ -1,5 +1,6 @@
 return {
     "mfussenegger/nvim-dap",
+    cond = not vim.g.vscode,
     opts = {
         netcoredbg = function()
             local dap = require("dap")
@@ -32,6 +33,7 @@ return {
         end,
     },
     {
-        "jlcrochet/vim-razor"
+        "jlcrochet/vim-razor",
+        cond = not vim.g.vscode,
     }
 }

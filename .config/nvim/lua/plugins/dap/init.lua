@@ -1,6 +1,7 @@
 return {
     {
         "folke/which-key.nvim",
+        cond = not vim.g.vscode,
         event = "VeryLazy",
         opts = {
             defaults = {
@@ -10,6 +11,7 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
+        cond = not vim.g.vscode,
         dependencies = {
             {
                 "rcarriga/nvim-dap-ui",

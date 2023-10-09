@@ -1,5 +1,6 @@
 return {
     "goolord/alpha-nvim", -- A fast and fully programmable greeter for neovim.
+    cond = not vim.g.vscode,
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()

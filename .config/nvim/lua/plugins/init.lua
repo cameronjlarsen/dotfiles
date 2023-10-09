@@ -5,6 +5,7 @@ return {
     },
     {
         "mbbill/undotree",
+        cond = not vim.g.vscode,
         cmd = { "UndotreeToggle", "UndotreeFocus", "UndotreeShow", "UndotreeHide" },
         keys = {
             { mode = { "n", "v" }, "<leader>fu", vim.cmd.UndotreeToggle, desc = "Undo Tree" },
@@ -12,6 +13,7 @@ return {
     },
     {
         "moll/vim-bbye",
+        cond = not vim.g.vscode,
         cmd = { "Bdelete", "Bwipeout" },
         keys = {
             { "<leader>bc", function() vim.cmd("Bdelete!") end, desc = "Close Buffer" },
@@ -20,6 +22,7 @@ return {
     },
     {
         "numToStr/Navigator.nvim",
+        cond = not vim.g.vscode,
         opts = {},
         keys = {
             -- Navigate mux panes
@@ -31,11 +34,13 @@ return {
     },
     {
         "theprimeagen/refactoring.nvim",
+        cond = not vim.g.vscode,
         dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
         opts = {},
     },
     {
         "kevinhwang91/nvim-ufo",
+        cond = not vim.g.vscode,
         dependencies = {
             "kevinhwang91/promise-async",
             "neovim/nvim-lspconfig",

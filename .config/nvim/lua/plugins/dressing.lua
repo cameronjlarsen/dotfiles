@@ -1,5 +1,6 @@
 return {
     "stevearc/dressing.nvim",
+    cond = not vim.g.vscode,
     opts = {
         input = {
             -- Set to false to disable the vim.ui.input implementation

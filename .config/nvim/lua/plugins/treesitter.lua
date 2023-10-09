@@ -21,9 +21,12 @@ return {
             autopairs = {
                 enable = true,
             },
+            autotag = {
+                enable = not vim.g.vscode
+            },
             highlight = {
-                enable = true,         -- false will disable the whole extension
-                disable = { "latex" }, -- list of language that will be disabled
+                enable = not vim.g.vscode, -- false will disable the whole extension
+                disable = { "latex" },     -- list of language that will be disabled
                 additional_vim_regex_highlighting = false,
             },
             indent = { enable = true, disable = { "yaml" } },
@@ -75,13 +78,16 @@ return {
                 extended_mode = true,  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
                 max_file_lines = 2000, -- Do not enable for files with more than specified lines
             },
-            autotag = {
-                enable = true,
-            },
             query_linter = {
                 enable = true,
                 use_virtual_text = true,
                 lint_events = { "BufWrite", "CursorHold" },
+            },
+            playground = {
+                enable = not vim.g.vscode
+            },
+            matchup = {
+                enable = not vim.g.vscode
             },
         },
         config = function(_, opts)
@@ -128,6 +134,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        cond = not vim.g.vscode,
         event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         opts = {}

@@ -1,5 +1,6 @@
 return {
     "akinsho/bufferline.nvim", -- A snazzy bufferline for Neovim.
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = "nvim-tree/nvim-web-devicons",
     keys = {

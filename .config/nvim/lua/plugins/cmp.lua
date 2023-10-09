@@ -1,6 +1,7 @@
 return {
     {
         "L3MON4D3/LuaSnip",
+        cond = not vim.g.vscode,
         build = "make install_jsregexp",
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -42,6 +43,7 @@ return {
     },
     {
         "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in Lua.
+        cond = not vim.g.vscode,
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "hrsh7th/cmp-buffer",           -- nvim-cmp source for buffer words.

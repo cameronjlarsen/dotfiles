@@ -1,5 +1,6 @@
 return {
     "rcarriga/nvim-notify",
+    cond = not vim.g.vscode,
     dependencies = {
         "nvim-telescope/telescope.nvim",
         config = function(_, opts)
