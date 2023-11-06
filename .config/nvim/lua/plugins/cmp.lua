@@ -6,7 +6,24 @@ return {
         dependencies = {
             "rafamadriz/friendly-snippets",
         },
-        config = function()
+        opts = function()
+            local types = require("luasnip.util.types")
+            return {
+                ext_opts = {
+                    [types.choiceNode] = {
+                        active = {
+                            virt_text = { { "●", "Boolean" } },
+                        },
+                    },
+                    [types.insertNode] = {
+                        active = {
+                            virt_text = { { "●", "Function" } },
+                        },
+                    },
+                }
+            }
+        end,
+        config = function(_, opts)
             local luasnip = require("luasnip")
 
             luasnip.filetype_extend("typescriptreact", { "html" })
@@ -38,8 +55,8 @@ return {
                     end
                 end
             })
+            luasnip.config.setup(opts)
         end,
-
     },
     {
         "hrsh7th/nvim-cmp", -- A completion plugin for neovim coded in Lua.
