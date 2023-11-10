@@ -1,7 +1,11 @@
 return {
     "nvim-lualine/lualine.nvim",
     cond = not vim.g.vscode,
-    dependencies = "nvim-tree/nvim-web-devicons",
+    dependencies =
+    {
+        "nvim-tree/nvim-web-devicons",
+        "copilot-status.nvim"
+    },
     event = "VeryLazy",
     opts = function()
         local components = require("plugins.lualine.components")

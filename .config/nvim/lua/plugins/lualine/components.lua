@@ -259,18 +259,34 @@ M = {
         end,
     },
     copilot = {
+        -- function()
+        --     return icons.ui.Octoface
+        -- end,
+        -- color = function()
+        --     if not package.loaded["copilot"] then
+        --         return { fg = get_colors("GitSignsDelete", "fg") }
+        --     end
+        --     local client = require("copilot.client").get(true)
+        --     return {
+        --         fg = client and (not vim.tbl_isempty(client)) and get_colors("GitSignsAdd", "fg") or
+        --             get_colors("GitSignsDelete", "fg")
+        --     }
+        -- end
         function()
-            return icons.ui.Octoface
+            return require("copilot_status").status_string()
+        end,
+        cnd = function()
+            return require("copilot_status").enabled()
         end,
         color = function()
-            if not package.loaded["copilot"] then
+            local status = require("copilot_status").status().status
+            if status == "offline" or status == "error" then
                 return { fg = get_colors("GitSignsDelete", "fg") }
+            elseif status == "warning" then
+                return { fg = get_colors("GitSignsChange", "fg") }
+            else
+                return { fg = get_colors("GitSignsAdd", "fg") }
             end
-            local client = require("copilot.client").get(true)
-            return {
-                fg = client and (not vim.tbl_isempty(client)) and get_colors("GitSignsAdd", "fg") or
-                    get_colors("GitSignsDelete", "fg")
-            }
         end
     },
     treesitter = {

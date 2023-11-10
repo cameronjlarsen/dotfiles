@@ -2,6 +2,7 @@ return {
     {
         "zbirenbaum/copilot.lua",
         cond = not vim.g.vscode,
+        event = "BufReadPost",
         cmd = "Copilot",
         build = ":Copilot auth",
         opts = {
@@ -59,7 +60,8 @@ return {
         dependencies = {
             "zbirenbaum/copilot-cmp",
             dependencies = "copilot.lua",
-            opts = {},
+            event = "BufReadPost",
+            opts = true,
             config = function(_, opts)
                 require("copilot_cmp").setup(opts)
             end,
@@ -84,5 +86,21 @@ return {
                 },
             }
         end
+    },
+    {
+        "jonahgoldwastaken/copilot-status.nvim",
+        dependencies = { "copilot.lua" }, -- or "zbirenbaum/copilot.lua"
+        lazy = true,
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            icons = {
+                idle = " ",
+                error = " ",
+                offline = " ",
+                warning = " ",
+                loading = " ",
+            },
+            debug = true,
+        },
     }
 }
