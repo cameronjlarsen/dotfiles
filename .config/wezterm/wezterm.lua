@@ -19,12 +19,18 @@ local function enable_wayland()
     end
 end
 
+local jetbrains_font = "JetBrainsMono Nerd Font"
+local maple_font = {
+    family = "Maple Mono NF",
+    harfbuzz_features = {
+        "cv01", "cv03", "cv04", "ss01", "ss02", "ss03", "ss04"
+    },
+}
+
 local function font_with_fallback(name, params)
-    local names = { name, "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded" }
+    local names = { name, "JetBrainsMono Nerd Font", "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded" }
     return wezterm.font_with_fallback(names, params)
 end
-
-local font_name = "JetBrainsMono Nerd Font"
 
 local function is_vi_process(pane)
     return pane:get_user_vars().IS_NVIM == true
@@ -332,7 +338,7 @@ return {
     -- OpenGL for GPU acceleration, Software for CPU
     front_end                                  = "OpenGL",
     -- Font config
-    font                                       = font_with_fallback(font_name),
+    font                                       = font_with_fallback(maple_font),
     warn_about_missing_glyphs                  = false,
     font_size                                  = 16,
     line_height                                = 1.0,
@@ -423,7 +429,7 @@ return {
     },
     window_background_opacity                  = get_opacity(get_os),
     window_frame                               = {
-        font = font_with_fallback(font_name, { bold = true })
+        font = font_with_fallback(maple_font, { bold = true })
     },
     window_decorations                         = "RESIZE",
     window_close_confirmation                  = "NeverPrompt",
