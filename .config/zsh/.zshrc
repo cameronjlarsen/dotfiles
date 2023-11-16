@@ -40,6 +40,10 @@ if command -v bat &> /dev/null; then
     alias catt="bat --theme \"Catppuccin-mocha\""
 fi
 
+# tabtab source for pnpm package
+# uninstall by removing these lines
+[[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ]] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh" || true
+
 # Wezterm shell integration
 [ -f "$HOME/.config/wezterm/wezterm.sh" ] && source "$HOME/.config/wezterm/wezterm.sh"
 
