@@ -16,4 +16,8 @@ require("lazy").setup({
         { import = "plugins" },
         { import = "plugins.extras.lang" }
     },
+    install = {
+        missing = true,
+        colorschme = { "catppuccin" }
+    }
 })

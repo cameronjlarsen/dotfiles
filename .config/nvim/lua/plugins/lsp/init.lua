@@ -102,7 +102,7 @@ return {
                 "clangd",
                 "jsonls",
                 "texlab",
-                "omnisharp",
+                "omnisharp_mono",
                 "bashls",
                 "marksman",
                 "jdtls",

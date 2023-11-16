@@ -1,6 +1,6 @@
 return {
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
