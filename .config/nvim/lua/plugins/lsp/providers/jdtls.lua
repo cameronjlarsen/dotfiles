@@ -84,8 +84,8 @@ local config = {
         "-data",
         workspace_dir,
     },
-    on_attach = function(client, bufnr)
-        require("plugins.lsp.defaults").on_attach(client, bufnr)
+    on_attach = function(client, buffer)
+        require("plugins.lsp.defaults").on_attach(client, buffer)
         require("jdtls.dap").setup_dap_main_class_configs()
         jdtls.setup_dap({
             hotcodereplace = "auto",

@@ -19,16 +19,16 @@ local function enable_wayland()
     end
 end
 
-local jetbrains_font = "JetBrainsMono Nerd Font"
 local maple_font = {
-    family = "Maple Mono NF",
+    family = "MapleMono Nerd Font",
     harfbuzz_features = {
         "cv01", "cv03", "cv04", "ss01", "ss02", "ss03", "ss04"
     },
 }
 
 local function font_with_fallback(name, params)
-    local names = { name, "JetBrainsMono Nerd Font", "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded" }
+    local names = { name, "JetBrainsMono Nerd Font", "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded",
+        "Symbols Nerd Font" }
     return wezterm.font_with_fallback(names, params)
 end
 

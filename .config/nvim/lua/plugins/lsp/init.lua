@@ -127,5 +127,11 @@ return {
         "lvimuser/lsp-inlayhints.nvim",
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
+        init = function()
+            require("core.utils").on_attach(function(client, buffer)
+                require("lsp-inlayhints").setup()
+                require("lsp-inlayhints").on_attach(client, buffer, false)
+            end)
+        end,
     },
 }

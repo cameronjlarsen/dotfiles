@@ -51,3 +51,11 @@ fi
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Starship prompt
 eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/home/camjl/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

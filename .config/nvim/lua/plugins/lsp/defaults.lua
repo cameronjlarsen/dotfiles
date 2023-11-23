@@ -1,18 +1,15 @@
 local M = {}
 
-function M.on_attach(client, bufnr)
+function M.on_attach(client, buffer)
     -- Configure keymaps
-    require("plugins.lsp.keymaps").setup(client, bufnr)
+    require("plugins.lsp.keymaps").setup(client, buffer)
 
     -- Configure highlighting
-    require("plugins.lsp.highlighter").setup(client, bufnr)
+    require("plugins.lsp.highlighter").setup(client, buffer)
 
     -- Configure formatting
-    require("plugins.null-ls.formatters").setup(client, bufnr)
+    require("plugins.null-ls.formatters").setup(client, buffer)
 
-    -- Setup inlay hints
-    require("lsp-inlayhints").setup()
-    require("lsp-inlayhints").on_attach(client, bufnr, false)
 end
 
 function M.common_capabilities()

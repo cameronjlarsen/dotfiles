@@ -67,6 +67,8 @@ function M.get_hl_colors(color_group, scope)
     return color
 end
 
+--- this will call git_files if it exists, otherwise find_files
+---@param opts? table
 function M.find_files(opts)
     opts = opts or {
         follow = true,
@@ -78,6 +80,17 @@ function M.find_files(opts)
     if not ok then
         require("telescope.builtin").find_files(opts)
     end
+end
+
+---@param on_attach fun(client, buffer)
+function M.on_attach(on_attach)
+    vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+            local buffer = args.buf ---@type number
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            on_attach(client, buffer)
+        end
+    })
 end
 
 return M

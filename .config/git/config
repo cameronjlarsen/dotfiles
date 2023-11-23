@@ -14,3 +14,15 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[merge]
+    tool = nvim
+[mergetool "nvim"]
+    path = /usr/bin/nvim
+    prompt = false
+[diff]
+    tool = nvim
+[difftool "nvim"]
+    path = /usr/bin/nvim
+    prompt = false
+; [alias]
+;     mergetool = "!nvim -c DiffviewOpen"
