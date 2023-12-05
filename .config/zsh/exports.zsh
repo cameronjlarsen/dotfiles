@@ -75,3 +75,13 @@ else
     unset __conda_setup
 fi
 # <<< conda initialize <<<
+
+#Android
+if [[ $(uname -s) == 'Darwin' ]]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+else
+  export ANDROID_HOME="$HOME/Android/Sdk"
+fi
+export PATH="$PATH:$ANDROID_HOME/emulator"
+export PATH="$PATH:$ANDROID_HOME/tools"
+
