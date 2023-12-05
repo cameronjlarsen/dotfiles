@@ -4,6 +4,27 @@ local ruled = require("ruled")
 -- Rules
 -- Rules to apply to new clients.
 ruled.client.connect_signal("request::rules", function()
+    ruled.client.append_rule {
+        id         = "Android Emulator",
+        rule_any   = {
+            name = { "Emulator" }
+        },
+        properties = {
+            floating          = true,
+            ontop             = true,
+            size_hints_honor  = false,
+            height            = 1000,
+            width             = 600,
+            titlebars_enabled = false,
+            border_width      = 0,
+        },
+        callback   = function(c)
+            awful.placement.no_offscreen(c, { honor_workarea = true })
+            awful.placement.align(c, { position = "top_right" })
+            awful.titlebar.hide(c)
+        end
+    }
+
     -- All clients will match this rule.
     ruled.client.append_rule {
         id         = "global",
@@ -17,6 +38,7 @@ ruled.client.connect_signal("request::rules", function()
             placement         = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen
         },
     }
+
 
     -- Floating clients.
     ruled.client.append_rule {
@@ -38,6 +60,7 @@ ruled.client.connect_signal("request::rules", function()
                 "Friends List",
                 "Steam - News",
                 "tdropdropdown",
+                "Android Emulator"
             },
             role     = {
                 "AlarmWindow",   -- Thunderbird's calendar.
