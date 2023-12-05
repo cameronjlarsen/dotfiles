@@ -85,6 +85,11 @@ return {
                 kind = require("core.icons").get("kind"),
             }
 
+            local check_backspace = function()
+                local col = vim.fn.col(".") - 1
+                return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+            end
+
             local has_words_before = function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0 and
@@ -107,7 +112,8 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
                     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-                    ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+                    ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+                        { "i" }),
                     ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {
                         "i" }),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -146,7 +152,11 @@ return {
                             cmp.select_next_item()
                         elseif luasnip.expand_or_locally_jumpable() then
                             luasnip.expand_or_jump()
-                        elseif has_words_before() then
+                        elseif luasnip.expandable() then
+                            luasnip.expand()
+                        elseif cmp.visible() and has_words_before() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        elseif check_backspace() then
                             fallback()
                         else
                             fallback()

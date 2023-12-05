@@ -22,7 +22,7 @@ return {
         init = function()
             vim.g.knap_settings = {
                 mdoutputext          = "pdf",
-                mdtopdf              = "pandoc -s -f markdown -t pdf -F mermaid-filter %docroot% -o %outputfile%",
+                mdtopdf              = "pandoc -s --highlight-style tango -f markdown -t pdf -F mermaid-filter %docroot% -o %outputfile%",
                 mdtopdfviewerlaunch  = "sioyek %outputfile%",
                 mdtopdfviewerrefresh = "none",
                 -- texoutputext          = "pdf",

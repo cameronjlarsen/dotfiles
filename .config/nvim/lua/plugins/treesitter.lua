@@ -11,7 +11,6 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "HiPhish/rainbow-delimiters.nvim",
             "nvim-treesitter/playground",
-            "JoosepAlviste/nvim-ts-context-commentstring",
             "windwp/nvim-ts-autotag",
         },
         opts = {
@@ -27,13 +26,9 @@ return {
             highlight = {
                 enable = not vim.g.vscode, -- false will disable the whole extension
                 disable = { "latex" },     -- list of language that will be disabled
-                additional_vim_regex_highlighting = false,
+                additional_vim_regex_highlighting = true,
             },
             indent = { enable = true, disable = { "yaml" } },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
             textobjects = {
                 select = {
                     enable = true,
@@ -147,5 +142,14 @@ return {
             use_default_keymaps = false,
             max_join_length = 150,
         },
+    },
+    {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        opts = {
+            context_commentstring = {
+                enable = true,
+                enable_autocmd = false,
+            },
+        }
     }
 }
