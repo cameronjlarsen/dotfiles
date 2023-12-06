@@ -71,7 +71,6 @@ return {
             "hrsh7th/cmp-nvim-lua",         -- nvim-cmp source for nvim lua.
             "rcarriga/cmp-dap",             -- nvim-cmp source for nvim-dap REPL and nvim-dap-ui buffers.
             "kdheepak/cmp-latex-symbols",   -- Add latex symbol support for nvim-cmp.
-            "lukas-reineke/cmp-rg",         -- nvim-cmp source for ripgrep.
             "onsails/lspkind-nvim",         -- VSCode-like pictograms for neovim lsp completion items.
             "saadparwaiz1/cmp_luasnip",     -- luasnip completion source for nvim-cmp.
             "rafamadriz/friendly-snippets", -- Set of preconfigured snippets for different languages.
@@ -209,21 +208,12 @@ return {
                     end,
                 },
                 sources = cmp.config.sources(
-                    {
-                        { name = "nvim_lsp",                keyword_length = 1 },
-                        { name = "nvim_lsp_signature_help", keyword_length = 1 },
-                        { name = "nvim_lua" },
-                        { name = "luasnip" },
-                    },
-                    {
-                        { name = "path" },
-                        { name = "buffer", keyword_length = 5 },
-                        { name = "rg",     keyword_length = 5 },
-                    },
-                    {
-                        { name = "latex_symbols" },
-                        { name = "emoji" },
-                    }
+                    { name = "nvim_lsp", group_index = 1, keyword_length = 1 },
+                    { name = "nvim_lsp_signature_help", group_index = 1, keyword_length = 1 },
+                    { name = "nvim_lua", group_index = 1, },
+                    { name = "luasnip", group_index = 1, },
+                    { name = "path", group_index = 2, keyword_length = 1, },
+                    { name = "buffer", group_index = 2, keyword_length = 5 }
                 ),
                 window = {
                     completion = {
@@ -251,9 +241,9 @@ return {
             cmp.setup.cmdline(":", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
-                    { name = "path" },
                     { name = "cmdline" },
                     { name = "nvim_lua" },
+                    { name = "path" },
                 }),
             })
 
@@ -267,6 +257,15 @@ return {
             cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
                 sources = {
                     { name = "dap" },
+                },
+            })
+
+            cmp.setup.filetype({ "latex", "markdown" }, {
+                sources = {
+                    { name = "latex_symbols", group_index = 1 },
+                    { name = "emoji",         group_index = 1 },
+                    { name = "buffer",        group_index = 1, keyword_length = 5 },
+                    { name = "path",          group_index = 1, keyword_length = 1 },
                 },
             })
         end,

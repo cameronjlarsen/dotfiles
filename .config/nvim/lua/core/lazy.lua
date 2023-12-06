@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     spec = {
         { import = "plugins" },
-        { import = "plugins.extras.lang" }
+        { import = "plugins.languages" },
+        { import = "plugins.extras" }
     },
     install = {
         missing = true,

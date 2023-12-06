@@ -23,6 +23,7 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         optional = true,
+        event = "VeryLazy",
         opts = function(_, opts)
             table.insert(opts.winbar.lualine_c,
                 {

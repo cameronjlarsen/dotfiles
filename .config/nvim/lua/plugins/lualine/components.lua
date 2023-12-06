@@ -259,19 +259,6 @@ M = {
         end,
     },
     copilot = {
-        -- function()
-        --     return icons.ui.Octoface
-        -- end,
-        -- color = function()
-        --     if not package.loaded["copilot"] then
-        --         return { fg = get_colors("GitSignsDelete", "fg") }
-        --     end
-        --     local client = require("copilot.client").get(true)
-        --     return {
-        --         fg = client and (not vim.tbl_isempty(client)) and get_colors("GitSignsAdd", "fg") or
-        --             get_colors("GitSignsDelete", "fg")
-        --     }
-        -- end
         function()
             return require("copilot_status").status_string()
         end,
