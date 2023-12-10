@@ -58,32 +58,32 @@ wezterm.on("ActivatePaneDirection-down", function(window, pane)
 end)
 
 local colors = {
-    rosewater = "#f5e0dc",
-    flamingo = "#f2cdcd",
-    pink = "#f5c2e7",
-    mauve = "#cba6f7",
-    red = "#f38ba8",
-    maroon = "#eba0ac",
-    peach = "#fab387",
-    yellow = "#f9e2af",
-    green = "#a6e3a1",
-    teal = "#94e2d5",
-    sky = "#89dceb",
-    sapphire = "#74c7ec",
-    blue = "#89b4fa",
-    lavender = "#b4befe",
-    text = "#cdd6f4",
-    subtext1 = "#bac2de",
-    subtext0 = "#a6adc8",
-    overlay2 = "#9399b2",
-    overlay1 = "#7f849c",
-    overlay0 = "#6c7086",
-    surface2 = "#585b70",
-    surface1 = "#45475a",
-    surface0 = "#313244",
-    base = "#1e1e2e",
-    mantle = "#181825",
-    crust = "#11111b",
+    rosewater = wezterm.color.parse("#f5e0dc"),
+    flamingo  = wezterm.color.parse("#f2cdcd"),
+    pink      = wezterm.color.parse("#f5c2e7"),
+    mauve     = wezterm.color.parse("#cba6f7"),
+    red       = wezterm.color.parse("#f38ba8"),
+    maroon    = wezterm.color.parse("#eba0ac"),
+    peach     = wezterm.color.parse("#fab387"),
+    yellow    = wezterm.color.parse("#f9e2af"),
+    green     = wezterm.color.parse("#a6e3a1"),
+    teal      = wezterm.color.parse("#94e2d5"),
+    sky       = wezterm.color.parse("#89dceb"),
+    sapphire  = wezterm.color.parse("#74c7ec"),
+    blue      = wezterm.color.parse("#89b4fa"),
+    lavender  = wezterm.color.parse("#b4befe"),
+    text      = wezterm.color.parse("#cdd6f4"),
+    subtext1  = wezterm.color.parse("#bac2de"),
+    subtext0  = wezterm.color.parse("#a6adc8"),
+    overlay2  = wezterm.color.parse("#9399b2"),
+    overlay1  = wezterm.color.parse("#7f849c"),
+    overlay0  = wezterm.color.parse("#6c7086"),
+    surface2  = wezterm.color.parse("#585b70"),
+    surface1  = wezterm.color.parse("#45475a"),
+    surface0  = wezterm.color.parse("#313244"),
+    base      = wezterm.color.parse("#1e1e2e"),
+    mantle    = wezterm.color.parse("#181825"),
+    crust     = wezterm.color.parse("#11111b"),
 }
 
 local function get_process(tab)
@@ -109,11 +109,11 @@ local function get_process(tab)
             { Text = wezterm.nerdfonts.md_hexagon },
         },
         ["zsh"] = {
-            { Foreground = { Color = colors.peach } },
+            { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.dev_terminal },
         },
         ["bash"] = {
-            { Foreground = { Color = colors.subtext0 } },
+            { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
         },
         ["htop"] = {
@@ -228,13 +228,6 @@ local function tab_title(tab_info)
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local active_tab_index = 0
-    for _, t in ipairs(tabs) do
-        if t.is_active then
-            active_tab_index = t.tab_index
-        end
-    end
-
     local rainbow = {
         config.resolved_palette.ansi[2],
         config.resolved_palette.indexed[16],
@@ -244,90 +237,95 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         config.resolved_palette.ansi[6],
     }
 
-    local i = tab.tab_index % 6
+    -- local i = tab.tab_index % 6
     local background = config.colors.tab_bar.background
     -- local active_bg = rainbow[i + 1]
     local active_bg = config.colors.tab_bar.active_tab.bg_color
     local active_fg = config.colors.tab_bar.active_tab.fg_color
     local inactive_bg = config.colors.tab_bar.inactive_tab.bg_color
     local inactive_fg = config.colors.tab_bar.inactive_tab.fg_color
-    local new_tab_bg = config.colors.tab_bar.new_tab.bg_color
     local inactive_hover_bg = config.colors.tab_bar.inactive_tab_hover.bg_color
     local inactive_hover_fg = config.colors.tab_bar.inactive_tab_hover.fg_color
 
-    local s_bg, s_fg, e_bg, e_fg
+    local sect_bg, sect_fg, end_bg, end_fg
 
-    -- the last tab
-    if tab.tab_index == #tabs - 1 then
-        if tab.is_active then
-            s_bg = active_bg
-            s_fg = active_fg
-            e_bg = new_tab_bg
-            e_fg = active_bg
-        elseif hover then
-            s_bg = inactive_hover_bg
-            s_fg = inactive_hover_fg
-            e_bg = new_tab_bg
-            e_fg = inactive_hover_bg
-        else
-            s_bg = inactive_bg
-            s_fg = inactive_fg
-            e_bg = new_tab_bg
-            e_fg = inactive_bg
-        end
-    elseif tab.tab_index == active_tab_index - 1 then
-        s_bg = inactive_bg
-        s_fg = inactive_fg
-        e_bg = active_bg
-        -- e_bg = rainbow[(i + 1) % 6 + 1]
-        e_fg = inactive_bg
-    elseif tab.is_active then
-        s_bg = active_bg
-        s_fg = active_fg
-        e_bg = inactive_bg
-        e_fg = active_bg
+    if tab.is_active then
+        sect_bg = active_bg
+        sect_fg = active_fg
+        end_fg = active_bg
+        end_bg = background
     elseif hover then
-        s_bg = inactive_hover_bg
-        s_fg = inactive_hover_fg
-        e_bg = new_tab_bg
-        e_fg = inactive_hover_bg
+        sect_bg = inactive_hover_bg
+        sect_fg = inactive_hover_fg
+        end_fg = inactive_hover_bg
+        end_bg = background
     else
-        s_bg = inactive_bg
-        s_fg = inactive_fg
-        e_bg = inactive_bg
-        e_fg = inactive_bg
+        sect_bg = inactive_bg
+        sect_fg = inactive_fg
+        end_fg = inactive_bg
+        end_bg = background
     end
 
     local index = string.format(" %s ", tab.tab_index + 1)
     local title = tab_title(tab)
+    local zoomed = ""
+    if tab.active_pane.is_zoomed then
+        zoomed = wezterm.nerdfonts.md_alpha_z_box
+    end
 
     return wezterm.format({
-        { Background = { Color = background } },
-        { Foreground = { Color = s_bg } },
-        { Text = " " },
-        { Background = { Color = s_bg } },
-        { Foreground = { Color = s_fg } },
+        { Background = { Color = end_bg } },
+        { Foreground = { Color = end_fg } },
+        { Text = " " .. wezterm.nerdfonts.ple_left_half_circle_thick },
+        { Background = { Color = sect_bg } },
+        { Foreground = { Color = sect_fg } },
+        { Text = zoomed },
+        { Background = { Color = sect_bg } },
+        { Foreground = { Color = sect_fg } },
         { Attribute = { Intensity = "Half" } },
         { Text = index },
         "ResetAttributes",
-        { Background = { Color = s_bg } },
-        { Foreground = { Color = s_fg } },
+        { Background = { Color = sect_bg } },
+        { Foreground = { Color = sect_fg } },
         { Text = title },
-        { Background = { Color = background } },
-        { Foreground = { Color = e_fg } },
-        { Text = " " },
+        { Background = { Color = end_bg } },
+        { Foreground = { Color = end_fg } },
+        { Text = wezterm.nerdfonts.ple_right_half_circle_thick .. " " },
     })
 end)
 
-wezterm.on("update-right-status", function(window)
+wezterm.on("update-status", function(window, pane)
     local battery_info = {}
     for _, b in ipairs(wezterm.battery_info()) do
         table.insert(battery_info, string.format("%.0f%%", b.state_of_charge * 100))
     end
+    local time = wezterm.strftime("%-l:%M %P")
+    local background = window:effective_config().colors.tab_bar.background
 
     window:set_right_status(wezterm.format({
-        { Attribute = { Intensity = "Bold" } },
-        { Text = wezterm.strftime(" %A, %B %d %Y %I:%M %p ") },
+        { Background = { Color = background } },
+        { Foreground = { Color = colors.green } },
+        { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+        { Background = { Color = colors.green } },
+        { Foreground = { Color = background } },
+        { Text = "  " },
+        { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+        { Background = { Color = background } },
+        { Foreground = { Color = colors.text } },
+        { Text = " " .. window:active_workspace() .. " " },
+        { Background = { Color = background } },
+        { Foreground = { Color = colors.blue } },
+        { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+        -- { Text = wezterm.nerdfonts.ple_left_half_circle_thick },
+        { Background = { Color = colors.blue } },
+        { Foreground = { Color = background } },
+        { Text = " " .. wezterm.nerdfonts.md_calendar_clock .. " " },
+        { Text = wezterm.nerdfonts.ple_upper_right_triangle },
+        { Background = { Color = background } },
+        { Foreground = { Color = colors.text } },
+        { Text = " " .. time .. " " },
+        { Background = { Color = background } },
+        { Foreground = { Color = colors.text } },
         { Text = table.concat(battery_info, " ") },
     }))
 end)
@@ -387,10 +385,10 @@ return {
             colors.surface1,
         },
         tab_bar = {
-            background = colors.crust,
+            background = colors.base,
             active_tab = {
-                bg_color = colors.surface1,
-                fg_color = colors.text,
+                bg_color = colors.lavender,
+                fg_color = colors.crust,
                 intensity = "Bold",
                 underline = "None",
                 italic = false,
@@ -414,6 +412,8 @@ return {
             },
         },
     },
+    command_palette_fg_color                   = colors.text,
+    command_palette_bg_color                   = colors.surface0,
     -- Window
     window_padding                             = {
         left   = 8,
