@@ -102,11 +102,10 @@ return {
                 "clangd",
                 "jsonls",
                 "texlab",
-                "omnisharp_mono",
                 "bashls",
                 "marksman",
                 "jdtls",
-                "gopls",
+                "tsserver"
             },
             handlers = {
                 function(server)

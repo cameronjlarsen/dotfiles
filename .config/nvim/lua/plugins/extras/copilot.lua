@@ -51,7 +51,7 @@ return {
             end,
         },
         opts = function(_, opts)
-            table.insert(opts.sources, 1, { name = "copilot", group_index = 1 })
+            table.insert(opts.sources, 3, { name = "copilot" })
         end
     },
     {

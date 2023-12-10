@@ -197,7 +197,6 @@ return {
                             luasnip = "[LuaSnip]",
                             nvim_lua = "[Lua]",
                             buffer = "[Buffer]",
-                            rg = "[Rg]",
                             path = "[Path]",
                             latex_symbols = "[LaTeX]",
                             emoji = "[Emoji]",
@@ -208,12 +207,16 @@ return {
                     end,
                 },
                 sources = cmp.config.sources(
-                    { name = "nvim_lsp", group_index = 1, keyword_length = 1 },
-                    { name = "nvim_lsp_signature_help", group_index = 1, keyword_length = 1 },
-                    { name = "nvim_lua", group_index = 1, },
-                    { name = "luasnip", group_index = 1, },
-                    { name = "path", group_index = 2, keyword_length = 1, },
-                    { name = "buffer", group_index = 2, keyword_length = 5 }
+                    {
+                        { name = "nvim_lsp" },
+                        { name = "nvim_lsp_signature_help" },
+                        { name = "luasnip" },
+                        { name = "nvim_lua" },
+                        { name = "path" },
+
+                    }, {
+                        { name = "buffer" }
+                    }
                 ),
                 window = {
                     completion = {
@@ -235,6 +238,9 @@ return {
         end,
         config = function(_, opts)
             local cmp = require("cmp")
+            for _, source in ipairs(opts.sources) do
+                source.group_index = source.group_index or 1
+            end
 
             cmp.setup(opts)
 

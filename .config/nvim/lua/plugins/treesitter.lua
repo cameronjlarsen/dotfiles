@@ -146,10 +146,7 @@ return {
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
         opts = {
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
+            enable_autocmd = false,
         }
     }
 }
