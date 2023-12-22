@@ -102,5 +102,14 @@ client.connect_signal("request::default_keybindings", function()
                 c:raise()
             end,
         },
+        awful.key {
+            modifiers   = { Super, Shift },
+            key         = "s",
+            description = "(un)stick",
+            group       = "Client",
+            on_press    = function(c)
+                c.sticky = not c.sticky
+            end,
+        },
     }
 end)
