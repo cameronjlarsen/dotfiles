@@ -198,7 +198,7 @@ local function get_process(tab)
 
     return wezterm.format(
         process_icons[process_name]
-        or { { Foreground = { Color = colors.sky } }, { Text = string.format("[%s]", process_name) } }
+        or { { Foreground = { Color = colors.base } }, { Text = string.format("[%s]", process_name) } }
     )
 end
 
@@ -351,10 +351,10 @@ return {
     colors                                     = {
         split = colors.surface0,
         foreground = colors.text,
-        background = colors.base,
+        background = colors.crust,
         cursor_bg = colors.rosewater,
         cursor_border = colors.rosewater,
-        cursor_fg = colors.base,
+        cursor_fg = colors.crust,
         selection_bg = colors.surface2,
         selection_fg = colors.text,
         visual_bell = colors.surface0,
@@ -385,7 +385,7 @@ return {
             colors.surface1,
         },
         tab_bar = {
-            background = colors.base,
+            background = colors.crust,
             active_tab = {
                 bg_color = colors.lavender,
                 fg_color = colors.crust,
@@ -520,6 +520,42 @@ return {
         { key = "8",          mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 8 }) },
         { key = "9",          mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTab = 9 }) },
         { key = "Enter",      mods = "ALT",        action = wezterm.action.DisableDefaultAssignment },
+        -- Prompt for a name to use for a new workspace and switch to it.
+        {
+            key = 'i',
+            mods = 'CTRL|SHIFT',
+            action = wezterm.action.PromptInputLine({
+                description = wezterm.format({
+                    { Attribute = { Intensity = 'Bold' } },
+                    { Foreground = { Color = colors.pink } },
+                    { Text = 'Enter name for new workspace' },
+                }),
+                action = wezterm.action_callback(function(window, pane, line)
+                    -- line will be `nil` if they hit escape without entering anything
+                    -- An empty string if they just hit enter
+                    -- Or the actual line of text they wrote
+                    if line then
+                        window:perform_action(
+                            wezterm.action.SwitchToWorkspace({
+                                name = line,
+                            }),
+                            pane
+                        )
+                    end
+                end),
+            }),
+        },
+        -- Show the launcher in fuzzy selection mode and have it list all workspaces
+        -- and allow activating one.
+        {
+            key = "w",
+            mods = "ALT|SHIFT",
+            action = wezterm.action.ShowLauncherArgs({
+                flags = "FUZZY|WORKSPACES",
+            }),
+        },
+        { key = "n", mods = "CTRL", action = wezterm.action.SwitchWorkspaceRelative(1) },
+        { key = "p", mods = "CTRL", action = wezterm.action.SwitchWorkspaceRelative(-1) },
     },
     hyperlink_rules                            = {
         {
