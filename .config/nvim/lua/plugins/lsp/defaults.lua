@@ -2,13 +2,13 @@ local M = {}
 
 function M.on_attach(client, buffer)
     -- Configure keymaps
-    require("plugins.lsp.keymaps").setup(client, buffer)
+    require("plugins.lsp.keymaps").on_attach(client, buffer)
 
     -- Configure highlighting
-    require("plugins.lsp.highlighter").setup(client, buffer)
+    require("plugins.lsp.highlighter").on_attach(client, buffer)
 
     -- Configure formatting
-    require("plugins.null-ls.formatters").setup(client, buffer)
+    require("plugins.null-ls.formatters").on_attach(client, buffer)
 
 end
 

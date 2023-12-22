@@ -1,8 +1,28 @@
 return {
-    keys = {
-        { "<leader>lo", function() vim.cmd("TypescriptOrganizeImports") end, desc = "Organize Imports" },
-        { "<leader>lR", function() vim.cmd("TypescriptRenameFile") end,      desc = "Rename File" },
-    },
+    on_attach = function(client, bufnr)
+        require("plugins.lsp.defaults").on_attach(client, bufnr)
+        local map = require("core.utils").map
+        map("n", "<leader>lo",
+            function()
+                vim.lsp.buf.code_action({
+                    apply = true,
+                    context = {
+                        only = { "source.organizeImports.ts" },
+                        diagnostics = {},
+                    }
+                })
+            end,
+            { desc = "Organize Imports" })
+        map("n", "<leader>lR", function()
+            vim.lsp.buf.code_action({
+                apply = true,
+                context = {
+                    only = { "source.removeUnused.ts" },
+                    diagnostics = {},
+                },
+            })
+        end, { desc = "Remove Unused Imports" })
+    end,
     settings = {
         typescript = {
             format = {

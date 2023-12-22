@@ -62,5 +62,8 @@ return {
                 end,
             },
         },
+    },
+    {
+        "justinsgithub/wezterm-types"
     }
 }

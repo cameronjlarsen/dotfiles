@@ -25,7 +25,7 @@ function M.list_supported(filetype)
     return supported_formatters
 end
 
-function M.setup(client, bufnr)
+function M.on_attach(client, bufnr)
     local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
     local enable = false

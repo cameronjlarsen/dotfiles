@@ -67,10 +67,8 @@ return {
             "hrsh7th/cmp-path",             -- nvim-cmp source for path.
             "hrsh7th/cmp-cmdline",          -- nvim-cmp source for vim's commandline.
             "hrsh7th/cmp-nvim-lsp",         -- nvim-cmp source for neovim builtin LSP client.
-            "hrsh7th/cmp-emoji",            -- nvim-cmp source for emoji.
             "hrsh7th/cmp-nvim-lua",         -- nvim-cmp source for nvim lua.
             "rcarriga/cmp-dap",             -- nvim-cmp source for nvim-dap REPL and nvim-dap-ui buffers.
-            "kdheepak/cmp-latex-symbols",   -- Add latex symbol support for nvim-cmp.
             "onsails/lspkind-nvim",         -- VSCode-like pictograms for neovim lsp completion items.
             "saadparwaiz1/cmp_luasnip",     -- luasnip completion source for nvim-cmp.
             "rafamadriz/friendly-snippets", -- Set of preconfigured snippets for different languages.
@@ -198,8 +196,6 @@ return {
                             nvim_lua = "[Lua]",
                             buffer = "[Buffer]",
                             path = "[Path]",
-                            latex_symbols = "[LaTeX]",
-                            emoji = "[Emoji]",
                             dap = "[Dap]",
                             copilot = "[Copilot]"
                         })[entry.source.name]
@@ -263,15 +259,6 @@ return {
             cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
                 sources = {
                     { name = "dap" },
-                },
-            })
-
-            cmp.setup.filetype({ "latex", "markdown" }, {
-                sources = {
-                    { name = "latex_symbols", group_index = 1 },
-                    { name = "emoji",         group_index = 1 },
-                    { name = "buffer",        group_index = 1, keyword_length = 5 },
-                    { name = "path",          group_index = 1, keyword_length = 1 },
                 },
             })
         end,

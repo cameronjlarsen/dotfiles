@@ -42,7 +42,7 @@ function M.highlight(client, bufnr)
 	end
 end
 
-function M.setup(client, bufnr)
+function M.on_attach(client, bufnr)
 	M.highlight(client, bufnr)
 end
 

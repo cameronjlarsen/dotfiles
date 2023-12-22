@@ -1,12 +1,14 @@
 return {
     "lervag/vimtex",
+    lazy = false,
     cond = not vim.g.vscode,
-    ft = "tex",
+    ft = { "tex", "bib", "sty" },
     config = function(_, opts)
-        vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-            pattern = opts.pattern,
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+            group = vim.api.nvim_create_augroup("vimtext_conceal", { clear = true }),
+            pattern = { "bib", "tex" },
             callback = function()
-                vim.cmd("VimtexCompile")
+                vim.wo.conceallevel = 2
             end,
         })
         vim.g.vimtex_view_method = "sioyek"

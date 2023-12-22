@@ -17,25 +17,12 @@ return {
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            {
-                "folke/neodev.nvim",
-                opts = {
-                    library = {
-                        plugins =
-                        {
-                            "nvim-dap-ui",
-                        },
-                        types = true
-                    },
-                }
-            },
+            { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+            { "folke/neodev.nvim",  opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
-            {
-                "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-                opts = {},
-            },
+            { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", opts = {} },
             "mfussenegger/nvim-jdtls"
         },
         keys = {
