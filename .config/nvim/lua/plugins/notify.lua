@@ -19,7 +19,6 @@ return {
         on_open = function(win)
             vim.api.nvim_win_set_config(win, { zindex = 100 })
         end,
-        background_colour = "#1E1E2E",
     },
     init = function()
         vim.notify = require("notify")
