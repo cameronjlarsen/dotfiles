@@ -428,6 +428,7 @@ return {
         brightness = 0.50
     },
     window_background_opacity                  = get_opacity(get_os),
+    text_background_opacity                    = get_opacity(get_os),
     window_frame                               = {
         font = font_with_fallback(maple_font, { bold = true })
     },
