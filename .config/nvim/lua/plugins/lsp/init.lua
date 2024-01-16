@@ -17,7 +17,7 @@ return {
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+            { "folke/neoconf.nvim", cmd = "Neoconf",                                                   config = false, dependencies = { "nvim-lspconfig" } },
             { "folke/neodev.nvim",  opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -120,4 +120,5 @@ return {
             end)
         end,
     },
+    { import = "plugins.languages" },
 }
