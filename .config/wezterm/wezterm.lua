@@ -109,11 +109,11 @@ local function get_process(tab)
             { Text = wezterm.nerdfonts.md_hexagon },
         },
         ["zsh"] = {
-            { Foreground = { Color = colors.base } },
+            -- { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.dev_terminal },
         },
         ["bash"] = {
-            { Foreground = { Color = colors.base } },
+            -- { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
         },
         ["htop"] = {
@@ -228,18 +228,7 @@ local function tab_title(tab_info)
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local rainbow = {
-        config.resolved_palette.ansi[2],
-        config.resolved_palette.indexed[16],
-        config.resolved_palette.ansi[4],
-        config.resolved_palette.ansi[3],
-        config.resolved_palette.ansi[5],
-        config.resolved_palette.ansi[6],
-    }
-
-    -- local i = tab.tab_index % 6
     local background = config.colors.tab_bar.background
-    -- local active_bg = rainbow[i + 1]
     local active_bg = config.colors.tab_bar.active_tab.bg_color
     local active_fg = config.colors.tab_bar.active_tab.fg_color
     local inactive_bg = config.colors.tab_bar.inactive_tab.bg_color
@@ -397,6 +386,7 @@ return {
             inactive_tab = {
                 bg_color = colors.crust,
                 fg_color = colors.surface2,
+                italic = true,
             },
             inactive_tab_hover = {
                 bg_color = colors.mantle,
