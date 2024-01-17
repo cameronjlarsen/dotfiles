@@ -14,7 +14,7 @@ return {
             "windwp/nvim-ts-autotag",
         },
         opts = {
-            ensure_installed = { "lua", "c", "cpp", "python", "bash", "javascript", "typescript", "html", "css", "json", "yaml", "toml", "rust", "java", "cs" },
+            ensure_installed = { "lua", "c", "cpp", "python", "bash", "javascript", "typescript", "html", "css", "json", "yaml", "toml", "rust", "java", "c_sharp" },
             sync_install = false,
             ignore_install = { "" }, -- List of parsers to ignore installing
             autopairs = {
