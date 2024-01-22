@@ -319,8 +319,10 @@ wezterm.on("update-status", function(window, pane)
     }))
 end)
 
+local config = {}
+if wezterm.config_builder then config = wezterm.config_builder{} end
 
-return {
+config = {
     term                                       = "wezterm",
     -- OpenGL for GPU acceleration, Software for CPU
     front_end                                  = "OpenGL",
@@ -575,3 +577,12 @@ return {
         },
     },
 }
+
+-- Windows specific config
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    config.default_prog = { "pwsh.exe" }
+    table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-NoLogo" } })
+    config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+end
+
+return config
