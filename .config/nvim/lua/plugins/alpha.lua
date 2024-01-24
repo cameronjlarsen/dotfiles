@@ -136,7 +136,7 @@ return {
                 dashboard.button("r", "󰄉  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
                 dashboard.button("t", "󰊄  Find text",
                     "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {}),
-                dashboard.button("c", "  Configuration", "<cmd>e" .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>",
+                dashboard.button("c", "  Configuration", "<cmd>e " .. home .. "/.config/nvim/init.lua | :cd %:p:h<CR>",
                     {}),
                 dashboard.button("q", "󰅚  Quit Neovim", "<cmd>qa<CR>", {}),
             },
