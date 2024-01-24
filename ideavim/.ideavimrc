@@ -22,14 +22,17 @@ set highlightedyank
 set nerdtree
 set argtextobj
 set textobj-entire
+set ideajoin
 
 "" Key Mappings
 inoremap jk <Esc>
+nnoremap <C-w>o <Action>(HideAllWindows)
 
 " Tab navigation
 nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprev<CR>
 nnoremap <leader>bc :tabclose<CR>
+nnoremap <leader>bb <Action>(Switcher)
 
 " Pane navigation
 nnoremap <C-h> <C-W>h
@@ -61,12 +64,14 @@ map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 " Open File Explorer
 map <leader>fe :NERDTreeFocus<CR>
 
+" Find/Search
 map <leader>ff <Action>(GotoFile)
 map <leader>fo <Action>(RecentFiles)
+map <leader>fs <Action>(SearchEverywhere)
+map <leader>fp <Action>(ActivateProjectToolWindow)
 
 " Actions
 map <leader>la <Action>(ShowIntentionActions)
-map <leader>fs <Action>(SearchEverywhere)
 
 
 " Refactoring
@@ -104,8 +109,8 @@ nmap gy <Action>(GotoTypeDeclaration)
 nmap gi <Action>(GotoImplementation)
 nmap gu <Action>(ShowUsages)
 nmap gt <Action>(GotoTest)
-nmap gf <Action>(Back)
-nmap gb <Action>(Forward)
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
 
 " Git windows
 nmap <leader>gc <Action>(CheckinProject)
