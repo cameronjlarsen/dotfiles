@@ -55,7 +55,7 @@ format = "[]($style)[$symbol$number](bg:surface1 fg:bright-green)[ ]($styl
 style = "bg:none fg:surface1"
 
 [username]
-format = "[](bg:none fg:surface1)[$user]($style)[on](bg:surface1 fg:text)"
+format = "[](bg:none fg:surface1)[$user ]($style)[on](bg:surface1 fg:text)[ ](bg:none fg:surface1)"
 style_user = "bg:surface1 fg:bold dimmed blue"
 style_root = "bg:surface1 fg:bold red"
 
