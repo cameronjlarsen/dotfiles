@@ -97,6 +97,7 @@ return {
                     return false
                 end, opts.ensure_installed)
             end
+            require ("nvim-treesitter.install").prefer_git = false
             require("nvim-treesitter.configs").setup(opts)
         end
     },

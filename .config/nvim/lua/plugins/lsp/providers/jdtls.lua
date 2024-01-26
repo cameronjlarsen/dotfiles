@@ -4,13 +4,16 @@ if not status then
     return
 end
 
-local home = os.getenv("HOME")
+local home = vim.env.HOME
 if vim.fn.has("mac") == 1 then
     WORKSPACE_PATH = home .. "/workspace/"
     CONFIG = "mac"
 elseif vim.fn.has("unix") == 1 then
     WORKSPACE_PATH = home .. "/workspace/"
     CONFIG = "linux"
+elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    WORKSPACE_PATH = home .. "/workspace/"
+    CONFIG = "win"
 else
     print("Unsupported system")
 end
