@@ -14,7 +14,12 @@ return {
             "windwp/nvim-ts-autotag",
         },
         opts = {
-            ensure_installed = { "lua", "c", "cpp", "python", "bash", "javascript", "typescript", "html", "css", "json", "yaml", "toml", "rust", "java", "c_sharp" },
+            ensure_installed = {
+                "lua", "c", "cpp", "python", "bash",
+                "javascript", "typescript", "html", "css", "json",
+                "yaml", "toml", "rust", "java", "c_sharp",
+                "gitcommit", "gitignore", "gitattributes", "git_config", "git_rebase"
+            },
             sync_install = false,
             ignore_install = { "" }, -- List of parsers to ignore installing
             autopairs = {
@@ -97,7 +102,7 @@ return {
                     return false
                 end, opts.ensure_installed)
             end
-            require ("nvim-treesitter.install").prefer_git = false
+            require("nvim-treesitter.install").prefer_git = false
             require("nvim-treesitter.configs").setup(opts)
         end
     },
