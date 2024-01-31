@@ -4,8 +4,7 @@
 # Use custom format:
 format = """$username$hostname$directory\
 $git_branch$git_status$git_state$git_metrics\
-$jobs$conda$character
-"""
+$jobs$conda$character"""
 
 command_timeout = 750
 
