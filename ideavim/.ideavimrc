@@ -69,6 +69,7 @@ map <leader>ff <Action>(GotoFile)
 map <leader>fo <Action>(RecentFiles)
 map <leader>fs <Action>(SearchEverywhere)
 map <leader>fp <Action>(ActivateProjectToolWindow)
+map <leader>ft <Action>(FindInPath)
 
 " Actions
 map <leader>la <Action>(ShowIntentionActions)
