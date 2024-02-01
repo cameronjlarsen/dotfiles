@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local hostname = wezterm.hostname()
+-- local hostname = wezterm.hostname()
 local get_os = io.popen("uname -s", "r"):read("*l")
 
 local function get_opacity(os)
@@ -203,19 +203,33 @@ local function get_process(tab)
 end
 
 local function get_current_working_dir(tab)
-    local current_dir = tab.active_pane.current_working_dir
-    local ROOT_DIR = string.format("file://%s/", hostname:lower())
-    local HOME_DIR = string.format("file://%s%s/", hostname:lower(), os.getenv("HOME"))
+    local cwd_uri = tab.active_pane.current_working_dir
+    if cwd_uri then
+        local cwd = ""
+        local username = os.getenv("USER")
 
-    local new_dir = string.format("%s", string.gsub(current_dir, "(.*[/\\])(.*[^/\\])[/\\]?$", "%2"))
+        if type(cwd_uri) == "userdata" then
+            cwd = cwd_uri.file_path
+        else
+            cwd_uri = cwd_uri:sub(8)
+            local slash = cwd_uri:find("/")
+            if slash then
+                cwd = cwd_uri:sub(slash):gsub("%%(%x%x)", function(hex)
+                    return string.char(tonumber(hex, 16))
+                end)
+            end
+        end
 
-    if current_dir == HOME_DIR then
-        new_dir = "~"
-    elseif current_dir == ROOT_DIR then
-        new_dir = "/"
+        cwd = string.format("%s", string.gsub(cwd, "(.*[/\\])(.*[^/\\])[/\\]?$", "%2"))
+
+        if cwd == username then
+            cwd = "~"
+        elseif cwd == "/" then
+            cwd = "/"
+        end
+
+        return cwd
     end
-
-    return new_dir
 end
 
 local function tab_title(tab_info)
@@ -320,7 +334,7 @@ wezterm.on("update-status", function(window, pane)
 end)
 
 local config = {}
-if wezterm.config_builder then config = wezterm.config_builder{} end
+if wezterm.config_builder then config = wezterm.config_builder {} end
 
 config = {
     term                                       = "wezterm",
