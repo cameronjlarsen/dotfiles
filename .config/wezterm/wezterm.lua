@@ -198,7 +198,9 @@ local function get_process(tab)
         }
     }
 
-    local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)%.exe", "%2")
+    local process_name = tab.active_pane.foreground_process_name:gsub("(.*[/\\])(.*)", "%2")
+    -- on windows, still need to remove the .exe
+    process_name = process_name:gsub("(.*)(%.exe)$", "%1")
 
     return wezterm.format(
         process_icons[process_name]
