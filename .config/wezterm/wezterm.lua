@@ -116,6 +116,10 @@ local function get_process(tab)
             -- { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
         },
+        ["pwsh"] = {
+            -- { Foreground = { Color = colors.base } },
+            { Text = wezterm.nerdfonts.cod_terminal_powershell },
+        },
         ["htop"] = {
             { Foreground = { Color = colors.yellow } },
             { Text = wezterm.nerdfonts.md_chart_donut_variant },
@@ -194,7 +198,7 @@ local function get_process(tab)
         }
     }
 
-    local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
+    local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)%.exe", "%2")
 
     return wezterm.format(
         process_icons[process_name]
@@ -338,8 +342,6 @@ if wezterm.config_builder then config = wezterm.config_builder {} end
 
 config = {
     term                                       = "wezterm",
-    -- OpenGL for GPU acceleration, Software for CPU
-    front_end                                  = "OpenGL",
     -- Font config
     font                                       = font_with_fallback(maple_font),
     warn_about_missing_glyphs                  = false,
