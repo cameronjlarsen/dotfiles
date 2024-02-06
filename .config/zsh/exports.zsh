@@ -83,3 +83,14 @@ fi
 export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/tools"
 
+# FNM
+export PATH="/run/user/1000/fnm_multishells/1698053_1707203460173/bin":$PATH
+export FNM_MULTISHELL_PATH="/run/user/1000/fnm_multishells/1698053_1707203460173"
+export FNM_LOGLEVEL="info"
+export FNM_ARCH="x64"
+export FNM_DIR="/home/camjl/.local/share/fnm"
+export FNM_COREPACK_ENABLED="false"
+export FNM_VERSION_FILE_STRATEGY="local"
+export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
+export FNM_RESOLVE_ENGINES="false"
+rehash

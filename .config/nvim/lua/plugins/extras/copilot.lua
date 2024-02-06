@@ -16,6 +16,7 @@ return {
                 markdown = true,
                 help = true,
             },
+            copilot_node_command = vim.fn.expand("$FNM_MULTISHELL_PATH") .. "/bin/node"
         }
     },
     {
