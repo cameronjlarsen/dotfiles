@@ -1,48 +1,91 @@
 "" .ideavimrc - Cameron Larsen
 echo "Loading .ideavimrc"
 
-"" Base Settings
+"" Leader
 map <Space> <Nop>
 let mapleader = " "
 
-set scrolloff=10
-set linenumber
+"" Base Settings
+set scrolloff=5
 set showmode
 set showcmd
-
+set number
+set relativenumber
 set smartcase
 set incsearch
 set hlsearch
-
 set clipboard+=unnamedplus
 
 "" Plugins
 set surround
 set highlightedyank
+let g:highlightedyank_highlight_duration = "1000"
+let g:highlightedyank_highlight_color = "rgba(57, 197, 187, 155)"
 set nerdtree
 set argtextobj
+set textobj-indent
 set textobj-entire
 set ideajoin
 
 "" Key Mappings
 inoremap jk <Esc>
-nnoremap <C-w>o <Action>(HideAllWindows)
+" built-in navigation to navigated items works better
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+" but preserve ideavim defaults
+nmap g<c-o> <c-o>
+nmap g<c-i> <c-i>
+" built in search looks better
+nmap / <Action>(Find)
+" but preserve ideavim search
+nmap g/ /
 
-" Tab navigation
+" Buffer/Tab navigation
 nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprev<CR>
 nnoremap <leader>bc :tabclose<CR>
 nnoremap <leader>bb <Action>(Switcher)
+nnoremap <leader>ba <Action>(CloseAllEditors)
+nnoremap <leader>bo <Action>(CloseAllEditorsButActive)
+nnoremap <leader>bp <Action>(CloseAllUnpinnedEditors)
 
-" Pane navigation
+" Window/Pane 
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 nnoremap <C-k> <C-W>k
 nnoremap <C-j> <C-W>j
+nmap <leader>wv <Action>(SplitVertically)
+nmap <leader>ws <Action>(SplitHorizontally)
+nmap <leader>wu <Action>(Unsplit)
+nmap <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+nmap <leader>ww <Action>(HideAllWindows)
 
-" Jump between methods
+" Menu
+nnoremap <leader>mm <Action>(MainMenu)
+nnoremap <leader>ma <Action>(AnalyzeMenu)
+nnoremap <leader>mb <Action>(BuildMenu)
+nnoremap <leader>mc <Action>(CodeMenu)
+nnoremap <leader>mf <Action>(FindMenuGroup)
+nnoremap <leader>mg <Action>(GoToMenu)
+nnoremap <leader>ms <Action>(ScopeViewPopupMenu)
+nnoremap <leader>mt <Action>(EditorTabPopupMenu)
+nnoremap <leader>mw <Action>(ToolWindowsGroup)
+
+" []
 nmap [[ <Action>(MethodUp)
 nmap ]] <Action>(MethodDown)
+nmap [h <Action>(VscShowPrevChangeMarker)
+nmap ]h <Action>(VscShowNextChangeMarker)
+nmap [b <Action>(PreviousTab)
+nmap ]b <Action>(NextTab)
+nmap [g <Action>(GotoPreviousError)
+nmap ]g <Action>(GotoNextError)
+nmap [u <Action>(GotoPrevElementUnderCaretUsage)
+nmap ]u <Action>(GotoNextElementUnderCaretUsage)
+nmap [o <Action>(PreviousOccurence)
+nmap ]o <Action>(NextOccurence)
+nmap [c <Action>(JumpToLastChange)
+nmap ]c <Action>(JumpToNextChange)
 
 " Easy visual indentation
 vnoremap < <gv
@@ -53,26 +96,26 @@ imap <C-j> <Action>(PopupMenu-selectNext)
 imap <C-k> <Action>(PopupMenu-selectPrev)
 
 " Comment
-map gcc <Action>(CommentByLineComment)
+nmap gcc <Action>(CommentByLineComment)
+nmap gcb <Action>(CommentByBlockComment)
+vmap gc <Action>(CommentByLineComment)
+vmap gc <Action>(CommentByBlockComment)
 
-" Window splits
-map <leader>wv <Action>(SplitVertically)
-map <leader>ws <Action>(SplitHorizontally)
-map <leader>wu <Action>(Unsplit)
-map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 
 " Open File Explorer
 map <leader>fe :NERDTreeFocus<CR>
+map <leader>fE :NERDTreeFind<CR>
 
 " Find/Search
-map <leader>ff <Action>(GotoFile)
-map <leader>fo <Action>(RecentFiles)
-map <leader>fs <Action>(SearchEverywhere)
-map <leader>fp <Action>(ActivateProjectToolWindow)
-map <leader>ft <Action>(FindInPath)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fo <Action>(RecentFiles)
+nmap <leader>fs <Action>(SearchEverywhere)
+nmap <leader>fp <Action>(ActivateProjectToolWindow)
+nmap <leader>ft <Action>(FindInPath)
 
 " Actions
 map <leader>la <Action>(ShowIntentionActions)
+map <leader>lf <Action>(ReformatCode)
 
 
 " Refactoring
@@ -108,10 +151,10 @@ map <leader>lf <Action>(ReformatCode)
 nmap gd <Action>(GotoDeclaration)
 nmap gy <Action>(GotoTypeDeclaration)
 nmap gi <Action>(GotoImplementation)
-nmap gu <Action>(ShowUsages)
+nmap gr <Action>(ShowUsages)
 nmap gt <Action>(GotoTest)
-nmap <C-o> <Action>(Back)
-nmap <C-i> <Action>(Forward)
+nmap gI <Action>(QuickImplementations)
+nmap gn <Action>(ShowNavBar)
 
 " Git windows
 nmap <leader>gc <Action>(CheckinProject)
@@ -120,5 +163,31 @@ nmap <leader>gb <Action>(Git.Branches)
 
 nmap gl <Action>(ShowErrorDescription)
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+
+" Run
+nmap <leader>rc <Action>(ContextRun)
+nmap <leader>rx<Action>(chooseRunConfiguration)
+nmap <leader>rr <Action>(Rerun)
+nmap <leader>rt <Action>(RunTests)
+nmap <leader>rs <Action>(Stop)
+
+" Debug
+nmap <leader>dc <Action>(ContextDebug)
+nmap <leader>dx <Action>(Debug)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>de <Action>(EditBreakpoint)
+nmap <leader>dv <Action>(ViewBreakpoints)
+
+" Collapse
+nmap zz <Action>(ExpandCollapseToggleAction)
+nmap za <Action>(CollapseAllRegions)
+nmap zA <Action>(ExpandAllRegions)
+
+" Zen
+nmap <leader>z <Action>(ToggleZenMode)
+
+" Terminal
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+nmap <leader>tc <Action>(Terminal.OpenInTerminal)
 
 echo "Finished loading .ideavimrc"
