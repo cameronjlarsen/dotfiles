@@ -1,3 +1,12 @@
+local copilot_node_command = vim.fn.expand("$FNM_MULTISHELL_PATH")
+-- if unix append "/bin/node"
+-- if windows append "node.exe"
+if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
+    copilot_node_command = copilot_node_command .. "/bin/node"
+elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    copilot_node_command = copilot_node_command .. "/node.exe"
+end
+
 return {
     {
         "zbirenbaum/copilot.lua",
@@ -16,7 +25,7 @@ return {
                 markdown = true,
                 help = true,
             },
-            copilot_node_command = vim.fn.expand("$FNM_MULTISHELL_PATH") .. "/bin/node"
+            copilot_node_command = copilot_node_command
         }
     },
     {
