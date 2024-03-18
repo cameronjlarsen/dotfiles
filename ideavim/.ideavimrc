@@ -29,16 +29,16 @@ set ideajoin
 
 "" Key Mappings
 inoremap jk <Esc>
+" but preserve ideavim defaults
+nnoremap g<c-o> <c-o>
+nnoremap g<c-i> <c-i>
 " built-in navigation to navigated items works better
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
-" but preserve ideavim defaults
-nmap g<c-o> <c-o>
-nmap g<c-i> <c-i>
+" but preserve ideavim search
+nnoremap g/ /
 " built in search looks better
 nmap / <Action>(Find)
-" but preserve ideavim search
-nmap g/ /
 
 " Buffer/Tab navigation
 nnoremap <S-Right> :tabnext<CR>
@@ -74,8 +74,8 @@ nnoremap <leader>mw <Action>(ToolWindowsGroup)
 " []
 nmap [[ <Action>(MethodUp)
 nmap ]] <Action>(MethodDown)
-nmap [h <Action>(VscShowPrevChangeMarker)
-nmap ]h <Action>(VscShowNextChangeMarker)
+nmap [h <Action>(VcsShowPrevChangeMarker)
+nmap ]h <Action>(VcsShowNextChangeMarker)
 nmap [b <Action>(PreviousTab)
 nmap ]b <Action>(NextTab)
 nmap [g <Action>(GotoPreviousError)
@@ -166,7 +166,7 @@ nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
 
 " Run
 nmap <leader>rc <Action>(ContextRun)
-nmap <leader>rx<Action>(chooseRunConfiguration)
+nmap <leader>rx <Action>(chooseRunConfiguration)
 nmap <leader>rr <Action>(Rerun)
 nmap <leader>rt <Action>(RunTests)
 nmap <leader>rs <Action>(Stop)
