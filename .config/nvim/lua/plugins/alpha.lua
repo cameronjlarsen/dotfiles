@@ -4,11 +4,6 @@ return {
     event = "VimEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        local home = vim.env.HOME
-        local config_path = home .. "/.config/nvim/init.lua"
-        if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-            config_path = home .. "\\AppData\\Local\\nvim\\init.lua"
-        end
         local dashboard = require("alpha.themes.dashboard")
 
         local function heading_info()
@@ -140,7 +135,7 @@ return {
                 dashboard.button("r", "󰄉  Recently used files", "<cmd>Telescope oldfiles <CR>", {}),
                 dashboard.button("t", "󰊄  Find text",
                     "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {}),
-                dashboard.button("c", "  Configuration", "<cmd>e " .. config_path .. " | :cd %:p:h<CR>",
+                dashboard.button("c", "  Configuration", "<cmd>e " .. vim.fn.stdpath("config") .. "/init.lua" .. " | :cd %:p:h<CR>",
                     {}),
                 dashboard.button("q", "󰅚  Quit Neovim", "<cmd>qa<CR>", {}),
             },
