@@ -14,6 +14,10 @@ return {
             "windwp/nvim-ts-autotag",
         },
         opts = {
+            install = {
+                prefer_git = false,
+                compilers = { "zig" },
+            },
             ensure_installed = {
                 "lua", "c", "cpp", "python", "bash",
                 "javascript", "typescript", "html", "css", "json",
