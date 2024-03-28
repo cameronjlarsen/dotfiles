@@ -61,15 +61,15 @@ nmap <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 nmap <leader>ww <Action>(HideAllWindows)
 
 " Menu
-nnoremap <leader>mm <Action>(MainMenu)
-nnoremap <leader>ma <Action>(AnalyzeMenu)
-nnoremap <leader>mb <Action>(BuildMenu)
-nnoremap <leader>mc <Action>(CodeMenu)
-nnoremap <leader>mf <Action>(FindMenuGroup)
-nnoremap <leader>mg <Action>(GoToMenu)
-nnoremap <leader>ms <Action>(ScopeViewPopupMenu)
-nnoremap <leader>mt <Action>(EditorTabPopupMenu)
-nnoremap <leader>mw <Action>(ToolWindowsGroup)
+nmap <leader>mm <Action>(MainMenu)
+nmap <leader>ma <Action>(AnalyzeMenu)
+nmap <leader>mb <Action>(BuildMenu)
+nmap <leader>mc <Action>(CodeMenu)
+nmap <leader>mf <Action>(FindMenuGroup)
+nmap <leader>mg <Action>(GoToMenu)
+nmap <leader>ms <Action>(ScopeViewPopupMenu)
+nmap <leader>mt <Action>(EditorTabPopupMenu)
+nmap <leader>mw <Action>(ToolWindowsGroup)
 
 " []
 nmap [[ <Action>(MethodUp)
@@ -108,10 +108,13 @@ map <leader>fE :NERDTreeFind<CR>
 
 " Find/Search
 nmap <leader>ff <Action>(GotoFile)
+vmap <leader>ff <Action>(GotoFile)
+nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fo <Action>(RecentFiles)
 nmap <leader>fs <Action>(SearchEverywhere)
-nmap <leader>fp <Action>(ActivateProjectToolWindow)
+vmap <leader>fs <Action>(SearchEverywhere)
 nmap <leader>ft <Action>(FindInPath)
+vmap <leader>ft <Action>(FindInPath)
 
 " Actions
 map <leader>la <Action>(ShowIntentionActions)
