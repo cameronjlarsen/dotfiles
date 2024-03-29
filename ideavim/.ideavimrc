@@ -39,6 +39,7 @@ nmap <C-i> <Action>(Forward)
 nnoremap g/ /
 " built in search looks better
 nmap / <Action>(Find)
+vmap / <Action>(Find)
 
 " Buffer/Tab navigation
 nnoremap <S-Right> :tabnext<CR>
