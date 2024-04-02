@@ -28,6 +28,7 @@
   #navigator-toolbox:focus-within #nav-bar {
     width: var(--uc-urlbar-max-width);
   }
+
   #navigator-toolbox:focus-within #titlebar {
     width: calc(100vw - var(--uc-urlbar-max-width) - 1px);
   }
