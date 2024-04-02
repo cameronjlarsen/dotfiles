@@ -1,4 +1,13 @@
+--@class: utils
 local M = {}
+
+setmetatable(M, {
+    __index = function(t, k)
+        t[k] = require("core.utils")[k]
+        return t[k]
+    end,
+})
+
 function M.map(mode, lhs, rhs, opts)
     opts = vim.tbl_extend("keep", opts,
         { silent = true })
@@ -91,6 +100,25 @@ function M.on_attach(on_attach)
             on_attach(client, buffer)
         end
     })
+end
+
+---@param name string
+---@param fn fun(name:string)
+function M.on_load(name, fn)
+    local config = require("lazy.core.config")
+    if config.plugins[name] and config.plugins[name]._.loaded then
+        fn(name)
+    else
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "LazyLoad",
+            callback = function(event)
+                if event.data == name then
+                    fn(name)
+                    return true
+                end
+            end,
+        })
+    end
 end
 
 return M

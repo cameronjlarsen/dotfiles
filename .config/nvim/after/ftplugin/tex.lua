@@ -2,7 +2,7 @@ vim.opt_local.wrap = true
 vim.opt_local.spell = true
 vim.opt_local.textwidth = 120
 
-local map = require("core.utils").map
+local map = Utils.map
 -- VimTeX --
 map("n", "<leader>vi", "<plug>(vimtex-info)", { desc = "Info" })
 map("n", "<leader>vI", "<plug>(vimtex-info-full)", { desc = "Full Info" })

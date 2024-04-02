@@ -21,175 +21,55 @@ return {
                 enabled = vim.fn.executable("make"),
                 build = "make",
                 config = function()
-                    require("telescope").load_extension("fzf")
+                    Utils.on_load("telescope.nvim", function()
+                        require("telescope").load_extension("fzf")
+                    end)
                 end
             },
             "nvim-telescope/telescope-symbols.nvim",
             "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
-            {
-                "nvim-telescope/telescope-live-grep-args.nvim",
-                cond = not vim.g.vscode,
-                config = function()
-                    require("telescope").load_extension("live_grep_args")
-                end
-            },
+            "nvim-telescope/telescope-live-grep-args.nvim",
         },
         keys = {
-            {
-                "<leader>bb",
-                function() require("telescope.builtin").buffers() end,
-                desc =
-                "Buffers"
-            },
-            {
-                "<leader>f?",
-                function() require("telescope.builtin").search_history() end,
-                desc =
-                "Search History"
-            },
-            {
-                "<leader>f:",
-                function() require("telescope.builtin").command_history() end,
-                desc =
-                "Command History"
-            },
-            {
-                "<leader>fa",
-                function() require("telescope.builtin").autocommands() end,
-                desc =
-                "Auto Commands"
-            },
-            {
-                "<leader>fb",
-                function() require("telescope.builtin").current_buffer_fuzzy_find() end,
-                desc =
-                "Current Buffer"
-            },
-            {
-                "<leader>fB",
-                function() require("telescope").extensions.file_browser.file_browser() end,
-                desc =
-                "File Browser"
-            },
-            {
-                "<leader>fc",
-                function() require("telescope.builtin").commands() end,
-                desc =
-                "Commands"
-            },
-            {
-                "<leader>ff",
-                function() require("core.utils").find_files() end,
-                desc =
-                "Files"
-            },
-            {
-                "<leader>fgb",
-                function() require("telescope.builtin").git_branches() end,
-                desc =
-                "Branchs"
-            },
-            {
-                "<leader>fgc",
-                function() require("telescope.builtin").git_commits() end,
-                desc =
-                "Commits"
-            },
-            {
-                "<leader>fgs",
-                function() require("telescope.builtin").git_status() end,
-                desc =
-                "Changed Files"
-            },
-            {
-                "<leader>fh",
-                function() require("telescope.builtin").help_tags() end,
-                desc =
-                "Help Pages"
-            },
-            {
-                "<leader>fk",
-                function() require("telescope.builtin").keymaps() end,
-                desc =
-                "Keymaps"
-            },
-            {
-                "<leader>fl",
-                function() require("telescope.builtin").resume() end,
-                desc =
-                "Last Search"
-            },
-            {
-                "<leader>fn",
-                function() require("telescope").extensions.notify.notify() end,
-                desc =
-                "Notifications"
-            },
-            {
-                "<leader>fm",
-                function() require("telescope").extensions.media_files.media_files() end,
-                desc =
-                "Media Files"
-            },
-            {
-                "<leader>fM",
-                function() require("telescope.builtin").man_pages() end,
-                desc =
-                "Man Pages"
-            },
-            {
-                "<leader>fo",
-                function() require("telescope.builtin").oldfiles() end,
-                desc =
-                "Old Files"
-            },
-            {
-                "<leader>fp",
-                function() require("telescope").extensions.projects.projects() end,
-                desc =
-                "Projects"
-            },
-            {
-                "<leader>fr",
-                function() require("telescope.builtin").registers() end,
-                desc =
-                "Registers"
-            },
-            {
-                "<leader>ft",
-                function() require("telescope").extensions.live_grep_args.live_grep_args() end,
-                desc =
-                "Live Grep"
-            },
-            {
-                "<leader>fT",
-                function() vim.cmd("Telescope builtin") end,
-                desc =
-                "Telescope"
-            },
-            {
-                "<leader>fs",
-                function() require("telescope.builtin").symbols() end,
-                desc =
-                "Symbols"
-            },
-            {
-                "<leader>fv",
-                function() require("telescope.builtin").vim_options() end,
-                desc =
-                "Vim Options"
-            },
-            {
-                "<leader>fw",
-                function() require("telescope.builtin").grep_string() end,
-                desc =
-                "Word Under Cursor"
-            },
+            { "<leader>bb",  function() require("telescope.builtin").buffers() end,                                 desc = "Buffers" },
+            { "<leader>f?",  function() require("telescope.builtin").search_history() end,                          desc = "Search History" },
+            { "<leader>f:",  function() require("telescope.builtin").command_history() end,                         desc = "Command History" },
+            { "<leader>fa",  function() require("telescope.builtin").autocommands() end,                            desc = "Auto Commands" },
+            { "<leader>fb",  function() require("telescope.builtin").current_buffer_fuzzy_find() end,               desc = "Current Buffer" },
+            { "<leader>fB",  function() require("telescope").extensions.file_browser.file_browser() end,            desc = "File Browser" },
+            { "<leader>fc",  function() require("telescope.builtin").commands() end,                                desc = "Commands" },
+            { "<leader>ff",  function() Utils.find_files() end,                                                     desc = "Files" },
+            { "<leader>fgb", function() require("telescope.builtin").git_branches() end,                            desc = "Branchs" },
+            { "<leader>fgc", function() require("telescope.builtin").git_commits() end,                             desc = "Commits" },
+            { "<leader>fgs", function() require("telescope.builtin").git_status() end,                              desc = "Changed Files" },
+            { "<leader>fh",  function() require("telescope.builtin").help_tags() end,                               desc = "Help Pages" },
+            { "<leader>fk",  function() require("telescope.builtin").keymaps() end,                                 desc = "Keymaps" },
+            { "<leader>fl",  function() require("telescope.builtin").resume() end,                                  desc = "Last Search" },
+            { "<leader>fn",  function() require("telescope").extensions.notify.notify() end,                        desc = "Notifications" },
+            { "<leader>fm",  function() require("telescope").extensions.media_files.media_files() end,              desc = "Media Files" },
+            { "<leader>fM",  function() require("telescope.builtin").man_pages() end,                               desc = "Man Pages" },
+            { "<leader>fo",  function() require("telescope.builtin").oldfiles() end,                                desc = "Old Files" },
+            { "<leader>fp",  function() require("telescope").extensions.projects.projects() end,                    desc = "Projects" },
+            { "<leader>fr",  function() require("telescope.builtin").registers() end,                               desc = "Registers" },
+            { "<leader>ft",  function() require("telescope").extensions.live_grep_args.live_grep_args() end,        desc = "Live Grep" },
+            { "<leader>ft",  function() require("telescope-live-grep-args.shortcuts").grep_visual_selection() end,  mode = "v",                desc = "Word Under Cursor" },
+            { "<leader>fT",  function() vim.cmd("Telescope builtin") end,                                           desc = "Telescope" },
+            { "<leader>fs",  function() require("telescope.builtin").symbols() end,                                 desc = "Symbols" },
+            { "<leader>fv",  function() require("telescope.builtin").vim_options() end,                             desc = "Vim Options" },
+            { "<leader>fw",  function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor() end, desc = "Word Under Cursor" },
         },
         opts = function()
-            local actions = require "telescope.actions"
-            local actions_layout = require "telescope.actions.layout"
+            local actions = require("telescope.actions")
+            local actions_layout = require("telescope.actions.layout")
+            local lga = require("telescope-live-grep-args.actions")
+            local function quote_prompt(prompt_bufnr)
+                return lga.quote_prompt()(prompt_bufnr)
+            end
+            local function quote_prompt_glob(prompt_bufnr)
+                return lga.quote_prompt({ postfix = " --iglob " })(prompt_bufnr)
+            end
+
             return {
                 defaults = {
                     error_mode = "notify",
@@ -330,15 +210,17 @@ return {
                     live_grep_args = {
                         mappings = {
                             i = {
-                                ["<C-o>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-                                ["<C-g>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix =
-                                " --iglob " }),
+                                ["<C-o>"] = quote_prompt,
+                                ["<C-g>"] = quote_prompt_glob,
                             }
                         }
                     }
                 },
             }
         end,
-
+        config = function(_, opts)
+            require("telescope").setup(opts)
+            require("telescope").load_extension("live_grep_args")
+        end
     }
 }

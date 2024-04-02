@@ -8,7 +8,7 @@ return {
             git = require("core.icons").get("git"),
             dap = require("core.icons").get("dap"),
         }
-        local get_color = require("core.utils").get_hl_colors
+        local get_color = Utils.get_hl_colors
 
         return {
             override = {

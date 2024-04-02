@@ -53,7 +53,7 @@ return {
 
                 -- attach cmp source whenever copilot attaches
                 -- fixes lazy loading issues with copilot cmp source
-                require("core.utils").on_attach(function(client, _)
+                Utils.on_attach(function(client, _)
                     if client.name ~= "copilot" then
                         copilot_cmp._on_insert_enter({})
                     end

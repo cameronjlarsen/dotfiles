@@ -1,4 +1,4 @@
-local map = require("core.utils").map
+local map = Utils.map
 
 --Remap space as leader key
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -74,8 +74,8 @@ map("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Focus terminal up" })
 map("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Focus terminal right" })
 
 -- LSP --
-map({ "n", "v" }, "<Leader>lv", function() require("core.utils").toggle_virtual_text() end, { desc = "Virtual Text" })
-map({ "n", "v" }, "<Leader>lt", function() require("core.utils").toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
+map({ "n", "v" }, "<Leader>lv", function() Utils.toggle_virtual_text() end, { desc = "Virtual Text" })
+map({ "n", "v" }, "<Leader>lt", function() Utils.toggle_diagnostics() end, { desc = "Toggle Diagnostics" })
 
 -- Package Manager --
 map("n", "<Leader>pp", function() vim.cmd("Lazy") end, { desc = "Open Lazy" })

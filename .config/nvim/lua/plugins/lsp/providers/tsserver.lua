@@ -1,7 +1,7 @@
 return {
     on_attach = function(client, bufnr)
         require("plugins.lsp.defaults").on_attach(client, bufnr)
-        local map = require("core.utils").map
+        local map = Utils.map
         map("n", "<leader>lo",
             function()
                 vim.lsp.buf.code_action({

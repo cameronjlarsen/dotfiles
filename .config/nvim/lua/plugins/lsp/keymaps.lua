@@ -4,7 +4,7 @@ local M = {}
 local function keymaps(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     local caps = client.server_capabilities
-    local map = require("core.utils").map
+    local map = Utils.map
     local tb_status_ok, telescope = pcall(require, "telescope.builtin")
     if not tb_status_ok then
         vim.notify("Telescope lsp not loaded")
