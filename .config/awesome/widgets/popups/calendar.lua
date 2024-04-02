@@ -4,27 +4,7 @@ local wibox     = require("wibox")
 local gears     = require("gears")
 local dpi       = beautiful.xresources.apply_dpi
 
--- listen for requests to change the visibility of the calendar in the focused screen ofc.
-local function get_calendar()
-    return awful.screen.focused().calendar
-end
-
-awesome.connect_signal("calendar::toggle", function()
-    get_calendar().toggle()
-end)
-
-awesome.connect_signal("calendar::visibility", function(v)
-    if v then
-        get_calendar().show()
-    else
-        get_calendar().hide()
-    end
-end)
-
-screen.connect_signal("request::desktop_decoration", function(s)
-    s.calendar = {}
-
-    s.calendar.calendar = wibox.widget {
+local calendar = wibox.widget {
         date = os.date("*t"),
         start_sunday = true,
         font = beautiful.font_family .. " 10",
@@ -61,6 +41,27 @@ screen.connect_signal("request::desktop_decoration", function(s)
         end
     }
 
+-- listen for requests to change the visibility of the calendar in the focused screen ofc.
+local function get_calendar()
+    return awful.screen.focused().calendar
+end
+
+awesome.connect_signal("calendar::toggle", function()
+    get_calendar().toggle()
+end)
+
+awesome.connect_signal("calendar::visibility", function(v)
+    if v then
+        get_calendar().show()
+    else
+        get_calendar().hide()
+    end
+end)
+
+screen.connect_signal("request::desktop_decoration", function(s)
+    s.calendar = {}
+
+    s.calendar.calendar = calendar
     s.calendar.popup = awful.popup {
         bg        = "#00000000",
         fg        = beautiful.fg_normal,
