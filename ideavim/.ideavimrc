@@ -37,18 +37,19 @@ nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 " but preserve ideavim search
 nnoremap g/ /
+vnoremap g/ /
 " built in search looks better
 nmap / <Action>(Find)
 vmap / <Action>(Find)
 
-" Buffer/Tab navigation
+
 nnoremap <S-Right> :tabnext<CR>
 nnoremap <S-Left> :tabprev<CR>
 nnoremap <leader>bc :tabclose<CR>
-nnoremap <leader>bb <Action>(Switcher)
-nnoremap <leader>ba <Action>(CloseAllEditors)
-nnoremap <leader>bo <Action>(CloseAllEditorsButActive)
-nnoremap <leader>bp <Action>(CloseAllUnpinnedEditors)
+nmap <leader>bb <Action>(Switcher)
+nmap <leader>ba <Action>(CloseAllEditors)
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+nmap <leader>bp <Action>(CloseAllUnpinnedEditors)
 
 " Window/Pane 
 nnoremap <C-h> <C-W>h
@@ -164,6 +165,7 @@ nmap gn <Action>(ShowNavBar)
 nmap <leader>gc <Action>(CheckinProject)
 nmap <leader>gs <Action>(ActivateVersionControlToolWindow)
 nmap <leader>gb <Action>(Git.Branches)
+nmap <leader>go <Action>(Vcs.QuickListPopupAction)
 
 nmap gl <Action>(ShowErrorDescription)
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
