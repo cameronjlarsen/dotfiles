@@ -28,6 +28,9 @@ unsetopt HIST_VERIFY
 # Add catppuccin-zsh-syntax-highlighting
 if [ -e "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]; then
     plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+  else 
+    git clone https://github.com/catppuccin/zsh-syntax-highlighting.git "$ZDOTDIR/plugins/zsh-syntax-highlighting"
+    plug "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 fi
 
 # Exports
@@ -47,6 +50,7 @@ plug "wintermi/zsh-brew"
 plug "wintermi/zsh-fnm"
 plug "memark/zsh-dotnet-completion"
 plug "conda-incubator/conda-zsh-completion"
+plug "Aloxaf/fzf-tab"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
@@ -62,6 +66,10 @@ if command -v bat &> /dev/null; then
     alias catt="bat --theme \"Catppuccin-mocha\""
 fi
 
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:ls:*' fzf-preview 'ls --color $realpath'
+
 # tabtab source for pnpm package
 # uninstall by removing these lines
 [[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ]] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh" || true
@@ -71,6 +79,7 @@ fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 # Starship prompt
 eval "$(starship init zsh)"
 

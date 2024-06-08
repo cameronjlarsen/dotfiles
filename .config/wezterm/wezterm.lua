@@ -112,6 +112,10 @@ local function get_process(tab)
             -- { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.dev_terminal },
         },
+        ["wezterm"] = {
+            -- { Foreground = { Color = colors.base } },
+            { Text = wezterm.nerdfonts.dev_terminal },
+        },
         ["bash"] = {
             -- { Foreground = { Color = colors.base } },
             { Text = wezterm.nerdfonts.cod_terminal_bash },
@@ -195,7 +199,11 @@ local function get_process(tab)
         ["dotnet"] = {
             { Foreground = { Color = colors.mauve } },
             { Text = "󰪮 " },
-        }
+        },
+        ["cp"] = {
+            { Foreground = { Color = '#00000000' } },
+            { Text = wezterm.nerdfonts.cod_copy },
+        },
     }
 
     local process_name = tab.active_pane.foreground_process_name:gsub("(.*[/\\])(.*)", "%2")

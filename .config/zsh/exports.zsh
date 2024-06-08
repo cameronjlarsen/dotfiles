@@ -21,7 +21,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=fg:#cdd6f4,header:#f38ba8,info:#b4befe,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#b4befe,hl+:#a6e3a1 \
 --color=border:#b4befe \
---height=60% --layout=reverse --info=inline --border --margin=1 --padding=1"
+--height=50% --layout=reverse --info=inline --border=rounded --margin=1 --padding=1"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="
