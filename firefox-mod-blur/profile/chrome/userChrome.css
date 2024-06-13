@@ -490,7 +490,7 @@ about:config -> svg.context-properties.content.enabled -> true*/
 
 /* Aligns text in the middle of search bar */
 #urlbar .urlbar-input-box {
-  text-align: center;
+  text-align: left !important;
 }
 
 #urlbar {
