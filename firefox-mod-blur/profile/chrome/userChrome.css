@@ -44,6 +44,7 @@
 @import url("tabs_take_full_bar_width.css");
 @import url("show_searchbar_dots_only_on_hover.css");
 @import url("thicker_control_buttons.css");
+@import url("catppuccin.css");
 
 /*=====================================================================
 ================= D A R K   T H E M E   C O L O R S ===================
@@ -52,14 +53,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     /* Main dark color, url bar, active tab etc. */
-    --firefoxcss-main-bg-color: hsl(240, 2%, 13%);
+    --firefoxcss-main-bg-color: hsl(var(--ctp-mocha-crust-hsl));
 
     /* Main lighter color, toolbar background */
-    --firefoxcss-item-bg-color: hsl(240, 2%, 20%);
+    --firefoxcss-item-bg-color: hsl(var(--ctp-mocha-base-hsl));
 
     /* Tab colors */
-    --firefoxcss-tab-bg-color: hsl(240, 2%, 26%);
-    --firefoxcss-tab-hover-bg-color: hsl(240, 2%, 32%);
+    --firefoxcss-tab-bg-color: hsl(var(--ctp-mocha-surface0-hsl));
+    --firefoxcss-tab-hover-bg-color: hsl(var(--ctp-mocha-surface2-hsl));
     --firefoxcss-tab-active-bg-color: var(--firefoxcss-main-bg-color);
     --firefoxcss-non-active-tabs: hsla(0, 0%, 100%, 0.65);
 
@@ -73,9 +74,9 @@
     --firefoxcss-tab-speaker-icon-small-background: hsla(0, 0%, 80%);
 
     /* Context menu colors */
-    --firefoxcss-context-menu-top-color: #131313cf;
+    --firefoxcss-context-menu-top-color: var(--firefoxcss-main-bg-color);
     /* Bookmarks bar colors */
-    --firefoxcss-bookmarks-bg-color: hsl(240, 2%, 13%);
+    --firefoxcss-bookmarks-bg-color: hsl(--var(--ctp-mocha-base-hsl));
 
     /* Change background color when loading a page */
     --firefoxcss-bright-flash-color: var(--firefoxcss-main-bg-color);
@@ -87,7 +88,7 @@
     --firefoxcss-new-tab-button-active: hsl(240, 2%, 18%);
     --firefoxcss-new-tab-button-box-shadow-active: rgba(0, 0, 0, 0.6);
 
-    --firefoxcss-new-tab-button-hover: hsla(0, 0%, 30%, 0.85);
+    --firefoxcss-new-tab-button-hover: var(--firefoxcss-tab-hover-bg-color);
     --firefoxcss-new-tab-button-box-shadow-hover: rgba(0, 0, 0, 0.5);
 
     /* Search Bar and breakout (when in focus) colors */
@@ -118,7 +119,7 @@
     
     /* ============== Firefox Global colors change ==================== */
     --arrowpanel-background: var(--firefoxcss-main-bg-color) !important;
-    --button-hover-bgcolor: hsla(0, 0%, 60%, 0.35) !important;
+    --button-hover-bgcolor:  var(--firefoxcss-tab-hover-bg-color) !important;
     --button-active-bgcolor: hsla(0, 0%, 45%, 0.35) !important;
     --button-bgcolor: hsla(0, 0%, 45%, 0.9) !important;
     --arrowpanel-border-color: hsla(0, 0%, 50%, 0.25) !important;
@@ -1397,14 +1398,14 @@ toolbar
   }
 
   #nav-bar {
-    padding-right: var(--firefoxcss-control-buttons-margin) !important;
+    padding-right: 0 !important;
   }
 
   #navigator-toolbox:not([inFullscreen])
     #TabsToolbar
     .titlebar-buttonbox-container {
     visibility: visible !important;
-    display: flex !important;
+    display: none !important;
     position: absolute !important;
     top: 1px;
     right: 0;
