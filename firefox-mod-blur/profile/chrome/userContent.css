@@ -4,6 +4,7 @@
 @import url("wallpaper-edition.css");
 @import url("remove_homepage_shortcut_title_text.css");
 @import url("circular_homepage_shortcuts.css");
+@import url("catppuccin.css");
 
 /*=====================================================================
 ================= D A R K   T H E M E   C O L O R S ===================
@@ -11,14 +12,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --firefoxcss-main-bg-color: hsl(240, 2%, 13%);
-    --firefoxcss-item-bg-color: hsl(240, 2%, 20%);
-    --firefoxcss-item-hover-bg-color: hsl(240, 2%, 25%);
-    --firefoxcss-text-color: hsl(0, 0%, 100%);
-    --firefoxcss-other-color: hsl(290, 21%, 20%);
+    --firefoxcss-main-bg-color: hsl(var(--ctp-mocha-crust-hsl));
+    --firefoxcss-item-bg-color: hsl(var(--ctp-mocha-base-hsl));
+    --firefoxcss-item-hover-bg-color: hsl(var(--ctp-mocha-surface2-hsl));
+    --firefoxcss-text-color: hsl(var(--ctp-mocha-text-hsl));
+    --firefoxcss-other-color: hsl(var(--ctp-mocha-lavender-hsl));
 
     /* ----- Private Page Colors ----- */
-    --firefoxcss-private-search-bg-color: hsla(275, 13%, 33%, 0.3);
+    --firefoxcss-private-search-bg-color: hsla(var(--firefoxcss-main-bg-color) 0.3);
     --firefoxcss-private-search-top-border: hsla(275, 13%, 40%, 0.3);
     --firefoxcss-private-search-fill: hsl(275, 13%, 53%);
 
