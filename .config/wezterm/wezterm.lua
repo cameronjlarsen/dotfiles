@@ -359,7 +359,6 @@ config = {
     line_height                                = 1.0,
     underline_thickness                        = "300%",
     adjust_window_size_when_changing_font_size = false,
-    show_update_window                         = false,
     -- Cursor style
     default_cursor_style                       = "BlinkingBar",
     -- X11
@@ -609,6 +608,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     config.default_prog = { "pwsh.exe" }
     -- table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-NoLogo" } })
     config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+    config.prefer_egl = true
 end
 
 return config
