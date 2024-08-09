@@ -178,11 +178,18 @@ nmap <leader>rt <Action>(RunTests)
 nmap <leader>rs <Action>(Stop)
 
 " Debug
+nmap <leader>dd <Action>(Debug)
 nmap <leader>dc <Action>(ContextDebug)
 nmap <leader>dx <Action>(Debug)
 nmap <leader>db <Action>(ToggleLineBreakpoint)
 nmap <leader>de <Action>(EditBreakpoint)
 nmap <leader>dv <Action>(ViewBreakpoints)
+nmap <leader>du <Action>(ActivateDebugToolWindow)
+nmap <leader>db <Action>(Resume)
+nmap <leader>dn <Action>(StepOver)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOut)
+nmap <leader>ds <Action>(Stop)
 
 " Collapse
 nmap zz <Action>(ExpandCollapseToggleAction)
