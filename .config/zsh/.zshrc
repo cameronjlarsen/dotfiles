@@ -70,6 +70,8 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:ls:*' fzf-preview 'ls --color $realpath'
 
+eval "$(op completion zsh)"; compdef _op op
+
 # tabtab source for pnpm package
 # uninstall by removing these lines
 [[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ]] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh" || true
