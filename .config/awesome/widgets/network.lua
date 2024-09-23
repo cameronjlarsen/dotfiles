@@ -3,7 +3,7 @@ local wibox     = require("wibox")
 local gears     = require("gears")
 local beautiful = require("beautiful")
 local dpi       = beautiful.xresources.apply_dpi
-local icon_dir  = require("gears").filesystem.get_configuration_dir() .. "/icons/network"
+local icon_dir  = require("gears").filesystem.get_configuration_dir() .. "icons/network/"
 
 local widget = wibox.widget {
     image         = icon_dir .. "wifi-strength-off.svg",
