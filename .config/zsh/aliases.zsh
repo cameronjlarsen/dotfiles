@@ -28,3 +28,8 @@ alias rm='rm -i'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+if command -v bat &> /dev/null; then
+    alias cat="bat -pp --theme \"Catppuccin-mocha\""
+    alias catt="bat --theme \"Catppuccin-mocha\""
+fi

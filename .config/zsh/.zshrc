@@ -57,14 +57,10 @@ plug "Aloxaf/fzf-tab"
 
 # Aliases
 plug "$ZDOTDIR/aliases.zsh"
+plug "$ZDOTDIR/functions.zsh"
 
 # Key-bindings
 bindkey '^ ' autosuggest-accept
-
-if command -v bat &> /dev/null; then
-    alias cat="bat -pp --theme \"Catppuccin-mocha\""
-    alias catt="bat --theme \"Catppuccin-mocha\""
-fi
 
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
