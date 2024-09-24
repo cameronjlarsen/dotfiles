@@ -219,7 +219,7 @@ M = {
         function()
             local icon = icons.ui.LSP
             local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-            local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+            local clients = vim.lsp.get_clients({ bufnr = 0 })
             local client_names = {}
 
             -- add client
@@ -243,6 +243,7 @@ M = {
             local unique_client_names = vim.fn.uniq(client_names)
 
             -- join client names with commas
+            ---@diagnostic disable-next-line: param-type-mismatch
             local client_names_str = table.concat(unique_client_names, ", ")
 
             local language_servers = ""

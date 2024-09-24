@@ -1,40 +1,22 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                mode = { "n", "v" },
-                ["<leader>g"] = {
-                    name = "+Git",
-                    h = { name = "+Hunk" },
-                    t = { name = "+Toggle" }
-                }
-            },
-        },
-    },
-    {
         "lewis6991/gitsigns.nvim",
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             signs = {
-                add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-                delete = { hl = "GitSignsDelete", text = "󰐊", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-                topdelete = {
-                    hl = "GitSignsDelete",
-                    text = "󰐊",
-                    numhl = "GitSignsDeleteNr",
-                    linehl = "GitSignsDeleteLn"
-                },
-                changedelete = {
-                    hl = "GitSignsChange",
-                    text = "▎",
-                    numhl = "GitSignsChangeNr",
-                    linehl = "GitSignsChangeLn"
-                },
+                add = { text = "▎" },
+                change = { text = "▎" },
+                delete = { text = "󰐊" },
+                topdelete = { text = "󰐊" },
+                changedelete = { text = "▎" },
+            },
+            signs_staged = {
+                add = { text = "▎" },
+                change = { text = "▎" },
+                delete = { text = "󰐊" },
+                topdelete = { text = "󰐊" },
+                changedelete = { text = "▎" },
             },
             signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
             numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
@@ -52,9 +34,6 @@ return {
                 delay = 1000,
                 ignore_whitespace = false,
             },
-            current_line_blame_formatter_opts = {
-                relative_time = false,
-            },
             sign_priority = 6,
             update_debounce = 100,
             status_formatter = nil, -- Use default
@@ -66,9 +45,6 @@ return {
                 relative = "cursor",
                 row = 0,
                 col = 1,
-            },
-            yadm = {
-                enable = false,
             },
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns

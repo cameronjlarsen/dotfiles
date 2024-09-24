@@ -1,15 +1,5 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>g"] = { name = "+Git" },
-            },
-        },
-    },
-    {
         "kdheepak/lazygit.nvim",
         cond = not vim.g.vscode,
         dependencies = {
@@ -17,6 +7,7 @@ return {
             "nvim-lua/plenary.nvim"
         },
         keys = {
+            { "<leader>g",  "",                                                               desc = "+Git" },
             { "<leader>gg", function() require("lazygit").lazygitcurrentfile() end,           desc = "LazyGit" },
             { "<leader>gr", function() require("telescope").extensions.lazygit.lazygit() end, desc = "LazyGit Repos" },
         },

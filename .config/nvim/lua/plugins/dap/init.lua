@@ -1,15 +1,5 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>d"] = { name = "+Dap", }
-            },
-        },
-    },
-    {
         "mfussenegger/nvim-dap",
         cond = not vim.g.vscode,
         dependencies = {
@@ -128,6 +118,7 @@ return {
                 desc =
                 "Step Out"
             },
+            { "<leader>d", "", desc = "+Dap" },
             {
                 "<leader>db",
                 function() require("dap").toggle_breakpoint() end,

@@ -1,29 +1,17 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>l"] = {
-                    name = "+LSP",
-                    w = { name = "+Workspace" },
-                },
-            },
-        },
-    },
-    {
         "neovim/nvim-lspconfig",
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            { "folke/neoconf.nvim", cmd = "Neoconf",                                                   config = false, dependencies = { "nvim-lspconfig" } },
-            { "folke/neodev.nvim",  opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/cmp-nvim-lsp",
+            { "folke/neoconf.nvim",                           cmd = "Neoconf",                                                   config = false, dependencies = { "nvim-lspconfig" } },
+            { "folke/neodev.nvim",                            opts = { library = { plugins = { "nvim-dap-ui" }, types = true } } },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "hrsh7th/cmp-nvim-lsp" },
             { "https://git.sr.ht/~whynothugo/lsp_lines.nvim", opts = {} },
-            "mfussenegger/nvim-jdtls"
+            { "mfussenegger/nvim-jdtls" },
+            { "seblj/roslyn.nvim" },
         },
         keys = {
             { "<leader>li", function() vim.cmd("LspInfo") end, silent = true, desc = "LSP Info" },
@@ -92,7 +80,7 @@ return {
                 "bashls",
                 "marksman",
                 "jdtls",
-                "tsserver"
+                "ts_ls"
             },
             handlers = {
                 function(server)

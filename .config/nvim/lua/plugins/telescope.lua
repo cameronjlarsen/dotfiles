@@ -1,15 +1,5 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>f"] = { name = "+Find", g = "+Git" },
-            },
-        },
-    },
-    {
         "nvim-telescope/telescope.nvim",
         cond = not vim.g.vscode,
         dependencies = {

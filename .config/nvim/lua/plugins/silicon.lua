@@ -1,19 +1,10 @@
 return {
     {
-        "folke/which-key.nvim",
-        cond = not vim.g.vscode,
-        event = "VeryLazy",
-        opts = {
-            defaults = {
-                ["<leader>S"] = { name = "+Silicon" },
-            },
-        },
-    },
-    {
         "narutoxy/silicon.lua", -- Beautiful code snippet images right in the most epic editor.
         cond = not vim.g.vscode,
         dependencies = "nvim-lua/plenary.nvim",
         keys = {
+            { "<leader>S", "", desc = "+Screenshot" },
             {
                 mode = { "n", "v" },
                 "<leader>Sl",

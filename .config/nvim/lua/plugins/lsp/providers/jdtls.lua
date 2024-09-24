@@ -52,14 +52,9 @@ local function java_keymaps()
         return
     end
 
-    wk.register({
-        ["<leader>"] = {
-            l = {
-                name = "+LSP",
-                x = { name = "+Extract" },
-                t = { name = "+Test" },
-            },
-        }
+    wk.add({
+        { "<leader>lx", group = "Extract" },
+        { "<leader>lt", group = "Test" }
     })
 end
 
