@@ -1,6 +1,12 @@
 local wezterm = require("wezterm")
 -- local hostname = wezterm.hostname()
-local get_os = io.popen("uname -s", "r"):read("*l")
+local get_os = {
+    ["x86_64-pc-windows-msvc"] = "Windows",
+    ["x86_64-unknown-linux-gnu"] = "Linux",
+    ["aarch64-unknown-linux-gnu"] = "Linux",
+    ["aarch64-apple-darwin"] = "Darwin",
+    ["x86_64-apple-darwin"] = "Darwin",
+}
 
 local function get_opacity(os)
     if os == "Darwin" then
@@ -444,8 +450,8 @@ config = {
         saturation = 0.9,
         brightness = 0.50
     },
-    window_background_opacity                  = get_opacity(get_os),
-    text_background_opacity                    = get_opacity(get_os),
+    window_background_opacity                  = get_opacity(get_os[wezterm.target_triple]),
+    text_background_opacity                    = get_opacity(get_os[wezterm.target_triple]),
     window_frame                               = {
         font = font_with_fallback(maple_font, { bold = true })
     },
@@ -604,9 +610,9 @@ config = {
 }
 
 -- Windows specific config
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    config.default_prog = { "pwsh.exe" }
-    -- table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-NoLogo" } })
+if get_os[wezterm.target_triple] == "Windows" then
+    config.default_prog = { "pwsh.exe -nologo" }
+    -- table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-nologo" } })
     config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
     config.prefer_egl = true
 end
