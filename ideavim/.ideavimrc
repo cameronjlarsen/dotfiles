@@ -43,9 +43,9 @@ nmap / <Action>(Find)
 vmap / <Action>(Find)
 
 
-nnoremap <S-Right> :tabnext<CR>
-nnoremap <S-Left> :tabprev<CR>
-nnoremap <leader>bc :tabclose<CR>
+nmap <S-Right> <Action>(NextTab)
+nmap <S-Left> <Action>(PreviousTab)
+nmap <leader>bc <Action>(CloseContent)
 nmap <leader>bb <Action>(Switcher)
 nmap <leader>ba <Action>(CloseAllEditors)
 nmap <leader>bo <Action>(CloseAllEditorsButActive)
@@ -117,6 +117,8 @@ nmap <leader>fs <Action>(SearchEverywhere)
 vmap <leader>fs <Action>(SearchEverywhere)
 nmap <leader>ft <Action>(FindInPath)
 vmap <leader>ft <Action>(FindInPath)
+nmap <leader>fr <Action>(ReplaceInPath)
+vmap <leader>fr <Action>(ReplaceInPath)
 
 " Actions
 map <leader>la <Action>(ShowIntentionActions)
