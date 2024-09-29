@@ -35,5 +35,13 @@ return {
     {
         "jlcrochet/vim-razor",
         cond = not vim.g.vscode,
+    },
+    {
+        "seblj/roslyn.nvim",
+        cond = not vim.g.vscode,
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            filewatching = true,
+        }
     }
 }
