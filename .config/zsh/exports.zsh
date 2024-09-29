@@ -12,7 +12,6 @@ export PATH="/home/camjl/.local/share/fnm:$PATH"
 # Environment variables set everywhere
 export EDITOR="nvim"
 export TERMINAL="wezterm"
-export BROWSER="firefox-developer-edition"
 
 # FZF 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
