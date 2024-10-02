@@ -7,4 +7,4 @@
 # ignore zsh history
 .config/zsh/.zsh_history
 
-*/.DS_Store
+*.DS_Store
