@@ -65,7 +65,7 @@ nmap <leader>ww <Action>(HideAllWindows)
 " Menu
 nmap <leader>mm <Action>(MainMenu)
 nmap <leader>ma <Action>(AnalyzeMenu)
-nmap <leader>mb <Action>(BuildMenu)
+nmap <leader>mb <Action>(Bookmarks)
 nmap <leader>mc <Action>(CodeMenu)
 nmap <leader>mf <Action>(FindMenuGroup)
 nmap <leader>mg <Action>(GoToMenu)
