@@ -80,16 +80,16 @@ return {
                 end, { expr = true, desc = "Prev Hunk" })
 
                 --Actions
-                map({ "n", "v" }, "<leader>ghs", function() require("gitsigns").stage_hunk() end, { desc = "Stage Hunk" })
-                map({ "n", "v" }, "<leader>ghr", function() require("gitsigns").reset_hunk() end, { desc = "Reset Hunk" })
+                map("n", "<leader>ghs", function() require("gitsigns").stage_hunk() end, { desc = "Stage Hunk" })
+                map("n", "<leader>ghr", function() require("gitsigns").reset_hunk() end, { desc = "Reset Hunk" })
+                map("v", "<leader>ghs", function() require("gitsigns").stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = "Stage Hunk" })
+                map("v", "<leader>ghr", function() require("gitsigns").reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = "Reset Hunk" })
                 map("n", "<leader>ghp", function() require("gitsigns").preview_hunk() end, { desc = "Preview Hunk" })
-                map("n", "<leader>ghu", function() require("gitsigns").undo_stage_hunk() end,
-                    { desc = "Undo Stage Hunk" })
+                map("n", "<leader>ghu", function() require("gitsigns").undo_stage_hunk() end, { desc = "Undo Stage Hunk" })
                 map("n", "<leader>ghS", function() require("gitsigns").stage_buffer() end, { desc = "Stage Buffer" })
                 map("n", "<leader>ghR", function() require("gitsigns").reset_buffer() end, { desc = "Reset Buffer" })
                 map("n", "<leader>ghb", function() require("gitsigns").blame_line() end, { desc = "Blame Line" })
-                map("n", "<leader>gtb", function() require("gitsigns").toggle_current_line_blame() end,
-                    { desc = "Toggle Line Blame " })
+                map("n", "<leader>gtb", function() require("gitsigns").toggle_current_line_blame() end, { desc = "Toggle Line Blame " })
                 map("n", "<leader>gtd", function() require("gitsigns").toggle_deleted() end, { desc = "Toggle Deleted " })
                 map("n", "<leader>ghd", function() require("gitsigns").diffthis("@") end, { desc = "Git Diff Head" })
 
