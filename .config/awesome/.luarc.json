@@ -8,7 +8,8 @@
             "awful",
             "client",
             "screen",
-            "tag"
+            "tag",
+            "update_timer"
         ]
     },
     "workspace": {

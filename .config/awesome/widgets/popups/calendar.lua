@@ -4,7 +4,8 @@ local wibox     = require("wibox")
 local gears     = require("gears")
 local dpi       = beautiful.xresources.apply_dpi
 
-local calendar = wibox.widget {
+local function create_calendar_widget()
+    local calendar = wibox.widget {
         date = os.date("*t"),
         start_sunday = true,
         font = beautiful.font_family .. " 10",
@@ -41,27 +42,43 @@ local calendar = wibox.widget {
         end
     }
 
--- listen for requests to change the visibility of the calendar in the focused screen ofc.
+    -- Function to update the calendar
+    local function update_calendar()
+        calendar:set_date(os.date("*t"))
+    end
+
+    return calendar, update_calendar
+end
+
+local calendar_widget, update_calendar = create_calendar_widget()
+
+-- listen for requests to change the visibility of the calendar in the focused screen
 local function get_calendar()
     return awful.screen.focused().calendar
 end
 
 awesome.connect_signal("calendar::toggle", function()
-    get_calendar().toggle()
+    local calendar = get_calendar()
+    calendar.toggle()
+    if calendar.popup.visible then
+        update_calendar()
+    end
 end)
 
 awesome.connect_signal("calendar::visibility", function(v)
+    local calendar = get_calendar()
     if v then
-        get_calendar().show()
+        calendar.show()
+        update_calendar()
     else
-        get_calendar().hide()
+        calendar.hide()
     end
 end)
 
 screen.connect_signal("request::desktop_decoration", function(s)
     s.calendar = {}
 
-    s.calendar.calendar = calendar
+    s.calendar.calendar = calendar_widget
     s.calendar.popup = awful.popup {
         bg        = "#00000000",
         fg        = beautiful.fg_normal,
@@ -86,6 +103,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
     function s.calendar.show()
         self.visible = true
+        update_calendar()
     end
 
     function s.calendar.hide()
@@ -94,5 +112,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
     function s.calendar.toggle()
         self.visible = not self.visible
+        if self.visible then
+            update_calendar()
+        end
     end
 end)
+
