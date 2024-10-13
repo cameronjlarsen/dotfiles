@@ -1,28 +1,51 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Use custom format:
-format = """$username$hostname$directory\
-$git_branch$git_status$git_state$git_metrics\
-$jobs$conda$character"""
-
-command_timeout = 750
-
-# Sets user-defined palette
 palette = "catppuccin_mocha"
+command_timeout = 750
+continuation_prompt = "[ 󱞩](bold green) "
+format = """
+$username\
+$hostname\
+$directory\
 
-# Prompt symbols 
-[character]
-success_symbol = "[󰉁](bold green)"
-error_symbol = "[](red)"
-vimcmd_symbol = "[](green)"
+$git_branch\
+$git_status\
+$git_state\
+$git_metrics\
+$jobs\
+$conda\
+$character\
+"""
+
+[username]
+style_user = "bg:surface1 fg:bold blue"
+style_root = "bg:surface1 fg:bold red"
+format = "[](bg:none fg:surface1)[[󰊠 ](bg:surface1 fg:bold blue)$user]($style)[ ](bg:none fg:surface1)"
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+ssh_symbol = "[󰣀](bold red)"
+format = "[](bg:none fg:surface1)[@](bg:surface1 fg:text)[$ssh_symbol$hostname](bg:surface1 fg:green)[ ]($style)"
+style = "bg:none fg:surface1"
+disabled = false
 
 [directory]
-format = """[]($style)[[󰊠 ](bg:surface1 fg:bold blue)$path](bg:surface1 fg:text)\
+format = """[]($style)[[ ](bg:surface1 fg:bold blue)$path](bg:surface1 fg:text)\
 [$read_only]($read_only_style)[ ]($style)"""
 read_only = ""
 read_only_style = "bg:surface1 fg:bold red"
 style = "bg:none fg:surface1"
+
+[character]
+success_symbol = "[󰉁](bold green)"
+error_symbol = "[](red)"
+vimcmd_symbol = "[](green)"
+vimcmd_visual_symbol = "[](lavender)"
+vimcmd_replace_one_symbol = "[](bold red)"
+vimcmd_replace_symbol = "[](bold red)"
 
 [git_branch]
 format = "[]($style)[[$symbol](bg:surface1 fg:bright-red)$branch(:$remote_name/$remote_branch)](bg:surface1 fg:text)[ ]($style)"
@@ -51,16 +74,6 @@ disabled = true
 
 [jobs]
 format = "[]($style)[$symbol$number](bg:surface1 fg:bright-green)[ ]($style)"
-style = "bg:none fg:surface1"
-
-[username]
-format = "[](bg:none fg:surface1)[$user ]($style)[on](bg:surface1 fg:text)[ ](bg:none fg:surface1)"
-style_user = "bg:surface1 fg:bold dimmed blue"
-style_root = "bg:surface1 fg:bold red"
-
-[hostname]
-ssh_symbol = "[󰣀](bold red)"
-format = "[$ssh_symbol$hostname](bg:surface1 fg:bold dimmed green)[ in](bg:surface1 fg:text)[ ]($style)"
 style = "bg:none fg:surface1"
 
 [conda]
