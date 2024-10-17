@@ -90,15 +90,15 @@ style = "bg:surface1 fg:text"
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
-format = "[](fg:surface1)([$all_status$ahead_behind]($style))[ ](fg:surface1)"
+format = "([](fg:surface1)[$all_status$ahead_behind]($style)[ ](fg:surface1))"
 style = "bg:surface1 fg:bold red"
 
 [git_state]
-format = "[](fg:surface1)([$state($progress_current/$progress_total)]($style))[ ](fg:surface1)"
+format = "([](fg:surface1)[$state($progress_current/$progress_total)]($style)[ ](fg:surface1))"
 style = "bg:surface1 fg:bright-red"
 
 [git_metrics]
-format = "[](fg:surface1)(([ $added]($added_style))([  $deleted]($deleted_style)))[ ](fg:surface1)"
+format = "([](fg:surface1)([ $added]($added_style))([  $deleted]($deleted_style))[ ](fg:surface1))"
 added_style = "bg:surface1 fg:bold green"
 deleted_style = "bg:surface1 fg:bold red"
 disabled = false
