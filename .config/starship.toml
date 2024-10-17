@@ -5,6 +5,7 @@ palette = "catppuccin_mocha"
 command_timeout = 750
 continuation_prompt = "[ 󱞩](bold green) "
 format = """
+$os\
 $username\
 $hostname\
 $directory\
@@ -18,26 +19,59 @@ $conda\
 $character\
 """
 
+[os]
+format = "[](fg:lavender)[$symbol ]($style)[](fg:lavender bg:surface1)"
+disabled = false
+style = "bg:lavender fg:mantle"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = ""
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+EndeavourOS = ""
+
 [username]
-style_user = "bg:surface1 fg:bold blue"
+style_user = "bg:surface1 fg:bold text"
 style_root = "bg:surface1 fg:bold red"
-format = "[](bg:none fg:surface1)[[󰊠 ](bg:surface1 fg:bold blue)$user]($style)[ ](bg:none fg:surface1)"
+format = "[ $user ]($style)"
 disabled = false
 show_always = true
 
 [hostname]
-ssh_only = true
+ssh_only = false
 ssh_symbol = "[󰣀](bold red)"
-format = "[](bg:none fg:surface1)[@](bg:surface1 fg:text)[$ssh_symbol$hostname](bg:surface1 fg:green)[ ]($style)"
-style = "bg:none fg:surface1"
+format = "[](fg:green bg:surface1)[@](bg:green fg:mantle)[](fg:green bg:surface1)[ $ssh_symbol $hostname]($style)[ ](fg:surface1)"
+style = "bg:surface1 fg:text"
 disabled = false
 
 [directory]
-format = """[]($style)[[ ](bg:surface1 fg:bold blue)$path](bg:surface1 fg:text)\
-[$read_only]($read_only_style)[ ]($style)"""
+format = "[](fg:blue)[ ](fg:mantle bg:blue)[](fg:blue bg:surface1)[ $path]($style)[$read_only]($read_only_style)[ ](fg:surface1)"
 read_only = ""
 read_only_style = "bg:surface1 fg:bold red"
-style = "bg:none fg:surface1"
+style = "bg:surface1 fg:text"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"repos" = "󰲋 "
 
 [character]
 success_symbol = "[󰉁](bold green)"
@@ -48,23 +82,23 @@ vimcmd_replace_one_symbol = "[](bold red)"
 vimcmd_replace_symbol = "[](bold red)"
 
 [git_branch]
-format = "[]($style)[[$symbol](bg:surface1 fg:bright-red)$branch(:$remote_name/$remote_branch)](bg:surface1 fg:text)[ ]($style)"
+format = "[](fg:bright-red)[$symbol](fg:mantle bg:bright-red)[](fg:bright-red bg:surface1)[ $branch(:$remote_name/$remote_branch)]($style)[ ](fg:surface1)"
 symbol = " "
-style = "bg:none fg:surface1"
+style = "bg:surface1 fg:text"
 
 [git_status]
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
-format = "([]($style)[$all_status$ahead_behind](bg:surface1 fg:bold red)[ ]($style))"
-style = "bg:none fg:surface1"
+format = "[](fg:surface1)([$all_status$ahead_behind]($style))[ ](fg:surface1)"
+style = "bg:surface1 fg:bold red"
 
 [git_state]
-format = "([]($style)[$state($progress_current/$progress_total)](bg:surface1 fg:bright-red)[ ]($style))"
-style = "bg:none fg:surface1"
+format = "[](fg:surface1)([$state($progress_current/$progress_total)]($style))[ ](fg:surface1)"
+style = "bg:surface1 fg:bright-red"
 
 [git_metrics]
-format = "([](bg:none fg:surface1)([ $added]($added_style))([  $deleted]($deleted_style))[ ](bg:none fg:surface1))"
+format = "[](fg:surface1)(([ $added]($added_style))([  $deleted]($deleted_style)))[ ](fg:surface1)"
 added_style = "bg:surface1 fg:bold green"
 deleted_style = "bg:surface1 fg:bold red"
 disabled = false
@@ -74,12 +108,12 @@ disabled = true
 
 [jobs]
 format = "[]($style)[$symbol$number](bg:surface1 fg:bright-green)[ ]($style)"
-style = "bg:none fg:surface1"
+style = "fg:surface1"
 
 [conda]
 format = "[]($style)[[$symbol$environment](bg:surface1 fg:dimmed green)](bg:surface1 fg:text)[ ]($style)"
 ignore_base = false
-style = "bg:none fg:surface1"
+style = "fg:surface1"
 
 # palette tables should be last in the config ⚓️
 [palettes.catppuccin_mocha]
