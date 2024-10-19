@@ -49,16 +49,16 @@ EndeavourOS = ""
 [username]
 style_user = "bg:surface1 fg:bold text"
 style_root = "bg:surface1 fg:bold red"
-format = "[ $user ]($style)"
+format = "[ $user ]($style)[ ](fg:surface1)"
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-ssh_symbol = "[󰣀](bold red)"
-format = "[](fg:green bg:surface1)[@](bg:green fg:mantle)[](fg:green bg:surface1)[ $ssh_symbol $hostname]($style)[ ](fg:surface1)"
+ssh_symbol = "[󰣀](bg:surface1 fg:bold red)"
+format = "[](fg:green bg:surface1)[@](bg:green fg:mantle)[](fg:green bg:surface1)[ $ssh_symbol$hostname]($style)[ ](fg:surface1)"
 style = "bg:surface1 fg:text"
-disabled = false
+disabled = true
 
 [directory]
 format = "[](fg:blue)[ ](fg:mantle bg:blue)[](fg:blue bg:surface1)[ $path]($style)[$read_only]($read_only_style)[ ](fg:surface1)"
@@ -71,6 +71,8 @@ style = "bg:surface1 fg:text"
 "Downloads" = " "
 "Music" = "󰝚 "
 "Pictures" = " "
+"Developer" = "󰲋 "
+"Dev" = "󰲋 "
 "repos" = "󰲋 "
 
 [character]
