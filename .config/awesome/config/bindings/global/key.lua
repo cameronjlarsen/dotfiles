@@ -220,7 +220,6 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client below",
         group       = "Client",
         on_press    = function()
-            -- awful.client.focus.global_bydirection("down")
             focus_bydirection("down")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
@@ -231,7 +230,6 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client above",
         group       = "Client",
         on_press    = function()
-            -- awful.client.focus.global_bydirection("up")
             focus_bydirection("up")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
@@ -242,7 +240,6 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client left",
         group       = "Client",
         on_press    = function()
-            -- awful.client.focus.global_bydirection("left")
             focus_bydirection("left")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
@@ -253,24 +250,10 @@ awful.keyboard.append_global_keybindings {
         description = "focus next client right",
         group       = "Client",
         on_press    = function()
-            -- awful.client.focus.global_bydirection("right")
             focus_bydirection("right")
             bling.module.flash_focus.flashfocus(client.focus)
         end,
     },
-    -- awful.key {
-    --     modifiers   = { Super },
-    --     key         = "Tab",
-    --     description = "go back",
-    --     group       = "Client",
-    --     on_press    = function()
-    --         awful.client.focus.history.previous()
-    --         if client.focus then
-    --             client.focus:raise()
-    --             bling.module.flash_focus.flashfocus(client.focus)
-    --         end
-    --     end,
-    -- },
     awful.key {
         modifiers   = { Super, Ctrl },
         key         = "j",
@@ -490,6 +473,15 @@ awful.keyboard.append_global_keybindings {
                     c:move_to_tag(t)
                 end
             end
+        end,
+    },
+    awful.key {
+        modifiers = { Super },
+        key = "s",
+        description = "toggle window swallowing",
+        group = "Layout",
+        on_press = function()
+            bling.module.window_swallowing.toggle()
         end,
     },
 }
