@@ -612,9 +612,8 @@ config = {
 -- Windows specific config
 if get_os[wezterm.target_triple] == "Windows" then
     config.default_prog = { "pwsh.exe -nologo" }
-    -- table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-nologo" } })
+    table.insert(config.launch_menu, { label = "pwsh", args = { "pwsh.exe", "-nologo" } })
     config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-    config.prefer_egl = true
 end
 
 return config
