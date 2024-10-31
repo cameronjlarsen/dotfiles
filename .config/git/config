@@ -28,7 +28,9 @@
     prompt = false
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	program = /opt/1Password/op-ssh-sign
 [commit]
 	gpgsign = true
+[includeIf "gitdir:/home/"]
+  path = .config/git/config-linux
+[includeIf "gitdir:/Users/"]
+    path = ~/.config/git/config-mac
