@@ -31,6 +31,6 @@
 [commit]
 	gpgsign = true
 [includeIf "gitdir:/home/"]
-  path = .config/git/config-linux
+  path = ~/.config/git/config-linux
 [includeIf "gitdir:/Users/"]
     path = ~/.config/git/config-mac
