@@ -1,0 +1,9 @@
+@media (-moz-platform: linux) {
+  #navigator-toolbox #titlebar #TabsToolbar .titlebar-buttonbox-container {
+    display: none !important;
+  }
+
+  :root {
+    --firefoxcss-control-buttons-margin: 0px !important;
+  }
+}
