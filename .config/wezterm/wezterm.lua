@@ -616,4 +616,8 @@ if get_os[wezterm.target_triple] == "Windows" then
     config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 end
 
+if get_os[wezterm.target_triple] == "Darwin" then
+    config.front_end = "WebGpu"
+end
+
 return config
