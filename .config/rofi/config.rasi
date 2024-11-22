@@ -1,5 +1,5 @@
 configuration{
-    modi: "run,drun,window";
+    modi: "run,drun,window,calc";
     icon-theme: "Catppuccin-SE";
     show-icons: true;
     terminal: "kitty";
@@ -11,6 +11,7 @@ configuration{
     display-run: "   Run ";
     display-window: " 﩯  Window";
     display-Network: " 直 Network";
+    display-calc: "   Calc";
     sidebar-mode: true;
 }
 
