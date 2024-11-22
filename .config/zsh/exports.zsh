@@ -1,13 +1,14 @@
 #!/bin/sh
 export PATH="$HOME/.local/bin":$PATH
-export MANPAGER='nvim +Man!'
+export MANPAGER="nvim +Man!"
 export MANWIDTH=999
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/share/go/bin:$PATH
-export GOPATH=$HOME/.local/share/go
-export PATH=$HOME/.fnm:$PATH
+export PATH="$HOME/.cargo/bin":$PATH
+export PATH="$HOME/.local/share/go/bin":$PATH
+export GOPATH="$HOME/.local/share/go"
+export PATH="$HOME/.fnm":$PATH
 export PATH="$HOME/.local/share/neovim/bin":$PATH
-export PATH="/home/camjl/.local/share/fnm:$PATH"
+export PATH="$HOME/.local/share/fnm":$PATH
+export PATH="$HOME/.dotnet/tools":$PATH
 
 # Environment variables set everywhere
 export EDITOR="nvim"
