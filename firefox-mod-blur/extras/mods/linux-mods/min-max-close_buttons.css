@@ -2,7 +2,6 @@
   #navigator-toolbox #TabsToolbar .titlebar-buttonbox-container {
     visibility: hidden !important;
     display: none !important;
-    position: absolute !important;
   }
 
   :root {

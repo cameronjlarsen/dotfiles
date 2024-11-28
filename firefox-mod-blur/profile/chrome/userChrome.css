@@ -1774,7 +1774,7 @@ mask-composite: intersect;
     #TabsToolbar
     .titlebar-buttonbox-container {
     visibility: visible !important;
-    display: flex !important;
+    display: none !important;
     position: absolute !important;
     top: 1px;
     right: 0;
