@@ -1,5 +1,6 @@
 @media (-moz-platform: linux) {
-  #navigator-toolbox #titlebar #TabsToolbar .titlebar-buttonbox-container {
+  .titlebar-buttonbox-container {
+    visibility: hidden !important;
     display: none !important;
   }
 
