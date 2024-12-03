@@ -7,6 +7,7 @@ let mapleader = " "
 
 "" Base Settings
 set scrolloff=5
+set sidescrolloff=8
 set showmode
 set showcmd
 set number
@@ -15,6 +16,8 @@ set smartcase
 set incsearch
 set hlsearch
 set clipboard+=unnamedplus
+set nowrap
+set timoutlen=5000
 
 "" Plugins
 set surround
@@ -26,6 +29,7 @@ set argtextobj
 set textobj-indent
 set textobj-entire
 set ideajoin
+set which-key
 
 "" Key Mappings
 inoremap jk <Esc>
@@ -42,7 +46,12 @@ vnoremap g/ /
 nmap / <Action>(Find)
 vmap / <Action>(Find)
 
+nmap <A-j> <Action>(MoveLineDown)
+imap <A-j> <Esc><Action>(MoveLineDown)i
+nmap <A-k> <Action>(MoveLineUp)
 
+
+" Buffers/Tabs
 nmap <S-Right> <Action>(NextTab)
 nmap <S-Left> <Action>(PreviousTab)
 nmap <leader>bc <Action>(CloseContent)
@@ -52,10 +61,14 @@ nmap <leader>bo <Action>(CloseAllEditorsButActive)
 nmap <leader>bp <Action>(CloseAllUnpinnedEditors)
 
 " Window/Pane 
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <C-k> <C-W>k
-nnoremap <C-j> <C-W>j
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+nmap <C-k> <C-W>k
+nmap <C-j> <C-W>j
+nmap <C-Up> <Action>(IncrementWindowHeight)
+nmap <C-Down> <Action>(DecrementWindowHeight)
+nmap <C-Left> <Action>(DecrementWindowWidth)
+nmap <C-Right> <Action>(IncrementWindowWidth)
 nmap <leader>wv <Action>(SplitVertically)
 nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wu <Action>(Unsplit)
@@ -159,6 +172,7 @@ nmap gd <Action>(GotoDeclaration)
 nmap gy <Action>(GotoTypeDeclaration)
 nmap gi <Action>(GotoImplementation)
 nmap gr <Action>(ShowUsages)
+nmap gu <Action>(HighlightUsagesInFile)
 nmap gt <Action>(GotoTest)
 nmap gI <Action>(QuickImplementations)
 nmap gn <Action>(ShowNavBar)
