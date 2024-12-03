@@ -46,3 +46,12 @@ vim.opt.whichwrap = "<,>,[,],h,l"
 vim.opt.iskeyword:append({ "-" })
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 vim.opt.fillchars:append({ eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "" })
+
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    vim.opt.guicursor = {
+        'n-v-c:block-blinkwait175-blinkoff150-blinkon175',
+        'i-ci-ve:ver25-Cursor-blinkwait175-blinkoff150-blinkon175',
+        'r-cr:hor20',
+        'o:hor50'
+    }
+end
