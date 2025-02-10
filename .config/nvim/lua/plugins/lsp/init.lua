@@ -22,14 +22,14 @@ return {
             }
 
             local signs = {
-                { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-                { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warn },
-                { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-                { name = "DiagnosticSignInfo",  text = icons.diagnostics.Info },
+                { name = "DiagnosticSignError", text = icons.diagnostics.Error, numhl = "ErrorMsg" },
+                { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warn, numhl = "WarningMsg" },
+                { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint, numhl = "DiagnosticHint" },
+                { name = "DiagnosticSignInfo",  text = icons.diagnostics.Info, numhl = "DiagnosticInfo" },
             }
 
             for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.numhl })
             end
             return {
                 diagnoistics = {
