@@ -34,3 +34,5 @@
   path = ~/.config/git/config-linux
 [includeIf "gitdir:/Users/"]
     path = ~/.config/git/config-mac
+[pull]
+	rebase = true
