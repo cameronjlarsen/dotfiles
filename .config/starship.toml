@@ -16,6 +16,7 @@ $git_state\
 $git_metrics\
 $jobs\
 $conda\
+$python\
 $line_break\
 $character\
 """
@@ -116,6 +117,11 @@ style = "fg:surface1"
 [conda]
 format = "[]($style)[[$symbol$environment](bg:surface1 fg:dimmed green)](bg:surface1 fg:text)[ ]($style)"
 ignore_base = false
+style = "fg:surface1"
+
+[python]
+format = "[]($style)[[${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\))](bg:surface1 fg:yellow bold)](bg:surface1 fg:text)[ ]($style)"
+symbol = " "
 style = "fg:surface1"
 
 # palette tables should be last in the config ⚓️
