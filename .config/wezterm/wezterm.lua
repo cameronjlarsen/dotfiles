@@ -92,134 +92,47 @@ local colors = {
     crust     = wezterm.color.parse("#11111b"),
 }
 
-local function get_process(tab)
-    local process_icons = {
-        ["docker"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = wezterm.nerdfonts.linux_docker },
-        },
-        ["docker-compose"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = wezterm.nerdfonts.linux_docker },
-        },
-        ["nvim"] = {
-            { Foreground = { Color = colors.green } },
-            { Text = wezterm.nerdfonts.custom_vim },
-        },
-        ["vim"] = {
-            { Foreground = { Color = colors.green } },
-            { Text = wezterm.nerdfonts.dev_vim },
-        },
-        ["node"] = {
-            { Foreground = { Color = colors.green } },
-            { Text = wezterm.nerdfonts.md_hexagon },
-        },
-        ["zsh"] = {
-            -- { Foreground = { Color = colors.base } },
-            { Text = wezterm.nerdfonts.dev_terminal },
-        },
-        ["wezterm"] = {
-            -- { Foreground = { Color = colors.base } },
-            { Text = wezterm.nerdfonts.dev_terminal },
-        },
-        ["bash"] = {
-            -- { Foreground = { Color = colors.base } },
-            { Text = wezterm.nerdfonts.cod_terminal_bash },
-        },
-        ["pwsh"] = {
-            -- { Foreground = { Color = colors.base } },
-            { Text = wezterm.nerdfonts.cod_terminal_powershell },
-        },
-        ["htop"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.md_chart_donut_variant },
-        },
-        ["btop"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.md_chart_donut_variant },
-        },
-        ["cargo"] = {
-            { Foreground = { Color = colors.peach } },
-            { Text = wezterm.nerdfonts.dev_rust },
-        },
-        ["go"] = {
-            { Foreground = { Color = colors.sapphire } },
-            { Text = wezterm.nerdfonts.md_language_go },
-        },
-        ["lazydocker"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = wezterm.nerdfonts.linux_docker },
-        },
-        ["git"] = {
-            { Foreground = { Color = colors.peach } },
-            { Text = wezterm.nerdfonts.dev_git },
-        },
-        ["lazygit"] = {
-            { Foreground = { Color = colors.peach } },
-            { Text = wezterm.nerdfonts.dev_git },
-        },
-        ["lua"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = wezterm.nerdfonts.seti_lua },
-        },
-        ["wget"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.md_arrow_down_box },
-        },
-        ["curl"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.md_flattr },
-        },
-        ["gh"] = {
-            { Foreground = { Color = colors.mauve } },
-            { Text = wezterm.nerdfonts.dev_github_badge },
-        },
-        ["yay"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = "󰮯" },
-        },
-        ["pacman"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = "󰮯" },
-        },
-        ["ruby"] = {
-            { Foreground = { Color = colors.red } },
-            { Text = wezterm.nerdfonts.dev_ruby },
-        },
-        ["python"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.dev_python },
-        },
-        ["python3.10"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.dev_python },
-        },
-        ["python3.11"] = {
-            { Foreground = { Color = colors.yellow } },
-            { Text = wezterm.nerdfonts.dev_python },
-        },
-        ["lf"] = {
-            { Foreground = { Color = colors.blue } },
-            { Text = wezterm.nerdfonts.custom_folder_open },
-        },
-        ["dotnet"] = {
-            { Foreground = { Color = colors.mauve } },
-            { Text = "󰪮 " },
-        },
-        ["cp"] = {
-            { Foreground = { Color = '#00000000' } },
-            { Text = wezterm.nerdfonts.cod_copy },
-        },
-    }
+-- Process icon mapping table with icon characters only
+local process_icons = {
+    ["docker"] = wezterm.nerdfonts.linux_docker,
+    ["docker-compose"] = wezterm.nerdfonts.linux_docker,
+    ["nvim"] = wezterm.nerdfonts.linux_neovim,
+    ["vim"] = wezterm.nerdfonts.dev_vim,
+    ["node"] = wezterm.nerdfonts.md_hexagon,
+    ["zsh"] = wezterm.nerdfonts.dev_terminal,
+    ["wezterm"] = wezterm.nerdfonts.dev_terminal,
+    ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
+    ["pwsh"] = wezterm.nerdfonts.cod_terminal_powershell,
+    ["htop"] = wezterm.nerdfonts.md_chart_donut_variant,
+    ["btop"] = wezterm.nerdfonts.md_chart_donut_variant,
+    ["cargo"] = wezterm.nerdfonts.dev_rust,
+    ["go"] = wezterm.nerdfonts.md_language_go,
+    ["lazydocker"] = wezterm.nerdfonts.linux_docker,
+    ["git"] = wezterm.nerdfonts.dev_git,
+    ["lazygit"] = wezterm.nerdfonts.dev_git,
+    ["lua"] = wezterm.nerdfonts.seti_lua,
+    ["wget"] = wezterm.nerdfonts.md_arrow_down_box,
+    ["curl"] = wezterm.nerdfonts.md_flattr,
+    ["gh"] = wezterm.nerdfonts.dev_github_badge,
+    ["yay"] = "󰮯",
+    ["pacman"] = "󰮯",
+    ["ruby"] = wezterm.nerdfonts.dev_ruby,
+    ["python"] = wezterm.nerdfonts.dev_python,
+    ["python3.10"] = wezterm.nerdfonts.dev_python,
+    ["python3.11"] = wezterm.nerdfonts.dev_python,
+    ["lf"] = wezterm.nerdfonts.custom_folder_open,
+    ["dotnet"] = "󰪮 ",
+    ["cp"] = wezterm.nerdfonts.cod_copy,
+}
 
+-- Function to get process icon for a tab
+local function get_process_icon(tab)
     local process_name = tab.active_pane.foreground_process_name:gsub("(.*[/\\])(.*)", "%2")
     -- on windows, still need to remove the .exe
     process_name = process_name:gsub("(.*)(%.exe)$", "%1")
 
-    return wezterm.format(
-        process_icons[process_name]
-        or { { Foreground = { Color = colors.base } }, { Text = string.format("[%s]", process_name) } }
-    )
+    -- Return the icon or a fallback text representation
+    return process_icons[process_name] or string.format("[%s]", process_name)
 end
 
 local function get_current_working_dir(tab)
@@ -255,12 +168,13 @@ end
 local function tab_title(tab_info)
     local title = tab_info.tab_title
     if title and #title > 0 then
-        return string.format("%s %s", get_process(tab_info), title)
+        return title
     end
 
-    return string.format("%s %s", get_process(tab_info), get_current_working_dir(tab_info))
+    return get_current_working_dir(tab_info) or ""
 end
 
+-- Tab formatting with consistent color scheme
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local background = config.colors.tab_bar.background
     local active_bg = config.colors.tab_bar.active_tab.bg_color
@@ -270,46 +184,55 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     local inactive_hover_bg = config.colors.tab_bar.inactive_tab_hover.bg_color
     local inactive_hover_fg = config.colors.tab_bar.inactive_tab_hover.fg_color
 
-    local sect_bg, sect_fg, end_bg, end_fg
+    -- Set colors based on tab state
+    local tab_bg, tab_fg, end_bg, end_fg, icon_fg
 
     if tab.is_active then
-        sect_bg = active_bg
-        sect_fg = active_fg
+        tab_bg = active_bg
+        tab_fg = active_fg
         end_fg = active_bg
         end_bg = background
+        icon_fg = active_fg -- Use the tab foreground color for icon
     elseif hover then
-        sect_bg = inactive_hover_bg
-        sect_fg = inactive_hover_fg
+        tab_bg = inactive_hover_bg
+        tab_fg = inactive_hover_fg
         end_fg = inactive_hover_bg
         end_bg = background
+        icon_fg = inactive_hover_fg -- Use the tab foreground color for icon
     else
-        sect_bg = inactive_bg
-        sect_fg = inactive_fg
+        tab_bg = inactive_bg
+        tab_fg = inactive_fg
         end_fg = inactive_bg
         end_bg = background
+        icon_fg = inactive_fg -- Use the tab foreground color for icon
     end
 
     local index = string.format(" %s ", tab.tab_index + 1)
     local title = tab_title(tab)
+    local process_icon = get_process_icon(tab)
     local zoomed = ""
     if tab.active_pane.is_zoomed then
         zoomed = wezterm.nerdfonts.md_alpha_z_box
     end
 
+    -- Create tab format with consistent colors
     return wezterm.format({
         { Background = { Color = end_bg } },
         { Foreground = { Color = end_fg } },
         { Text = " " .. wezterm.nerdfonts.ple_left_half_circle_thick },
-        { Background = { Color = sect_bg } },
-        { Foreground = { Color = sect_fg } },
+        { Background = { Color = tab_bg } },
+        { Foreground = { Color = tab_fg } },
         { Text = zoomed },
-        { Background = { Color = sect_bg } },
-        { Foreground = { Color = sect_fg } },
+        { Background = { Color = tab_bg } },
+        { Foreground = { Color = icon_fg } },
+        { Text = " " .. process_icon .. " " }, -- Add padding around the icon
+        { Background = { Color = tab_bg } },
+        { Foreground = { Color = tab_fg } },
         { Attribute = { Intensity = "Half" } },
         { Text = index },
         "ResetAttributes",
-        { Background = { Color = sect_bg } },
-        { Foreground = { Color = sect_fg } },
+        { Background = { Color = tab_bg } },
+        { Foreground = { Color = tab_fg } },
         { Text = title },
         { Background = { Color = end_bg } },
         { Foreground = { Color = end_fg } },
@@ -331,7 +254,7 @@ wezterm.on("update-status", function(window, pane)
         { Text = wezterm.nerdfonts.ple_upper_right_triangle },
         { Background = { Color = colors.green } },
         { Foreground = { Color = background } },
-        { Text = "  " },
+        { Text = " " .. wezterm.nerdfonts.fa_person .. " " },
         { Text = wezterm.nerdfonts.ple_upper_right_triangle },
         { Background = { Color = background } },
         { Foreground = { Color = colors.text } },
