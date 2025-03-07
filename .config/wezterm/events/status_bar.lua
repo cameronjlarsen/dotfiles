@@ -19,7 +19,7 @@ return function(config)
             { Text = wezterm.nerdfonts.ple_upper_right_triangle },
             { Background = { Color = colors.green } },
             { Foreground = { Color = background } },
-            { Text = " " .. wezterm.nerdfonts.fa_person .. " " },
+            { Text = " " .. wezterm.nerdfonts.fa_male .. " " },
             { Text = wezterm.nerdfonts.ple_upper_right_triangle },
             { Background = { Color = background } },
             { Foreground = { Color = colors.text } },
@@ -42,4 +42,3 @@ return function(config)
 
     return config
 end
-
