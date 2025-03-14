@@ -73,10 +73,14 @@ eval "$(op completion zsh)"; compdef _op op
 [[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ]] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh" || true
 
 # Wezterm shell integration
-[ -f "$HOME/.config/wezterm/wezterm.sh" ] && source "$HOME/.config/wezterm/wezterm.sh"
+[[ -f "$HOME/.config/wezterm/wezterm.sh" ]] && source "$HOME/.config/wezterm/wezterm.sh"
+
+[[ -f "$HOME/.conifg/op/plugins.sh" ]] && source "$HOME/.config/op/plugins.sh"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Starship prompt
 eval "$(starship init zsh)"

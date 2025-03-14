@@ -3,10 +3,8 @@
 	name = Cameron Larsen
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrb/l/y43MarfyKKUoBJX3jgBGzLV9MUyJ4Svo5HucT
 [credential "https://github.com"]
-	helper = 
 	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !gh auth git-credential
 [core]
 	editor = nvim
