@@ -82,5 +82,3 @@ else
 fi
 export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/tools"
-
-# FNM
