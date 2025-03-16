@@ -13,6 +13,7 @@ export PATH="$HOME/.dotnet/tools":$PATH
 # Environment variables set everywhere
 export EDITOR="nvim"
 export TERMINAL="wezterm"
+export BROWSER="zen-browser"
 
 # FZF 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
