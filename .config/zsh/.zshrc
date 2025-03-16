@@ -1,6 +1,7 @@
 #!/bin/sh
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-export ZDOTDIR=$HOME/.config/zsh
+export ZAP_GIT_PREFIX="git@github.com:"
+
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
@@ -24,6 +25,9 @@ setopt HIST_SAVE_NO_DUPS
 setopt SHARE_HISTORY
 # Execute commands using history (e.g.: using !$) immediatel:
 unsetopt HIST_VERIFY
+
+# Starship prompt
+eval "$(starship init zsh)"
 
 # Add catppuccin-zsh-syntax-highlighting
 if [ -e "$ZDOTDIR/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]; then
@@ -51,6 +55,7 @@ plug "wintermi/zsh-fnm"
 plug "memark/zsh-dotnet-completion"
 plug "conda-incubator/conda-zsh-completion"
 plug "Aloxaf/fzf-tab"
+plug "GianniBYoung/omz-take"
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
@@ -79,11 +84,6 @@ eval "$(op completion zsh)"; compdef _op op
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-eval "$(fnm env --use-on-cd --shell zsh)"
-
-# Starship prompt
-eval "$(starship init zsh)"
 
 # pnpm
 export PNPM_HOME="/home/camjl/.local/share/pnpm"
