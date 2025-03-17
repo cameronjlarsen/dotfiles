@@ -16,7 +16,7 @@ Run `stow` from `/dotfiles` directory like so:
 This will stow the `.config` directory at `$HOME/.config/`
 
 ```bash
-stow -v -R .config -t ~/.config
+stow -v -R config -t ~/.config
 ```
 
 This will stow the `Wallpapers` directory at `$HOME/Pictures/Wallpapers/`
