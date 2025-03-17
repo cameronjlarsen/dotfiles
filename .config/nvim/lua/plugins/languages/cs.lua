@@ -101,7 +101,7 @@ return {
         cond = not vim.g.vscode,
         event = { "BufReadPre", "BufNewFile" },
         opts = {
-            filewatching = true,
+            filewatching = "auto",
         }
     }
 }
