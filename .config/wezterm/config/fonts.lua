@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 
 local maple_font = {
-    family = "MapleMono Nerd Font",
+    family = "Maple Mono NF",
     harfbuzz_features = {
         "cv01", "cv03", "cv04", "ss01", "ss02", "ss03", "ss04"
     },
