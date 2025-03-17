@@ -1,10 +1,10 @@
 # Ignore packer compiled 
-.config/nvim/plugin/packer_compiled.lua
+*config/nvim/plugin/packer_compiled.lua
 
 # ignore zsh sessions
-.config/zsh/.zsh_sessions/
+*config/zsh/.zsh_sessions/
 
 # ignore zsh history
-.config/zsh/.zsh_history
+*config/zsh/.zsh_history
 
 *.DS_Store
