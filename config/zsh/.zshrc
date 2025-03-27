@@ -2,29 +2,6 @@
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 export ZAP_GIT_PREFIX="git@github.com:"
 
-HISTFILE=~/.zsh_history
-HISTSIZE=1000000
-SAVEHIST=1000000
-# Immediately append to history file:
-setopt INC_APPEND_HISTORY
-# Record timestamp in history:
-setopt EXTENDED_HISTORY
-# Expire duplicate entries first when trimming history:
-setopt HIST_EXPIRE_DUPS_FIRST
-# Dont record an entry that was just recorded again:
-setopt HIST_IGNORE_DUPS
-# Delete old recorded entry if new entry is a duplicate:
-setopt HIST_IGNORE_ALL_DUPS
-# Do not display a line previously found:
-setopt HIST_FIND_NO_DUPS
-# Dont record an entry starting with a space:
-setopt HIST_IGNORE_SPACE
-# Dont write duplicate entries in the history file:
-setopt HIST_SAVE_NO_DUPS
-# Share history between all sessions:
-setopt SHARE_HISTORY
-# Execute commands using history (e.g.: using !$) immediatel:
-unsetopt HIST_VERIFY
 
 # Starship prompt
 eval "$(starship init zsh)"
@@ -55,10 +32,8 @@ plug "wintermi/zsh-fnm"
 plug "memark/zsh-dotnet-completion"
 plug "conda-incubator/conda-zsh-completion"
 plug "Aloxaf/fzf-tab"
+plug "Freed-Wu/fzf-tab-source"
 plug "GianniBYoung/omz-take"
-# zsh_add_completion "esc/conda-zsh-completion" false
-# For more plugins: https://github.com/unixorn/awesome-zsh-plugins
-# More completions https://github.com/zsh-users/zsh-completions
 
 # Aliases
 plug "$ZDOTDIR/aliases.zsh"
@@ -72,23 +47,3 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:ls:*' fzf-preview 'ls --color $realpath'
 
 eval "$(op completion zsh)"; compdef _op op
-
-# tabtab source for pnpm package
-# uninstall by removing these lines
-[[ -f "$HOME/.config/tabtab/zsh/__tabtab.zsh" ]] && . "$HOME/.config/tabtab/zsh/__tabtab.zsh" || true
-
-# Wezterm shell integration
-[[ -f "$HOME/.config/wezterm/wezterm.sh" ]] && source "$HOME/.config/wezterm/wezterm.sh"
-
-[[ -f "$HOME/.conifg/op/plugins.sh" ]] && source "$HOME/.config/op/plugins.sh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# pnpm
-export PNPM_HOME="/home/camjl/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
