@@ -1,57 +1,89 @@
 "" .ideavimrc - Cameron Larsen
 echo "Loading .ideavimrc"
 
-"" Leader
-map <Space> <Nop>
-let mapleader = " "
 
+"" ========================================================
 "" Base Settings
-set scrolloff=5
-set sidescrolloff=8
+"" ========================================================
+set scrolloff=10
+set history=1000
+set number relativenumber
 set showmode
 set showcmd
-set number
-set relativenumber
 set smartcase
 set incsearch
 set hlsearch
-set clipboard+=unnamedplus
-set nowrap
-set timoutlen=5000
 
-"" Plugins
+" Clipboard Integration
+set clipboard+=unnamedplus
+
+"" Leader
+let mapleader = "\<Space>"
+
+" iIdeaVim Specific Settings
+set ideajoin
+set ideamarks
+set ideastatusicon=gray
+
+"" ========================================================
+"" Plugin Settings
+"" ========================================================
+set exchange
+set commentary
 set surround
+set nerdtree
+
+" Highlighting Plugins
 set highlightedyank
 let g:highlightedyank_highlight_duration = "1000"
 let g:highlightedyank_highlight_color = "rgba(57, 197, 187, 155)"
-set nerdtree
-set argtextobj
-set textobj-indent
-set textobj-entire
-set ideajoin
-set which-key
 
+" Object Plugins
+set textobj-entire
+set argtextobj
+let g:argtextobj_pairs="[:],(:),<:>"
+set ideajoin
+
+" Which-key settings
+set which-key
+set notimeout
+let g:WhichKey_FontSize = 16
+let g:WhichKey_PrefixColor = "#b4befe"
+let g:WhichKey_CommandColor = "#f5c2e7"
+let g:WhichKey_PrefixStyle = "bold"
+let g:WhichKey_KeyStyle = "italic"
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_ShowTypedSequence = "false"
+
+"" ========================================================
 "" Key Mappings
+"" ========================================================
 inoremap jk <Esc>
+let g:WhichKeyDesc_escape = "jk Escape"
 " but preserve ideavim defaults
 nnoremap g<c-o> <c-o>
 nnoremap g<c-i> <c-i>
-" built-in navigation to navigated items works better
+" Navigation Actions
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
+let g:WhichKeyDesc_navigation_back = "<C-o> Back"
+let g:WhichKeyDesc_navigation_forward = "<C-i> Forward"
+
 " but preserve ideavim search
 nnoremap g/ /
 vnoremap g/ /
 " built in search looks better
 nmap / <Action>(Find)
 vmap / <Action>(Find)
+let g:WhichKeyDesc_search = "/ Search"
 
 nmap <A-j> <Action>(MoveLineDown)
 imap <A-j> <Esc><Action>(MoveLineDown)i
 nmap <A-k> <Action>(MoveLineUp)
+let g:WhichKeyDesc_move = "<A-j> Move Line Down"
+let g:WhichKeyDesc_move = "<A-k> Move Line Up"
 
-
-" Buffers/Tabs
+" Tab Navigation
 nmap <S-Right> <Action>(NextTab)
 nmap <S-Left> <Action>(PreviousTab)
 nmap <leader>bc <Action>(CloseContent)
@@ -59,6 +91,13 @@ nmap <leader>bb <Action>(Switcher)
 nmap <leader>ba <Action>(CloseAllEditors)
 nmap <leader>bo <Action>(CloseAllEditorsButActive)
 nmap <leader>bp <Action>(CloseAllUnpinnedEditors)
+let g:WhichKeyDesc_tab = "<leader>b Tab"
+let g:WhichKeyDesc_tab_close = "<leader>bc Close"
+let g:WhichKeyDesc_tab_switch = "<leader>bb Switch"
+let g:WhichKeyDesc_tab_close_all = "<leader>ba Close All"
+let g:WhichKeyDesc_tab_close_all_but = "<leader>bo Close All But Active"
+let g:WhichKeyDesc_tab_close_all_unpinned = "<leader>bp Close All Unpinned"
+
 
 " Window/Pane 
 nmap <C-h> <C-W>h
@@ -74,6 +113,14 @@ nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wu <Action>(Unsplit)
 nmap <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 nmap <leader>ww <Action>(HideAllWindows)
+nmap <Esc> <Action>(HideActiveWindow)
+let g:WhichKeyDesc_window = "<leader>w Window splits"
+let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
+let g:WhichKeyDesc_window_split_horizontally = "<leader>ws Split horizontally"
+let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
+let g:WhichKeyDesc_window_split_move_editor = "<leader>wm Move editor to opposite tab group"
+let g:WhichKeyDesc_window_hide_all = "<leader>ww Hide All Windows"
+let g:WhichKeyDesc_window_hide_active = "<Escape> Hide Active Window"
 
 " Menu
 nmap <leader>mm <Action>(MainMenu)
@@ -85,6 +132,16 @@ nmap <leader>mg <Action>(GoToMenu)
 nmap <leader>ms <Action>(ScopeViewPopupMenu)
 nmap <leader>mt <Action>(EditorTabPopupMenu)
 nmap <leader>mw <Action>(ToolWindowsGroup)
+let g:WhichKeyDesc_menu = "<leader>m Menu"
+let g:WhichKeyDesc_menu_analyze = "<leader>ma Analyze"
+let g:WhichKeyDesc_menu_bookmarks = "<leader>mb Bookmarks"
+let g:WhichKeyDesc_menu_code = "<leader>mc Code"
+let g:WhichKeyDesc_menu_find = "<leader>mf Find"
+let g:WhichKeyDesc_menu_goto = "<leader>mg Go To"
+let g:WhichKeyDesc_menu_scope = "<leader>ms Scope"
+let g:WhichKeyDesc_menu_tab = "<leader>mt Tab"
+let g:WhichKeyDesc_menu_tool = "<leader>mw Tool Windows"
+
 
 " []
 nmap [[ <Action>(MethodUp)
@@ -101,6 +158,21 @@ nmap [o <Action>(PreviousOccurence)
 nmap ]o <Action>(NextOccurence)
 nmap [c <Action>(JumpToLastChange)
 nmap ]c <Action>(JumpToNextChange)
+let g:WhichKeyDesc_navigation = "[ Navigation"
+let g:WhichKeyDesc_navigation_method_up = "[[ Method Up"
+let g:WhichKeyDesc_navigation_method_down = "[] Method Down"
+let g:WhichKeyDesc_navigation_vcs_prev = "[h Previous VCS Change"
+let g:WhichKeyDesc_navigation_vcs_next = "]h Next VCS Change"
+let g:WhichKeyDesc_navigation_tab_prev = "[b Previous Tab"
+let g:WhichKeyDesc_navigation_tab_next = "]b Next Tab"
+let g:WhichKeyDesc_navigation_error_prev = "[e Previous Error"
+let g:WhichKeyDesc_navigation_error_next = "]e Next Error"
+let g:WhichKeyDesc_navigation_element_prev = "[u Previous Element"
+let g:WhichKeyDesc_navigation_element_next = "]u Next Element"
+let g:WhichKeyDesc_navigation_occurence_prev = "[o Previous Occurence"
+let g:WhichKeyDesc_navigation_occurence_next = "]o Next Occurence"
+let g:WhichKeyDesc_navigation_change_prev = "[c Previous Change"
+let g:WhichKeyDesc_navigation_change_next = "]c Next Change"
 
 " Easy visual indentation
 vnoremap < <gv
@@ -109,17 +181,27 @@ vnoremap > >gv
 " Popup navigation
 imap <C-j> <Action>(PopupMenu-selectNext)
 imap <C-k> <Action>(PopupMenu-selectPrev)
+let g:WhichKeyDesc_popup = "Popup Navigation"
+let g:WhichKeyDesc_popup_next = "<C-j> Next"
+let g:WhichKeyDesc_popup_prev = "<C-k> Previous"
 
 " Comment
 nmap gcc <Action>(CommentByLineComment)
 nmap gcb <Action>(CommentByBlockComment)
 vmap gc <Action>(CommentByLineComment)
 vmap gc <Action>(CommentByBlockComment)
-
+let g:WhichKeyDesc_comment = "Comment"
+let g:WhichKeyDesc_comment_line = "gcc Line"
+let g:WhichKeyDesc_comment_block = "gcb Block"
+let g:WhichKeyDesc_comment_line_visual = "gc Line"
+let g:WhichKeyDesc_comment_block_visual = "gc Block"
 
 " Open File Explorer
 map <leader>fe :NERDTreeFocus<CR>
 map <leader>fE :NERDTreeFind<CR>
+let g:WhichKeyDesc_file = "<leader>f File Explorer"
+let g:WhichKeyDesc_file_focus = "<leader>fe Focus"
+let g:WhichKeyDesc_file_find = "<leader>fE Find"
 
 " Find/Search
 nmap <leader>ff <Action>(GotoFile)
@@ -132,13 +214,23 @@ nmap <leader>ft <Action>(FindInPath)
 vmap <leader>ft <Action>(FindInPath)
 nmap <leader>fr <Action>(ReplaceInPath)
 vmap <leader>fr <Action>(ReplaceInPath)
+let g:WhichKeyDesc_find = "<leader>f Find"
+let g:WhichKeyDesc_find_file = "<leader>ff File"
+let g:WhichKeyDesc_find_action = "<leader>fa Action"
+let g:WhichKeyDesc_find_recent = "<leader>fo Recent"
+let g:WhichKeyDesc_find_search = "<leader>fs Search"
+let g:WhichKeyDesc_find_search_visual = "<leader>fs Search"
+let g:WhichKeyDesc_find_find = "<leader>ft Find"
+let g:WhichKeyDesc_find_find_visual = "<leader>ft Find"
+let g:WhichKeyDesc_find_replace = "<leader>fr Replace"
+let g:WhichKeyDesc_find_replace_visual = "<leader>fr Replace"
 
-" Actions
+
+
+" Language Actions
 map <leader>la <Action>(ShowIntentionActions)
 map <leader>lf <Action>(ReformatCode)
-
-
-" Refactoring
+map <leader>ll <Action>(Refactorings.QuickListPopupAction)
 map <leader>lrn <Action>(RenameElement)
 map <leader>lrx <Action>(ExtractMethod)
 map <leader>lrv <Action>(IntroduceVariable)
@@ -146,11 +238,26 @@ map <leader>lrf <Action>(IntroduceField)
 map <leader>lrc <Action>(IntroduceConstant)
 map <leader>lrp <Action>(IntroduceParameter)
 map <leader>lrs <Action>(ChangeSignature)
-map <leader>lrr <Action>(Refactorings.QuickListPopupAction)
 map <leader>lro <Action>(OptimizeImports)
 map <leader>lri <Action>(Inline)
 map <leader>lrm <Action>(Move)
 map <leader>lra <Action>(AnonymousToInner)
+let g:WhichKeyDesc_action = "<leader>l Language"
+let g:WhichKeyDesc_action_intention = "<leader>la Intention"
+let g:WhichKeyDesc_action_reformat = "<leader>lf Reformat"
+let g:WhichKeyDesc_refactor_quick = "<leader>ll Quick"
+let g:WhichKeyDesc_refactor = "<leader>lr Refactor"
+let g:WhichKeyDesc_refactor_rename = "<leader>lrn Rename"
+let g:WhichKeyDesc_refactor_extract = "<leader>lrx Extract"
+let g:WhichKeyDesc_refactor_variable = "<leader>lrv Variable"
+let g:WhichKeyDesc_refactor_field = "<leader>lrf Field"
+let g:WhichKeyDesc_refactor_constant = "<leader>lrc Constant"
+let g:WhichKeyDesc_refactor_parameter = "<leader>lrp Parameter"
+let g:WhichKeyDesc_refactor_signature = "<leader>lrs Signature"
+let g:WhichKeyDesc_refactor_optimize = "<leader>lro Optimize"
+let g:WhichKeyDesc_refactor_inline = "<leader>lri Inline"
+let g:WhichKeyDesc_refactor_move = "<leader>lrm Move"
+let g:WhichKeyDesc_refactor_anonymous = "<leader>lra Anonymous"
 
 " Source generation
 map <leader>lsa <Action>(Generate)
@@ -160,12 +267,20 @@ map <leader>lse <Action>(GenerateEquals)
 map <leader>lso <Action>(OverrideMethods)
 if &ide =~? 'android studio'
     map <leader>lsn <Action>(Kotlin.NewFile)
+    let g:WhichKeyDesc_generate_new = "<leader>lsn New"
 else
     map <leader>lsn <Action>(NewClass)
+    let g:WhichKeyDesc_generate_new = "<leader>lsn New Class"
 endif
 map <leader>lsf <Action>(NewFile)
-
-map <leader>lf <Action>(ReformatCode)
+let g:WhichKeyDesc_generate = "<leader>ls Generate"
+let g:WhichKeyDesc_generate_generate = "<leader>lsa Generate"
+let g:WhichKeyDesc_generate_constructor = "<leader>lsc Constructor"
+let g:WhichKeyDesc_generate_getter = "<leader>lsg Getter/Setter"
+let g:WhichKeyDesc_generate_equals = "<leader>lse Equals"
+let g:WhichKeyDesc_generate_override = "<leader>lso Override"
+let g:WhichKeyDesc_generate_new = "<leader>lsn New"
+let g:WhichKeyDesc_generate_file = "<leader>lsf File"
 
 " Go to code
 nmap gd <Action>(GotoDeclaration)
@@ -176,22 +291,48 @@ nmap gu <Action>(HighlightUsagesInFile)
 nmap gt <Action>(GotoTest)
 nmap gI <Action>(QuickImplementations)
 nmap gn <Action>(ShowNavBar)
+let g:WhichKeyDesc_goto = "Go To"
+let g:WhichKeyDesc_goto_declaration = "gd Declaration"
+let g:WhichKeyDesc_goto_type = "gy Type Declaration"
+let g:WhichKeyDesc_goto_implementation = "gi Implementation"
+let g:WhichKeyDesc_goto_usages = "gr Usages"
+let g:WhichKeyDesc_goto_highlight = "gu Highlight"
+let g:WhichKeyDesc_goto_test = "gt Test"
+let g:WhichKeyDesc_goto_implementations = "gI Implementations"
+let g:WhichKeyDesc_goto_navbar = "gn Navigation Bar"
+
 
 " Git windows
 nmap <leader>gc <Action>(CheckinProject)
 nmap <leader>gg <Action>(ActivateVersionControlToolWindow)
 nmap <leader>gb <Action>(Git.Branches)
 nmap <leader>go <Action>(Vcs.QuickListPopupAction)
+nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+let g:WhichKeyDesc_git = "<leader>g Git"
+let g:WhichKeyDesc_git_checkin = "<leader>gc Checkin"
+let g:WhichKeyDesc_git_tool = "<leader>gg Tool"
+let g:WhichKeyDesc_git_branches = "<leader>gb Branches"
+let g:WhichKeyDesc_git_quick = "<leader>go Quick"
+let g:WhichKeyDesc_git_rollback = "<leader>ghr Rollback"
+
 
 nmap gl <Action>(ShowErrorDescription)
-nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+let g:WhichKeyDesc_git_error = "gl Error"
 
 " Run
 nmap <leader>rc <Action>(ContextRun)
-nmap <leader>rx <Action>(chooseRunConfiguration)
+nmap <leader>rx <Action>(ChooseRunConfiguration)
 nmap <leader>rr <Action>(Rerun)
 nmap <leader>rt <Action>(RunTests)
 nmap <leader>rs <Action>(Stop)
+nmap <leader>rm <Action>(RunMenu)
+let g:WhichKeyDesc_run = "<leader>r Run"
+let g:WhichKeyDesc_run_context = "<leader>rc Context"
+let g:WhichKeyDesc_run_configuration = "<leader>rx Configuration"
+let g:WhichKeyDesc_run_rerun = "<leader>rr Rerun"
+let g:WhichKeyDesc_run_tests = "<leader>rt Tests"
+let g:WhichKeyDesc_run_stop = "<leader>rs Stop"
+let g:WhichKeyDesc_run_menu = "<leader>rm Menu"
 
 " Debug
 nmap <leader>dd <Action>(Debug)
@@ -206,17 +347,37 @@ nmap <leader>dn <Action>(StepOver)
 nmap <leader>di <Action>(StepInto)
 nmap <leader>do <Action>(StepOut)
 nmap <leader>ds <Action>(Stop)
+let g:WhichKeyDesc_debug = "<leader>d Debug"
+let g:WhichKeyDesc_debug_debug = "<leader>dd Debug"
+let g:WhichKeyDesc_debug_context = "<leader>dc Context"
+let g:WhichKeyDesc_debug_toggle = "<leader>db Toggle Breakpoint"
+let g:WhichKeyDesc_debug_edit = "<leader>de Edit Breakpoint"
+let g:WhichKeyDesc_debug_view = "<leader>dv View Breakpoints"
+let g:WhichKeyDesc_debug_tool = "<leader>du Tool"
+let g:WhichKeyDesc_debug_resume = "<leader>db Resume"
+let g:WhichKeyDesc_debug_step_over = "<leader>dn Step Over"
+let g:WhichKeyDesc_debug_step_into = "<leader>di Step Into"
+let g:WhichKeyDesc_debug_step_out = "<leader>do Step Out"
+let g:WhichKeyDesc_debug_stop = "<leader>ds Stop"
+
 
 " Collapse
 nmap zz <Action>(ExpandCollapseToggleAction)
 nmap za <Action>(CollapseAllRegions)
 nmap zA <Action>(ExpandAllRegions)
+let g:WhichKeyDesc_collapse = "zz Collapse"
+let g:WhichKeyDesc_collapse_toggle = "zz Toggle"
+let g:WhichKeyDesc_collapse_all = "za All"
 
 " Zen
 nmap <leader>z <Action>(ToggleZenMode)
+let g:WhichKeyDesc_zen = "<leader>z Zen"
 
 " Terminal
 nmap <leader>tt <Action>(ActivateTerminalToolWindow)
-nmap <leader>tc <Action>(Terminal.OpenInTerminal)
+nmap <leader>to <Action>(Terminal.OpenInTerminal)
+let g:WhichKeyDesc_terminal = "<leader>t Terminal"
+let g:WhichKeyDesc_terminal_tool = "<leader>tt Tool"
+let g:WhichKeyDesc_terminal_open = "<leader>to Open"
 
 echo "Finished loading .ideavimrc"
