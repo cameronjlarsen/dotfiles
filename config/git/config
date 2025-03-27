@@ -1,7 +1,7 @@
 [user]
 	email = camjlarsen@gmail.com
 	name = Cameron Larsen
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrb/l/y43MarfyKKUoBJX3jgBGzLV9MUyJ4Svo5HucT
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHDVrHlfoy5X4UnWww9S7Bjw92ZpwLiG8aV3BT+2Wsk
 [credential "https://github.com"]
 	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
