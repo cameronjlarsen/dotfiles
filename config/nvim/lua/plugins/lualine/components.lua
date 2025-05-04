@@ -259,6 +259,14 @@ M = {
             end
         end,
     },
+    lsp_status = {
+        "lsp_status",
+        icon = icons.ui.LSP,
+        ignore_lsp = {
+            'null-ls',
+            'copilot'
+        }
+    },
     copilot = {
         function()
             return require("copilot_status").status_string()

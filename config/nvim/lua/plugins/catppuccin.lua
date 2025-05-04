@@ -202,24 +202,30 @@ return {
     },
     {
         "akinsho/bufferline.nvim", -- A snazzy bufferline for Neovim.
+        event = 'ColorScheme',
         opts = function(_, opts)
-            local cp = require("catppuccin.palettes").get_palette()
+            if (vim.g.colors_name or ""):find("catppuccin") then
+                local cp = require("catppuccin.palettes").get_palette()
 
-            opts.highlights = require("catppuccin.groups.integrations.bufferline").get({
-                custom = {
-                    all = {
-                        indicator_selected = { fg = cp.lavender },
+                opts.highlights = require("catppuccin.groups.integrations.bufferline").get({
+                    custom = {
+                        all = {
+                            indicator_selected = { fg = cp.lavender },
+                        }
                     }
-                }
-            })
+                })
+            end
         end,
     },
     {
         "narutoxy/silicon.lua", -- Beautiful code snippet images right in the most epic editor.
+        event = 'ColorScheme',
         opts = function(_, opts)
-            local cp = require("catppuccin.palettes").get_palette()
-            opts.theme = "Catppuccin-mocha"
-            opts.bgColor = cp.lavender
+            if (vim.g.colors_name or ""):find("catppuccin") then
+                local cp = require("catppuccin.palettes").get_palette()
+                opts.theme = "Catppuccin-mocha"
+                opts.bgColor = cp.lavender
+            end
         end,
     }
 }
