@@ -60,7 +60,7 @@ ssh_only = false
 ssh_symbol = "[󰣀](bg:surface1 fg:bold red)"
 format = "[](fg:green bg:surface1)[@](bg:green fg:mantle)[](fg:green bg:surface1)[ $ssh_symbol$hostname]($style)[ ](fg:surface1)"
 style = "bg:surface1 fg:text"
-disabled = true
+disabled = false
 
 [directory]
 format = "[](fg:blue)[ ](fg:mantle bg:blue)[](fg:blue bg:surface1)[ $path]($style)[$read_only]($read_only_style)[ ](fg:surface1)"
