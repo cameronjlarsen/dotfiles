@@ -13,6 +13,8 @@ set showcmd
 set smartcase
 set incsearch
 set hlsearch
+set visualbell
+set noerrorbells
 
 " Clipboard Integration
 set clipboard+=unnamedplus
@@ -23,7 +25,8 @@ let mapleader = "\<Space>"
 " iIdeaVim Specific Settings
 set ideajoin
 set ideamarks
-set ideastatusicon=gray
+set ideastatusicon=enabled
+set idearefactormode=keep
 
 "" ========================================================
 "" Plugin Settings
