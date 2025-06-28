@@ -7,10 +7,21 @@ local maple_font = {
     },
 }
 
-local function font_with_fallback(name, params)
-    local names = { name, "JetBrainsMono Nerd Font", "Apple Color Emoji", "Noto Color Emoji", "Material Icons Rounded",
-        "Symbols Nerd Font" }
-    return wezterm.font_with_fallback(names, params)
+local function font_with_fallback(font_config)
+    -- If a string is passed, convert it to a table with family
+    if type(font_config) == "string" then
+        font_config = { family = font_config }
+    end
+
+    local fallback_chain = {
+        font_config,
+        { family = "JetBrainsMono Nerd Font" },
+        { family = "Apple Color Emoji" },
+        { family = "Noto Color Emoji" },
+        { family = "Material Icons Rounded" },
+        { family = "Symbols Nerd Font" }
+    }
+    return wezterm.font_with_fallback(fallback_chain)
 end
 
 return function(config)
