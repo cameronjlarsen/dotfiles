@@ -1,9 +1,13 @@
 local function get_codelldb()
-    local mason_registry = require "mason-registry"
-    local codelldb = mason_registry.get_package "codelldb"
-    local extension_path = codelldb:get_install_path() .. "/extension/"
-    local codelldb_path = extension_path .. "adapter/codelldb"
-    local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+    local mason_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb"
+    local codelldb_path = mason_path .. "/extension/adapter/codelldb"
+    local liblldb_path = mason_path .. "/extension/lldb/lib/liblldb.so"
+    
+    if vim.fn.filereadable(codelldb_path) == 0 then
+        vim.notify("codelldb not found at: " .. codelldb_path, vim.log.levels.ERROR)
+        return nil, nil
+    end
+    
     return codelldb_path, liblldb_path
 end
 
@@ -14,6 +18,9 @@ return {
         setup = {
             codelldb = function()
                 local codelldb_path, _ = get_codelldb()
+                if not codelldb_path then
+                    return
+                end
                 local dap = require("dap")
                 dap.adapters.lldb = {
                     type = "executable",

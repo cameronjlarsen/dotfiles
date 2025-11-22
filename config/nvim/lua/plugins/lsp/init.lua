@@ -21,23 +21,27 @@ return {
                 diagnostics = require("core.icons").get("diagnostics")
             }
 
-            local signs = {
-                { name = "DiagnosticSignError", text = icons.diagnostics.Error, numhl = "ErrorMsg" },
-                { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warn, numhl = "WarningMsg" },
-                { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint, numhl = "DiagnosticHint" },
-                { name = "DiagnosticSignInfo",  text = icons.diagnostics.Info, numhl = "DiagnosticInfo" },
-            }
-
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.numhl })
-            end
+            -- Configure diagnostic signs using modern API
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+                        [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+                        [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+                        [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+                    },
+                    numhl = {
+                        [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+                        [vim.diagnostic.severity.WARN] = "WarningMsg",
+                        [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+                        [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+                    }
+                }
+            })
             return {
-                diagnoistics = {
+                diagnostics = {
                     virtual_text = false,
                     virtual_lines = true,
-                    signs = {
-                        active = signs
-                    },
                     update_in_insert = false,
                     underline = true,
                     severity_sort = true,

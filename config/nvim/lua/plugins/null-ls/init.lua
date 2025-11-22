@@ -22,7 +22,6 @@ return {
                     nls.builtins.code_actions.gitsigns,
                     nls.builtins.code_actions.refactoring,
                     nls.builtins.formatting.google_java_format,
-                    nls.builtins.formatting.latexindent,
                     nls.builtins.diagnostics.zsh,
                     nls.builtins.hover.dictionary,
                     nls.builtins.hover.printenv,

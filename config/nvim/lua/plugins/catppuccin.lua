@@ -202,12 +202,13 @@ return {
     },
     {
         "akinsho/bufferline.nvim", -- A snazzy bufferline for Neovim.
+        after = 'catppuccin',
         event = 'ColorScheme',
         opts = function(_, opts)
             if (vim.g.colors_name or ""):find("catppuccin") then
                 local cp = require("catppuccin.palettes").get_palette()
 
-                opts.highlights = require("catppuccin.groups.integrations.bufferline").get({
+                opts.highlights = require("catppuccin.special.bufferline").get_theme({
                     custom = {
                         all = {
                             indicator_selected = { fg = cp.lavender },
