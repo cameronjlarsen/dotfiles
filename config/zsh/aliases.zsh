@@ -33,3 +33,6 @@ if command -v bat &> /dev/null; then
     alias cat="bat -pp --theme \"Catppuccin-mocha\""
     alias catt="bat --theme \"Catppuccin-mocha\""
 fi
+
+# Find packages without leaving the terminal
+alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
