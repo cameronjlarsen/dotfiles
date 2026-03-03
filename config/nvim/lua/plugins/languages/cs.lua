@@ -20,7 +20,7 @@ return {
                         }
                     end
 
-                    for _, lang in ipairs({ "cs", "fs", "vb" }) do
+                    for _, lang in ipairs({ "cs", "fs"}) do
                         if not dap.configurations[lang] then
                             dap.configurations[lang] = {
                                 {
