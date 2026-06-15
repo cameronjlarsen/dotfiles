@@ -8,3 +8,6 @@
 *config/zsh/.zsh_history
 
 *.DS_Store
+
+# SDD artifacts
+.atl/
