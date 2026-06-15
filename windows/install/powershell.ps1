@@ -54,6 +54,43 @@ function ls { eza --color=auto --icons=auto --group-directories-first @args }
 function la { eza --color=auto --icons=auto --group-directories-first --all --git @args }
 function ll { eza --color=auto --icons=auto --group-directories-first --all --git --long @args }
 function l { eza --color=auto --icons=auto --group-directories-first --all --git --long @args }
+function make-link ($target, $link) {
+    $currentPath = (Get-Location).ProviderPath
+    $linkPath = if ([System.IO.Path]::IsPathRooted($link)) {
+        [System.IO.Path]::GetFullPath($link)
+    }
+    else {
+        [System.IO.Path]::GetFullPath((Join-Path $currentPath $link))
+    }
+    $linkParent = Split-Path -Path $linkPath -Parent
+
+    $targetPath = if ([System.IO.Path]::IsPathRooted($target)) {
+        [System.IO.Path]::GetFullPath($target)
+    }
+    else {
+        [System.IO.Path]::GetFullPath((Join-Path $currentPath $target))
+    }
+
+    $targetValue = if ([System.IO.Path]::IsPathRooted($target)) {
+        $targetPath
+    }
+    else {
+        [System.IO.Path]::GetRelativePath($linkParent, $targetPath)
+    }
+
+    $targetIsDirectory = Test-Path -LiteralPath $targetPath -PathType Container
+    $mklinkArgs = if ($targetIsDirectory) {
+        @('/c', 'mklink', '/D', $linkPath, $targetValue)
+    }
+    else {
+        @('/c', 'mklink', $linkPath, $targetValue)
+    }
+
+    $mklinkOutput = & cmd.exe @mklinkArgs 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw ($mklinkOutput | Out-String).Trim()
+    }
+}
 
 # Key bindings
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock {
