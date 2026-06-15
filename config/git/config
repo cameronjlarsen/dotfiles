@@ -21,6 +21,7 @@
 
 [merge]
     tool = nvim
+	conflictstyle = zdiff3
 
 [mergetool "nvim"]
     path = /usr/bin/nvim
@@ -28,6 +29,10 @@
 
 [diff]
     tool = nvim
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 
 [difftool "nvim"]
     path = /usr/bin/nvim
@@ -38,6 +43,7 @@
 
 [commit]
 	gpgsign = true
+	verbose = true
 
 [includeIf "gitdir:/home/"]
   path = ~/.config/git/config-linux
@@ -50,3 +56,26 @@
 
 [url "git@github.com:"]
   insteadOf = "gh:"
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
