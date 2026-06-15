@@ -9,7 +9,6 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            "HiPhish/rainbow-delimiters.nvim",
             "nvim-treesitter/playground",
             "windwp/nvim-ts-autotag",
         },
@@ -77,11 +76,6 @@ return {
                     },
                 }
             },
-            rainbow = {
-                enable = true,
-                extended_mode = true,  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-                max_file_lines = 2000, -- Do not enable for files with more than specified lines
-            },
             query_linter = {
                 enable = true,
                 use_virtual_text = true,
@@ -98,7 +92,7 @@ return {
             if type(opts.ensure_installed) == "table" then
                 --@type table<string, boolean>
                 local added = {}
-                opts.ensure_installedg = vim.tbl_filter(function(lang)
+                opts.ensure_installed = vim.tbl_filter(function(lang)
                     if not added[lang] then
                         added[lang] = true
                         return true
@@ -158,5 +152,28 @@ return {
         opts = {
             enable_autocmd = false,
         }
-    }
+    },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        init = function()
+          -- Must use init (not config) so vim.g.rainbow_delimiters is set
+          -- BEFORE plugin/rainbow-delimiters.lua sources and registers the
+          -- FileType * autocommand. config runs after, causing a race where
+          -- noice/nui/cmp popup buffers trigger FileType before condition is set.
+          vim.g.rainbow_delimiters = {
+            condition = function(bufnr)
+              local buftype = vim.bo[bufnr].buftype
+              -- Skip all non-file buffers: noice popups, nui splits, cmp docs, etc.
+              if buftype ~= "" then return false end
+              local ft = vim.bo[bufnr].filetype
+              if ft == "" then return false end
+              local lang = vim.treesitter.language.get_lang(ft)
+              if not lang then return false end
+              local ok = pcall(vim.treesitter.get_parser, bufnr, lang)
+              return ok
+            end,
+          }
+        end,
+    },
 }
