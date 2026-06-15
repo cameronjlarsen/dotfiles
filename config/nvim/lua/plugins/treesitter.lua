@@ -77,7 +77,7 @@ return {
                 }
             },
             query_linter = {
-                enable = true,
+                enable = not vim.g.vscode,
                 use_virtual_text = true,
                 lint_events = { "BufWrite", "CursorHold" },
             },

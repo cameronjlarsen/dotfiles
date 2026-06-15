@@ -36,8 +36,14 @@ vim.opt.sidescrolloff  = 8
 vim.opt.guifont        = "MapleMono Nerd Font:h16"                                       -- the font used in graphical neovim applications
 vim.opt.showmode       = false                                            -- don't show vim mode in the command line
 vim.opt.foldenable     = true                                             -- enable folding
-vim.opt.foldmethod     = "expr"
-vim.opt.foldexpr       = "nvim_treesitter#foldexpr()"
+-- Treesitter foldexpr pulls the parser in embedded editors (vscode-neovim) and can
+-- contribute to languagetree/highlighter noise; use indent folds there instead.
+if vim.g.vscode then
+    vim.opt.foldmethod = "indent"
+else
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+end
 vim.opt.foldlevelstart = 10
 
 
