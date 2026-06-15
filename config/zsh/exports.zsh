@@ -9,6 +9,8 @@ export PATH="$HOME/.fnm":$PATH
 export PATH="$HOME/.local/share/neovim/bin":$PATH
 export PATH="$HOME/.local/share/fnm":$PATH
 export PATH="$HOME/.dotnet/tools":$PATH
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Environment variables set everywhere
 export EDITOR="nvim"

@@ -47,3 +47,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:ls:*' fzf-preview 'ls --color $realpath'
 
 eval "$(op completion zsh)"; compdef _op op
+
+# bun completions
+[ -s "/home/cameron/.bun/_bun" ] && source "/home/cameron/.bun/_bun"
+
+# Ray shell completions
+[[ -f "/home/cameron/.ray/completion.zsh" ]] && source "/home/cameron/.ray/completion.zsh"
