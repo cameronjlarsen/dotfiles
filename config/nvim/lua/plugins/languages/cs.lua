@@ -16,11 +16,10 @@ return {
                             options = {
                                 detached = false,
                             },
-
                         }
                     end
 
-                    for _, lang in ipairs({ "cs", "fs"}) do
+                    for _, lang in ipairs({ "cs", "fs" }) do
                         if not dap.configurations[lang] then
                             dap.configurations[lang] = {
                                 {
@@ -37,8 +36,10 @@ return {
                                         end
 
                                         return dap_utils.pick_file({
-                                            filter = string.format("Debug/.*/%s",
-                                                vim.fn.fnamemodify(project_path, ":t:r")),
+                                            filter = string.format(
+                                                "Debug/.*/%s",
+                                                vim.fn.fnamemodify(project_path, ":t:r")
+                                            ),
                                             path = string.format("%s/bin", project_path),
                                         })
                                     end,
@@ -61,8 +62,12 @@ return {
 
                                         local solution_dir = vim.fs.dirname(vim.g.roslyn_nvim_selected_solution)
 
-                                        local res = vim.system({ "dotnet", "sln", vim.g
-                                            .roslyn_nvim_selected_solution, "list" }):wait()
+                                        local res = vim.system({
+                                            "dotnet",
+                                            "sln",
+                                            vim.g.roslyn_nvim_selected_solution,
+                                            "list",
+                                        }):wait()
                                         local csproj_files = vim.iter(vim.split(res.stdout, "\n"))
                                             :map(function(it)
                                                 local fullpath = vim.fs.normalize(vim.fs.joinpath(solution_dir, it))
@@ -88,8 +93,8 @@ return {
                             }
                         end
                     end
-                end
-            }
+                end,
+            },
         },
     },
     {
@@ -102,6 +107,10 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             filewatching = "auto",
-        }
-    }
+        },
+    },
+    {
+        "GustavEikaas/easy-dotnet.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    },
 }
