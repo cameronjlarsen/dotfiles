@@ -209,7 +209,7 @@ return {
             pattern = "LazyVimStarted",
             callback = function()
                 dashboard.section.footer.val = footer_info
-                pcall(vim.cmd.AlphaRedwraw)
+                pcall(vim.cmd.AlphaRedraw)
             end,
             desc = "Footer for Alpha",
         })
