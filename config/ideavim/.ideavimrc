@@ -5,6 +5,7 @@ echo "Loading .ideavimrc"
 "" ========================================================
 "" Base Settings
 "" ========================================================
+set VimEverywhere
 set scrolloff=10
 set history=1000
 set number relativenumber
@@ -15,6 +16,8 @@ set incsearch
 set hlsearch
 set visualbell
 set noerrorbells
+set inccommand=nosplit
+set youcompleteme
 
 " Clipboard Integration
 set clipboard+=unnamedplus
