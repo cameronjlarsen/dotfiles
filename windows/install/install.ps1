@@ -80,6 +80,6 @@ if (-not $skipScoop) {
 }
 
 Write-Host "==> Setting up dot files..." -ForegroundColor Cyan
-& "$scriptDir\symlinks.ps1" -DotfilesRoot $dotfilesRoot -ProfilePath $PROFILE
+& "$scriptDir\symlinks.ps1" -DotfilesRoot $dotfilesRoot -ProfilePath $PROFILE -AllHostsProfilePath $PROFILE.CurrentUserAllHosts
 
 Write-Host "`n==> Setup complete!" -ForegroundColor Cyan

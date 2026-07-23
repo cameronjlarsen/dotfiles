@@ -1,3 +1,7 @@
+# Skip interactive tooling in dumb/agent shells (TERM=dumb, CURSOR_AGENT=1).
+# Remove this block to roll back fast-path profile loading.
+if ($env:TERM -eq 'dumb' -or $env:CURSOR_AGENT -eq '1') { return }
+
 #Module imports
 if (-not (Get-Module -ListAvailable -Name PSCompletions)) {
     Install-Module PSCompletions -Scope CurrentUser -Repository PSGallery -Force

@@ -5,7 +5,10 @@ param(
     [string]$DotfilesRoot,
 
     [Parameter(Mandatory)]
-    [string]$ProfilePath
+    [string]$ProfilePath,
+
+    [Parameter(Mandatory)]
+    [string]$AllHostsProfilePath
 )
 
 $ErrorActionPreference = "Stop"
@@ -61,6 +64,7 @@ function Install-DotfileSymlink {
 
 $symlinks = @(
     @{ Link = $ProfilePath; Target = 'windows\install\powershell.ps1' }
+    @{ Link = $AllHostsProfilePath; Target = 'windows\install\profile.allhosts.ps1' }
     @{ Link = "$env:USERPROFILE\.config\wezterm"; Target = 'config\wezterm' }
     @{ Link = "$env:USERPROFILE\.config\starship.toml"; Target = 'config\starship.toml' }
     @{ Link = "$env:USERPROFILE\.config\ideavim"; Target = 'config\ideavim' }
