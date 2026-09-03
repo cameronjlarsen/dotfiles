@@ -43,7 +43,12 @@ function Install-DotfileSymlink {
             }
             Remove-Item -LiteralPath $linkPath -Force
         } else {
-            throw "Cannot create symlink; path exists and is not a symlink: $linkPath"
+            $bakPath = "$linkPath.bak"
+            if (Test-Path -LiteralPath $bakPath) {
+                throw "Cannot create symlink; path exists and is not a symlink: $linkPath (and $bakPath already exists)"
+            }
+            Move-Item -LiteralPath $linkPath -Destination $bakPath -Force
+            Write-Host "  Backed up existing file to $bakPath" -ForegroundColor Yellow
         }
     }
 
@@ -71,6 +76,12 @@ $symlinks = @(
     @{ Link = "$env:USERPROFILE\.ideavimrc"; Target = 'config\ideavim\.ideavimrc' }
     @{ Link = "$env:LOCALAPPDATA\nvim"; Target = 'config\nvim' }
     @{ Link = "$env:APPDATA\bat"; Target = 'config\bat' }
+    @{ Link = "$env:USERPROFILE\komorebi.json"; Target = 'config\komorebi\komorebi.json' }
+    @{ Link = "$env:USERPROFILE\komorebi.bar.json"; Target = 'config\komorebi\komorebi.bar.json' }
+    @{ Link = "$env:USERPROFILE\applications.json"; Target = 'config\komorebi\applications.json' }
+    @{ Link = "$env:USERPROFILE\.config\komorebi-swap-monitor.ps1"; Target = 'config\komorebi\komorebi-swap-monitor.ps1' }
+    @{ Link = "$env:USERPROFILE\.config\whkdrc"; Target = 'config\whkdrc' }
+    @{ Link = "$env:USERPROFILE\.config\yasb"; Target = 'config\yasb' }
 )
 
 foreach ($entry in $symlinks) {

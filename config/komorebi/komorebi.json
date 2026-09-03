@@ -1,0 +1,166 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.40/schema.json",
+  "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "animation": {
+    "enabled": true,
+    "duration": 250,
+    "fps": 60,
+    "style": "EaseOutSine"
+  },
+  "mouse_follows_focus": false,
+  "default_workspace_padding": 10,
+  "default_container_padding": 5,
+  "border": true,
+  "border_width": 3,
+  "border_offset": -1,
+  "border_style": "Rounded",
+  "theme": {
+    "palette": "Base16",
+    "name": "CatppuccinMocha",
+    "single_border": "Base07"
+  },
+  "display_index_preferences": {
+    "0": "15280018D2X00",
+    "1": "1528001902X00",
+    "2": "NDRWF7CF0H1L",
+    "3": "16843009",
+    "4": "0"
+  },
+  "monitors": [
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "2",
+          "layout": "BSP",
+          "initial_workspace_rules": [
+            {
+              "id": "Slack.exe",
+              "kind": "Exe",
+              "matching_strategy": "Equals"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "layout": "BSP",
+          "initial_workspace_rules": [
+            {
+              "id": "olk.exe",
+              "kind": "Exe",
+              "matching_strategy": "Equals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "2",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "3",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "2",
+          "layout": "BSP",
+          "initial_workspace_rules": [
+            {
+              "id": "Slack.exe",
+              "kind": "Exe",
+              "matching_strategy": "Equals"
+            }
+          ]
+        },
+        {
+          "name": "3",
+          "layout": "BSP",
+          "initial_workspace_rules": [
+            {
+              "id": "olk.exe",
+              "kind": "Exe",
+              "matching_strategy": "Equals"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "2",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "3",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "1",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "2",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        },
+        {
+          "name": "3",
+          "layout": "BSP",
+          "initial_workspace_rules": []
+        }
+      ]
+    }
+  ],
+  "tray_and_multi_window_applications": [
+    {
+      "kind": "Exe",
+      "id": "The Mortgage Office.exe",
+      "matching_strategy": "Equals"
+    }
+  ],
+  "ignore_rules": [
+    {
+      "kind": "Title",
+      "id": "Recording",
+      "matching_strategy": "Equals"
+    }
+  ]
+}
