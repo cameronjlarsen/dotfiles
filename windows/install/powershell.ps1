@@ -181,3 +181,5 @@ function Invoke-Starship-PreCommand {
     $host.ui.Write($prompt)
 }
 
+
+if (Get-Command git-wt -ErrorAction SilentlyContinue) { Invoke-Expression (& git-wt config shell init powershell | Out-String) }
