@@ -1,0 +1,81 @@
+[user]
+	email = camjlarsen@gmail.com
+	name = Cameron Larsen
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHDVrHlfoy5X4UnWww9S7Bjw92ZpwLiG8aV3BT+2Wsk
+
+[credential "https://github.com"]
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper = !gh auth git-credential
+
+[core]
+	editor = nvim
+	fsmonitor = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[merge]
+    tool = nvim
+	conflictstyle = zdiff3
+
+[mergetool "nvim"]
+    path = /usr/bin/nvim
+    prompt = false
+
+[diff]
+    tool = nvim
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[difftool "nvim"]
+    path = /usr/bin/nvim
+    prompt = false
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+	verbose = true
+
+[includeIf "gitdir:/home/"]
+  path = ~/.config/git/config-linux
+
+[includeIf "gitdir:/Users/"]
+    path = ~/.config/git/config-mac
+
+[pull]
+	rebase = true
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt
+[rerere]
+	enabled = true
+	autoupdate = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
